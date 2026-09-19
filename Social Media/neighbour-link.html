@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Neighbour-Link</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="neighbour-link.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="neighbour-link.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Neighbour-Link</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="neighbour-link-student-proposal">Neighbour-Link <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> 🔶 Fit with adjustments · <b>Category:</b> Social Media · <b>Assessed:</b> 2026-09-19 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> An application designed to revive lost community spirit by connecting neighbours who share common interests. Users are matched by location (postal code) and interest, can discover a hobbies feed, create neighbourhood events, and earn reputation and rewards (points redeemable for shop discounts). A C++ service continuously tracks and manages nearby users and events; a &quot;Dynamic Hobby Creator&quot; lets users define new hobbies. Named building blocks: location-based matching (postal code), database management, interest-matching algorithms, and a real-time notification system. Four major Design features: hobbies-discovery feed, neighbourhood event creation, interest matching, and reputation &amp; reward.</p>
+<p><strong>Adjustments required for approval:</strong></p>
+<ul>
+<li>The <strong>interest + postal-code proximity matching must be the team&#39;s own load-bearing C++ service</strong> (a benchmarked ranking/matching engine with weighted scoring, not a Firebase query or a plain database <code>where</code> filter). The proposal already commits to &quot;a C++ service that continuously tracks and manages nearby users and events&quot; — hold the design to that; Firebase stays the store/sync layer, never the matcher (category guard-rail: Firebase alone must never be the backend).</li>
+<li><strong>Safety-by-design, because the product connects strangers to meet offline:</strong> verified accounts, report + block, per-user visibility controls, and a <strong>moderation / report-review dashboard</strong> (this is the custom tool) — plus in-app public-place guidance for event meetups. Treat this as a graded surface, not an afterthought.</li>
+<li><strong>Reputation and rewards computed server-side</strong> (anti-gaming) and the &quot;shop discount&quot; rewards must stay <strong>in-app points</strong> — a points ledger plus redeemable codes, <strong>not real payments or e-commerce</strong>. Real money would push the project into Fintech and out of scope for this trimester.</li>
+</ul>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://about.nextdoor.com/">Nextdoor — the neighbourhood network (verified neighbours, local events, shared-interest connections)</a></li>
+<li><a href="https://www.meetup.com/">Meetup — find local groups &amp; events near you around shared interests</a></li>
+<li><a href="https://bumble.com/bff/friendship/friend-apps">Bumble For Friends — match nearby people by shared interests, with identity verification and IRL group plans</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Neighbour-Link</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>🔶</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile + Web browser on mobile — location-based matching and push notifications are mobile-first (GPS/postal geocoding + FCM push favour a native build), with a mobile-web front-end for reach; the Native PC build is the development/iteration and tools vehicle (device: Pixel 9a). <b>Extended:</b> Firebase + Linux server set up by M2 (full use T2).</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> Hobbies-discovery feed, nearby-neighbours / event proximity view, event-creation and hobby-creator screens, reputation/points display and notification centre (OpenGL ES for the custom feed cards, proximity map and reputation charts). <b>Languages:</b> Web — HTML/JS/CSS + C++→WASM (Emscripten, SDL2/3, OpenGL ES); Native — Kotlin Native Android UI + C++ via JNI (Android Studio); OpenGL ES in a GLSurfaceView where realtime 2D is needed (no SDL on native).</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The C++ matching/tracking service (interest + postal-code proximity scoring, incremental re-ranking, nearby-users/events index), notification dispatch, reputation/points ledger and moderation/report queue. <b>Languages:</b> C++.<br><b>Backend scope:</b> Local now, server-ready (T2) — the Linux server seam is set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the load-bearing piece is a <strong>performant C++ service</strong> that continuously maintains the nearby-users/events index and re-scores interest + postal-code proximity matches as users, hobbies and events change — weighted scoring and incremental re-ranking in C++, not a database query. Real-time notification dispatch runs off the same service.</li>
+<li><em>Data-driven:</em> hobbies (including user-authored ones from the Dynamic Hobby Creator), events, interest tags, matching weights, reputation rules and reward tiers are all hot-reloadable JSON — no hard-coded hobbies, event types or scoring constants.</li>
+<li><em>2D:</em> custom-rendered feed cards, a nearby-neighbours / event proximity view, and reputation/engagement charts (custom-rendered, no chart libs) — the domain-adapted 2D surface for a Social Media app. <em>3D:</em> not needed. <em>Networking:</em> real-time notifications (new nearby match, event invite, reputation change) and presence of nearby users/events via push + an in-app event bus.</li>
+<li><em>Custom tool:</em> the <strong>Dynamic Hobby Creator</strong> (author/curate hobby definitions and interest tags) plus a <strong>moderation / report-review dashboard</strong> (PC-side authoring/ops) — review the report queue, action blocks, and tune matching weights and reward tiers.</li>
+<li><em>External DB:</em> Firebase stores users, hobbies, events, reputation ledger and reports. <em>Auth ⏭️:</em> verified accounts are safety-critical here (identity/postal verification, report/block tied to identity). <em>Analytics ⏭️:</em> optional engagement funnels — which hobbies/events convert to real-life meetups.</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Social Media pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window and input with a fixed-timestep loop driving the nearby-users/events tick, match-rescoring cadence and notification dispatch; C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the M1G9 matching engine and M1G12 notifications run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ entity/registry with users, hobbies, interest tags, events, matching weights and reputation/reward rules defined in JSON (nlohmann/json) with hot-reload.</li><li><b>Prerequisites:</b> G1 (loop &amp; update hooks).</li><li><b>Feeds into:</b> M1G7 (hobby/event content models), M1G9 (scoring reads this model), M2G2 (the Hobby Creator edits this data).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays for the match index and notification queue, Tracy profiling, Catch2 stress tests re-ranking a synthetic neighbourhood (tens of thousands of users/events across many postal codes at once), GitHub Actions Windows+Linux matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening) and the frame/latency budget M2G1 validates for web/mobile.</li></ul></details>
+</li>
+<li><strong>G7 Data-Driven Content Models</strong> — hobbies, events and reputation rules as JSON schemas: the data backbone the Dynamic Hobby Creator authors.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Versioned JSON schemas for hobbies/interest tags, event types and reputation/reward tiers, with schema validation and hot-reload.</li><li><b>Prerequisites:</b> G2 (data-driven architecture).</li><li><b>Feeds into:</b> M1G9 (scoring features), M2G2 (Hobby Creator), M2G8 (recommendation features).</li></ul></details>
+</li>
+<li><strong>G9 Matching / Ranking Engine — Foundation</strong> — the load-bearing C++ service: score neighbours and events by shared interest + postal-code proximity.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Priority queues and weighted scoring functions (interest-tag overlap + postal-code distance), incremental re-ranking as users/events change, a maintained nearby index (custom C++) — not a Firebase query.</li><li><b>Prerequisites:</b> G2 (user/hobby/event model), G1 (tick).</li><li><b>Feeds into:</b> M2G8 (recommendations II), the discovery feed and match notifications.</li></ul></details>
+</li>
+<li><strong>G12 Notification System — Foundation</strong> — real-time alerts for new nearby matches, event invites and reputation changes.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Cloud Messaging (push) plus an in-app event bus and a web service worker; notification schema and delivery tracking.</li><li><b>Prerequisites:</b> G1 (loop/event bus); Firebase integration seam.</li><li><b>Feeds into:</b> M2G12-class digests and the M2G7 push/identity completion.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling of match re-ranking spikes, ASan on MSVC, memory pools for the nearby index, and Emscripten WASM validation for the mobile-web target plus on-device Pixel 9a checks; Linux server set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The web/mobile deliverable and headroom for larger neighbourhoods.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core</strong> — the Dynamic Hobby Creator plus the moderation/report-review dashboard: author hobbies/interest tags, tune matching weights and reward tiers, action reports.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui editor authoring hobby/tag definitions, matching-weight and reward-tier tables as JSON, with round-trip serialization and an undo/redo command stack; a report-queue review pane.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s SDL2/3/OpenGL renderer (live feed/proximity preview).</li><li><b>Prerequisites:</b> G2 (hobby/event/reputation data), M1G7 (content models).</li><li><b>Feeds into:</b> M2G8 (weights it tunes), M2G16 (safety actions applied through it).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, and packaging of the native build plus the Emscripten web build artifact via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI and test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every Neighbour-Link goal.</li></ul></details>
+</li>
+<li><strong>G8 Ranking / Matching Engine II</strong> — recommendations: rank neighbour and event suggestions by interest + proximity + reputation.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Scoring models (weighted features, cosine similarity on interest-tag vectors), candidate generation from the nearby index, and evaluation metrics; reputation as a scoring feature.</li><li><b>Prerequisites:</b> M1G9 (matching foundation), M1G7 (content/feature models).</li><li><b>Feeds into:</b> The discovery feed, &quot;neighbours you may know&quot; and event/meetup suggestions.</li></ul></details>
+</li>
+<li><strong>G7 Firebase — Auth, Push &amp; Analytics</strong> — verified accounts, push delivery and the reputation/reward ledger sync.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth (verified accounts — safety-critical), Firestore/Realtime DB for hobbies/events/reputation, Cloud Messaging for push and Analytics — REST API from C++, JS SDK on the web front-end.</li><li><b>Prerequisites:</b> G2 (data model to sync), M1G12 (notification foundation).</li><li><b>Feeds into:</b> M2G16 (identity-backed safety controls) and the points/reputation ledger.</li></ul></details>
+</li>
+<li><strong>G16 Privacy &amp; Safety Controls</strong> — blocking, visibility rules and report actions: the safety layer for connecting strangers offline.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Block lists, per-user visibility flags, report-to-action flow and Firebase security rules; ties to the moderation dashboard.</li><li><b>Prerequisites:</b> M2G7 (auth/identity), M2G2 (moderation dashboard).</li><li><b>Feeds into:</b> Safe discovery, safe event meetups and trustworthy reputation.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + 1 Art (8) — the four Design features (feed, event creation, interest matching, reputation &amp; reward) are a strong single-designer load, and the art surface (feed cards, hobby/interest iconography, reputation badges &amp; reward tiers, event imagery) is a utility social-app surface one artist can cover (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). Add a 2nd artist only if a richer illustrated hobby/badge set becomes a selling point.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the discover → match → create/join event → earn reputation loop, plus the Dynamic Hobby Creator and the in-app points/reward economy — anti-gaming)</li><li>M1D2 Prototype (clickable flow proving the interest-match → event-join path feels worthwhile)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D3 Systems Balance &amp; Tuning — Data-Driven (matching weights and reward tiers tuned via the team&#39;s JSON, no code changes)</li></ul></li><li><b>UI/UX M1</b> (graded by the UI/UX instructor):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — screen-flow map and readability standards for the feed, matching, event-creation and reputation screens.</li><li>M1U2 UX Flows &amp; Wireframes — the discover → match → join-event and hobby-creation journeys.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — the required Social Media screens (feed, profile, event, notifications, report/block) navigable unaided.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — touch-first layouts, notification affordances and proximity view validated on the Pixel 9a / mobile-web target.</li></ul></li><li><b>Art M1:</b> 1 artist (utility social-app surface)<ul><li>M1A1 ⭐ (mockups: hobbies-discovery feed + event-creation screen)</li><li>M1A4 UI Art Concepts &amp; Typography (feed cards, hobby/interest icon set, reputation/reward visual language)</li><li>M1A6 Early Asset Production (first production-ready icon &amp; badge set)</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ (polished feed, event and reputation screens)</li><li>M2A4 UI Art — States &amp; Feedback (match found, event full, reputation up/down, reward unlocked)</li><li>M2A5 Illustration &amp; Iconography — Full Set (complete hobby/interest icons, reward-tier badges, empty/onboarding states)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial UI/notification SFX and light ambient BGM from the week-5 needs list, present &amp; working in the prototype (match found, event invite, reputation change), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback (overlapping notification/UI SFX).</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Social Media floor (subtle UI/notification SFX + optional light ambient BGM in the showcase build; audio is not load-bearing here).</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing for stacked notifications).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase, prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-19.</em></p>
+</body>
+</html>
