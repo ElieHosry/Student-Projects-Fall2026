@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>SPACE</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="space.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="space.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">SPACE</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="space-student-proposal">SPACE <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Simulator · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>SPACE</em> is a <strong>web application for large-scale events</strong> (conventions, expos) that helps planners <strong>design venues while accounting for crowd movement and emergency access</strong>. Planners generate a <strong>3D floor plan</strong>, place furnishings (booths, signage), and define entry/exit points; the app <strong>simulates crowd movement</strong> and surfaces problems (movement bottlenecks, poorly-placed signage), so planners can adjust the layout. Named load-bearing C++: a <strong>fixed-timestep crowd-simulation loop</strong> (updates attendee movement, detects bottlenecks + restricted-access areas); an <strong>ECS</strong> (DOTS-like, efficient data layout); <strong>agent grouping for pathfinding</strong> (group attendees to cut cost); and <strong>event-driven pathfinding</strong> (recompute only when needed, not every frame). Named technical features: <strong>floor-plan importing</strong> into an editable layout; an <strong>interactive 3D venue editor</strong> (place furnishings, entry/exit); <strong>crowd simulation + overcrowding heatmap</strong>; and <strong>emergency-scenario / evacuation simulation</strong>. Tools: a <strong>file-import system</strong> (pdf/png/jpeg → canvas layer with reference scale); a <strong>3D spatial editor</strong> (drag-and-drop, scaling/rotation, a 3D grid for precise placement + measurement); and a <strong>real-time crowd-simulation tool</strong> (emergency scenarios — density, pathfinding, evacuation routes). Design features: a 3D interactable floor plan; a real-world measurement + grid system; a drag-and-drop 3D basic-shapes panel; and simulation flow analysis. Team: <strong>6 CS + 1 Design + 0 Art</strong>.</p>
+<p><em>Note (category):</em> SPACE spans a 3D authoring editor and density visualization, but its technical spine is a <strong>real-time agent-based crowd/evacuation simulation</strong> — so it is assessed as a <strong>Simulator</strong> (the editor sets up the run; the heatmap reads it out). This lands squarely on the Simulator pool (agent behaviour, movement/collision-avoidance, scenario editor, advanced visualization, evacuation behaviour).</p>
+<p><em>Note (module completeness):</em> the app needs to <strong>save/load venue plans, scenarios and run results</strong> — use the module&#39;s external DB (Firebase, or the team&#39;s Linux server) for this; set the seam up + basic-test it by M2. <em>Platform:</em> SPACE is explicitly a <strong>web application</strong> for planners at a desk, so the Main target is the <strong>web build</strong> (browser, HTML/JS/CSS front-end + a C++ engine compiled to <strong>WASM via Emscripten</strong>, rendering through WebGL/OpenGL ES) — there is no native-mobile target, so goals below carry the <strong>Web build</strong> label only.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://www.oasys-software.com/products/pedestrian-simulation-software/massmotion/">Oasys MassMotion — pedestrian simulation &amp; crowd modelling software (the industry benchmark: a 3D venue authoring + pedestrian-flow simulation tool that surfaces congestion hot-spots as heatmaps and validates fire egress/evacuation for stadia and events — the venue-design + crowd-sim + heatmap + evacuation precedent)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Social_force_model">Social force model — Wikipedia (the foundational pedestrian-dynamics model: attendees are agents driven by goal-seeking + repulsive social/obstacle forces, which is how bottlenecks and congestion emerge — the crowd-movement algorithm precedent)</a></li>
+<li><a href="https://arxiv.org/abs/2512.16887">An evacuation simulator for pedestrian dynamics based on the Social Force Model (arXiv) (a worked evacuation simulator: agents egress a floor plan under the social-force model, exactly the emergency/evacuation-scenario feature — the evacuation-simulation precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>SPACE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>🔶</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Web build — a browser app (HTML/JS/CSS front-end) with the C++ simulation engine compiled to <b>WASM via Emscripten</b>, rendering through WebGL/OpenGL ES; desktop-first (planners at a workstation), responsive web-on-mobile optional. No native-mobile target. The PC is also the dev/tools vehicle. <b>Extended:</b> Firebase (or the team&#39;s Linux server, set up by M2, full use T2) to store venue plans, scenarios and run results.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A browser app — the 3D venue editor (grid canvas, drag-and-drop furnishings/booths/signage, entry/exit markers, scale + measurement), the simulation view (attendees moving) and the overcrowding heatmap + flow-analysis panels. <b>Languages:</b> Web — HTML/JS/CSS shell + the C++ engine as WASM (Emscripten), WebGL/OpenGL ES for the 3D scene and the 2D heatmap; some panels are plain web UI.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The real-time C++ crowd-simulation engine — the fixed-timestep loop over an ECS (DOTS-like), agent grouping + event-driven pathfinding, movement + local collision-avoidance producing emergent bottlenecks, and the evacuation-scenario model — compiled to WASM and driving the browser view; plus a store (Firebase/server) for plans and run results. <b>Languages:</b> C++ (engine → WASM); Firebase/server on the Extended tier.<br><b>Backend scope:</b> Client-side WASM engine now, cloud-persisted (T2) — the plan/scenario/results store set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ fixed-timestep loop is the heart — it advances every attendee-agent (goal-seeking + collision-avoidance), groups agents for cheaper pathfinding, recomputes paths only on demand (event-driven), and continuously flags bottlenecks + restricted-access areas.</li>
+<li><em>Data-driven:</em> the venue (walls, booths, signage, entry/exit), the agent populations/parameters, and the scenarios (normal vs emergency) are all data — a new layout or scenario is a data change (authored in the editor, JSON round-trip).</li>
+<li><em>2D:</em> the top-down agent visualization and the <strong>overcrowding heatmap / density layers</strong> satisfy the 2D gate (custom-rendered, no chart libs). <em>3D (🔶, strong-students tier):</em> the 3D venue editor + 3D floor plan is the ambitious layer — recommended to keep the <strong>simulation itself 2D/top-down</strong> (which fully satisfies the gate) and treat 3D as a visualization/editing layer on top, so the 3D scope can flex without risking the core sim.</li>
+<li><em>Front-end + Back-end:</em> a genuine split — a web/JS front-end over a C++/WASM engine; save/load + results storage is <strong>Application Communication</strong> ✅.</li>
+<li><em>Custom tools:</em> three — the <strong>floor-plan import system</strong> (pdf/png/jpeg → scaled canvas layer), the <strong>3D spatial editor</strong> (drag-drop, scale/rotate, measurement grid), and the <strong>crowd-simulation/emergency-scenario tool</strong>.</li>
+<li><em>Networking:</em> a single-planner tool — no real-time multiplayer, so a Networking System is optional (🔵). <em>External DB:</em> plans + scenarios + run results (add per the module). <em>Auth ⏭️ / Analytics ⏭️:</em> planner accounts + aggregate run metrics are natural but module-deferred to T2 (🔵).</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Simulator pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — the fixed-timestep crowd loop + the ECS.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> A fixed-timestep C++ loop over an ECS (DOTS-like, contiguous storage) advancing attendee-agents and detecting bottlenecks/restricted-access, compiled to WASM (Emscripten) with an HTML/JS shell; C++17/20, CMake, Git.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; behaviour (M1G5), movement (M1G7) and the visualization (M1G4) run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> An ECS/data model with the venue (walls, booths, signage, entry/exit), agent populations + parameters, and scenarios (normal/emergency) in hot-reloadable JSON — a new layout or scenario is a data change.</li><li><b>Prerequisites:</b> G1 (loop &amp; entity hooks).</li><li><b>Feeds into:</b> M2G2 (the 3D editor), M2G6 (advanced editor + import), M1G5/M1G7 (agent + movement data).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui/overlay inspectors (agent state, group membership, path-recompute events), Tracy profiling of a crowded venue to prove the fixed step holds, Catch2 tests (determinism, bottleneck detection, data loading), on a GitHub Actions Windows+Linux matrix (WASM build check).</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the scale work M2G1 validates.</li></ul></details>
+</li>
+<li><strong>G4 2D Visualization of the Simulated World</strong> — the top-down venue + moving attendees (the base view the heatmap extends).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> A renderer (WebGL/OpenGL ES via Emscripten) drawing the venue, the attendee-agents moving, entry/exit and early density shading, plus a camera; GLSL, FreeType for labels.</li><li><b>Prerequisites:</b> G1 (loop &amp; window).</li><li><b>Feeds into:</b> M2G4 (the overcrowding heatmap/density layers); the editor shares this renderer.</li></ul></details>
+</li>
+<li><strong>G5 Agent / Entity Behavior System</strong> — attendee agents (grouping + event-driven decisions).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Goal-seeking agents (to a booth/exit) with FSM/decision rules, **agent grouping** to cut pathfinding cost, and **event-driven pathfinding** (recompute only on layout/goal change), all custom C++; a social-force-style steering model produces emergent congestion.</li><li><b>Prerequisites:</b> G1 (tick), G2 (agent/venue data).</li><li><b>Feeds into:</b> M2G13 (evacuation/panic behaviour); the bottleneck pillar.</li></ul></details>
+</li>
+<li><strong>G7 Movement &amp; Collision-Avoidance Core</strong> — kinematics + local avoidance (where bottlenecks form).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A C++ integrator + broadphase (uniform grid / quadtree) with local collision-avoidance (social-force / velocity-obstacle style) so agents queue, jostle and jam realistically at chokepoints; GLM math, deterministic.</li><li><b>Prerequisites:</b> G1 (loop &amp; tick), G2 (venue geometry).</li><li><b>Feeds into:</b> The bottleneck/overcrowding detection; M2G13 (evacuation).</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong> — scale the sim + validate the WASM build.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Memory pools, cache-friendly ECS iteration, threading where the browser allows (Web Workers / WASM threads), Tracy profiling of a large crowd, sanitizers on the native dev build, and Emscripten→WASM validation in the browser; the Firebase/Linux-server store set up (account + software + basic connectivity test) by M2.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The web deliverable + a smooth large-venue simulation.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (3D Venue / Scenario Editor)</strong> — place furnishings, define entry/exit, the measurement grid.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A web/JS front-end (or Dear ImGui in the dev build) over the shared renderer: drag-and-drop booths/signage, mark entry/exit, snap to a real-world-scaled grid, and edit scenarios, with round-trip JSON, live preview and undo/redo.</li><li><b>Libraries/Software:</b> HTML/JS/CSS + WASM bindings (or Dear ImGui), nlohmann/json, the WebGL/OpenGL ES renderer.</li><li><b>Prerequisites:</b> G2 (venue/scenario data), M1G4 (renderer).</li><li><b>Feeds into:</b> All venue content; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, a reproducible Emscripten→WASM build in CI, tests (determinism, bottleneck detection, import round-trip, data loading) and packaging via GitHub Actions.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G4 Visualization — Advanced (Overcrowding Heatmap &amp; Density)</strong> — heatmaps, density layers, time scrubbing.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> WebGL/GLSL shaders + framebuffers rendering an occupancy/overcrowding heatmap and density layers over the venue, with a time-scrub to replay the run and a legend; the &quot;simulation flow analysis&quot; read-out.</li><li><b>Prerequisites:</b> M1G4 (2D visualization), M2G1 (optimization).</li><li><b>Feeds into:</b> The bottleneck/flow-analysis showcase; layout-decision support.</li></ul></details>
+</li>
+<li><strong>G6 Scenario Editor — Advanced (Drag-Drop, Scale/Rotate, Measurement + Floor-Plan Import)</strong> — the full spatial editor + the import system.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Advanced editor features — drag-drop with scaling/rotation, precise grid placement + real-world measurement, and a **floor-plan import** pipeline (pdf/png/jpeg → a scaled reference canvas layer to trace/build over); live preview binding, deep undo/redo.</li><li><b>Prerequisites:</b> M2G2 (editor core), G2 (data model).</li><li><b>Feeds into:</b> Fast venue authoring; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G13 Behavior II — Panic Models &amp; Evacuation</strong> — the emergency-scenario / evacuation simulation.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Adaptive/panic agent models for emergencies (raised urgency, exit-seeking, herding, reduced spacing), evacuation-route resolution to the defined exits, and egress-time + blockage metrics; custom C++ over the M1 behaviour/movement cores.</li><li><b>Prerequisites:</b> M1G5 (behaviour), M1G7 (movement/avoidance).</li><li><b>Feeds into:</b> The emergency-access safety story; the evacuation showcase.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + 0 Art (8) — <strong>as proposed</strong>, and defensible: a spatial-planning/simulation <strong>tool</strong> has a <strong>light art surface</strong> (UI, iconography, the 3D primitive/furnishing look, the heatmap palette), so 0 artists is far less risky here than for an asset-heavy game — the single designer can carry the <strong>D11 conditional</strong> (visual identity + in-app art quality) alongside the tool/UX design. That said, a <strong>solo designer + 0 artists</strong> is still the case the design pool flags (&quot;must ask the instructor which conditional bends&quot;, see <code>design-goals-pool.pdf</code>), and the design load here is real (the planner UX, the analysis presentation, the crowd-model realism and scenario design), so a <strong>2nd designer is recommended</strong> if the team can — one owns the tool/interaction design, the other the D11 art surface + the flow-analysis presentation. <em>Scope note (advisory):</em> a WASM crowd-sim engine (ECS + grouping + event-driven pathfinding + collision-avoidance) + a 3D editor + import + heatmaps + evacuation is a <strong>large, genuinely research-flavoured CS scope</strong> — a 2D top-down sim of one venue with basic bottleneck detection + a simple editor is the M1/M2 floor; the 3D editor, floor-plan import, overcrowding heatmap and evacuation scenarios are the stretch. <strong>Keep the simulation 2D</strong> (satisfies the 2D gate) and treat 3D as the strong-students visualization/editing layer — this is the single biggest scope-risk lever.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / TEAM picks for this project (no Art track as proposed — 0 artists, so the light Art surface is carried by the Design-owned D11 conditional); deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the planner&#39;s problem — designing safe, high-flow event venues; the plan → simulate → read bottlenecks/heatmap → adjust loop; the emergency/evacuation value; a primary benchmark e.g. MassMotion, and a Singapore benchmark — e.g. a Marina Bay Sands / Expo / Singapore EXPO planning context)</li><li>M1D2 Core-Loop Interactive Prototype (a clickable prototype of the editor → run → analysis flow, proving the planner UX before the engine is deep) · Figma/Unity for the prototype</li><li>M1D11 Art Proof of Concept *(conditional — mandatory for 0-artist teams; Design-owned)* — the tool&#39;s visual identity: UI system, iconography, the 3D primitive/furnishing look and the heatmap palette; 2 mockups.</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D11 Art Implementation Quality *(conditional — mandatory for 0-artist teams; Design-owned)* — the UI, editor chrome, 3D asset look and heatmap styling implemented in-engine, no placeholders.</li></ul></li><li><b>UI/UX M1:</b><ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — standards for the editor (tool palettes, property inspectors, the measurement grid), the run controls and the analysis panels, plus a wireframe baseline; this is a <b>data-dense professional tool</b>, so information density + clarity are the priority.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — the editor, run controls, heatmap/flow-analysis and import flow navigable unaided in the browser.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated with target users (planners / people who lay out spaces), polished to the &quot;A&quot; standard in the web build.</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial audio from the week-5 needs list present &amp; working (UI feedback, the emergency-alarm/alert cue for evacuation scenarios, run start/stop), suitable and correctly triggered — modest for a tool, but the evacuation alarm is a real design beat.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable playback.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — the tool&#39;s audio set (UI + alert/alarm + run cues), suited to a professional desktop tool.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the playback the build needs (multi-channel; a distinct emergency-alarm cue).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the 3D editor + import + the crowd-sim/evacuation tool), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
