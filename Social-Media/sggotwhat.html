@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>SGGotWhat?</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="sggotwhat.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="sggotwhat.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">SGGotWhat?</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="sggotwhat-student-proposal">SGGotWhat? <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> 🔶 Fit with adjustments · <b>Category:</b> Social Media · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> A crowdsourced discovery app helping Singaporeans find real hidden gems (quiet cafes, unexpected viewpoints), countering the &quot;SG got what&quot; stereotype. Users log spots and one-off events, validated by the community; a personalized recommendation engine and route planner surface what&#39;s worth seeing and plan a full day out. An Events page pairs Eventfinda-API listings with community-submitted niche pop-ups. Backend C++ services handle spatiotemporal search, trending and multi-stop transit route optimization in real time. Named technical features: a <strong>Trust &amp; Validation pipeline</strong> (hard checks — GPS radius + accuracy, rate limiting, account age; soft checks — perceptual photo hashing, n-gram/Jaccard text similarity); a <strong>personalised recommendation engine</strong> (per-user affinity vectors + collaborative persona matching, a reserved share from adjacent clusters to avoid taste bubbles, clusters recomputed in a background loop); a <strong>spatiotemporal discovery index</strong> (custom C++ spatial index over spots/events with valid-time windows, distance blended with trending/personalisation, auto-expanding radius, zoom-based pin clustering); and a <strong>multimodal router + itinerary optimiser</strong> (C++ earliest-arrival over bus/MRT from LTA DataMall, plus a time-window orienteering metaheuristic that selects/orders stops to maximise value). Custom tool: a web-based moderation &amp; content editor (review soft-check-flagged submissions side-by-side with the detected duplicate, create/edit spots &amp; categories, tune ranking weights with a live preview of a test user&#39;s feed). Perf targets: nearby query &lt;50 ms p95 at 10k spots; itinerary &lt;2 s for 20 candidates; submission validation &lt;500 ms; deterministic-for-seed recommendations.</p>
+<p><strong>Adjustments required for approval:</strong></p>
+<ul>
+<li><strong>Clear the 2D gate with a custom-rendered data-display surface.</strong> A map built purely from a maps SDK plus native lists would miss the module&#39;s 2D requirement. Custom-render at least the map layer (your own pin-clustering, auto-expanding-radius ring, route polyline and trending/popularity styling) and/or the day-out itinerary visualization in <strong>OpenGL ES (GLSurfaceView)</strong> — the editor&#39;s live &quot;feed re-sort&quot; preview is another good candidate — rather than only a drop-in map widget and RecyclerViews.</li>
+<li><strong>Safety &amp; privacy for user-submitted spots and photos.</strong> Keep the trust/validation pipeline as a graded surface and add report/block plus moderation of user photos before public listing; don&#39;t expose a submitter&#39;s precise identity/home or a private draft location. (Your hard/soft checks and moderation tool already cover most of this — make the user-facing safety controls explicit.)</li>
+</ul>
+<p><em>(Not required, affirmed:</em> LTA DataMall and the Eventfinda API are legitimately available data sources — good choice over scraping. Keep the spatial index, recommender, router and orienteering solver as the team&#39;s own load-bearing C++.)*</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Atlas_Obscura">Atlas Obscura — Wikipedia (crowdsourced catalogue of unusual/hidden places via user-generated + editorial content, plus local community experiences and events)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Foursquare_City_Guide">Foursquare City Guide — Wikipedia (local search-and-discovery with personalized recommendations from history, a community-edited venue database and user trust levels)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Citymapper">Citymapper — Wikipedia (multimodal public-transit journey planning with live timings across walk/bus/metro, built on open GTFS transit data)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>SGGotWhat?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>🔶</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile + Web browser on mobile — a location-first discovery app (map, nearby, on-the-go itineraries) on the phone (device: Pixel 9a); the web-based moderation/content editor and the C++ desktop benchmark build are the tools/dev vehicle. <b>Extended:</b> Firebase + Linux server set up by M2 (full use T2).</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> The map (custom pin-clustering, auto-expanding radius, route polyline, popularity styling), the personalised discovery feed, the events browse/filter page, the day-out itinerary view and member profiles (OpenGL ES for the custom map/itinerary surface). <b>Languages:</b> Web — HTML/JS/CSS + C++→WASM (Emscripten, SDL2/3, OpenGL ES) for the moderation tool &amp; desktop benchmark build; Native — Kotlin Native Android UI + C++ via JNI (Android Studio); OpenGL ES in a GLSurfaceView where realtime 2D is needed (no SDL on native).</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The C++ services — the spatiotemporal spatial index (distance × trending × personalisation), the recommender (affinity vectors + persona clustering, background recompute), the trust/validation pipeline (GPS/hash/text-sim), and the multimodal transit router + time-window orienteering solver (LTA DataMall) — plus a Firebase store for spots/events/profiles and an Eventfinda-API adapter. <b>Languages:</b> C++.<br><b>Backend scope:</b> Local now, server-ready (T2) — Firebase for the crowdsourced DB; the Linux server seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> several load-bearing <strong>C++ services</strong> — an in-memory spatial index answering nearby queries under 50 ms p95 at 10k spots, an orienteering solver returning a ≤20-stop itinerary in under 2 s, a validation pass under 500 ms per submission, and a fixed-interval background loop recomputing persona clusters and trending without blocking requests (deterministic for a given seed, so the recommender is reproducibly testable).</li>
+<li><em>Data-driven:</em> spots/events (with valid-time windows), categories, affinity/persona vectors, ranking weights (distance/trending/personalisation/exploration) and validation thresholds are hot-reloadable JSON — the editor retunes ranking without recompiling.</li>
+<li><em>2D:</em> the map (own clustering/radius/route/popularity rendering) and the itinerary/feed views are <strong>custom-rendered in OpenGL ES</strong> (see adjustment 1). <em>3D:</em> not needed. <em>Networking:</em> Eventfinda + LTA DataMall API calls, Firebase sync of the crowdsourced DB, and push for trending/events.</li>
+<li><em>Custom tool:</em> the <strong>web-based moderation &amp; content editor</strong> — review soft-check-flagged submissions beside the detected duplicate, create/edit spots &amp; categories, and tune ranking weights with a live preview of a test user&#39;s feed.</li>
+<li><em>External DB:</em> Firebase for spots/events/profiles/trust. <em>Auth ⏭️:</em> accounts + trust level (account age is a validation input). <em>Analytics ⏭️:</em> engagement events feed trending and persona clustering.</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Social Media pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> On the desktop/benchmark build, C++17/20 with a service loop + a fixed-interval background pass (trending/persona recompute); SDL2/3 dev harness, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the M1G9 recommender and the background loop run through it.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ entity/registry with spots/events (valid-time windows), categories, affinity/persona vectors, ranking weights and validation thresholds in JSON (nlohmann/json) with hot-reload.</li><li><b>Prerequisites:</b> G1 (loop &amp; update hooks).</li><li><b>Feeds into:</b> M1G9 (scoring reads it), M2G2 (the editor tunes it), M2G11 (the spatial/discovery index), M1G13 (validation).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays for the ranker/index, Tracy profiling against the perf targets (nearby &lt;50 ms p95 @10k, itinerary &lt;2 s, validation &lt;500 ms), Catch2 tests incl. seeded-deterministic recommender checks, GitHub Actions Windows+Linux matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the perf budgets M2G1 validates on-device.</li></ul></details>
+</li>
+<li><strong>G9 Matching / Ranking Engine — Foundation</strong> — the recommender: blend distance, trending and per-user affinity/persona into ranked results.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Weighted scoring over affinity vectors + persona match, a reserved exploration share from adjacent clusters, and incremental re-ranking (custom C++) — not a database query.</li><li><b>Prerequisites:</b> G2 (spot/user model), G1 (tick + background recompute).</li><li><b>Feeds into:</b> M2G8 (recommender II + clustering), M2G11 (spatiotemporal index), the feed.</li></ul></details>
+</li>
+<li><strong>G6 Custom 2D UI Rendering</strong> — the map (custom pin-clustering, auto-expanding radius, route, popularity) rendered custom (satisfies the 2D gate).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 renderer or OpenGL ES, GLSL, FreeType, stb_image for custom markers, cluster bubbles, the radius ring and route polyline on the desktop build. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (shell &amp; loop).</li><li><b>Feeds into:</b> The nearby map + itinerary views; the editor&#39;s live preview.</li></ul></details>
+</li>
+<li><strong>G13 Moderation Data Model &amp; Report Flow — Foundation</strong> — the Trust &amp; Validation pipeline (hard + soft checks) and the report/flag flow.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Hard checks (GPS radius + accuracy, rate limiting, account age) and soft checks (perceptual photo hashing, n-gram/Jaccard text similarity) in C++ under 500 ms; a report/flag queue in Firestore.</li><li><b>Prerequisites:</b> G2 (spot model); Firebase identity.</li><li><b>Feeds into:</b> M2G6 (the moderation dashboard/editor); trustworthy data for ranking.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling against the perf targets, ASan on MSVC, memory pools for the index, and desktop benchmark validation; Linux server set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI; validate nearby-query and itinerary latency and the GLSurfaceView map on the Pixel 9a.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The native deliverable; the p95/latency targets met on-device.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core</strong> — the web-based moderation &amp; content editor: review flagged submissions beside duplicates, create/edit spots &amp; categories, tune ranking weights with a live feed preview.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ + Dear ImGui (or a web front-end), JSON serialization, undo/redo; a live binding that re-sorts a test user&#39;s feed as weights change, and a side-by-side duplicate-review pane.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s SDL2/3/OpenGL ES renderer (live feed/map preview).</li><li><b>Prerequisites:</b> G2 (data model), M1G9 (engine to preview), M1G13 (flagged submissions).</li><li><b>Feeds into:</b> Trusted content; ranking-weight tuning M2G8 consumes.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, and packaging of the moderation tool / desktop benchmark build via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI) packaging the Android APK/AAB; OpenGL ES in a GLSurfaceView where realtime 2D is needed — no SDL on native.</li><li><b>Prerequisites:</b> G3 (CI and test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every SGGotWhat? goal.</li></ul></details>
+</li>
+<li><strong>G11 Search &amp; Discovery Engine</strong> — the spatiotemporal discovery index: search spots/events by location + time window with auto-expanding radius.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A custom C++ spatial index (grid/quadtree) over spots and events with valid-time windows, distance blended with trending/personalisation, auto-expanding radius and zoom-based pin clustering.</li><li><b>Prerequisites:</b> M1G2 (content model), M1G9 (scoring).</li><li><b>Feeds into:</b> The nearby map, the events page and the itinerary candidate set.</li></ul></details>
+</li>
+<li><strong>G8 Ranking / Matching Engine II</strong> — recommendations II: persona clustering with an exploration share, refreshed by the background loop.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Collaborative persona clustering, similarity scoring, an adjacent-cluster exploration ratio (anti-taste-bubble), evaluation metrics, and a fixed-interval background recompute that never blocks requests.</li><li><b>Prerequisites:</b> M1G9 (ranking foundation).</li><li><b>Feeds into:</b> The personalised feed; the itinerary value model.</li></ul></details>
+</li>
+<li><strong>G7 Firebase — Auth, Push &amp; Analytics</strong> — accounts + trust level, the crowdsourced DB, trending/events push, and analytics.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth (accounts; account age feeds validation), Firestore for spots/events/profiles/trust, Cloud Messaging for trending/event push, Analytics — REST API from C++, JS/Kotlin SDK on the front-end.</li><li><b>Prerequisites:</b> M1G2 (data model), M1G13 (validation/trust).</li><li><b>Feeds into:</b> Member profiles/trust level; trending signals for ranking.</li></ul></details>
+</li>
+</ul>
+<p><em>(Proposed new pool goal (requires instructor approval):</em> <strong>Multimodal Transit Router &amp; Time-Window Orienteering Solver</strong> — earliest-arrival routing over bus/MRT from LTA DataMall (frequency-based estimates) plus a fixed-budget orienteering metaheuristic that selects and orders stops to maximise value; the Social Media pool has no routing/optimiser goal, so this would be a new appended pool goal. The spatiotemporal index above is the spatial variant of G11; the three picks stand regardless.<em>)</em></p>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 2 Design + 0 Art (8) — SGGotWhat? is a UX-heavy social utility: the map/nearby discovery, the personalised feed, events filtering, day-out itineraries, profiles/trust and the community-submission flow are a strong two-designer load, while the visual surface (map markers, category icons, trust badges) is UI-art the designers own and photos are user-supplied — no character/illustration production, so 0 artists (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). With 0 artists, the designers take the <strong>D11 conditional</strong> as a real graded Design goal each milestone (M1 Art Proof of Concept / M2 Art Implementation Quality) — the last Design goal each milestone.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the submit → validate → discover → plan-day-out loop, the trust model, and the &quot;SG got what&quot; positioning)</li><li>M1D2 Core-Loop Interactive Prototype (Figma flow: nearby map → discover/feed → events filter → day-out itinerary → submit a spot)</li><li>M1D3 User Research, Personas &amp; Competitive Analysis (teardown of Atlas Obscura / Foursquare / Citymapper; SG explorer personas)</li><li>M1D5 Interaction &amp; Input Design (map interactions, auto-expanding-radius affordance, submission flow, proximity-duplicate prompt)</li><li>M1D11 Art Proof of Concept (conditional — no artist: map-marker/category-icon/trust-badge set, UI style guide)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D2 Visual Branding &amp; Style Guide (SGGotWhat? identity; the trust-level / trending-badge system)</li><li>M2D5 Playtesting &amp; Iteration Program (discovery relevance, submission friction, itinerary usefulness)</li><li>M2D11 Art Implementation Quality (conditional — no artist: UI art/icons implemented to standard)</li></ul></li><li><b>UI/UX M1</b> (graded by the UI/UX instructor):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — map, feed, events, itinerary, profile and submission screens.</li><li>M1U2 UX Flows &amp; Wireframes — discover → plan → submit → validate journeys.</li><li>M1U3 Accessibility &amp; Readability Foundations — legible map/feed typography, contrast, thumb-reach targets.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — the required screens navigable unaided on the mobile target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished map, feed and events browse.</li><li>M2U3 Menu &amp; HUD Motion Design — map cluster/expand animation, feed re-sort, trending transitions.</li><li>M2U5 Mobile UX Adaptation &amp; Ergonomics — one-handed map/discovery use on the Pixel 9a, on-the-go.</li></ul></li><li><b>Art:</b> 0 artists — the art surface is covered by the D11 conditionals, taken as Design goals (see Design M1/M2).</li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — light UI/notification SFX and optional ambience from the week-5 needs list, present &amp; working in the prototype (submit confirm, validated, nearby alert), suitable and correctly triggered. Audio is not load-bearing here — a lecturer scope waiver may apply.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback for overlapping UI SFX.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — the standard floor tailored down for a utility app (subtle UI/notification SFX + optional ambience in the showcase build).</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing for stacked notifications).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the web moderation/content editor), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
