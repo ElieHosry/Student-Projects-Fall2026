@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Polterheist</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="polterheist.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="polterheist.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Polterheist</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="polterheist-student-proposal">Polterheist <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> A mobile perspective-switching puzzle game (in the vein of <em>Toodee and Topdee</em>). You play a kleptomaniac ghost robbing the underworld: the main body is controlled in a side-view (tap to move toward a point), while the &quot;spirit&quot; sees the world in a top-down ¾ view, flies undetected, and possesses blocks to move them around. Get the body to the target without detection to complete the heist. Named technical features: side-view ↔︎ top-down isometric perspective switching (player controls the viewing angle); a data-driven engine tailored to designer needs; a server-side solution for leaderboards and social functions; procedural map generation from preset sections. Custom tools: a game editor, runtime debug tools, and a custom map/room editor for the procedural generation. Design features: the perspective-switching mechanic (reshape the stage from the top-down view); ≥5 possessable block types with unique stage interactions; ≥5 designed stages using the perspective/gravity switch; ≥3 enemies with distinct behaviours. Target 16 ms frametime.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://store.steampowered.com/app/1303950/Toodee_and_Topdee/">Toodee and Topdee on Steam (the stated inspiration — a 2D-platformer × top-down-puzzler hybrid; switch perspectives, and the world bends to the current genre&#39;s rules)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Fez_(video_game)">FEZ — Wikipedia (perspective-shifting 2D/3D puzzle-platformer built on rotating between orthogonal views)</a></li>
+<li><a href="https://store.steampowered.com/app/113020/Monaco_Whats_Yours_Is_Mine/">Monaco: What&#39;s Yours Is Mine on Steam (top-down stealth heist — case the joint and steal without detection, with leaderboards and a level editor)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Polterheist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile + Web browser on mobile — tap-to-move and tap-to-possess are touch-first and the ¾ top-down/side switch suits a phone screen (device: Pixel 9a); the Native PC build is the development/tools vehicle. <b>Extended:</b> Firebase + Linux server set up by M2 (full use T2).</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> Dual renderer — a side-view of the body and an isometric ¾ top-down view of the spirit and the level — with the perspective-switch transition, possessed-block highlighting, detection/stealth cues and stage HUD (OpenGL ES). <b>Languages:</b> Web — HTML/JS/CSS + C++→WASM (Emscripten, SDL2/3, OpenGL ES); Native — Kotlin Native Android UI + C++ via JNI (Android Studio); OpenGL ES in a GLSurfaceView where realtime 2D is needed (no SDL on native).</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> Engine core (fixed + variable timestep loop targeting 16 ms, entity system, per-perspective physics/collision &amp; gravity, block-possession system, enemy AI &amp; detection, procedural room assembler) + a leaderboard/social service. <b>Languages:</b> C++.<br><b>Backend scope:</b> Local now, server-ready (T2) — leaderboard/social seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ loop is load-bearing — it advances the body (side-view movement to a tapped point), the spirit (free top-down flight + block possession/movement), per-perspective physics and gravity, enemy behaviour and detection, and the perspective-switch state, holding a 16 ms frame budget with mixed fixed/variable timesteps.</li>
+<li><em>Data-driven:</em> stages, the ≥5 block types and their interactions, the ≥3 enemies and their behaviours, preset rooms for procedural generation and the perspective/gravity rules are all hot-reloadable JSON authored via the editors — a data-driven engine tailored to the designers.</li>
+<li><em>2D:</em> sprite/tile rendering of both the side-view and the isometric ¾ top-down view, the switch transition, possession and detection VFX (custom-rendered). <em>3D:</em> not needed (the ¾ view is 2D/iso sprites). <em>Networking:</em> async leaderboards / social via Firebase; no real-time netcode.</li>
+<li><em>Custom tool:</em> a game editor + a custom <strong>map/room editor</strong> (author preset rooms for procedural assembly, place blocks, spawns, targets and detection zones) with live preview, plus runtime debug tools.</li>
+<li><em>External DB:</em> leaderboards and social functions. <em>Auth ⏭️:</em> accounts for leaderboards/social. <em>Analytics ⏭️:</em> optional — where players are detected/stuck, for stage balancing.</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window with tap-to-move / tap-to-possess input and a mixed fixed+variable timestep loop targeting 16 ms that advances the body, spirit, physics and the perspective-switch state; C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; M1G5 physics and M1G8 enemy detection run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Entity/component registry in C++ with stages, the block types and interactions, enemies, preset rooms and the perspective/gravity rules defined in JSON (nlohmann/json) with hot-reload — the data-driven engine the designers author against.</li><li><b>Prerequisites:</b> G1 (loop &amp; entity update hooks).</li><li><b>Feeds into:</b> M2G2 (the editor edits this data), M2G14 (procgen consumes rooms), M1G8 (enemy/data).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui runtime debug tools (perspective/gravity state, possession, detection cones), Tracy profiling to hold the 16 ms budget, Catch2 stress tests (many blocks + enemies + a perspective switch under load), GitHub Actions Windows+Linux matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening) and the frame budget M2G1 validates on-device; the runtime debug tools are a named deliverable.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the dual side-view + isometric ¾ top-down renderer and the perspective-switch transition are the whole read of the game.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Sprite/tile renderer with two projections (side + iso ¾ top-down), a camera, batching, and the switch transition; SDL2/3/OpenGL ES, GLSL, stb_image, FreeType HUD text. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window).</li><li><b>Feeds into:</b> M2G4 (advanced switch/possession VFX); every visible feature of the demo.</li></ul></details>
+</li>
+<li><strong>G5 Physics &amp; Collision</strong> — per-perspective movement, gravity switching and block possession/pushing are the mechanical core.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ + GLM math, a custom integrator handling side-view body movement and top-down spirit flight, gravity switching, and collision/resolution when possessed blocks move and reshape the stage; broadphase (grid/quadtree).</li><li><b>Prerequisites:</b> G1 (loop &amp; tick), G2 (block data).</li><li><b>Feeds into:</b> The puzzle interactions; M2G14 (procgen rooms must be solvable under these rules).</li></ul></details>
+</li>
+<li><strong>G8 Enemy AI &amp; Pathfinding</strong> — the ≥3 enemy types with distinct behaviours and the detection that makes the heist a stealth puzzle.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Finite-state machines and A*/steering for the enemies, detection cones/awareness against the body and spirit, tuned per enemy type from data (custom C++).</li><li><b>Prerequisites:</b> G1 (tick), G2 (enemy data), G5 (movement/collision).</li><li><b>Feeds into:</b> M2G10-class advanced behaviour; the &quot;without detection&quot; stealth loop.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling to hold 16 ms through a perspective switch, ASan on MSVC, memory pools for blocks/enemies, and Emscripten WASM validation for the mobile-web target plus on-device Pixel 9a checks; Linux server set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The web/mobile deliverable and a stable frame budget across both perspectives.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core</strong> — the game editor + the custom map/room editor: author stages, place blocks/spawns/targets/detection zones and the preset rooms for procedural generation.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui editor authoring stages, block placement, enemy spawns, targets and preset rooms as JSON, with round-trip serialization, live preview in both perspectives and an undo/redo command stack.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s SDL2/3/OpenGL ES renderer (dual-perspective live preview).</li><li><b>Prerequisites:</b> G2 (stage/block/room data), M1G4 (rendering for preview).</li><li><b>Feeds into:</b> M2G6 (advanced room-authoring), M2G14 (procgen consumes the rooms).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, and packaging of the native build plus the Emscripten web build artifact via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI and test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every Polterheist goal.</li></ul></details>
+</li>
+<li><strong>G6 Content Editor — Advanced Tool Features</strong> — the room editor matured: drag-drop room authoring with a live preview that validates a room is solvable under both perspectives.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui advanced widgets, drag-drop room/block editing, live preview binding that runs the sim inside the tool, and deep undo/redo.</li><li><b>Prerequisites:</b> M2G2 (editor core), M1G5 (sim used for solvability preview).</li><li><b>Feeds into:</b> The preset-room library that M2G14 assembles; the content-creation showcase.</li></ul></details>
+</li>
+<li><strong>G14 Procedural Generation II</strong> — assemble the preset rooms into varied, solvable stages with pacing.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Constraint-based assembly of preset rooms (connectivity, difficulty pacing), seeded RNG for reproducibility, and automated validation that generated stages are completable under the perspective/gravity rules.</li><li><b>Prerequisites:</b> M2G2/M2G6 (the room library), M1G5 (solvability rules).</li><li><b>Feeds into:</b> Replayable content variety at the showcase.</li></ul></details>
+</li>
+<li><strong>G8 Firebase — Accounts, Leaderboards &amp; Analytics</strong> — the server-side leaderboards and social functions.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth accounts, Firestore leaderboards (best time / least detection), optional social functions, and Analytics events, via the REST API from C++.</li><li><b>Prerequisites:</b> G2 (run/score data model).</li><li><b>Feeds into:</b> Competitive leaderboards and the social layer; stage balancing telemetry.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + 2 Art (9) — every block, room and enemy needs art in <strong>two</strong> projections (a side view and an isometric ¾ top-down view), so the environment/character art roughly doubles and earns 2 artists; a solo designer owns the perspective/gravity/possession puzzle design across the ≥5 stages and the block-interaction matrix (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). If stage/puzzle volume outgrows one designer, trade the 2nd artist for a 2nd designer. <em>Scope note (advisory):</em> perspective switch + gravity + ≥5 blocks + ≥5 stages + ≥3 enemies + procgen + editor + server is a large surface — treat the perspective-switch + possession core with 2–3 hand-built stages and the editor as the M1/M2 floor, with procedural assembly and the server layer as the stretch.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the switch → possess → reshape → sneak-to-target heist loop; benchmark e.g. Toodee and Topdee for perspective-swap clarity)</li><li>M1D2 Core Gameplay Loop Prototype (greybox proving the side/top switch + block possession makes a satisfying puzzle) · prototype in Unity</li><li>M1D6 Level &amp; Progression Design (the ≥5 stages, the block-interaction matrix, and the teach-test-twist curve for the switch/gravity mechanic)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D3 Systems Balance &amp; Tuning — Data-Driven (stage difficulty, detection tuning and block behaviour via the team&#39;s JSON, no code changes)</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the two perspectives, the switch affordance, possession and detection cues.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — standard screens + the switch/possession controls navigable unaided on the mobile target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished HUD and touch controls on the Pixel 9a.</li></ul></li><li><b>Art M1:</b> 2 artists justified (every asset in two projections + characters + enemies)<ul><li>M1A1 ⭐ (mockups: main menu + a stage shown in both perspectives)</li><li>M1A2 Characters (the ghost body, the spirit, + the 3 enemy types, silhouette-first)</li><li>M1A3 Environment (the underworld tileset in BOTH side and iso ¾ top-down projections)</li><li>M1A4 UI Art Concepts &amp; Typography (switch affordance, possession/detection HUD)</li><li>M1A5 Animation Foundations (body move, spirit float, possession, enemy idle/alert)</li><li>M1A6 Early Asset Production</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐</li><li>M2A2 Extensive Animation (perspective-switch transition, possession, enemy behaviours)</li><li>M2A3 Environment Alive (both-projection ambient motion, block/room variety)</li><li>M2A4 UI Art — States &amp; Feedback (detected, possessing, switch-locked, target reached)</li><li>M2A5 VFX — Effects &amp; Transitions (the switch morph, possession glow, detection stingers)</li><li>M2A6 Cutscenes &amp; Storyboards (heist intro / outro)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial BGM/SFX from the week-5 needs list present &amp; working in the prototype (spooky underworld BGM, possession, switch, detection stings), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Games floor (atmospheric BGM + possession / switch / detection / heist-complete SFX, ≥6 types).</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing; a cue for the perspective switch).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the map/room editor), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
