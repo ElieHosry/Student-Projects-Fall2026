@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>RBR - Room Bot Rumble</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="rbr-room-bot-rumble.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="rbr-room-bot-rumble.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">RBR - Room Bot Rumble</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="rbr---room-bot-rumble-student-proposal">RBR - Room Bot Rumble <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>RBR</em> is a bot-builder auto-battler: the player creates a battle cleaning bot by allocating points to its <strong>statistics and behaviour</strong> and attaching <strong>gadgets/weapons</strong>, then the bots fight until the timer runs out or a bot is destroyed — the higher score wins. It features an <strong>asynchronous PVP</strong> system with a points-based <strong>rating/ranking</strong>. Named technical features: async PVP with a points rating; modular bot customisation (gadgets/weapons); customisations with unique behaviours; stat customisation affecting behaviour; and a <strong>paint-trail render</strong> as the bot moves. Load-bearing C++: a 2D renderer (multiple objects, primitive shapes, images, text), a sound system, an object-based system for AIs/projectiles/components, a game loop updating &amp; rendering objects/projectiles/particles, image-slicing for sprite-sheet animation, a collision system for combat, and a particle system for VFX. Tools: a <strong>generic Finite State Machine</strong> for bot AI, an <strong>Entity-Component System</strong> for modular objects, an <strong>animation system</strong> (sprite-sheet slicing + playback), a <strong>UI system</strong> (parent-child anchors), and a <strong>module maker</strong> to create new bot attachments. Design features: the bot-customisation system (weapon/gadget types); player-adjusted stats that also affect behaviour; timer/score-based combat; and an <strong>auto-battler</strong> where the player watches their built bot fight in a single world map.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://store.steampowered.com/app/871930/GLADIABOTS__AI_Combat_Arena/">GLADIABOTS - AI Combat Arena on Steam (build and customise a robot crew, construct their AI/behaviour, send them to the arena and watch it play out — with <strong>asynchronous multiplayer</strong> and ranked matches; the closest build-a-bot-set-its-behaviour + async-PvP precedent)</a></li>
+<li><a href="https://store.steampowered.com/app/1714040/Super_Auto_Pets/">Super Auto Pets on Steam (an <strong>auto-battler</strong> where you build a loadout and battle other players <strong>asynchronously</strong> — Arena mode with no timers, working toward wins/rating — the async auto-battler + rating precedent)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Robocraft">Robocraft — Wikipedia (build a combat robot by attaching <strong>modular parts and weapons</strong> — lasers, launchers, rail guns, melee — then send it into battle; the modular gadget/weapon bot-building precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>RBR - Room Bot Rumble</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (device: Pixel 9a) and/or Web browser on mobile — an auto-battler + builder is touch-friendly on either; the Native PC build is the development/tools vehicle (the FSM/ECS tooling + the module maker). <b>Extended:</b> Firebase + a Linux server the team sets up by M2 (full use T2) for accounts, submitted bot builds, the async-PVP match resolution and the points rating/ranking.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A 2D renderer (objects, primitives, images, text, sprite-sheet animation) of the bots, gadgets/weapons, projectiles, the paint trail and the world map, plus the anchored UI (the bot-builder screen, stat allocation, combat HUD, leaderboard). <b>Languages:</b> Web — HTML/JS/CSS + C++→WASM (Emscripten, SDL2/3, OpenGL ES); Native — Kotlin Native Android UI + C++ via JNI (Android Studio); OpenGL ES in a GLSurfaceView where realtime 2D is needed (no SDL on native).</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The real-time C++ combat simulation loop (FSM bot AI over the ECS, projectiles, collision, particles/paint-trail, timer/score) + the async-PVP service that resolves submitted bot builds and updates the points rating. <b>Languages:</b> C++ (engine + sim); Firebase-backed services + the Linux match/rating host on the Extended tier.<br><b>Backend scope:</b> Local now, server-ready (T2) — the accounts / bot-build submission / match-resolution / rating seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ loop is load-bearing — it drives the FSM bot AI (behaviour derived from stats + attached gadgets), moves/collides projectiles, updates particles + the paint trail, and resolves the timer/score win condition; the async-PVP match resolution runs the same deterministic sim.</li>
+<li><em>Data-driven:</em> bots, stat allocations, gadgets/weapons (each with unique behaviours), FSM behaviour definitions and world maps are all data via the ECS — a new module or bot is a data change (authored in the module maker).</li>
+<li><em>2D:</em> the renderer (objects/primitives/images/text/sprite-sheets), the paint-trail, projectiles, particles and the anchored UI (custom-rendered). <em>3D:</em> not needed. <em>Networking:</em> PVP is <strong>asynchronous</strong> (submit build → server resolves → rating updates), so it&#39;s async client↔︎server (Application Communication ✅) and a real-time Networking System is optional (🔵).</li>
+<li><em>Custom tool:</em> the <strong>module maker</strong> (author new gadgets/weapons/attachments + their behaviours and stats as data) — plus the FSM/ECS/animation/UI systems as reusable engine tooling.</li>
+<li><em>External DB:</em> accounts, submitted bot builds, match results and the rating/ranking. <em>Auth ⏭️:</em> accounts for PVP/rating. <em>Analytics ⏭️:</em> optional — build/win-rate stats for balancing.</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — the combat loop + the generic FSM + the UI system.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a real-time C++ loop updating/rendering objects, projectiles and particles, a generic start/update/exit FSM for bot AI, a sound system, and an anchored parent-child UI system. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the bot AI (M1G8) and combat run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong> — the <strong>ECS</strong> (modular bots/gadgets/components).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> An entity-component system in C++ (transform, collision, stats, behaviour, weapon/gadget components) with bots, gadgets/weapons and their behaviours/stats in hot-reloadable JSON — a new module is a data change; low coupling between systems.</li><li><b>Prerequisites:</b> G1 (loop &amp; system update order).</li><li><b>Feeds into:</b> M2G2 (the module maker), M1G8 (behaviour/stat data), M2G13 (build/stat economy).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays (FSM state, stats, pool usage), Tracy profiling of a full fight with many projectiles + particles + paint-trail, Catch2 tests for the deterministic combat sim (same build → same result, needed for async PVP) and data loading, on a GitHub Actions matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the deterministic async-PVP resolution M2 relies on.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the renderer (objects/primitives/images/text + sprite-sheet animation) and the <strong>paint trail</strong>.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> A 2D renderer for bots, gadgets/weapons, projectiles, world map and text, with image-slicing sprite-sheet animation and a paint-trail renderer (a fading trail as the bot moves); SDL2/3/OpenGL ES, GLSL, stb_image, FreeType. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window).</li><li><b>Feeds into:</b> M2G4 (advanced VFX); every visible frame.</li></ul></details>
+</li>
+<li><strong>G5 Physics &amp; Collision</strong> — the combat collision (projectiles, hits, bot bodies).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ + GLM math, projectile motion and collision/hit resolution against bots and the world map, damage application, and broadphase to keep cost stable with many projectiles.</li><li><b>Prerequisites:</b> G1 (loop &amp; tick), G2 (bot/weapon data).</li><li><b>Feeds into:</b> The combat outcome/score; M2G13 (scoring).</li></ul></details>
+</li>
+<li><strong>G8 Enemy AI &amp; Pathfinding</strong> — the <strong>FSM bot AI</strong> whose behaviour is driven by stats + attached gadgets.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A generic FSM (idle/seek/attack/retreat…) parameterised by the bot&#39;s stats and equipped gadgets, plus steering/pathfinding on the single world map, tuned from data (custom C++).</li><li><b>Prerequisites:</b> G1 (tick, FSM), G2 (stat/gadget data).</li><li><b>Feeds into:</b> M2G10 (advanced behaviours); the auto-battler&#39;s read.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling of a full fight, ASan on MSVC, object pools for projectiles/particles, and validation on the mobile target (Pixel 9a and/or mobile web); the Firebase/Linux-server seam (accounts + build submission + match resolution + rating) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The mobile deliverable + a stable, deterministic sim for async PVP.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Module Maker)</strong> — author new bot attachments (gadgets/weapons) with their behaviours and stats.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui + the shared renderer: compose a new gadget/weapon from components, set its stats and behaviour, and preview it on a bot, with round-trip JSON serialization and undo/redo.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s SDL2/3/OpenGL ES renderer (preview).</li><li><b>Prerequisites:</b> G2 (the ECS/module data model), M1G4 (rendering for preview).</li><li><b>Feeds into:</b> All module content; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android (or Emscripten) builds, tests (deterministic sim, collision, data loading) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G8 Firebase — Accounts, Leaderboards &amp; Analytics</strong> — accounts, submitted bot builds, and the async-PVP <strong>points rating / ranking</strong>.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth accounts, Firestore for submitted bot builds + match results + the rating/leaderboard (periodically updated), and optional Analytics, via the REST API from C++; server-validated so ratings can&#39;t be forged.</li><li><b>Prerequisites:</b> G2 (build/result data model), M1 sim (deterministic resolution).</li><li><b>Feeds into:</b> The async-PVP + rating/ranking features; balancing telemetry.</li></ul></details>
+</li>
+<li><strong>G10 AI — Advanced</strong> — the bot behaviours matured: stat/gadget-driven decision-making and difficulty/opponent variety.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Behaviour trees / richer FSM logic where equipped gadgets and stat thresholds change tactics (kite, rush, defend), plus opponent-bot variety for the auto-battler.</li><li><b>Prerequisites:</b> M1G8 (FSM AI foundation).</li><li><b>Feeds into:</b> Interesting fights across diverse builds; the &quot;customisations have unique behaviours&quot; pillar.</li></ul></details>
+</li>
+<li><strong>G13 Gameplay Systems II</strong> — the <strong>bot-build / stat / module economy + scoring</strong> system.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ systems over the ECS for the point-allocation stat economy, the gadget/weapon effects (each a unique behaviour), and the timer/score win condition; balancing-data-driven.</li><li><b>Prerequisites:</b> M1G2 (modules/stats), M1G5 (combat → score).</li><li><b>Feeds into:</b> The build depth + the competitive rating at showcase; T2 module expansion.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 2 Design + 1 Art (9) — a bot-builder auto-battler is a <strong>systems-and-balance</strong> game, so the design surface is large (the stat/point economy, the gadget/weapon behaviours, the FSM behaviour design, the rating/matchmaking and combat balance), fitting two designers; one artist can carry a <strong>modular, combinatorial</strong> bot look (chassis + interchangeable gadgets/weapons parts), the single world map, projectiles/paint-trail VFX and the builder UI (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). If the modular-part art volume outgrows one artist, trade the 2nd designer for a 2nd artist. <em>Scope note (advisory):</em> an FSM/ECS engine + combat sim + module maker + async-PVP + rating is a full but well-structured scope — the build-a-bot → deterministic auto-battle → score loop with a handful of gadgets and the module maker is the M1/M2 floor; the full async-PVP rating ladder and broad module variety are the stretch. Keep the combat sim <strong>deterministic</strong> so async matches resolve identically on the server.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the build-a-bot → auto-battle → score/rating loop and the stat/gadget behaviour model; primary benchmark e.g. Gladiabots / Super Auto Pets, with a Singapore benchmark for the local-awareness criterion)</li><li>M1D2 Core Gameplay Loop Prototype (a greybox proving build-a-bot → watch-it-fight → score is satisfying and readable) · prototype in Unity</li><li>M1D3 User Research, Personas &amp; Competitive Analysis (teardown of Gladiabots / Super Auto Pets / Robocraft; findings into the FDD)</li><li>M1D5 Level &amp; Progression Design (the rating/ranking progression and unlock pacing of gadgets/stats)</li><li>M1D6 Systems &amp; Economy Design (the point-allocation stat economy, the gadget/weapon behaviours and the scoring — every system with a purpose)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D3 Systems Balance &amp; Tuning — Data-Driven (stat/gadget balance and matchmaking/rating tuning via the team&#39;s JSON, no code changes)</li><li>M2D5 Playtesting &amp; Iteration Program (test build variety and fight readability, triage, re-test)</li><li>M2D6 Progression &amp; Retention Tuning (the rating ladder pacing and unlock cadence, kept fair and non-grindy)</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the bot-builder (stat allocation + attachment), the combat HUD (timer/score) and the leaderboard.</li><li>M1U2 UX Flows &amp; Wireframes — Menus → HUD — the build → submit → watch → rating flow wireframed end to end.</li><li>M1U3 Accessibility &amp; Readability Foundations — legible stats/behaviour cues, contrast and touch targets on a phone.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — builder, combat, results and leaderboard navigable unaided on the mobile target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished builder + combat UX tested with players on the Pixel 9a.</li><li>M2U3 Menu &amp; HUD Motion Design — build-confirm, combat-start, score and rating-update transitions animated so state reads clearly.</li><li>M2U4 Onboarding &amp; Tutorial Design — teach build → attach → stats → watch → rate in the first session without a wall of text.</li></ul></li><li><b>Art M1:</b> 1 artist (modular combinatorial bot parts + world + UI + VFX)<ul><li>M1A1 ⭐ Art Bible / Proof of Concept (the visual direction — the &quot;cleaning bot&quot; tone, the modular-part language, readability of gadgets/weapons)</li><li>M1A2 Character Concepts &amp; Model Sheets (the bot chassis + the interchangeable gadgets/weapons as a modular set)</li><li>M1A4 UI Art Concepts &amp; Typography (the builder screen, stat allocation, combat HUD, leaderboard)</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ Critical Asset Production &amp; In-Engine Visual Quality (the bot parts, world map, projectiles and UI implemented and consistent)</li><li>M2A2 Character Animation — Extensive (bot movement, gadget/weapon firing, hit/destroy reactions)</li><li>M2A5 VFX — Critical Effects &amp; Transitions (the paint trail, weapon/gadget effects, projectile impacts and the destroy moment)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial BGM/SFX from the week-5 needs list present &amp; working in the prototype (workshop/arena BGM, build-confirm, weapon-fire, hit, and destroy cues), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — the team&#39;s data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback for overlapping combat SFX.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Games floor (BGM + build / weapon-fire / hit / gadget / score / destroy SFX, ≥6 types), scaling with combat intensity.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing; distinct per-weapon/gadget cues).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the module maker), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
