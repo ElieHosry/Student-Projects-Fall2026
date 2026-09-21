@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>FORKCAST</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="forkcast.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="forkcast.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">FORKCAST</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="forkcast-student-proposal">FORKCAST <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Social Media · <b>Assessed:</b> 2026-09-22 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>Forkcast</em> helps users and friend groups decide where to eat. A <strong>Dining Decision Bracket</strong> lets everyone swipe through restaurant options to narrow choices and break ties; the app compares everyone&#39;s picks into a final recommendation. As users visit restaurants, the app learns their <strong>Food Taste DNA</strong>; a <strong>Community Hub</strong> lets them find people with similar tastes (by preferences or Taste DNA), join cuisine communities, chat, and share reviews/discoveries. A <strong>Cuisine Tracker</strong> logs cuisines/restaurants tried and awards <strong>milestone badges</strong> shown off on the profile. Named load-bearing C++: the <strong>Bracket Simulation Engine</strong> — a live single-elimination state machine seeded from an integer + a restaurant-ID vector, swipe-driven, adding restaurants each swipe until a threshold/pick resolves; the <strong>Food Taste DNA</strong> performant service — a weighted vector/map (one dimension per cuisine tag) updated per dine-in with a <strong>decayed running average</strong> scaled by rating, with a weightage hierarchy (post-dine rating &gt; repeat visits &gt; dining-in-after-swiping &gt; bookmarking &gt; joining a hub &gt; swiping); the <strong>Community Hub</strong> — <strong>TCP</strong> for chat text (server-relayed, buffered against overflow) and <strong>UDP with a sliding window</strong> for video/audio/image (chunked, missing-chunk detection + retransmit), event-driven high-throughput; and the <strong>Cuisine Tracker</strong> — <strong>Firebase Firestore</strong> (Users, Restaurants, Reviews, Leaderboards) with matching C++ data structures, a <strong>Linux-VM backend script pulling restaurants from the Google Places API</strong> and tagging cuisine/area into Firestore, C++-core review validation submitted through services to the backend, and backend cuisine-count + milestone-badge tracking. Team: <strong>6 CS + 1 Design + 0 Art</strong>.</p>
+<p><em>Note (category):</em> Forkcast&#39;s core is <strong>social</strong> — cuisine communities, live chat + media, connecting people by Taste DNA, shared reviews, and show-off badge profiles — so it is assessed as <strong>Social Media</strong>; the bracket engine and Taste DNA are the decision/recommendation systems that feed the social network. (Runners-up considered: Visualization &amp; Analytics for the Taste-DNA modelling, and a gamified-app lens for the badges.)</p>
+<p><em>Note (module completeness):</em> the design already leans on <strong>Firebase + a Linux VM backend + Google Places API</strong> — this is exactly the module&#39;s model (external DB mandatory; a Linux server set up by M2, full use T2). <em>Platform:</em> the swipe-first, on-the-go experience is a <strong>mobile app</strong> (Native Android, Pixel 9a). <em>Scope caution:</em> the <strong>UDP sliding-window media streaming</strong> (video/audio) in chat is genuinely hard — treat <strong>text chat as the floor</strong> and media as a stretch (see scope note).</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Beli_(app)">Beli — Wikipedia (a social app to track, rank and share restaurant experiences with friends, whose algorithm computes a &quot;Match Score&quot; to connect users with similar tastes and recommend places — the restaurant-tracking + taste-matching + social precedent, almost feature-for-feature)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Untappd">Untappd — Wikipedia (a social check-in app where users log what they consume, earn <strong>milestone badges</strong>, and share to a community feed — the Cuisine-Tracker + badges + community precedent)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Tinder_(app)">Tinder — Wikipedia (the origin of the swipe-through-a-stack-of-cards decision mechanic — swipe to like/dislike to narrow a set — the Dining Decision Bracket&#39;s swipe-UX precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>FORKCAST</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — C++ engine/services via JNI, OpenGL ES for the Taste-DNA visualization in a GLSurfaceView, Kotlin app shell; device: Pixel 9a) — a swipe-first, on-the-go social app; some screens (feed, profile, hub) can be pure Native UI. The Native PC build is the dev/tools vehicle (admin/moderation + restaurant/badge tooling). <b>Extended:</b> Firebase Firestore + a Linux VM backend (set up by M2, full use T2) — the Google Places ingest script, review persistence, cuisine-count/badge tracking and the chat relay.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A 2D social app — the swipe-bracket cards, the Food Taste DNA visualization, the Community Hub (communities, chat, media), review forms, and the profile with badges/leaderboards. <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine/services via JNI (Android Studio); OpenGL ES for the custom Taste-DNA charts in a GLSurfaceView; feed/profile/hub screens can be pure Native UI. Web/desktop — SDL2/3 + OpenGL ES for the PC dev/tools build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> C++ core + services — the Bracket single-elimination state machine, the Food Taste DNA weighted-vector service (decayed running average), the chat relay (TCP text, buffered) + UDP sliding-window media, and review validation — plus a Linux VM backend (Google Places ingest, badge/cuisine tracking) and Firebase Firestore (Users/Restaurants/Reviews/Leaderboards) with matching C++ data structures. <b>Languages:</b> C++ (engine/services); backend script on the Linux VM; Firebase on the Extended tier.<br><b>Backend scope:</b> Client + services now, cloud + server (T2) — Firebase live from M1 for identity/data; the Linux VM chat relay + Places ingest set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> three load-bearing C++ pieces — the <strong>Bracket state machine</strong> (seeded, swipe-driven single-elimination resolving to a recommendation), the <strong>Food Taste DNA</strong> service (per-cuisine weighted vector, decayed running average scaled by the weightage hierarchy), and the <strong>chat/networking</strong> event loop (high-throughput, buffered).</li>
+<li><em>Networking:</em> <strong>core</strong> — TCP server-relayed chat with overflow buffers, and UDP sliding-window media (chunk detection + retransmit). Text chat is the floor; the custom reliable-UDP media is the stretch. Application Communication ✅ covers client↔︎Firebase↔︎backend.</li>
+<li><em>Data-driven:</em> users, restaurants (Places-ingested, cuisine/area-tagged), reviews, cuisine tags/weights, badge milestones and leaderboards are all data — matching C++ structs and Firestore models; a new cuisine tag or badge tier is a data change.</li>
+<li><em>2D:</em> the swipe-bracket cards, the <strong>Food Taste DNA visualization</strong> (custom-rendered charts, no chart libs) and the profile/badges satisfy the 2D gate. <em>3D:</em> not needed.</li>
+<li><em>Front-end + Back-end:</em> a genuine split — mobile client + C++ services + Linux-VM backend + Firestore; the Places ingest and review-submission flows are <strong>Application Communication</strong> ✅.</li>
+<li><em>Custom tool:</em> an <strong>admin / moderation + restaurant-and-badge management</strong> dashboard (review moderation, cuisine-tag/badge-milestone editing, the Places-ingest control) — the &quot;tools development&quot; the proposal calls for to keep the system stable.</li>
+<li><em>External DB:</em> central (Firestore — users/restaurants/reviews/leaderboards). <em>Auth ⏭️ / Analytics ⏭️:</em> accounts (Firebase identity, foundational here) and engagement analytics are natural but module-deferred to T2 (🔵).</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Social Media pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — the shell + the <strong>Bracket</strong> state machine + swipe input.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a C++ loop hosting the single-elimination Bracket state machine (seeded integer + restaurant-ID vector, swipe-driven resolution) and swipe input; C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the Taste DNA (M1G9) and networking (M1G4) build on it.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ structs (User, Restaurant, Review, cuisine tag/weight, badge milestone) mirrored to Firestore models, in hot-reloadable JSON where local — a new cuisine tag or badge tier is a data change; the shared model the app + DB both use.</li><li><b>Prerequisites:</b> G1 (loop &amp; entity hooks).</li><li><b>Feeds into:</b> M1G8 (Firebase), M1G9 (Taste DNA), M2G2 (admin tool).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui/overlay inspectors (bracket state, Taste-DNA weights, chat buffer occupancy), Tracy profiling of the chat relay + Taste-DNA updates under load, Catch2 tests (bracket resolution, decayed-average correctness, data loading), on a GitHub Actions Windows+Linux matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the network stability tooling.</li></ul></details>
+</li>
+<li><strong>G4 Real-time Networking Foundation</strong> — the Community Hub chat transport (TCP relay + presence).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Winsock2/BSD sockets (or ENet/SDL_net), a TCP chat relay (client→server→client) with presence + a message protocol and overflow buffers, serialization; the base the UDP media layer extends. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (shell &amp; loop).</li><li><b>Feeds into:</b> M2G9 (Chat II — rooms/presence/history); the Community Hub.</li></ul></details>
+</li>
+<li><strong>G8 Firebase Integration — Identity &amp; Data</strong> — users, restaurants, reviews, leaderboards + the Places ingest.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth + Firestore (Users/Restaurants/Reviews/Leaderboards), REST from the C++ core; a Linux-VM backend script pulling restaurants from the Google Places API, tagging cuisine/area, writing to Firestore; C++-core review validation submitted to the backend.</li><li><b>Prerequisites:</b> G2 (matching data model).</li><li><b>Feeds into:</b> M2G7 (Firebase auth/push/analytics); the Cuisine Tracker/badges; the social graph.</li></ul></details>
+</li>
+<li><strong>G9 Matching / Ranking Engine — Foundation (Food Taste DNA)</strong> — the weighted-vector affinity service.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A per-cuisine-tag weighted vector/map, each dine-in updating a tag via a decayed running average scaled by the weightage hierarchy (post-dine rating &gt; repeat visits &gt; dine-in &gt; bookmark &gt; join hub &gt; swipe); weighted scoring for the bracket&#39;s group aggregation (custom C++).</li><li><b>Prerequisites:</b> G2 (user/content model).</li><li><b>Feeds into:</b> M2G8 (Ranking II — recommendations + similar-taste matching); the bracket&#39;s final recommendation.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong> — on-device perf + the Linux-VM relay/backend seam.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Profiling + optimization of the chat relay + Taste-DNA service (threading, memory pools), sanitizers, and on-device validation (Pixel 9a); the Linux VM (chat relay + Places ingest) + Firebase set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The mobile deliverable + a stable, scalable hub.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Admin / Moderation &amp; Restaurant-Badge Tool)</strong> — the stability/admin tooling.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui (or a web admin UI): moderate reviews/chat, edit cuisine tags + badge milestones, control the Places-ingest, and inspect leaderboards, with round-trip JSON/Firestore and undo/redo.</li><li><b>Prerequisites:</b> G2 (data model), M1G8 (Firestore).</li><li><b>Feeds into:</b> Safe deployment; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android builds, tests (bracket resolution, decayed-average, chat under simulated latency/loss, data loading) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G8 Ranking / Matching Engine II — Recommendations &amp; Similar-Taste Discovery</strong> — the Taste DNA matured.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Scoring models over the Taste-DNA vectors (weighted features, cosine similarity), candidate generation for restaurant recommendations, and user-to-user matching (find people with similar Taste DNA) with evaluation metrics.</li><li><b>Prerequisites:</b> M1G9 (Taste DNA foundation).</li><li><b>Feeds into:</b> The Community Hub&#39;s &quot;similar tastes&quot; discovery; the bracket recommendations.</li></ul></details>
+</li>
+<li><strong>G9 Chat II — Rooms, Presence, Typing, History</strong> — the Community Hub matured.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Cuisine-community rooms, presence + typing indicators, message history (Firestore), and (stretch) the UDP sliding-window media path (chunked send + retransmit) layered on M1&#39;s transport.</li><li><b>Prerequisites:</b> M1G4 (networking foundation).</li><li><b>Feeds into:</b> The Community Hub showcase; moderation pipeline.</li></ul></details>
+</li>
+<li><strong>G13 Engagement Analytics Dashboards — Taste-DNA Visualization &amp; Cuisine Stats</strong> — the preference viz + tracker stats.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Custom chart rendering (no chart libs) for the Food Taste DNA visualization (affinity per cuisine), the Cuisine Tracker counts + badge-milestone progress, and leaderboards, over a Firebase event/data pipeline.</li><li><b>Prerequisites:</b> M1G8 (Firebase data), M1G9 (Taste DNA).</li><li><b>Feeds into:</b> The profile/badge showcase; the &quot;visualization of user&#39;s preferences&quot; feature.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + 0 Art (8) — <strong>as proposed</strong>, and workable: a social/utility app&#39;s art surface is <strong>light-to-moderate</strong> (UI, the Taste-DNA visual language, the badge/icon set, profile styling), which the <strong>D11 conditional</strong> can carry — though the <strong>badge set</strong> is a real, reusable visual-asset job worth scoping deliberately. That said, a <strong>solo designer + 0 artists</strong> is the case the design pool flags (&quot;must ask the instructor which conditional bends&quot;, see <code>design-goals-pool.pdf</code>), and the design load here is heavy — the group-decision UX, the Community-Hub social design, the recommendation/onboarding and the moderation/safety UX — so a <strong>2nd designer is recommended</strong> (one owning the social/decision UX, the other the D11 visual surface + moderation UX). <em>Scope note (advisory):</em> the standout risk is <strong>networking breadth</strong> — a TCP chat relay is achievable, but a <strong>custom reliable-UDP sliding-window media stream</strong> (video/audio) is a research-grade task; make <strong>text chat + images the floor</strong> and treat live video/audio as a T2 stretch. Likewise, keep the <strong>Bracket + Taste DNA + Firebase tracker</strong> as the core M1/M2 spine, and let media streaming + advanced recommendations flex.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / TEAM picks for this project (no Art track as proposed — 0 artists, so the light Art surface + badge set is carried by the Design-owned D11 conditional); deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the group-decision USP, the Food Taste DNA, the Community Hub and the Cuisine Tracker/badges; the problem — friend groups can&#39;t agree where to eat; a primary benchmark e.g. Beli / Untappd, and a Singapore benchmark — e.g. a local food-discovery app)</li><li>M1D2 Core-Loop Interactive Prototype (a clickable prototype of the swipe-bracket → recommendation and the hub/tracker flows, proving the UX before the engine is deep) · Figma/Unity</li><li>M1D11 Art Proof of Concept *(conditional — mandatory for 0-artist teams; Design-owned)* — the visual identity: UI system, the Taste-DNA visual language, the badge/icon set and profile styling; 2 mockups.</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D11 Art Implementation Quality *(conditional — mandatory for 0-artist teams; Design-owned)* — the UI, Taste-DNA viz, badge set and profile implemented in-engine, no placeholders.</li></ul></li><li><b>UI/UX M1:</b><ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — standards for the swipe-bracket cards, the Taste-DNA viz, the Community Hub (communities/chat) and the profile/badges, plus a wireframe baseline; group-decision + social flows are the priority.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — the bracket, hub/chat, tracker/badges and profile navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated with real friend groups (does the group swipe-to-decide actually resolve arguments?), polished on the Pixel 9a.</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial audio from the week-5 needs list present &amp; working (swipe/pick cues, match-found, badge-earned, notification), suitable and correctly triggered — modest for a social app but the badge/match moments are real beats.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable playback.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — the app&#39;s audio set (swipe/pick + match + badge + chat/notification cues), suited to a mobile social app.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the playback the build needs (multi-channel; a distinct badge-earned + match cue).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the admin/moderation + restaurant/badge tool), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-22.</em></p>
+</body>
+</html>
