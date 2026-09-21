@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Katabasis</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="katabasis.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="katabasis.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Katabasis</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="katabasis-student-proposal">Katabasis <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>Katabasis</em> is a level-based macabre-themed RPG where players control three characters in <strong>turn-based battles</strong>. At the start of each battle, players assign a <strong>card</strong> to each character granting offensive/defensive abilities; then, based on each character&#39;s individual <strong>action value</strong>, players <strong>tap and drag from each character across enemies to chain attacks</strong>. Named technical features: a <strong>decision-tracking enemy AI</strong> that attacks automatically, evaluates the player&#39;s likely next action and counters it to force optimal play; a <strong>level editor</strong> for asset placement and building scenes; a <strong>custom particle-effect (VFX) inspector</strong> (spawn rate, color-over-time, scale); and a <strong>gesture input system</strong> (swipes, multi-finger triggers). Load-bearing C++: a <strong>real-time combat simulation loop</strong> holding a stable update rate across multiple enemies, AI behaviours, environment, repeated attacks and effects on target Android devices; and <strong>static memory allocation &amp; pooling</strong> (a fixed number of enemies/particles/assets allocated at level load and recycled). Tools: a <strong>level editor</strong> (scenes, parallax, show/hide images), a <strong>particle-effect inspector</strong> (sliders for particle patterns), and an <strong>asset importer &amp; optimization pipeline</strong> (import .mp3/.png etc., convert to engine format, compress). Built for Android — C++ rendering via OpenGL ES, connected to a Kotlin app through JNI. Design features: ≥5 turn-based combat encounters with designed enemy layouts; ≥5 ability cards; ≥3 deployable units with individual action values; and the tap-and-drag chain-attack system.</p>
+<p><em>Note (module completeness):</em> the proposal doesn&#39;t mention an <strong>External Database</strong> or accounts, but the module mandates Firebase as the external DB — plan to persist progress / unlocked cards / level records there (a standard, small addition; see the External Database row + M1G12-style integration). Not a category concern; just build it in.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://store.steampowered.com/app/646570/Slay_the_Spire/">Slay the Spire on Steam (the benchmark card-driven turn-based combat RPG — assign cards that grant abilities, then resolve attacks against a lineup of enemies — the card-ability-per-turn precedent)</a></li>
+<li><a href="https://store.steampowered.com/app/262060/Darkest_Dungeon/">Darkest Dungeon on Steam (a macabre/gothic turn-based party RPG — lead a small party through level-based encounters with an innovative strategic turn system — the macabre-theme + party-turn-based precedent)</a></li>
+<li><a href="https://honkai-star-rail.fandom.com/wiki/Follow-Up_Attack">Honkai: Star Rail — &quot;Follow-Up Attack&quot; (a turn-based combat system where each character&#39;s <strong>action value</strong> governs turn order and abilities chain <strong>follow-up attacks</strong> across enemies — the action-value + chain-attack precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Katabasis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — C++ via JNI rendering through OpenGL ES, Kotlin app shell; device: Pixel 9a) — the tap-and-drag chain and gesture input are touch-first; the Native PC build is the development/tools vehicle (the level editor, particle inspector and asset importer). <b>Extended:</b> Firebase + a Linux server the team sets up by M2 (full use T2) for accounts and progress/card-unlock persistence.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A 2D macabre renderer — the three characters, the enemy layouts, parallax scenes, the card-assignment UI, the action-value/turn HUD, the tap-and-drag chain-target overlay, and the particle VFX. <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine via JNI (Android Studio); OpenGL ES for the realtime 2D in a GLSurfaceView; Web/desktop — SDL2/3 + OpenGL ES for the PC dev/tools build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The real-time C++ combat simulation loop (turn/action-value resolution, card abilities, chain-attack targeting, the decision-tracking enemy AI, particle updates), with static allocation + object pooling for enemies/particles/assets; plus Firebase for accounts + progress persistence. <b>Languages:</b> C++ (engine); Firebase-backed services on the Extended tier.<br><b>Backend scope:</b> Local now, server-ready (T2) — the accounts / progress-persistence seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ loop is load-bearing — it resolves the action-value turn order, applies card abilities, executes the tap-and-drag chain attacks, runs the decision-tracking enemy AI and updates particles, holding a stable rate on Android with static allocation + pooling.</li>
+<li><em>Data-driven:</em> cards (≥5), characters/units (≥3, with action values), enemies and their layouts, encounters (≥5) and particle-effect definitions are all data — a new card, enemy or encounter is a data change (authored via the editor tools).</li>
+<li><em>2D:</em> the macabre renderer, parallax scenes, the chain-target overlay, the card/turn UI and the particle VFX (custom-rendered). <em>3D:</em> not needed. <em>Networking:</em> single-player; accounts/progress persistence is async client↔︎cloud (Application Communication ✅), so a Networking System is optional (🔵).</li>
+<li><em>Custom tool:</em> three — the <strong>level editor</strong> (scenes/parallax/asset placement), the <strong>particle-effect inspector</strong> (spawn rate / color-over-time / scale sliders), and the <strong>asset importer &amp; optimization pipeline</strong> (import + convert + compress).</li>
+<li><em>External DB:</em> progress, unlocked cards and level records (Firebase — add this per the module). <em>Auth ⏭️:</em> optional accounts. <em>Analytics ⏭️:</em> optional — encounter win/loss + card usage for balancing.</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — the combat loop (action-value turns) + the gesture input system.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a real-time C++ loop resolving action-value turn order, card abilities and the tap-and-drag chain, with a gesture input system (swipes, multi-finger triggers); C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the enemy AI (M1G8) and particles (M1G13) run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Entity/component model with cards, characters/units (+ action values), enemies + layouts, encounters and particle-effect definitions in hot-reloadable JSON — a new card/enemy/encounter is a data change.</li><li><b>Prerequisites:</b> G1 (loop &amp; entity hooks).</li><li><b>Feeds into:</b> M2G2 (the level editor), M2G13 (card/chain systems), M1G8 (enemy/AI data).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays (turn/action-value state, AI decisions, pool usage), Tracy profiling of a full encounter with many enemies + particle bursts to hold a stable rate on Android, Catch2 tests for the turn/chain resolution and data loading, on a GitHub Actions Windows+Android matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the static-pooling budget M2G1 validates.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the macabre renderer + parallax scenes + the chain-target overlay.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Sprite/tile renderer (characters, enemies, parallax backgrounds), a camera, batching, the tap-and-drag chain overlay and the card/turn HUD; SDL2/3/OpenGL ES, GLSL, stb_image, FreeType. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window).</li><li><b>Feeds into:</b> M2G4 (advanced VFX/lighting); every visible frame; the level editor shares this renderer.</li></ul></details>
+</li>
+<li><strong>G8 Enemy AI &amp; Pathfinding</strong> — the <strong>decision-tracking enemy AI</strong> (evaluate the player&#39;s likely next action and counter it).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A decision model that scores the player&#39;s available actions, predicts the highest-value one and picks a counter (minimax/heuristic search over the turn state), auto-attacking and adapting per turn; tuned from data (custom C++).</li><li><b>Prerequisites:</b> G1 (tick, turn state), G2 (enemy/ability data).</li><li><b>Feeds into:</b> M2G10 (advanced AI + boss behaviour); the &quot;forces optimal play&quot; design pillar.</li></ul></details>
+</li>
+<li><strong>G13 Particle &amp; VFX System</strong> — the custom particle system behind the VFX inspector (spawn rate, color-over-time, scale), object-pooled.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A pooled particle system (emitters, forces, color/scale-over-lifetime) driven by data so the inspector&#39;s sliders map to particle parameters, sized to hold a stable rate under combat bursts.</li><li><b>Prerequisites:</b> G1 (loop), G4 (rendering).</li><li><b>Feeds into:</b> M2G6 (the particle inspector tool); the attack/ability VFX.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong> — static allocation + pooling and on-device validation.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Static allocation + object pools for enemies/particles/assets (allocated at level load, recycled in play), Tracy profiling of a heavy encounter, ASan on MSVC, and on-device validation (Pixel 9a); the Firebase/Linux-server seam (accounts + progress) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The Native-Android deliverable + a stable rate under particle-heavy combat.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Level Editor)</strong> — build scenes: asset placement, parallax layers, show/hide images.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui + the shared renderer: place assets, arrange parallax layers, toggle image visibility and lay out enemy encounters, with round-trip JSON serialization, live preview and undo/redo.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s SDL2/3/OpenGL ES renderer (preview).</li><li><b>Prerequisites:</b> G2 (scene/encounter data), M1G4 (renderer).</li><li><b>Feeds into:</b> All level content; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android Debug builds, tests (turn/chain resolution, AI, data loading) and packaging via GitHub Actions; the asset importer/optimization pipeline can run as a CI step. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G6 Content Editor — Advanced Tool Features (Particle VFX Inspector)</strong> — sliders for spawn rate, color-over-time and scale, with live preview.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui inspector exposing the M1G13 particle parameters as sliders (spawn rate, color-over-time gradient, scale curve), with live preview and JSON save/load of effect presets.</li><li><b>Prerequisites:</b> M1G13 (the particle system), M2G2 (editor patterns).</li><li><b>Feeds into:</b> Fast VFX authoring without code; the content showcase.</li></ul></details>
+</li>
+<li><strong>G10 AI — Advanced</strong> — the decision-tracking counter-AI matured (deeper look-ahead, boss/enemy tiers).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Behaviour trees + deeper heuristic/minimax look-ahead over the turn state for the counter-AI, difficulty tiers and distinct enemy roles, tuned from data.</li><li><b>Prerequisites:</b> M1G8 (the decision-tracking AI foundation).</li><li><b>Feeds into:</b> The ≥5 encounters + any boss; the &quot;optimal play&quot; pressure at showcase.</li></ul></details>
+</li>
+<li><strong>G13 Gameplay Systems II</strong> — the card / action-value / <strong>tap-and-drag chain-attack</strong> system matured.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ systems over the ECS for the ≥5 card abilities (offensive/defensive), the per-unit action-value economy governing chain frequency, and the tap-and-drag chain resolution across enemies; balancing-data-driven.</li><li><b>Prerequisites:</b> M1G2 (card/unit data), M1G1 (chain input/loop).</li><li><b>Feeds into:</b> The core combat depth at showcase; T2 card/encounter expansion.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + 2 Art (9) — a macabre RPG reads by its <strong>characters, enemies, cards and scenes</strong>: three characters, ≥5 enemies with designed layouts, ≥5 card illustrations, macabre parallax environments and the attack VFX are a large art surface, so two artists carry it; a single designer owns the card-ability design, the action-value/chain-attack systems, the ≥5 encounters and the counter-AI difficulty design (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). If the card/encounter/balance systems outgrow one designer, trade the 2nd artist for a 2nd designer. <em>Scope note (advisory):</em> a real-time combat loop + decision-tracking AI + card/chain systems + three editor tools + pooling is a full but well-structured scope — the action-value turn combat with the chain attack, ~3 cards, the counter-AI and the level editor is the M1/M2 floor; the full card set, all encounters, the particle inspector and the asset pipeline are the stretch.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the card + action-value + chain-attack combat, the macabre theme and the level-based encounter structure; primary benchmark e.g. Slay the Spire / Honkai: Star Rail, with a Singapore benchmark for the local-awareness criterion)</li><li>M1D2 Core Gameplay Loop Prototype (a greybox proving assign-card → action-value turn → tap-and-drag chain is satisfying) · prototype in Unity</li><li>M1D6 Systems &amp; Economy Design (the ≥5 card abilities, the per-unit action-value economy governing chain frequency, and the enemy-layout/encounter design — every system with a purpose)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D3 Systems Balance &amp; Tuning — Data-Driven (card/action-value/enemy balance and the counter-AI difficulty via the team&#39;s JSON, no code changes)</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the card-assignment UI, the action-value/turn order and the tap-and-drag chain-target affordance.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — battle, card-assignment, chain-target and results screens navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished combat + chain UX tested with players on the Pixel 9a.</li></ul></li><li><b>Art M1:</b> 2 artists justified (3 characters + enemy roster + cards + macabre scenes + VFX)<ul><li>M1A1 ⭐ Art Bible / Proof of Concept (the macabre visual direction — palette, tone, card frame language)</li><li>M1A2 Character Concepts &amp; Model Sheets (the 3 playable characters + the ≥5 enemy types)</li><li>M1A3 Environment, Props &amp; VFX Concepts (the macabre parallax scenes + the attack/ability VFX concepts)</li><li>M1A4 UI Art Concepts &amp; Typography (card art/frames, action-value/turn HUD, battle UI)</li><li>M1A5 Animation Foundations (character attack/chain, enemy idle/attack, hit reactions)</li><li>M1A6 Early Asset Production — Prototype Support</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ Critical Asset Production &amp; In-Engine Visual Quality</li><li>M2A2 Character Animation — Extensive (character/enemy attack, chain, counter and death animations)</li><li>M2A3 Environment Alive — Ambient Animation &amp; Layering (living macabre parallax scenes)</li><li>M2A4 UI Art — States &amp; Feedback (card-assigned / chain-target / counter states)</li><li>M2A5 VFX — Critical Effects &amp; Transitions (the card/ability effects, chain-attack impacts — authored in the particle inspector)</li><li>M2A6 Cutscenes &amp; Storyboards (the macabre level intros / story beats)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial BGM/SFX from the week-5 needs list present &amp; working in the prototype (macabre BGM, card-assign, attack, chain-hit, counter and defeat cues), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback for overlapping combat SFX.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Games floor (macabre BGM + card / attack / chain / counter / enemy / defeat SFX, ≥6 types), scaling with combat intensity.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing; a distinct chain/counter cue).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the level editor + particle inspector), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
