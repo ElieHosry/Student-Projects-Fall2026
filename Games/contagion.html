@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>ConTagion</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="contagion.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="contagion.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">ConTagion</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="contagion-student-proposal">ConTagion <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> A 2D, introspective, story-based survival platformer set in the ruins of a city trapped 10,000 feet underground after an apocalyptic earthquake. The player navigates out with the help of a pet dog — the only one able to sense safe routes — avoiding unstable structures, falling debris, aftershocks, cannibalistic humans and infected creatures, across at least 5 levels with 4 different endings. Named technical features: gyro-based environment control for hazards/traps; player movement + pet command + collision; dog AI pathfinding + threat detection; enemy AI (idle/chase/attack) for player and dog. Custom tools: a scene/tile-map editor (falling structures, hazards like exposed wiring and fire), an enemy controller (spawn/detection/attack range), a player &amp; dog controller, an obstacle trigger (aftershocks, cave-ins, enemies) and inventory/resource configuration. A server-side service stores inventory, level and completion time.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Never_Alone_(video_game)">Never Alone (Kisima Inŋitchuŋa) — Wikipedia (atmospheric 2D puzzle-platformer; swap between a girl and her Arctic-fox companion to clear hazards)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Little_Nightmares">Little Nightmares — Wikipedia (2D survival-horror puzzle-platformer; a child evades grotesque/carnivorous enemies with only a lighter)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Inside_(video_game)">INSIDE — Wikipedia (Playdead&#39;s dark 2D survival-platformer; evade pursuers and hazards, with a hidden alternate ending)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>ConTagion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile + Web browser on mobile — the gyro/tilt hazard control and touch controls are mobile-first (the device gyroscope favours a native build), with a mobile-web front-end for reach; the Native PC build is the development/tools vehicle (device: Pixel 9a). <b>Extended:</b> Firebase + Linux server set up by M2 (full use T2).</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> Side-scrolling level renderer (player, dog, enemies, hazards, debris), lighting/atmosphere for the dark ruins, HUD (health/stamina, inventory, dog-command state), and menus/ending screens (OpenGL ES). <b>Languages:</b> Web — HTML/JS/CSS + C++→WASM (Emscripten, SDL2/3, OpenGL ES); Native — Kotlin Native Android UI + C++ via JNI (Android Studio); OpenGL ES in a GLSurfaceView where realtime 2D is needed (no SDL on native).</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> Engine core (fixed-timestep loop, entity system, platformer physics &amp; collision, hazard/aftershock simulation, dog AI pathfinding + threat detection, enemy AI state machines, inventory/resource systems) + a save/progress service. <b>Languages:</b> C++.<br><b>Backend scope:</b> Local now, server-ready (T2) — save/inventory/completion-time seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the fixed-timestep C++ loop is load-bearing — it steps player movement (run/jump/climb) and stamina, the dog&#39;s pathfinding and threat detection, enemy AI (idle/chase/attack) against both player and dog, hazard/aftershock triggers (falling debris, cave-ins, fire, flooding) and collision resolution, plus the gyro input that tilts/destabilises structures, all in real time.</li>
+<li><em>Data-driven:</em> levels/tile maps, hazards and triggers, the two enemy types and their behaviour parameters, the dog&#39;s command set, survival resources/items and the 4 ending conditions are all defined as hot-reloadable JSON — no hard-coded levels, enemies or hazards.</li>
+<li><em>2D:</em> side-scrolling sprite/tile rendering of the ruined city, player, dog, enemies, debris and hazard VFX, with atmospheric lighting (custom-rendered). <em>3D:</em> not needed. <em>Networking:</em> optional — cloud save/leaderboard only; no real-time netcode.</li>
+<li><em>Custom tool:</em> a scene / tile-map / hazard editor (place tiles, falling structures, exposed wiring, fire, spawn points and aftershock/cave-in triggers; set player/dog spawns; configure enemy spawn/detection/attack ranges; author inventory/resources) with live preview.</li>
+<li><em>External DB:</em> server-side inventory, level reached and completion time. <em>Auth ⏭️:</em> optional accounts. <em>Analytics ⏭️:</em> death/failure funnels — which hazard, enemy and level the run ends on, for balancing.</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window and a fixed-timestep loop stepping player/dog/enemy updates, hazard triggers and collision, plus the gyro/tilt input that destabilises structures; C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; M1G5 physics, M1G8 dog/enemy AI and the hazard system run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Entity/component registry in C++ with the player, dog, enemy types, hazards/triggers, items and level/tile data defined in JSON (nlohmann/json) with hot-reload.</li><li><b>Prerequisites:</b> G1 (loop &amp; entity update hooks).</li><li><b>Feeds into:</b> M1G14 (tile/level data), M2G2 (the editor edits this data), M2G13 (inventory/progression reads it).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays for AI state, hazard triggers and collision, Tracy profiling, Catch2 stress tests spawning many enemies + simultaneous aftershock/debris hazards, GitHub Actions Windows+Linux matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening) and the frame budget M2G1 validates for web/mobile.</li></ul></details>
+</li>
+<li><strong>G5 Physics &amp; Collision</strong> — run/jump/climb movement, falling debris, collapsing structures and hazard collision are core to the platforming.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ + GLM math, custom integrator for platformer movement (run/jump/climb), broadphase (uniform grid / quadtree), collision resolution for the player, dog, debris and hazards.</li><li><b>Prerequisites:</b> G1 (loop &amp; tick).</li><li><b>Feeds into:</b> M2G11 (advanced physics for cave-ins/falling structures); the dog and enemies that move through the world.</li></ul></details>
+</li>
+<li><strong>G8 Enemy AI &amp; Pathfinding</strong> — the dog&#39;s safe-route pathfinding + threat detection AND the two enemy types&#39; idle/chase/attack behaviours.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A* / flow fields for the dog&#39;s safe-route finding and enemy navigation, steering behaviours, and finite-state machines for idle/chase/attack plus the dog&#39;s follow/stay/scout and flee/cover states (custom C++).</li><li><b>Prerequisites:</b> G1 (tick), G2 (enemy/dog data), G5 (movement/collision).</li><li><b>Feeds into:</b> M2G10 (behavior trees, difficulty tiers); threat-alert feedback to the player.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the side-scrolling render of the ruined city, player, dog, enemies, debris and hazards is the whole read of the game.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Sprite/tile renderer with camera and batching for the level, player, dog, enemies and hazard VFX; SDL2/3/OpenGL ES, GLSL, stb_image, FreeType HUD text. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window).</li><li><b>Feeds into:</b> M1G10 (HUD over it), M2G4 (atmospheric lighting/post-FX for the dark ruins); every visible feature.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling of AI/hazard spikes, ASan on MSVC, memory pools for enemies/debris/particles, and Emscripten WASM validation for the mobile-web target plus on-device Pixel 9a checks (including gyro input); Linux server set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The web/mobile deliverable and headroom for dense hazard/enemy scenes.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core</strong> — the scene / tile-map / hazard editor: place tiles, falling structures, wiring/fire hazards, spawns and aftershock/cave-in triggers; set player/dog spawns; configure enemies; author inventory.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui editor authoring tile maps, hazard/trigger placement, enemy spawn/detection/attack ranges, player/dog spawns and item/resource tables as JSON, with round-trip serialization and an undo/redo command stack.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s SDL2/3/OpenGL ES renderer (live level preview).</li><li><b>Prerequisites:</b> G2 (entity/level data), M1G14 (tile/level system).</li><li><b>Feeds into:</b> M2G6 (advanced tool features), M2G16 (balancing edits applied through it).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, and packaging of the native build plus the Emscripten web build artifact via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI and test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every ConTagion goal.</li></ul></details>
+</li>
+<li><strong>G10 AI — Advanced</strong> — behavior trees and difficulty tiers for the dog and the two enemy types (idle/chase/attack, threat detection, flee/cover; timed puzzle pressure from the cannibals).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Behavior trees, squad/awareness logic and difficulty tiers over the M1 AI foundation (custom C++); the dog&#39;s scout/alert and the cannibals&#39; timed-puzzle chase pressure.</li><li><b>Prerequisites:</b> M1G8 (AI &amp; pathfinding foundation).</li><li><b>Feeds into:</b> Showcase encounters; M2G16 balancing.</li></ul></details>
+</li>
+<li><strong>G11 Physics — Advanced</strong> — collapsing structures, cave-ins, falling debris and flooding as constraint/continuous-collision physics.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Constraint/joint solvers and continuous collision for collapsing structures, debris piles and flooding, GLM math, tuned from data.</li><li><b>Prerequisites:</b> M1G5 (physics &amp; collision).</li><li><b>Feeds into:</b> The aftershock/cave-in set pieces; showcase gameplay depth.</li></ul></details>
+</li>
+<li><strong>G13 Gameplay Systems II</strong> — progression across the 5 levels and 4 endings, inventory and the survival-resource economy (torchlight, food, items).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ systems over the entity/data model: level progression and branching to the 4 endings, inventory, resource pickups/consumption and the save/completion-time service.</li><li><b>Prerequisites:</b> G2 (entity system), M2G2 (editor authors the content).</li><li><b>Feeds into:</b> The 4-ending showcase; M2G16 telemetry balancing.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + 2 Art (9) — a story-driven survival platformer with a player, a dog companion, two enemy types, a ruined-city environment across 5 levels and heavy hazard/animation/VFX demand makes character + environment + animation art the big slot need (2 artists); a solo designer owns the survival loop, level and puzzle design, the resource economy and the 4-ending narrative (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). <em>Scope note (advisory):</em> 5 levels × 4 endings × 2 enemy types is ambitious — treat 2–3 polished levels + the 4 ending hooks as the M2 showcase floor and let the editor scale content afterward.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the sense-route → navigate → evade → survive → escape loop and the 4 endings; benchmark e.g. INSIDE / Little Nightmares for readable dread and hazard pacing)</li><li>M1D2 Core Gameplay Loop Prototype (greybox run/jump/climb + dog command/scout proving the companion-guided survival loop is tense and fun) · prototype in Unity</li><li>M1D6 Systems &amp; Economy Design (survival resources — torchlight/food/items — vs. hazard/enemy pressure; the timed-puzzle pressure from the cannibals)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D3 Systems Balance &amp; Tuning — Data-Driven (hazard difficulty, enemy aggression and puzzle timers via the team&#39;s JSON, no code changes)</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — screen-flow map and readability standards for the HUD (health/stamina, dog-command state, inventory) and the threat-alert cues.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — standard screens + the dog-command and inventory/interaction flows navigable unaided.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished HUD and menus, touch + gyro affordances confirmed on the Pixel 9a / mobile-web target.</li></ul></li><li><b>Art M1:</b> 2 artists justified (character roster + ruined-city environment + heavy animation/VFX)<ul><li>M1A1 ⭐ (mockups: main menu + a ruined-city level in play)</li><li>M1A2 Characters (player, the dog, + the 2 enemy types — infected creature &amp; cannibal human, silhouette-first)</li><li>M1A3 Environment (collapsed-city tileset &amp; backdrops — debris, wiring, fire)</li><li>M1A4 UI Art Concepts &amp; Typography (health/stamina, dog-command, inventory HUD)</li><li>M1A5 Animation Foundations (run/jump/climb, dog follow/scout, enemy idle/chase)</li><li>M1A6 Early Asset Production</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐</li><li>M2A2 Extensive Animation (climb/traversal set, dog scout/alert, enemy attacks &amp; deaths)</li><li>M2A3 Environment Alive (parallax ruins, flooding, ambient fire/smoke motion)</li><li>M2A4 UI Art — States &amp; Feedback (low-health/stamina, threat alerts, resource pickups)</li><li>M2A5 VFX — Effects &amp; Transitions (debris/cave-ins, fire, water, threat stingers)</li><li>M2A6 Cutscenes &amp; Storyboards (intro + the 4 ending sequences)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial BGM/SFX from the week-5 needs list present &amp; working in the prototype (oppressive underground ambience, footsteps/dog, aftershock rumble, enemy stings), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback (overlapping hazard/enemy/ambience SFX).</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Games floor (atmospheric BGM + hazard, enemy, dog and UI SFX, ≥6 types), tension-reactive where the design calls for it.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing; spatial cues for off-screen threats the dog senses).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase, prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
