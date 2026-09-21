@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CardSmith</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="cardsmith.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="cardsmith.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">CardSmith</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="cardsmith-student-proposal">CardSmith <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>CardSmith</em> is a fantasy-themed, single-player PvE <strong>card battler</strong>: players manipulate elemental cards to defeat enemies through resource management and combo-driven combat. Players manage <strong>Energy</strong> by choosing to play cards for their effects or <strong>discard them to generate resources</strong>, and combine cards from four elements (Fire, Water, Earth, Lightning) to discover <strong>Elemental Combinations</strong> that modify attacks. The game has linear level progression, adaptable enemy behaviours, deck customisation, a permanent card collection and upgrade systems. Designed for <strong>native mobile</strong>. Team: 6 CS + 1 Design + 2 Art. Named technical features: a debugging UI; adaptable enemy AI; haptic feedback; a combo-driven combat system. Load-bearing C++: a <strong>deterministic, turn-based C++ simulation loop</strong> running each fixed step, giving real-time feedback for animations and VFX. Tools: a <strong>combo-system editor</strong> (define/test/simulate combos), a <strong>toggleable in-game debug overlay</strong> (state inspector, combo logs), a <strong>haptic-pattern previewer</strong> (assign a haptic pattern to an event), and an <strong>enemy encounter editor</strong> (define enemy type, HP, AI behaviour, modifiers per encounter). Design features: elemental combo-driven combat; discard-to-Energy resource management; progressive PvE encounters with waves + unique enemy behaviours; and deck customisation + permanent collection + a Tech Tree.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://store.steampowered.com/app/646570/Slay_the_Spire/">Slay the Spire on Steam (the benchmark single-player PvE deckbuilder: build a deck, chain card combos, fight structured encounters, and unlock permanent progression — the deckbuilder-PvE + permanent-collection precedent)</a></li>
+<li><a href="https://store.steampowered.com/app/1102190/Monster_Train/">Monster Train on Steam (a strategic deckbuilder whose lifeblood is <strong>synergy/combos</strong> between cards and factions — the combo-discovery + deck-synergy precedent)</a></li>
+<li><a href="https://store.steampowered.com/app/42910/Magicka/">Magicka on Steam (a game built on <strong>combining elements</strong> — Fire, Water, Earth, Lightning and more — into new effects; the elemental-combination system precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>CardSmith</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — the stated target, with haptic feedback; device: Pixel 9a) — the Native PC build is the development/tools vehicle (the combo editor, encounter editor, debug overlay and haptic previewer). <b>Extended:</b> Firebase + a Linux server the team sets up by M2 (full use T2) for accounts and the permanent collection / Tech-Tree persistence.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A 2D renderer for cards, the hand/board, enemies, the Energy/combo HUD and the elemental-combination VFX, plus card animations and the deck/collection/Tech-Tree screens; haptics paired to key events. <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine via JNI (Android Studio); OpenGL ES for the realtime 2D in a GLSurfaceView; Web/desktop — SDL2/3 + OpenGL ES for the PC dev/tools build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The deterministic, turn-based C++ simulation loop (card play/discard, Energy, the combo resolver, the adaptable enemy AI, damage), driving animations/VFX/haptics; plus Firebase for accounts + permanent collection/Tech-Tree persistence. <b>Languages:</b> C++ (engine + sim); Firebase-backed services on the Extended tier.<br><b>Backend scope:</b> Local now, server-ready (T2) — the accounts / collection / Tech-Tree seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ loop is load-bearing — each fixed step it resolves card plays/discards, the Energy economy, the elemental-combination combos and the adaptable enemy AI deterministically, then feeds animations, VFX and haptics.</li>
+<li><em>Data-driven:</em> cards, the four elements + their combination rules, enemy types/behaviours, encounters (type/HP/AI/modifiers) and the Tech-Tree are all data — a new card, combo or encounter is a data change (authored in the combo + encounter editors).</li>
+<li><em>2D:</em> card/board/enemy rendering, card animations, the Energy/combo HUD, the elemental-combination VFX and the deck/collection/Tech-Tree screens (custom-rendered). <em>3D:</em> not needed. <em>Networking:</em> single-player; the collection/Tech-Tree persistence is async client↔︎cloud (Application Communication ✅), so a Networking System is optional (🔵).</li>
+<li><em>Custom tool:</em> the <strong>combo-system editor</strong> (define/test/simulate combos) and the <strong>enemy encounter editor</strong> (type/HP/AI/modifiers) are content-authoring tools; the <strong>debug overlay</strong> (state inspector + combo logs) and the <strong>haptic-pattern previewer</strong> are strong dev tools.</li>
+<li><em>External DB:</em> accounts + the permanent card collection + Tech-Tree progression. <em>Auth ⏭️:</em> accounts for persistent progression. <em>Analytics ⏭️:</em> optional — combo usage / encounter win-rates for balancing.</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — the deterministic turn-based combat sim + card input + haptics.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a deterministic fixed-step turn-based loop resolving card plays/discards, Energy and combo resolution, with touch card input and event-triggered haptics. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI, device haptics); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the enemy AI (M1G8) and combo VFX (M1G13) run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Entity/component model with cards, the four elements + combination rules, enemy types/behaviours, encounters and the Tech-Tree in hot-reloadable JSON — a new card, combo or encounter is a data change.</li><li><b>Prerequisites:</b> G1 (loop &amp; update hooks).</li><li><b>Feeds into:</b> M2G2 (the combo editor), M1G8 (enemy data), M2G13 (combo/deck systems).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong> — home of the toggleable debug overlay (state inspector + combo logs).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui debug overlay (state inspector, combo logs, deterministic-replay), Tracy profiling of a busy combat turn with combo VFX, Catch2 tests for the deterministic combo/turn resolution and data loading, on a GitHub Actions Windows+Android matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the in-game debug overlay is a named deliverable.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the card/board/enemy renderer, card animation and elemental-combination VFX + HUD.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Sprite renderer for cards, hand/board, enemies, the Energy/combo HUD and card animations; SDL2/3/OpenGL ES, GLSL, stb_image, FreeType. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window).</li><li><b>Feeds into:</b> M2G4 (advanced combo VFX); every visible frame.</li></ul></details>
+</li>
+<li><strong>G8 Enemy AI &amp; Pathfinding</strong> — the <strong>adaptable enemy AI</strong> (responds to the player&#39;s cards/deck).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Finite-state / utility AI that reads the board and the player&#39;s likely plays and adapts intents (block, buff, target the biggest threat), tuned per enemy type from data (custom C++).</li><li><b>Prerequisites:</b> G1 (tick, turn state), G2 (enemy data).</li><li><b>Feeds into:</b> M2G10 (advanced adaptive AI); the progressive-encounter challenge.</li></ul></details>
+</li>
+<li><strong>G13 Particle &amp; VFX System</strong> — the elemental-combination VFX (Fire/Water/Earth/Lightning combos), object-pooled.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A pooled particle/VFX system (emitters, color/scale over lifetime) that renders each elemental-combination&#39;s signature effect, driven from data so new combos get VFX without code.</li><li><b>Prerequisites:</b> G1 (loop), G4 (rendering).</li><li><b>Feeds into:</b> M2G4 (advanced VFX); the combo payoff feedback (with haptics).</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling of a combo-heavy turn, ASan on MSVC, pools for cards/particles, and on-device validation (Pixel 9a, incl. haptics); the Firebase/Linux-server seam (accounts + collection + Tech-Tree) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The Native-Android deliverable + persistent progression.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Combo-System Editor)</strong> — define, test and simulate elemental combinations.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui editor to author element-combination rules and their effects/VFX, run a simulated resolution against a test hand/enemy, and inspect the result, with round-trip JSON and undo/redo. (The enemy encounter editor — type/HP/AI/modifiers — is built on the same tool tech.)</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s SDL2/3/OpenGL ES renderer (preview).</li><li><b>Prerequisites:</b> G2 (card/combo data), M1G13 (VFX for preview).</li><li><b>Feeds into:</b> All combo/encounter content; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android Debug builds, tests (deterministic combo/turn resolution, AI, data loading) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G8 Firebase — Accounts, Leaderboards &amp; Analytics</strong> — accounts + the <strong>permanent card collection + Tech-Tree</strong> persistence.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth accounts, Firestore for the permanent card collection, deck configurations and Tech-Tree unlocks synced across devices, and optional Analytics, via the REST API from C++.</li><li><b>Prerequisites:</b> G2 (collection/Tech-Tree data model).</li><li><b>Feeds into:</b> Permanent progression (design feature 4); cross-device continuity.</li></ul></details>
+</li>
+<li><strong>G10 AI — Advanced</strong> — the adaptable enemy AI matured across the progressive encounters.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Behaviour trees / deeper utility AI that adapts to the player&#39;s deck and current board, plus difficulty tiers and distinct enemy roles across waves; tuned from data.</li><li><b>Prerequisites:</b> M1G8 (adaptable-AI foundation).</li><li><b>Feeds into:</b> The increasing challenge that rewards adaptation (design feature 3).</li></ul></details>
+</li>
+<li><strong>G13 Gameplay Systems II</strong> — the <strong>combo / discard-to-Energy / deck / collection / Tech-Tree</strong> systems matured.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ systems over the ECS for the elemental-combination resolver, the discard-to-Energy economy, deck customisation, the permanent collection and the Tech-Tree upgrades; balancing-data-driven.</li><li><b>Prerequisites:</b> M1G2 (card/combo data), M1G1 (combo resolution).</li><li><b>Feeds into:</b> The strategic depth + progression at showcase; T2 card/combo expansion.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + 2 Art (9) — matches the team&#39;s stated make-up. One designer owns the elemental-combination system, the discard-to-Energy economy, the deck/collection/Tech-Tree progression and the adaptable-AI/encounter difficulty design; two artists carry the card art (a fantasy elemental set), the enemy roster, the elemental-combination VFX and the deck/collection/Tech-Tree UI — a card game is art-forward (every card is a bespoke illustration), which justifies the two artists (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). <em>Scope note (advisory):</em> a deterministic combo engine + adaptable AI + deck/collection/Tech-Tree + a combo editor + an encounter editor is a full but well-structured scope for a single designer — the elemental-combo combat with the discard-to-Energy loop, ~2 elements&#39; worth of combos, a few encounters and the combo editor is the M1/M2 floor; all four elements, the full Tech-Tree and broad card variety are the stretch. With one designer, keep the card/combo/encounter <strong>balance</strong> tightly scoped.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the elemental-combo card battler, the discard-to-Energy loop and the collection/Tech-Tree progression; primary benchmark e.g. Slay the Spire / Monster Train, with a Singapore benchmark for the local-awareness criterion)</li><li>M1D2 Core Gameplay Loop Prototype (a greybox proving play-vs-discard + elemental combos makes a satisfying turn) · prototype in Unity</li><li>M1D6 Systems &amp; Economy Design (the four elements + combination rules, the discard-to-Energy economy, and the deck/collection/Tech-Tree economy — every system with a purpose)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D3 Systems Balance &amp; Tuning — Data-Driven (card/combo/enemy and Tech-Tree balance via the team&#39;s JSON, no code changes)</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the hand/board, the Energy/combo indicators and the deck/collection/Tech-Tree screens.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — battle, deck-builder, collection and Tech-Tree screens navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished combat + combo-discovery UX (with haptics) tested with players on the Pixel 9a.</li></ul></li><li><b>Art M1:</b> 2 artists (card illustrations + enemies + elemental VFX + UI)<ul><li>M1A1 ⭐ Art Bible / Proof of Concept (the fantasy elemental visual direction — palette per element, card-frame language)</li><li>M1A2 Character Concepts &amp; Model Sheets (the enemy roster + any bosses)</li><li>M1A3 Environment, Props &amp; VFX Concepts (battle backdrops + the elemental-combination VFX concepts)</li><li>M1A4 UI Art Concepts &amp; Typography (card art/frames, Energy/combo HUD, deck/collection/Tech-Tree screens)</li><li>M1A5 Animation Foundations (card play/draw/discard, combo triggers, enemy attacks)</li><li>M1A6 Early Asset Production — Prototype Support</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ Critical Asset Production &amp; In-Engine Visual Quality</li><li>M2A2 Character Animation — Extensive (enemy attacks/reactions, boss beats)</li><li>M2A3 Environment Alive — Ambient Animation &amp; Layering (living battle backdrops)</li><li>M2A4 UI Art — States &amp; Feedback (card-hover/played/discarded, Energy, combo-ready, Tech-Tree states)</li><li>M2A5 VFX — Critical Effects &amp; Transitions (the elemental-combination effects — the core visual payoff — plus hit/defeat VFX)</li><li>M2A6 Cutscenes &amp; Storyboards (fantasy level/story beats)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial BGM/SFX from the week-5 needs list present &amp; working in the prototype (fantasy BGM, card-play/draw/discard, per-element and combo cues), suitable and correctly triggered, and paired with haptics on key events.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback for overlapping combo SFX.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Games floor (fantasy BGM + card / per-element / combo / enemy / defeat SFX, ≥6 types), the combo payoff cues coordinated with the haptic feedback.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing; a distinct cue per elemental combination).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the combo editor + encounter editor), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
