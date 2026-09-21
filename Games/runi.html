@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Runi</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="runi.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="runi.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Runi</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="runi-student-proposal">Runi <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games <i>(gamified-app lens)</i> · <b>Assessed:</b> 2026-09-22 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>Runi</em> is a <strong>gamified running platform</strong> that turns real-world running into an interactive experience with challenges, progression, achievements and social interaction to build consistent habits. Named load-bearing C++ (the <strong>Runi Activity Engine</strong>): a subsystem that processes incoming <strong>GPS</strong> samples, filters noisy readings, calculates distance and pace, tracks route progress, <strong>interpolates ghost positions</strong> and generates real-time <strong>race events</strong> (distance-milestone reached, personal-best split beaten, ghost overtaken, challenge objective completed). Named technical features: <strong>GPS Route Tracking &amp; Ghost Racing</strong> (race a &quot;ghost&quot; of your previous/personal-best run or a friend&#39;s, with live ahead/behind stats on completed routes); <strong>Virtual Pet Progression &amp; Reward</strong> (a persistent pet whose XP/accessories/cosmetics are driven by streaks, distance milestones, specific routes and challenges); <strong>Social Network &amp; Competitive Leaderboards</strong> (friends, shared activities, challenges, leaderboards by route-time/distance/achievements); and an <strong>Achievement &amp; Challenge System</strong> (configurable objectives → XP/achievements/cosmetics). Tools: a <strong>content-authoring tool</strong> (configure challenges, achievements, progression values, cosmetics and rewards as data, distributed via the backend — a data-driven workflow); and a <strong>testing tool</strong> that <strong>simulates running activity</strong> (GPS movement, distance, pace, completed runs) so developers can test/debug/balance ghost racing, challenges, rewards and pet progression without physically running, with adjustable speed/distance/progression. Design features: a Running Dashboard, an Adaptive Goal System, Friends &amp; Community, a Challenge Hub, Personal Racing (live ahead/behind), a Virtual Pet &amp; Profile (raise/customise/equip cosmetics), and Pet Activity States (happy/energetic/sleepy/exhausted; hatch + evolve on milestones). Team: <strong>6 CS + 1 Design + 0 Art</strong>.</p>
+<p><em>Note (category):</em> like other <strong>gamified apps</strong> (there is no fitness/health category), Runi is filed under <strong>Games</strong> and assessed through the gamified-app lens (session/progression/retention systems) — the same way the module treats step-and-pet and habit-loop projects. (A Social Media reading was considered for the friends/leaderboard layer, but the core is the gamified running/pet loop.)</p>
+<p><em>Note (module completeness):</em> Runi needs a <strong>backend + external DB</strong> (persistent pet/XP/cosmetics, runs, leaderboards, social graph, content packs) — use Firebase and/or the team&#39;s Linux server (set the seam up + basic-test it by M2). <em>Platform:</em> GPS + on-the-go use → a <strong>mobile</strong> build (Native Android, Pixel 9a). <em>Monetization:</em> none specified and the economy is <strong>earn-by-running</strong> (XP/cosmetics), which is clean; if real-money purchases are added, keep them <strong>cosmetic / non-pay-to-win</strong> per the module rule.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Strava">Strava — Wikipedia (the benchmark GPS running/cycling app with route + pace tracking, segment <strong>leaderboards</strong> and a <strong>social</strong> feed where users follow each other and compete on segment times — the GPS-tracking + social + leaderboard + segment-racing precedent)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Tamagotchi">Tamagotchi — Wikipedia (the archetypal <strong>virtual pet</strong> you raise and customise, whose <strong>states and branching evolution</strong> depend on how it&#39;s cared for — the persistent-pet + activity-driven-states + hatch/evolve precedent)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/TrackMania">TrackMania — Wikipedia (the racing benchmark for <strong>ghost racing</strong>: race against a recorded ghost of your best time or others&#39; times, submitted to online leaderboards — the ghost-of-a-previous-run + live-comparison precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Runi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — C++ Activity Engine via JNI, OpenGL ES for the map/ghost/pet rendering in a GLSurfaceView, Kotlin app shell; device: Pixel 9a) — GPS, background-safe run recording and on-device state are native concerns. The Native PC build is the dev/tools vehicle (the content-authoring tool + the GPS-simulation testing tool). <b>Extended:</b> Firebase + a Linux server the team sets up by M2 (full use T2) for pet/XP/cosmetic persistence, runs, leaderboards, the social graph and content-pack distribution.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A 2D app — the Running Dashboard, the route map with the live ghost + ahead/behind feedback, the Challenge Hub, leaderboards/friends feed, and the virtual pet (states, cosmetics, evolution). <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine via JNI (Android Studio); OpenGL ES for the realtime map/ghost/pet in a GLSurfaceView; dashboard/social/profile screens can be pure Native UI. Web/desktop — SDL2/3 + OpenGL ES for the PC dev/tools build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The C++ Runi Activity Engine — GPS ingest + noise filtering, distance/pace, route-progress tracking, ghost-position interpolation and real-time race-event generation — plus the pet-progression, achievement/challenge and leaderboard systems; a backend (Firebase/Linux server) for persistence, social and content packs. <b>Languages:</b> C++ (engine); Firebase/server on the Extended tier.<br><b>Backend scope:</b> Local now, server-backed (T2) — the persistence/social/content seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ Activity Engine is the heart — per GPS sample it filters noise, updates distance/pace + route progress, interpolates the ghost, and fires race events (milestone, PB split, ghost overtaken, challenge complete).</li>
+<li><em>Data-driven:</em> challenges, achievements, progression curves, cosmetics, rewards and pet-evolution rules are all <strong>content packs</strong> authored in the tool and distributed via the backend — new content ships without code changes (a named requirement).</li>
+<li><em>2D:</em> the dashboard, the route map + ghost, the challenge/leaderboard screens and the virtual pet (states, cosmetics) are custom-rendered. <em>3D:</em> not needed.</li>
+<li><em>Front-end + Back-end:</em> a client/server split — device app + backend for persistence, leaderboards, social and content — the run-upload + content-distribution flows are <strong>Application Communication</strong> ✅.</li>
+<li><em>Custom tools:</em> two — the <strong>content-authoring tool</strong> (challenges/achievements/progression/cosmetics as data) and the <strong>GPS-simulation testing tool</strong> (synthetic runs to test ghost racing/challenges/rewards/pet without running).</li>
+<li><em>Networking:</em> single-player with async social — runs upload and leaderboards/social sync after the fact, so a real-time Networking System is optional (🔵). <em>External DB:</em> central (pet/runs/leaderboards/social/content). <em>Auth ⏭️ / Analytics ⏭️:</em> accounts + activity analytics are natural but module-deferred to T2 (🔵).</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — the <strong>Runi Activity Engine</strong> (GPS filtering, distance/pace, ghost interpolation, race events).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a C++ loop processing GPS samples (noise filtering), computing distance/pace + route progress, interpolating ghost positions and generating race events; C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); GPS + OpenGL ES map in a GLSurfaceView; some screens pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the ghost replay (M1G15) and rendering (M1G4) build on it.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> An entity/data model with challenges, achievements, progression curves, cosmetics, rewards and pet-evolution rules in hot-reloadable, versioned JSON content packs — a new challenge or cosmetic is a data change.</li><li><b>Prerequisites:</b> G1 (loop &amp; entity hooks).</li><li><b>Feeds into:</b> M2G2 (the content-authoring tool), M2G13 (pet/challenge systems).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong> — incl. the <strong>GPS-simulation testing tool</strong>.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A testing tool feeding synthetic GPS traces (adjustable speed/distance/progression) through the real Activity Engine, ImGui overlays (route progress, ghost delta, race events), Tracy profiling of a long run, Catch2 tests (GPS filtering, distance/pace, event firing), on a GitHub Actions matrix.</li><li><b>Prerequisites:</b> G1 (engine to drive).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the testing tool at showcase.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the dashboard, the route map + live ghost, and the virtual pet.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> A renderer for the route map + the ghost marker with ahead/behind feedback, the dashboard, and the virtual pet (states/cosmetics), with a camera; SDL2/3/OpenGL ES, GLSL, FreeType. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES map/pet in a GLSurfaceView; some screens pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window).</li><li><b>Feeds into:</b> Every visible frame; the pet/cosmetic display.</li></ul></details>
+</li>
+<li><strong>G12 Save / Persistence &amp; Firebase Integration</strong> — persistent pet/XP/cosmetics, runs, leaderboards, social.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Local persistence of runs + pet/XP/cosmetics, synced to Firebase (Firestore) for the social graph, shared activities, leaderboards and content-pack distribution; REST from C++ (JS SDK on web).</li><li><b>Prerequisites:</b> G2 (data model to sync).</li><li><b>Feeds into:</b> M2G8 (accounts/leaderboards/analytics); reliable progression + social.</li></ul></details>
+</li>
+<li><strong>G15 Deterministic Input &amp; Replay Foundation</strong> — the <strong>ghost</strong> recording/replay.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Record a run as a timestamped position/pace track and replay it deterministically as a ghost, with live ahead/behind computation against the current run; the basis for personal-best and friends&#39; ghosts.</li><li><b>Prerequisites:</b> M1G1 (the Activity Engine), M1G3 (debug hooks).</li><li><b>Feeds into:</b> M2G12 (Replay System — multi-ghost, friends&#39; ghosts); the Personal Racing feature.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong> — battery-aware on-device perf + the server seam.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Battery-aware GPS/render cadence, memory pools, Tracy profiling of a long run, ASan on MSVC, and on-device validation (Pixel 9a); the Firebase/Linux-server seam (persistence/social/content) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES map/pet in a GLSurfaceView; some screens pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The mobile deliverable + a battery-viable long run.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Content-Authoring Tool)</strong> — challenges, achievements, progression, cosmetics, rewards as data.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui (or a small external editor): author challenges/achievements/progression values/cosmetics/rewards, round-trip JSON content packs, live preview and undo/redo, distributed via the backend.</li><li><b>Prerequisites:</b> G2 (data model).</li><li><b>Feeds into:</b> All live content; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android builds, tests (GPS filtering, distance/pace, ghost delta, event firing, content-pack loading — driven by the GPS-simulation tool) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES map/pet in a GLSurfaceView; some screens pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G8 Firebase — Accounts, Leaderboards &amp; Analytics</strong> — the social network + competitive leaderboards.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth + Firestore: accounts, the friend/social graph, shared activities + reactions, group challenges, and the competitive leaderboards (route time / distance / achievements), server-validated so scores can&#39;t be forged.</li><li><b>Prerequisites:</b> M1G12 (persistence/sync).</li><li><b>Feeds into:</b> Friends &amp; Community + Challenge Hub; T2 live-ops.</li></ul></details>
+</li>
+<li><strong>G12 Replay System — Record &amp; Playback (Ghost Racing)</strong> — the ghost racing matured.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Multi-ghost replay (previous run, personal best, friends&#39; ghosts) with robust live ahead/behind, race-event triggers (ghost overtaken, PB split) and shareable ghost tracks.</li><li><b>Prerequisites:</b> M1G15 (replay foundation).</li><li><b>Feeds into:</b> The Personal Racing showcase; competitive route leaderboards.</li></ul></details>
+</li>
+<li><strong>G13 Gameplay Systems II</strong> — the <strong>virtual pet + XP/cosmetics + achievements/challenges</strong> systems.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ systems over the entity/data model: the pet progression (XP, states happy/energetic/sleepy/exhausted, hatch/evolve on milestones), the cosmetic inventory + equip, and the achievement/challenge objective engine + reward issue; balancing-data-driven via content packs.</li><li><b>Prerequisites:</b> M1G2 (data), M1G1 (activity events).</li><li><b>Feeds into:</b> The pet/progression showcase; T2 content expansion.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + <strong>1 Art</strong> (8) — the proposed <strong>6 CS + 1 Design + 0 Art</strong> is the module&#39;s tight case for an <strong>art-heavy</strong> concept: a virtual pet with <strong>states, cosmetics/accessories and hatch/evolve stages</strong>, plus dashboard/map/UI, is a real art surface, so with no artist the single designer must also carry the <strong>D11 conditional</strong> each milestone, and a <strong>solo designer + 0 artists</strong> is exactly what the design pool flags (&quot;must ask the instructor which conditional bends&quot;, see <code>design-goals-pool.pdf</code>). <strong>Strongly recommended: add 1 Artist</strong> (best for the pet/cosmetic/evolution volume), or at least a <strong>2nd designer</strong> so one owns the run/challenge/retention systems and the other absorbs the D11 art surface. If the team stays 0-artist, scope the art hard: <strong>one pet with a few evolution stages and a small, reusable, recolourable cosmetic set</strong> authored/sourced under D11, and expect the instructor sign-off on the bent conditional. <em>Scope note (advisory):</em> a GPS Activity Engine (noise filtering + ghost interpolation + race events) + a replay/ghost system + persistence/social/leaderboards + a data-driven content pipeline + two tools is a <strong>large, server-backed CS scope</strong> — GPS→distance/pace, one recordable ghost with ahead/behind, basic pet progression and one editor is the M1/M2 floor; friends&#39; ghosts, the full social/leaderboard layer, pet evolution and all cosmetics/challenges are the stretch. The <strong>content-pack pipeline + the GPS-simulation testing tool are the smartest levers</strong> — they let a small team add content as data and test without running.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / TEAM picks for this project (no Art track as proposed — 0 artists, so the pet/cosmetic Art surface is carried by the Design-owned D11 conditional; adding an artist is recommended, see above); deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the gamified-running USP, ghost racing, the virtual-pet progression, the challenge/achievement economy and the social/leaderboard layer; primary benchmark e.g. Strava / a virtual-pet fitness app, plus a Singapore benchmark — Healthy 365 fits the local-awareness criterion)</li><li>M1D9 Engagement &amp; Retention Loop Design (the streaks, adaptive goals, challenges and pet-progression retention — with the ethics line: engagement serves the user&#39;s fitness goal, never dark-pattern or pay-to-win)</li><li>M1D11 Art Proof of Concept *(conditional — mandatory for 0-artist teams; Design-owned)* — the pet visual direction (states + evolution stages), the cosmetic set, and the dashboard/map UI style; 2 mockups.</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D11 Art Implementation Quality *(conditional — mandatory for 0-artist teams; Design-owned)* — the pet (states/evolution), cosmetics and UI implemented in-engine, no placeholders.</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the Running Dashboard, the live ghost/ahead-behind feedback, the Challenge Hub and the pet/profile, plus a wireframe baseline; <b>glanceability while running</b> is a priority.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — dashboard, personal racing, challenge hub, friends/leaderboards and pet/profile navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished non-interruptive-run + pet UX tested with real runners on the Pixel 9a.</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial audio from the week-5 needs list present &amp; working (run BGM/coaching cues, race-event stings — ghost overtaken / PB split, pet + reward cues), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable playback (suited to a screen-off run).</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — the app&#39;s audio set (run BGM + race-event / milestone / pet / reward / notification SFX, ≥6 types), suited to a non-interruptive, often screen-off run.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the playback the build needs (multi-channel; distinct ghost-overtaken + reward cues).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the content-authoring tool + the GPS-simulation testing tool), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-22.</em></p>
+</body>
+</html>
