@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>No Way Out</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="no-way-out.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="no-way-out.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">No Way Out</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="no-way-out-student-proposal">No Way Out <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>No Way Out</em> is a <strong>2-player top-down brawler</strong> where two scavengers enter <strong>shifting labyrinths that mutate unpredictably</strong>, racing to collect loot while <strong>sabotaging each other&#39;s paths</strong>. A <strong>real-time C++ simulation engine</strong> tracks wall directions, collision states and dynamic map shifts every frame so transitions are seamless — no softlocks, no desyncs — and a <strong>robust LAN networking layer</strong> keeps both players synchronized through every mutation and trap trigger. Named load-bearing C++: the game loop <strong>remembers all wall directions each frame</strong> then randomises/changes a chosen wall, aiming for a <strong>stable step for up to 4 players</strong> (targeting 2), running <strong>deterministically</strong>; and a <strong>real-time physics/collision engine</strong> that keeps wall collision correct as walls change direction. Named technical features: an <strong>algorithm that shifts the layout while guaranteeing a path back to spawn</strong> (no softlocking); <strong>clean, fast tile updates</strong> so players aren&#39;t visibly affected by layout changes; <strong>robust LAN networking</strong> that resists desync through layout changes; and the <strong>collision engine</strong> for direction-changing walls. Tool: a <strong>custom level editor</strong> for building maps (environment + traps). Design features: dynamic labyrinth mutation forcing constant adaptation; a <strong>loot system</strong> with limited carry capacity and deposit scoring; <strong>sabotage mechanics</strong> (traps, path-blocking, altering the labyrinth); and a <strong>timed survival challenge</strong> under a strict countdown. Monetization is a <strong>cosmetic-only shop</strong> (no gameplay effect). Target platform: <strong>Native Android mobile, tested on Google Pixel 9a</strong>.</p>
+<p><em>Note (module completeness):</em> the proposal doesn&#39;t mention an <strong>External Database</strong> or accounts, but the module mandates Firebase as the external DB — plan to persist <strong>cosmetic ownership / unlock records</strong> (and optionally match results) there (a standard, small addition; see the External Database row + M1G12-style integration). Not a category concern; just build it in.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://store.steampowered.com/app/386940/Ultimate_Chicken_Horse/">Ultimate Chicken Horse on Steam (a competitive party game where players place traps and hazards to sabotage each other while racing an obstacle course — the place-traps / sabotage-the-opponent precedent; also ships a level editor)</a></li>
+<li><a href="https://store.steampowered.com/app/207140/SpeedRunners/">SpeedRunners on Steam (a competitive multiplayer race where players use items to sabotage rivals and the last one on screen is eliminated — the race-under-pressure + sabotage precedent)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Labyrinth_(board_game)">Labyrinth (Ravensburger board game) — Wikipedia (the classic shifting-tile maze: players slide rows of tiles to reshape the labyrinth every turn, opening and closing paths — the mutating-maze precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>No Way Out</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — C++ engine via JNI rendering through OpenGL ES in a GLSurfaceView, Kotlin app shell; device: Pixel 9a) — a real-time top-down brawler with touch controls; the Native PC build is the development/tools vehicle (the level editor). <b>Extended:</b> Firebase + a Linux server the team sets up by M2 (full use T2) for cosmetic-ownership persistence (and optional match records); LAN peer-to-peer is the in-match transport.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A 2D top-down renderer — the mutating labyrinth grid, both scavengers, loot, traps, the countdown/score HUD and the deposit/carry indicators, updated seamlessly as walls shift. <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine via JNI (Android Studio); OpenGL ES for the realtime 2D in a GLSurfaceView; Web/desktop — SDL2/3 + OpenGL ES for the PC dev/tools build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The deterministic real-time C++ simulation loop (per-frame wall-direction state, the maze-mutation algorithm with a guaranteed path-back-to-spawn, collision resolution for direction-changing walls, loot/sabotage/trap logic and the countdown), plus the LAN networking layer keeping both clients in sync through every mutation; Firebase for cosmetic ownership on the Extended tier. <b>Languages:</b> C++ (engine + networking); Firebase-backed services on the Extended tier.<br><b>Backend scope:</b> Local + LAN now, server-ready (T2) — the cosmetic-persistence seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ loop is load-bearing — each frame it records every wall&#39;s direction, mutates the chosen wall(s), re-resolves collision so a turning wall never traps or tunnels a player, advances loot/sabotage/traps and the countdown, and holds a stable deterministic step (targeting 2 players, architected for up to 4).</li>
+<li><em>Networking:</em> <strong>core pillar</strong> — a robust <strong>LAN</strong> layer (peer/host) keeps both clients synchronized through every maze mutation and trap trigger; determinism + a shared seed for the mutation stream keeps the two simulations identical, with desync detection so a divergence is caught, not silently played out.</li>
+<li><em>Data-driven:</em> tile/wall types, trap definitions, loot values + carry/deposit rules, the mutation parameters (seed, cadence, constraints) and the cosmetic catalogue are all data — a new trap, tile or cosmetic is a data change (authored via the level editor).</li>
+<li><em>2D:</em> the top-down maze renderer, the shifting-wall transitions, loot/trap sprites and the countdown/score HUD (custom-rendered). <em>3D:</em> not needed.</li>
+<li><em>Custom tool:</em> the <strong>level editor</strong> — place environment + traps, define spawn/loot/deposit points and the mutable wall regions, with round-trip JSON so designers build maps without code.</li>
+<li><em>External DB:</em> cosmetic ownership / unlock records (Firebase — add this per the module). <em>Auth ⏭️:</em> optional accounts. <em>Analytics ⏭️:</em> optional — match length + sabotage/loot stats for balancing.</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — the deterministic per-frame maze/loot/countdown loop + touch input.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a deterministic fixed-timestep C++ loop that records every wall&#39;s direction each frame, mutates the chosen wall(s), advances loot/sabotage/traps and the countdown, decoupled from rendering and ready for LAN lockstep; C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the maze generator (M1G7), collision (M1G5) and networking (M1G11) run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Entity/component model with tile/wall types, trap definitions, loot values + carry/deposit rules, the mutation parameters (seed, cadence, constraints) and the cosmetic catalogue in hot-reloadable JSON — a new trap/tile/cosmetic is a data change.</li><li><b>Prerequisites:</b> G1 (loop &amp; entity hooks).</li><li><b>Feeds into:</b> M2G2 (the level editor), M1G7 (maze data), M1G5 (collision shapes from tile data).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays (wall-direction state, path-to-spawn validation, LAN frame/input buffer), a per-frame state-hash desync detector across the two clients, Tracy profiling of a full mutation + trap-heavy match to hold a stable rate on Android, and Catch2 tests (deterministic replay, &quot;always a path back to spawn&quot;), on a GitHub Actions Windows+Android matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the desync detection M2G7 hardens.</li></ul></details>
+</li>
+<li><strong>G5 Physics &amp; Collision</strong> — the real-time collision engine that stays correct as walls change direction.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A C++ collision system (uniform-grid broadphase over the tile map + resolution) that re-derives wall colliders the instant a wall mutates, so a turning wall never tunnels or traps a player; GLM math, deterministic and identical on both clients.</li><li><b>Prerequisites:</b> G1 (loop &amp; tick), G2 (tile/wall data).</li><li><b>Feeds into:</b> M2G11 (advanced/continuous collision); the &quot;seamless transitions, no softlocks&quot; pillar.</li></ul></details>
+</li>
+<li><strong>G7 Procedural Level Generation</strong> — the <strong>maze-mutation algorithm with a guaranteed path back to spawn</strong>.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Seeded RNG + a graph/connectivity check (union-find or BFS/DFS reachability) that shifts the layout each cadence while validating that both scavengers retain a path to spawn/deposit — a mutation that would softlock is rejected or repaired; validation tests prove the invariant.</li><li><b>Prerequisites:</b> G2 (maze/tile data model).</li><li><b>Feeds into:</b> M2G14 (labyrinth variety/pacing); the replayability + &quot;no softlock&quot; pillars.</li></ul></details>
+</li>
+<li><strong>G11 Networking Foundation</strong> — the robust <strong>LAN</strong> layer that resists desync through mutations.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> LAN sockets (Winsock2/BSD, or ENet/SDL_net) with a lockstep/shared-seed protocol so both clients run the identical mutation stream, an input/frame buffer, and lobby/host discovery; serialization + a state-hash desync guard. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (deterministic loop), G3 (desync detection).</li><li><b>Feeds into:</b> M2G7 (match sync &amp; prediction hardening); the LAN-sync pillar.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong> — on-device validation + the cosmetic-persistence seam.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Memory pools for tiles/traps/loot, Tracy profiling of a mutation- and trap-heavy match, ASan on MSVC, and on-device validation (Pixel 9a) holding the frame budget; the Firebase/Linux-server seam (cosmetic ownership) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The Native-Android deliverable + a stable rate under heavy mutation.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Level Editor)</strong> — build maps: environment, traps, spawn/loot/deposit points and mutable wall regions.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui + the shared renderer: paint tiles/walls, place traps and loot/deposit/spawn points, mark the regions that may mutate, with round-trip JSON serialization, live preview and undo/redo.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s SDL2/3/OpenGL ES renderer (preview).</li><li><b>Prerequisites:</b> G2 (tile/trap/loot data), M1G5 (collision shapes preview).</li><li><b>Feeds into:</b> All map content; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android Debug builds, tests (deterministic replay, path-to-spawn invariant, LAN-sync under simulated latency/loss) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G7 Networking — Match Sync &amp; Prediction (LAN Hardening)</strong> — the LAN layer hardened against packet loss/jitter while walls mutate.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Input-delay/lockstep tuning, handling of dropped/late packets (stall + catch-up), and per-frame state-hash desync detection + recovery so a mid-mutation divergence is caught and healed; validated under simulated packet-loss/jitter/lag on LAN.</li><li><b>Prerequisites:</b> M1G11 (networking foundation), M2G1 (optimization).</li><li><b>Feeds into:</b> A desync-free 2-player match at showcase; the LAN pillar.</li></ul></details>
+</li>
+<li><strong>G11 Physics — Advanced</strong> — continuous collision so fast play + shifting walls never tunnel.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Continuous collision detection (swept tests) and constraint/material handling so a player moving at speed against a just-mutated wall resolves correctly every frame; GLM math, deterministic on both clients.</li><li><b>Prerequisites:</b> M1G5 (physics &amp; collision).</li><li><b>Feeds into:</b> The &quot;seamless, no-softlock&quot; transitions under real play speed.</li></ul></details>
+</li>
+<li><strong>G14 Procedural Generation II</strong> — labyrinth variety + mutation pacing for long-term replayability.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Constraint-based generation (biome/theme variants, trap density, mutation cadence curves) with automated validation of the path-to-spawn invariant across many seeds, so every match is distinct yet always solvable.</li><li><b>Prerequisites:</b> M1G7 (procedural level generation).</li><li><b>Feeds into:</b> The replayability pillar; content variety at showcase.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + <strong>2 Design</strong> + 0 Art (8) — the proposal is <strong>6 CS + 1 Design + 0 Art</strong>, which is <em>accepted but tight</em>: with <strong>no artist</strong>, the designer must also pick up the <strong>D11 conditional</strong> (Art POC / Art Implementation Quality) each milestone, and a <strong>solo designer + 0 artists</strong> is exactly the case the design pool flags — such a team &quot;must ask the instructor which conditional bends&quot; (see <code>design-goals-pool.pdf</code>). Strongly advised: <strong>add a 2nd designer</strong> so one owns the game design (labyrinth mutation, loot/sabotage/countdown systems, level design) and the other absorbs the D11 art-surface conditional, keeping both reachable; the module rules allow it (min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). If the team stays at 1 designer, expect a lighter art surface — a <strong>geometric / programmer-art</strong> visual style (clean top-down shapes, colour-coded walls/traps/loot) that the cosmetic shop reskins — and the instructor sign-off on the bent conditional. <em>Scope note (advisory):</em> a deterministic mutating-maze sim + a path-to-spawn-guaranteed generator + LAN lockstep + a direction-changing collision engine + a level editor is a <strong>CS-heavy, well-focused</strong> scope — the 2-player LAN match on one mutating map with basic loot/sabotage and the level editor is the M1/M2 floor; multiple map themes, the full trap/sabotage set, up-to-4-player support and mutation-pacing variety are the stretch.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / TEAM picks for this project (no Art track — 0 artists, so the Art surface is carried by the Design-owned D11 conditional); deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the mutating-labyrinth 2-player race, the loot/carry/deposit scoring, the sabotage mechanics and the timed-survival pressure; primary benchmark e.g. Ultimate Chicken Horse / SpeedRunners, with a Singapore benchmark for the local-awareness criterion)</li><li>M1D2 Core Gameplay Loop Prototype (a greybox proving collect-loot → sabotage → escape under the countdown, with a mutating maze, is fun) · prototype in Unity</li><li>M1D11 Art Proof of Concept *(conditional — mandatory for 0-artist teams; Design-owned)* — the geometric/programmer-art visual direction: palette, colour-coding for walls/traps/loot, and 2 mockup screens.</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D11 Art Implementation Quality *(conditional — mandatory for 0-artist teams; Design-owned)* — all in-game art implemented in-engine (no placeholders); the cosmetic-shop skins applied.</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the countdown, the loot/carry/deposit indicators, the sabotage affordances and the LAN lobby.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — lobby/LAN-connect, in-match HUD, results and the cosmetic shop navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished match + sabotage UX tested with players on the Pixel 9a.</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial BGM/SFX from the week-5 needs list present &amp; working in the prototype (tense chase BGM, loot pickup, trap trigger, wall-shift and countdown cues), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback for overlapping match SFX.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Games floor (chase BGM + loot / deposit / trap / wall-shift / sabotage / countdown SFX, ≥6 types), scaling with match intensity.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing; a distinct wall-shift + trap cue).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the level editor + the network debug tool), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
