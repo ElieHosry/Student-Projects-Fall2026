@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Ahmad: Away from Home</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="ahmad-away-from-home.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="ahmad-away-from-home.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Ahmad: Away from Home</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="ahmad-away-from-home-student-proposal">Ahmad: Away from Home <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-22 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>Ahmad: Away from Home</em> is a <strong>puzzle-based exploration game</strong> (in the style of a map-piecing game): players <strong>zoom out to a world map</strong> to place and connect puzzle pieces, then <strong>zoom in to explore each piece as a fully navigable environment</strong>, hunting for clues and more pieces until a completed section reveals the way out. Named load-bearing C++: a game loop handling <strong>player input, NPC AI, collision detection, puzzle fitting and game-state transitions</strong> in real time, maintaining a consistent map layout from the pieces with instant feedback. Named technical features: an <strong>Undo/Redo puzzle-placement system</strong> (track placements, undo/redo without losing collected pieces/progress); <strong>Real-Time World &amp; Progression Synchronisation</strong> (discoveries during exploration — clues, pieces, objectives — update the world map live); <strong>Automatic Terrain-Connection Detection</strong> (auto-identify connected same-terrain areas, plus <strong>tile preview + placement prediction</strong> showing valid positions and resulting connections); and a <strong>Multi-State Gameplay System</strong> (smooth transition from the 2D puzzle-piecing view to the top-down exploration view). Tool: a <strong>Game-State Debugging Tool</strong> to visualise the current puzzle map, found pieces, objectives and exploration states, keeping pieces + environments in sync and cutting manual setup. Design features: a <strong>rotatable piece-fitting mechanic</strong> (rotate + place pieces into matching shapes, any order as long as the shape fits); <strong>seamless zoom transition</strong>; an <strong>environmental clue system</strong> (≥4 NPCs + environmental signs — worn paths, notes, landmarks — giving subtle non-handholding hints; ≥4 distinct puzzle-piece <strong>biomes</strong> — water, forest, ruins… — each with unique interactables/hazards); and <strong>free-roam exploration within each piece</strong>. Team: <strong>6 CS + 1 Design + 1 Artist</strong>.</p>
+<p><em>Note (module completeness):</em> the proposal doesn&#39;t name a <strong>platform</strong> — the zoom/place/rotate interaction is touch-friendly, so it&#39;s planned as a mobile build (Native Android, Pixel 9a; a Web-on-mobile build is a viable alternative). It also doesn&#39;t mention an <strong>External Database</strong> or accounts, but the module mandates Firebase — plan to persist save games / progress there (a standard, small addition; see the External Database row + M1G12-style integration). Neither is a category concern.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://store.steampowered.com/app/1172450/Carto/">Carto on Steam (a tile-placement adventure where you discover pieces of the world map, <strong>rearrange and rotate them (edges must match) to shape the levels</strong>, then explore them on foot — an almost feature-for-feature precedent for the place-and-connect-then-explore loop)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Dorfromantik">Dorfromantik — Wikipedia (a tile-placement puzzle of placing/rotating tiles so <strong>terrain edges match</strong>, forming connected landscape groups — the automatic-terrain-connection + placement-prediction precedent)</a></li>
+<li><a href="https://store.steampowered.com/app/557600/Gorogoa/">Gorogoa on Steam (a puzzle of <strong>arranging and zooming into panels/tiles</strong> to connect them and open paths — the seamless-zoom + piece-arrangement precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Ahmad: Away from Home</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — C++ engine via JNI rendering through OpenGL ES in a GLSurfaceView, Kotlin app shell; device: Pixel 9a) — zoom/place/rotate + top-down movement are touch-first; a Web-on-mobile (Emscripten→WASM) build is a viable alternative. The Native PC build is the dev/tools vehicle (the game-state debug + environment editor). <b>Extended:</b> Firebase + a Linux server the team sets up by M2 (full use T2) for save-game / progress persistence.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A 2D game with two views — the zoomed-out world map (puzzle pieces + connection previews) and the zoomed-in top-down explorable environments (Ahmad, NPCs, interactables, clues) — with a seamless zoom transition and the objective/clue HUD. <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine via JNI (Android Studio); OpenGL ES for the realtime 2D in a GLSurfaceView; some screens (menus) can be pure Native UI. Web/desktop — SDL2/3 + OpenGL ES for the PC dev/tools build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The real-time C++ engine — player input, the puzzle-fitting + rotation + placement-validation, automatic terrain-connection detection, the undo/redo command stack, NPC AI + top-down collision, the multi-state (map↔exploration) machine and the world/progression sync — with instant feedback; plus Firebase for save/progress. <b>Languages:</b> C++ (engine); Firebase-backed services on the Extended tier.<br><b>Backend scope:</b> Local now, server-ready (T2) — the save/progress seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ loop is load-bearing — it validates + rotates + fits puzzle pieces, runs automatic terrain-connection detection, maintains the undo/redo command stack, drives NPC AI + collision in exploration, and transitions the multi-state (map↔︎walk) machine with instant feedback.</li>
+<li><em>Data-driven:</em> the puzzle pieces + their terrain edges, the ≥4 biomes and their interactables/hazards, the ≥4 NPCs + clue placements, and objectives are all data — a new piece, biome or clue is a data change (authored in the debug/environment tool).</li>
+<li><em>2D:</em> both views (the world-map puzzle + the top-down exploration) and the zoom transition are 2D and custom-rendered. <em>3D:</em> not needed.</li>
+<li><em>Custom tool:</em> the <strong>Game-State Debugging + environment tool</strong> — visualise the puzzle map, found pieces, objectives and exploration states, and author pieces/environments/clues, keeping map + environments in sync.</li>
+<li><em>Networking:</em> single-player; save/progress is async client↔︎cloud (Application Communication ✅), so a Networking System is optional (🔵). <em>External DB:</em> save games / progress (Firebase — add per the module). <em>Auth ⏭️ / Analytics ⏭️:</em> module-deferred to T2 (🔵).</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — the loop + puzzle-fitting + the <strong>undo/redo</strong> command stack.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a C++ loop handling input, puzzle fitting/rotation/placement-validation, an undo/redo command stack (progress-preserving), and game-state transitions with instant feedback; C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the tile/terrain system (M1G14) and camera/state (M1G16) build on it.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong> — incl. the world/progression sync model.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> An entity/data model with puzzle pieces + terrain edges, the ≥4 biomes + interactables/hazards, the ≥4 NPCs + clues, and objectives in hot-reloadable JSON; a shared world/progression state that exploration discoveries update live and the map reads back.</li><li><b>Prerequisites:</b> G1 (loop &amp; entity hooks).</li><li><b>Feeds into:</b> M2G2 (the debug/environment tool), M1G14 (tile/terrain), M2G13 (progression/clue systems).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays (piece connections, terrain groups, objective/exploration state), Tracy profiling of a large connected map + a busy exploration scene, Catch2 tests (placement validation, terrain-connection detection, undo/redo, data loading), on a GitHub Actions matrix — the base of the Game-State Debug Tool.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G2 (the full debug/environment tool); M2G3 (CI hardening).</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the world-map view, the top-down exploration view, and the zoom.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> A sprite/tile renderer for the zoomed-out puzzle map (pieces + connection previews) and the zoomed-in top-down environments (Ahmad, NPCs, interactables), a camera, and the objective/clue HUD; SDL2/3/OpenGL ES, GLSL, stb_image, FreeType. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window).</li><li><b>Feeds into:</b> M2G4 (biome visual variety + zoom polish); the debug tool shares this renderer.</li></ul></details>
+</li>
+<li><strong>G14 Level / Tile Map System</strong> — the <strong>puzzle tiles + automatic terrain-connection detection + placement prediction</strong>.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A tile/piece map (JSON) with terrain edges + collision data, placement validation (shape/edge fit, any rotation), a connected-component/flood-fill pass that auto-detects same-terrain groups, and a tile-preview that shows valid positions + resulting connections before commit.</li><li><b>Prerequisites:</b> M1G2 (piece/terrain data model), G4 (rendering).</li><li><b>Feeds into:</b> The core puzzle mechanic; the explorable environments as tile maps.</li></ul></details>
+</li>
+<li><strong>G16 Camera, Scene &amp; State Management</strong> — the <strong>seamless zoom</strong> + the <strong>multi-state</strong> transition.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Interpolation/easing for the zoom in/out, a scene/state stack managing the 2D puzzle-piecing view ↔ the top-down exploration view, and clean transitions that preserve world/progression state.</li><li><b>Prerequisites:</b> G4 (rendering), G1 (state machine).</li><li><b>Feeds into:</b> The signature multi-state gameplay; polished navigation.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong> — on-device perf + the save/progress seam.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Memory pools, Tracy profiling of a large connected map + busy exploration, ASan on MSVC, and on-device validation (Pixel 9a) holding the frame budget through zoom transitions; the Firebase/Linux-server seam (save/progress) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The Native-Android deliverable + smooth zoom/exploration.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Game-State Debug + Environment Tool)</strong> — visualise/author the map, pieces, objectives, exploration states.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui + the shared renderer: visualise the puzzle map + found pieces + objectives + exploration state, and author pieces (terrain edges), biomes, clues and NPC placements, with round-trip JSON, live preview and undo/redo — keeping map + environments in sync.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s renderer (preview).</li><li><b>Prerequisites:</b> G2 (data model), M1G3 (debug overlays), M1G14 (tile/terrain).</li><li><b>Feeds into:</b> All content; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android builds, tests (placement validation, terrain-connection, undo/redo, save/load) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics — Advanced</strong> — the ≥4 biome visual identities + zoom/lighting polish.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> OpenGL/GLSL shaders, lighting/atmosphere per biome (water/forest/ruins…), post-FX for the zoom transition and texture atlases. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> M1G4 (2D graphics), M2G1 (optimization).</li><li><b>Feeds into:</b> The biome variety + polished zoom at showcase.</li></ul></details>
+</li>
+<li><strong>G6 Content Editor — Advanced Tool Features (Environment &amp; Clue Authoring)</strong> — the biome/clue/NPC authoring matured.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui advanced widgets: drag-drop environment building per biome, place interactables/hazards, clues (worn paths/notes/landmarks) and NPCs with hint links, and live-preview the map↔environment sync; deep undo/redo.</li><li><b>Prerequisites:</b> M2G2 (editor core).</li><li><b>Feeds into:</b> Fast environment/clue authoring; the content showcase.</li></ul></details>
+</li>
+<li><strong>G13 Gameplay Systems II</strong> — objectives/progression, the <strong>clue system</strong>, biome interactables/hazards + NPC hints.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ systems over the entity/data model: the objective/progression tracking + world-map reveal, the environmental clue system (subtle non-handholding hints), the ≥4 biomes&#39; unique interactables/hazards, and the ≥4 NPCs&#39; hint behaviours; balancing-data-driven.</li><li><b>Prerequisites:</b> M1G2 (data), M1G14 (tiles/terrain).</li><li><b>Feeds into:</b> The exploration depth at showcase; T2 content expansion.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + 1 Art (8) — <strong>as proposed</strong>, and well-matched: an exploration game leans on its <strong>environments</strong> (≥4 distinct biomes, Ahmad + ≥4 NPCs, interactables, the world-map art, UI), which one dedicated artist can carry, while a single designer owns the FDD, the puzzle/mechanic design, the biome/clue/level design and the exploration pacing (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). If the biome + clue content outgrows one designer, consider a 2nd designer. <em>Scope note (advisory):</em> a puzzle-fitting + terrain-connection engine + a multi-state/zoom system + free-roam exploration with NPCs + a debug/environment tool is a solid, cohesive scope — the place/rotate/connect mechanic, the seamless zoom, and <strong>one or two fully explorable biomes</strong> with basic clues is the M1/M2 floor; all ≥4 biomes with unique interactables/hazards, the full ≥4-NPC clue web and the polished world reveal are the stretch. The <strong>automatic terrain-connection detection + placement prediction</strong> is the trickiest CS bit — validate it early on a small piece set.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the place-connect-then-explore USP, the rotatable piece-fitting, the seamless zoom, the clue system and the ≥4 biomes; primary benchmark e.g. Carto / Dorfromantik, plus a Singapore benchmark)</li><li>M1D8 Puzzle &amp; Mechanic Design (the rotatable piece-fitting + terrain-connection mechanic — a catalogue of piece/connection situations, a difficulty ramp, and 5–8 designed puzzle layouts authored to the CS data format)</li><li>M1D5 Level &amp; Progression Design (the ≥4 biomes, the exploration + clue placement, the non-handholding hint design and the world-reveal pacing)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D2 Working Prototype — Full-Content Build (the polished place → zoom → explore experience across the shipping biomes, in the team&#39;s engine + editor)</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the piece-placement/rotation UI, the connection-preview, the zoom affordance and the objective/clue HUD, plus a wireframe baseline.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — the map/placement view, exploration HUD, clue log and objectives navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished place-rotate-explore + zoom UX tested with players on the Pixel 9a (is the piece-fitting + zoom legible and satisfying?).</li></ul></li><li><b>Art M1:</b> 1 artist (Ahmad + ≥4 NPCs + ≥4 biomes + interactables + UI)<ul><li>M1A1 ⭐ Art Bible / Proof of Concept (the &quot;away from home&quot; visual direction — tone, palette, the biome + world-map identity language)</li><li>M1A2 Character Concepts &amp; Model Sheets (Ahmad + the ≥4 NPCs)</li><li>M1A3 Environment, Props &amp; VFX Concepts (the ≥4 biomes — water/forest/ruins… — their interactables/hazards, and the world-map puzzle-piece art)</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ Critical Asset Production &amp; In-Engine Visual Quality</li><li>M2A2 Character Animation — Extensive (Ahmad&#39;s movement + NPC idles/gestures)</li><li>M2A3 Environment Alive — Ambient Animation &amp; Layering (living biomes — water, foliage, ruins ambiance — that make each piece feel explorable)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial BGM/SFX from the week-5 needs list present &amp; working in the prototype (world-map + per-biome ambience, piece-place/rotate/connect cues, clue-found, zoom-transition), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Games floor (world + ≥4 biome ambiences + place/connect / clue / discovery / zoom / NPC SFX, ≥6 types), scaling with exploration.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing; distinct per-biome ambience + connect/discovery cues).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the Game-State Debug + environment tool), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-22.</em></p>
+</body>
+</html>
