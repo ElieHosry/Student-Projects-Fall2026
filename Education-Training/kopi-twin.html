@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>KOPI-TWIN</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="kopi-twin.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="kopi-twin.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">KOPI-TWIN</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="kopi-twin-student-proposal">KOPI-TWIN <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Education + Training · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval · <b>Runner-up category:</b> Immersive Experience</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>Kopi Twin</em> is a mobile <strong>augmented-reality training app</strong> that turns an ordinary table into a simulated kopitiam drink workstation for <strong>new food-service employees</strong> — trainees practise preparing and serving orders without occupying a stall or using real ingredients. Unlike video tutorials or fixed step-by-step guides, it uses a <strong>real-time simulation</strong> to generate customer orders, manage virtual ingredients, track recipe states and introduce changing workplace conditions. Trainees do guided lessons, then timed <strong>peak-hour scenarios</strong> balancing speed, accuracy and waste; performance is scored on procedural accuracy, completion time, incorrect actions and simulated ingredient usage. The POC focuses on traditional kopi, but the data-driven training system can extend to other workstations. Named technical features: a <strong>native C++ digital-twin core on ARCore&#39;s NDK (C API)</strong> converting a live camera scan into a persistent, bounded spatial-anchor map that survives across sessions; a <strong>data-driven object system</strong> (real-world anchors carry swappable behaviour definitions in data files, so the same engine runs different scenarios without code changes — swap JSON/txt instead of hard-coding); <strong>user interaction with the object system</strong> (handle objects via a button press); and a <strong>bounded-space digital-twin</strong> (a defined playable area with persistent anchor placement). Loop: a local native C++ update loop drives the AR session every frame — pull ARCore pose/plane data, update anchored virtual-object states, run the interaction/grading logic — performant enough for a live camera feed on-device. Tool: a <strong>content/scenario editor</strong> letting a non-programmer (a recipe designer or safety trainer) define anchor points, object behaviours and pass/fail interaction rules as data. Design features: guided AR training (instructions beside the relevant virtual equipment); peak-hour simulation (simultaneous orders, limited ingredients, time pressure); immediate error feedback (wrong ingredients/quantities/sequences/skipped steps); and a performance &amp; competency dashboard (accuracy, completion time, compliance, simulated waste).</p>
+<p><em>Note on category:</em> filed under <strong>Education + Training</strong> — the product is a <strong>training simulator with learning objectives and measurable competency</strong> (guided lessons → assessed peak-hour scenarios → a competency dashboard); the pedagogy is the product. Runner-up <strong>Immersive Experience</strong> (the AR medium) — but the goal is measurable skill acquisition, not atmosphere, so Education + Training is the better home. (Not Simulator: there is no system-modelling/physics simulation as the product — the simulation exists to train a procedure.)</p>
+<p><strong>Scope &amp; risk note (advisory, not a blocking condition):</strong> persistent cross-session AR anchors + a bounded digital twin + a data-driven scenario system + peak-hour simulation + a scenario editor + a competency dashboard is a <strong>large surface</strong>, and this is a genuine <strong>3D/AR</strong> project (the &quot;strong students only&quot; row); the persistent-anchor AR core on the ARCore NDK is the key risk. Scope the floor to <strong>the kopi POC on one bounded table</strong> with the C++ AR loop, the data-driven object system, one guided lesson and the grading, and treat cross-session anchor persistence, peak-hour and the full dashboard as the stretch. (ARCore&#39;s NDK C API is a low-level platform API — permitted, like SDL/OpenGL ES — not a disallowed engine.)</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://store.steampowered.com/app/704300/Bartender_VR_Simulator/">Bartender VR Simulator on Steam (a drink-preparation <strong>training simulator</strong>: learn recipes in guided modes, then timed orders scored on accuracy and speed, with a completion certificate and a &quot;Pro Mode&quot; — the food-service drink-prep training precedent)</a></li>
+<li><a href="https://www.diageobaracademy.com/en-us/home">Diageo Bar Academy (an industry bartending <strong>training platform</strong> with accredited skills courses and a virtual-bar experience — the real-world food-service training-with-competency precedent)</a></li>
+<li><a href="https://developers.google.com/ar/reference/c">ARCore SDK for Android NDK (C) — Google (the official native C API for camera pose/plane tracking and persistent anchors that the digital-twin core is built on — the AR-anchor tech precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>KOPI-TWIN</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — ARCore NDK on-device; device: Pixel 9a) — a camera-driven AR app; the Native PC build is the development/tools vehicle (the scenario editor). <b>Extended:</b> Firebase + a Linux server the team sets up by M2 (full use T2) for accounts, progress sync and the trainer/competency dashboard data.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> The AR camera view with virtual kopitiam objects rendered over the live feed (anchored cups, ingredients, equipment), the guided-instruction overlays, the order/timer/error-feedback HUD and the competency dashboard. <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine (and the ARCore NDK C API) via JNI (Android Studio); OpenGL ES for the AR object rendering in a GLSurfaceView; Web/desktop — SDL2/3 + OpenGL ES for the PC dev/scenario-editor build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The native C++ per-frame loop (pull ARCore pose/plane → update anchored virtual-object states → run the order/recipe simulation + interaction/grading), the data-driven object/behaviour system, and the bounded persistent-anchor map; plus accounts/progress/dashboard data. <b>Languages:</b> C++ (loop + simulation + grading); Firebase-backed services on the Extended tier.<br><b>Backend scope:</b> Local now, server-ready (T2) — the accounts / progress-sync / trainer-dashboard seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ loop is load-bearing — every frame it pulls ARCore pose/plane data, updates the anchored virtual-object states (order queue, virtual ingredients, recipe states, changing conditions), and runs the interaction + grading logic, sustaining a live camera feed on-device.</li>
+<li><em>Data-driven:</em> customer orders, recipes/recipe-states, the per-anchor object behaviours, scenario definitions and the pass/fail grading rules are all data (JSON/txt), so a new drink, scenario or even a different workstation is a data change — not engine code.</li>
+<li><em>2D:</em> the guided-instruction overlays, order/timer/error HUD and the competency dashboard are custom 2D rendering — satisfying the 2D gate. <em>3D:</em> ✅ <strong>central</strong> — the anchored virtual objects rendered in AR world space + the persistent bounded anchor map (strong-students; the key risk). <em>Networking:</em> progress/dashboard sync is async client↔︎cloud (Application Communication ✅), so a bespoke Networking System is optional (🔵).</li>
+<li><em>Custom tool:</em> the <strong>content/scenario editor</strong> — a non-programmer defines anchor points, object behaviours and pass/fail interaction rules as data, without touching the C++ engine.</li>
+<li><em>External DB:</em> accounts, progress history and the competency-dashboard data. <em>Auth ⏭️:</em> trainee/trainer accounts. <em>Analytics ⏭️:</em> optional — cross-trainee competency trends (the per-trainee dashboard is the team&#39;s own in-app analytics via G10).</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Education + Training pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — the loop drives the <strong>AR session</strong> (ARCore pose/plane) + anchored object states + grading.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a per-frame C++ loop that (on desktop) simulates the workstation without a camera for tooling/tests; C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine and the ARCore NDK C API via JNI); OpenGL ES drawn in a GLSurfaceView over the live camera feed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the anchored object system, interaction (M1G5) and simulation (M1G11) run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong> — the <strong>swappable per-anchor behaviour definitions</strong>.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> An entity/component model where real-world anchors carry swappable behaviour definitions (JSON/txt): drinks, recipes/recipe-states, ingredient objects, scenario config and grading rules, hot-reloadable — a new scenario is a data change, not engine code.</li><li><b>Prerequisites:</b> G1 (loop &amp; anchored-object hooks).</li><li><b>Feeds into:</b> M2G2 (the scenario editor), M1G11 (simulation consumes it), M1G13/M2 grading.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui debug overlays (anchor map, object/recipe state), Tracy profiling of the pull-pose→update→grade loop to sustain a live camera feed on-device, Catch2 tests for the grading rules and data loading, on a GitHub Actions Windows+Android matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the on-device budget M2G1 validates.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics &amp; Interactive Content Rendering</strong> (extended to <strong>AR object rendering</strong>) — the virtual kopitiam objects rendered over the camera + the instruction/HUD overlays.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> A renderer for the anchored 3D virtual objects composited over the live camera (via the GLSurfaceView), plus the 2D guided-instruction overlays and order/timer/error HUD; OpenGL ES, GLSL, FreeType. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime AR is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; AR session).</li><li><b>Feeds into:</b> M2G4 (advanced feedback visuals + dashboard charts); every visible frame.</li></ul></details>
+</li>
+<li><strong>G5 Real-time Interaction Engine</strong> — button interaction with the anchored objects, step timing and scoring (the coffee-order steps + immediate error feedback).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Touch/button capture mapped to object interactions (grab/pour/serve), step timing, and per-step scoring with immediate error detection (wrong ingredient/quantity/sequence/skipped step).</li><li><b>Prerequisites:</b> G1 (tick), G2 (object behaviours).</li><li><b>Feeds into:</b> The grading + the competency dashboard; M2G13-class assessment.</li></ul></details>
+</li>
+<li><strong>G11 Domain Simulation Core</strong> — the kopi-prep simulation: order generation, virtual ingredients, recipe states and changing workplace conditions.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A C++ simulation generating customer orders, managing virtual ingredient inventory, tracking recipe states through the prep steps, and introducing changing conditions — all tunable from data.</li><li><b>Prerequisites:</b> G1 (tick), G2 (recipe/order data).</li><li><b>Feeds into:</b> M2G11 (peak-hour: simultaneous orders + limited ingredients + time pressure); the training scenarios.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong> — on-device AR performance + persistent anchors across sessions.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling of the AR loop under a live feed, ASan on MSVC, memory pools, and on-device validation (Pixel 9a) that the bounded anchor map persists across sessions; the Firebase/Linux-server seam (accounts + progress + dashboard) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine + ARCore NDK via JNI); OpenGL ES drawn in a GLSurfaceView where realtime AR is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The Native-Android deliverable + a stable live-camera budget with persistent anchors.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Scenario Editor)</strong> — a non-programmer defines anchor points, object behaviours and pass/fail interaction rules as data.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui + the shared C++ renderer: place/define anchor points, author per-object behaviour definitions and the pass/fail grading rules, with round-trip JSON/txt serialization and a preview, usable by a recipe designer / safety trainer.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s OpenGL ES renderer (preview).</li><li><b>Prerequisites:</b> G2 (behaviour/scenario data model), M1G4 (rendering for preview).</li><li><b>Feeds into:</b> All scenario content; the future non-kopi workstations; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android Debug builds, tests (grading rules, simulation, data loading) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime AR is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G7 Firebase — Accounts, Progress Sync &amp; Teacher Dashboards</strong> — trainee accounts, progress history and the trainer-facing view.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth accounts, Firestore for progress/attempt history synced across devices, and a trainer dashboard reading aggregate trainee results, via the REST API from C++.</li><li><b>Prerequisites:</b> G2 (result/progress data model), M1G5 (scores to store).</li><li><b>Feeds into:</b> The competency dashboard; trainer oversight.</li></ul></details>
+</li>
+<li><strong>G10 Analytics &amp; Learning Insights</strong> — the <strong>performance &amp; competency dashboard</strong> (accuracy, completion time, compliance, simulated waste).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Per-attempt metrics captured from the grading (procedural accuracy, completion time, incorrect actions, ingredient usage/waste), aggregated into a competency dashboard with custom-rendered charts.</li><li><b>Prerequisites:</b> M1G5 (the scored metrics), M2G7 (stored history).</li><li><b>Feeds into:</b> The competency-dashboard design feature; the trainee/trainer feedback loop.</li></ul></details>
+</li>
+<li><strong>G11 Domain Simulation II</strong> — the <strong>peak-hour</strong> scenario: simultaneous orders, limited ingredients and time pressure.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> The simulation matured for concurrent orders, constrained ingredient inventory and a time-pressure model, with difficulty scaling from data (guided → peak-hour).</li><li><b>Prerequisites:</b> M1G11 (simulation core).</li><li><b>Feeds into:</b> The peak-hour design feature; the speed/accuracy/waste balance at showcase.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 2 Design + 1 Art (9) — the <strong>instructional design surface is large</strong> (the guided-lesson curriculum, the grading/competency rubric, the peak-hour scenario design, the error-feedback design and the wayfinding-free AR UX), so two designers own the design + UI/UX; one artist can carry the virtual kopitiam objects (cups, ingredients, equipment) as AR assets plus the instruction/HUD/dashboard visuals (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). If the AR asset set + dashboard visuals outgrow one artist, trade the 2nd designer for a 2nd artist. Note: for a training utility the audio floor is lighter (feedback cues + ambient kopitiam) — a lecturer waiver on heavy BGM may apply.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (learning objectives + target learners (new food-service staff), the skill gap the app closes, the guided → peak-hour progression, feasibility against the AR/engine plan)</li><li>M1D2 Prototype — one guided kopi lesson working end to end (place workstation → follow steps → get graded)</li><li>M1D3 User Research, Personas &amp; Competitive Analysis (trainee + trainer personas; teardown of Bartender VR Simulator / Diageo Bar Academy / video-tutorial training; findings into the FDD)</li><li>M1D6 Level &amp; Progression Design → the lesson/scenario progression and the difficulty ramp from guided lessons to peak-hour</li><li>M1D9 Playtest Plan &amp; First Playtests (protocol + ≥3 sessions with target trainees on the M1 lesson; findings triaged)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D5 Playtesting &amp; Iteration Program (test the guided-lesson clarity + the competency rubric with trainees, triaged)</li><li>M2D6 Vertical Slice — one complete unit polished (guided lesson → peak-hour → competency result)</li><li>M2D7 Systems Balance &amp; Tuning — Data-Driven (the grading thresholds, peak-hour difficulty and waste/time weights via the team&#39;s data)</li></ul></li><li><b>UI/UX M1</b> (graded by the UI/UX instructor):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — the AR instruction-overlay, order/timer/error HUD and dashboard standards; readable over a live camera feed.</li><li>M1U2 UX Flows &amp; Wireframes — lesson-select → AR setup → guided steps → result → dashboard, wireframed end to end.</li><li>M1U3 Accessibility &amp; Readability Foundations — contrast, type scale and touch targets legible against a camera background.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — lesson, AR session, result and dashboard navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished instruction + feedback UX tested with trainees on the Pixel 9a.</li><li>M2U4 Onboarding &amp; Tutorial Design — get a first-time trainee from install to first graded drink without a wall of text.</li><li>M2U5 Mobile UX Adaptation &amp; Ergonomics — one-handed / device-held AR use, safe areas, session-length fit on the Pixel 9a.</li></ul></li><li><b>Art M1:</b> 1 artist (AR objects + UI/dashboard visuals)<ul><li>M1A1 ⭐ Art Bible / Proof of Concept (the kopitiam visual language, the virtual-equipment style, instruction iconography)</li><li>M1A3 Environment, Props &amp; VFX Concepts (the virtual kopi equipment/ingredients/cups AR props + error/success feedback VFX concepts)</li><li>M1A4 UI Art Concepts &amp; Typography (instruction overlays, order/timer/error HUD, dashboard visuals, large readable type over camera)</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ Critical Asset Production &amp; In-Engine Visual Quality (the AR props + HUD + dashboard implemented and consistent)</li><li>M2A4 UI Art — States &amp; Feedback (correct / incorrect / skipped-step / peak-hour-pressure states; dashboard charts)</li><li>M2A5 VFX — Critical Effects &amp; Transitions (immediate error/success feedback effects, completion/celebration)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial audio from the week-5 needs list present &amp; working (kopitiam ambience + interaction, correct/incorrect and order cues), suitable and correctly triggered (a lecturer waiver on heavy BGM may apply for this training utility).</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback for overlapping feedback cues.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — the Education-floor set: ambient + interaction / correct / incorrect / order-in / peak-hour cues, correctly triggered and clear under time pressure.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the playback functionality the build needs (multi-channel; distinct correct-vs-error cues).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the scenario editor), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
