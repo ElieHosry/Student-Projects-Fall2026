@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Ungeared</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="ungeared.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="ungeared.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Ungeared</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="ungeared-student-proposal">Ungeared <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>Ungeared</em> is a <strong>2D dungeon crawler that inverts progression</strong> — instead of gaining gear, the hero <strong>loses</strong> it. Each floor cleared <strong>breaks a piece of equipment</strong>, and every loss changes how the run plays (when the lamp fails, the field of view shrinks, so the player must navigate the dark more carefully). Core loop: explore winding tunnels, scavenge potions left by fallen heroes, clear hordes of spiders, and push deeper as another piece of gear gives out. The cave doesn&#39;t change — the <strong>player&#39;s toolkit shrinks</strong>, forcing new tactics and decisions about when to spend saved potions; adaptation replaces raw power. Named load-bearing C++: a <strong>real-time simulation loop holding a stable step with ≥200 live spiders</strong>, via an <strong>ECS</strong> with contiguous component storage, a <strong>capped spawn system</strong>, <strong>pathfinding that only runs when a wall blocks the way</strong>, and <strong>batched rendering</strong>. Named technical features: a <strong>robust real-time spawning system</strong>; <strong>enemy AI &amp; pathfinding</strong> (spiders crawl toward the hero by distance + line of sight, path resolved around walls); a <strong>seeded random map generator</strong> for paths + spawners; and a <strong>swipe-based combat system</strong>. Tools: <strong>seeded procedural level generation</strong> (specific seeds for a consistent experience across players); and an <strong>enemy-behaviour tuning tool</strong> (importer/exporter for speed, health, detection range, aggression — edit externally, import, export for balancing). Design features: the hero <strong>grows weaker</strong>, discarding equipment each stage; <strong>≥3 &quot;pictures-as-cutscene&quot;</strong> depicting equipment failure; <strong>≥3 wave-designed stages + 1 boss stage</strong>; and <strong>≥3 spider types</strong> with distinct behaviours. Team: <strong>6 CS + 2 Design + 0 Art</strong>.</p>
+<p><em>Note (module completeness):</em> the proposal doesn&#39;t name a <strong>platform</strong> — the swipe combat is touch-first, so this is planned as a mobile build (Pixel 9a per the module). It also doesn&#39;t mention an <strong>External Database</strong> or accounts, but the module mandates Firebase — plan to persist run records / seeds / best depth there (a standard, small addition; see the External Database row + M1G12-style integration). Neither is a category concern.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://store.steampowered.com/app/1794680/Vampire_Survivors/">Vampire Survivors on Steam (a horde-survival action roguelite where the screen fills with enemies and the player pushes to survive deeper — the hordes-of-enemies + ≥200-live-agents performance precedent)</a></li>
+<li><a href="https://store.steampowered.com/app/250900/The_Binding_of_Isaac_Rebirth/">The Binding of Isaac: Rebirth on Steam (a randomly-generated, run-based dungeon crawler where each run is a fresh combination of rooms and items — the run-based dungeon-crawler precedent)</a></li>
+<li><a href="https://store.steampowered.com/app/418530/Spelunky_2/">Spelunky 2 on Steam (procedurally-generated caves from seeds, producing unique but reproducible descents each playthrough — the seeded-procedural-cave + &quot;push deeper&quot; precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Ungeared</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — C++ engine via JNI rendering through OpenGL ES in a GLSurfaceView, Kotlin app shell; device: Pixel 9a) — the swipe combat is touch-first; a Web-on-mobile (Emscripten→WASM) build is a viable alternative. The Native PC build is the development/tools vehicle (the enemy-behaviour tuning tool + the seed/level tooling). <b>Extended:</b> Firebase + a Linux server the team sets up by M2 (full use T2) for run records / seeds / best-depth persistence.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A 2D top-down dungeon renderer — the cave tunnels, the hero, up to ≥200 spiders (batched), potions/pickups, the shrinking field-of-view as the lamp fails, the equipment/potion HUD and the &quot;pictures-as-cutscene&quot; equipment-failure screens. <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine via JNI (Android Studio); OpenGL ES for the realtime 2D in a GLSurfaceView; Web/desktop — SDL2/3 + OpenGL ES for the PC dev/tools build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The real-time C++ simulation loop (ECS with contiguous storage, the capped spawning system, the wall-aware line-of-sight pathfinding that runs only when blocked, the equipment-degradation + potion economy, swipe-combat resolution and batched rendering), holding a stable step with ≥200 live spiders on Android; plus Firebase for run/seed persistence. <b>Languages:</b> C++ (engine); Firebase-backed services on the Extended tier.<br><b>Backend scope:</b> Local now, server-ready (T2) — the run/seed-persistence seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ loop is load-bearing — the ECS + contiguous component storage, the capped spawn system, wall-aware LOS pathfinding computed only when a wall blocks, batched rendering and the per-floor equipment-degradation logic together hold a stable step with ≥200 live spiders on the mobile target.</li>
+<li><em>Data-driven:</em> spider types (≥3, with speed/health/detection-range/aggression), equipment pieces + their break-effects, potions, spawn tables, wave definitions and level seeds are all data — a new spider or gear effect is a data change (authored/tuned via the enemy-behaviour tool).</li>
+<li><em>2D:</em> the top-down cave renderer, the batched spider horde, the shrinking-FOV lighting, the potion/gear HUD and the equipment-failure cutscene stills (custom-rendered). <em>3D:</em> not needed.</li>
+<li><em>Custom tools:</em> two — the <strong>seeded procedural level generator</strong> (seeds → reproducible maps with paths + scattered spawners) and the <strong>enemy-behaviour tuning tool</strong> (import/export spider stats + AI params for external balancing).</li>
+<li><em>Networking:</em> single-player; run/seed persistence is async client↔︎cloud (Application Communication ✅), so a Networking System is optional (🔵).</li>
+<li><em>External DB:</em> run records, seeds and best depth (Firebase — add this per the module). <em>Auth ⏭️:</em> optional accounts. <em>Analytics ⏭️:</em> optional — per-floor deaths + potion usage for balancing.</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — the ECS loop (capped spawns + the ≥200-spider budget) + swipe input.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a fixed-timestep C++ loop over an ECS with contiguous component storage, a capped real-time spawning system, and swipe-gesture input, decoupled from rendering; C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the AI/pathfinding (M1G8) and rendering (M1G4) run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> An ECS/entity model with spider types (speed/health/detection-range/aggression), equipment pieces + break-effects, potions, spawn tables, wave definitions and level seeds in hot-reloadable JSON — a new spider or gear effect is a data change.</li><li><b>Prerequisites:</b> G1 (loop &amp; entity hooks).</li><li><b>Feeds into:</b> M2G2 (the enemy-behaviour tuning tool), M1G8 (AI data), M2G13 (the degradation/potion systems).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays (entity/spawn counts, pathfinding triggers, FOV state), Tracy profiling of a ≥200-spider stress test to prove the stable step on Android, Catch2 tests (deterministic seeded generation, pathfinding-only-when-blocked, data loading), on a GitHub Actions Windows+Android matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the ≥200-spider budget M2G1 validates.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the batched top-down renderer for the cave + the ≥200-spider horde + shrinking FOV.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> A sprite/tile renderer with batching for the many spiders, a camera, the potion/gear HUD, and a lamp/FOV lighting mask that shrinks as gear breaks; SDL2/3/OpenGL ES, GLSL, stb_image, FreeType. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window).</li><li><b>Feeds into:</b> M2G4 (advanced/juice); every visible frame.</li></ul></details>
+</li>
+<li><strong>G7 Procedural Level Generation</strong> — the <strong>seeded</strong> map generator (paths + scattered spawners, reproducible across players).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Seeded RNG + a cave/tunnel algorithm (BSP / cellular automata / drunkard&#39;s walk) placing paths and spawners, with validation tests that a seed always yields a completable layout; identical output for a given seed across devices.</li><li><b>Prerequisites:</b> M1G2 (level/seed data model).</li><li><b>Feeds into:</b> M2G14 (proc-gen II — stage/wave variety); the &quot;consistent experience between players&quot; requirement.</li></ul></details>
+</li>
+<li><strong>G8 Enemy AI &amp; Pathfinding</strong> — spiders crawl toward the hero by distance + line of sight; path resolved around walls, only when blocked.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Line-of-sight/distance seeking with A* invoked only when a wall blocks the direct path (a cheap direct-chase fallback otherwise), steering to avoid clumping, tuned from data (custom C++); designed to stay cheap across ≥200 agents.</li><li><b>Prerequisites:</b> G1 (tick), G2 (spider data).</li><li><b>Feeds into:</b> M2G10 (advanced AI — the ≥3 spider behaviours + boss); the horde-combat pillar.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong> — the ≥200-spider budget hardened + on-device validation.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Memory/component pools, cache-friendly ECS iteration, Tracy profiling of the ≥200-spider stress case, ASan on MSVC, and on-device validation (Pixel 9a) holding the frame budget; the Firebase/Linux-server seam (run/seed persistence) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The mobile deliverable + a stable step under the full horde.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Enemy-Behaviour Tuning Tool)</strong> — import/export spider stats + AI params for external balancing.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui (or a small external editor) exposing speed/health/detection-range/aggression per spider type with round-trip JSON import/export, live preview and undo/redo, so designers rebalance without recompiling.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s renderer (preview).</li><li><b>Prerequisites:</b> G2 (spider/AI data model).</li><li><b>Feeds into:</b> M2D3 (data-driven balance); the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android builds, tests (seeded-generation determinism, pathfinding-only-when-blocked, degradation logic, data loading) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G10 AI — Advanced</strong> — the ≥3 spider behaviours matured + the boss.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Behaviour trees / FSMs giving the ≥3 spider types distinct roles (rushers, ambushers, ranged/spitters, etc.), a boss behaviour, and difficulty scaling as gear breaks, all tuned from data.</li><li><b>Prerequisites:</b> M1G8 (AI &amp; pathfinding foundation).</li><li><b>Feeds into:</b> The ≥3 wave stages + the boss stage; the &quot;adapt as you weaken&quot; pressure.</li></ul></details>
+</li>
+<li><strong>G13 Gameplay Systems II</strong> — the <strong>inverse-progression</strong> system: equipment degradation + the potion economy.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ systems over the ECS for the per-floor equipment-break rules and their run-changing effects (lamp → FOV shrink, etc.), the potion inventory + save/spend decision economy, and the weakening-difficulty curve; balancing-data-driven.</li><li><b>Prerequisites:</b> M1G2 (equipment/potion data), M1G1 (loop).</li><li><b>Feeds into:</b> The USP at showcase; T2 gear/effect expansion.</li></ul></details>
+</li>
+<li><strong>G14 Procedural Generation II</strong> — stage/wave variety + pacing across the ≥3 stages + boss.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Constraint-based generation for the designed wave stages and the boss arena (spawner density, path length, pacing curves) layered on the seeded generator, with automated validation of completability.</li><li><b>Prerequisites:</b> M1G7 (seeded generation).</li><li><b>Feeds into:</b> Content variety at showcase; the ≥3 stages + boss.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + <strong>2 Design</strong> + 0 Art (8) — <strong>as proposed</strong>, and a good fit: with <strong>no artist</strong>, the two designers absorb the <strong>D11 conditional</strong> (Art POC / Art Implementation Quality) each milestone (this is exactly why a 0-artist team is advised to carry 2 designers), so one can own the game/systems design (the degradation economy, the ≥3 stages + boss, the ≥3 spider behaviours, the swipe game-feel) while the other carries the art-surface conditional and the narrative cutscenes — both tracks stay reachable at the full 4-goals-per-designer load. Plan a <strong>geometric / stylised programmer-art</strong> direction (readable cave tiles, colour-coded spider types, silhouette-first gear) that suits a 0-artist team; the ≥3 &quot;pictures-as-cutscene&quot; stills are a scoped, design-ownable art deliverable. <em>Scope note (advisory):</em> an ECS holding ≥200 agents + wall-aware LOS pathfinding + seeded proc-gen + the degradation system + two tools is a <strong>strong, focused CS scope</strong> — one seeded stage with ~1 spider type, basic degradation and the horde at target count is the M1/M2 floor; the ≥3 stages, the boss, all ≥3 spider behaviours, the full gear-break table and the cutscenes are the stretch.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / TEAM picks for this project (no Art track — 0 artists, so the Art surface is carried by the Design-owned D11 conditional + the design-owned cutscene stills); deliverables &amp; quality ladders live in the track pool documents. Full load = 4 goals per designer per milestone across Design + UI/UX (8 combined for 2 designers).<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the inverse-progression USP, the equipment-break-effects, the potion economy, the ≥3 stages + boss and the ≥3 spider types; primary benchmark e.g. Spelunky 2 / The Binding of Isaac, plus a Singapore benchmark)</li><li>M1D2 Core Gameplay Loop Prototype (a greybox proving explore → clear horde → lose gear → adapt is fun) · prototype in Unity</li><li>M1D4 Game Feel &amp; Touch Interaction Specification (the swipe-combat feel — gesture zones, hit-stop, feedback timing — as tunable data)</li><li>M1D6 Systems &amp; Economy Design (the equipment-degradation source/sink, the potion save-or-spend economy and the spawn/wave interlocks — every system with a purpose)</li><li>M1D5 Level &amp; Progression Design (the ≥3 stages + boss, the difficulty curve that rises as the hero weakens)</li><li>M1D11 Art Proof of Concept *(conditional — mandatory for 0-artist teams; Design-owned)* — the stylised/programmer-art visual direction: palette, cave/spider/gear readability, and the equipment-failure cutscene style; 2 mockups.</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D2 Working Prototype — Full-Content Build (the polished core: explore → horde → degrade → boss)</li><li>M2D3 Systems Balance &amp; Tuning — Data-Driven (degradation/potion/spider balance via the tuning tool&#39;s JSON, no code changes)</li><li>M2D4 Game Feel &amp; Feedback Pass (&quot;Juice&quot;) (swipe-hit reactions, gear-break punctuation, horde-readable feedback)</li><li>M2D7 Narrative Presentation &amp; Delivery (the ≥3 equipment-failure &quot;pictures-as-cutscene&quot; beats integrated in the build)</li><li>M2D11 Art Implementation Quality *(conditional — mandatory for 0-artist teams; Design-owned)* — all in-game art + the cutscene stills implemented in-engine, no placeholders.</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the gear/potion HUD, the shrinking-FOV readability and the depth/floor indicator, plus a wireframe baseline.</li><li>M1U3 Accessibility &amp; Readability Foundations — legibility under the shrinking field-of-view; contrast and touch-target sizing for the swipe combat.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — menus, HUD, the gear-break screens and the cutscene flow navigable unaided on the mobile target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished swipe-combat + gear-loss UX tested with players on the Pixel 9a.</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial BGM/SFX from the week-5 needs list present &amp; working in the prototype (tense cave BGM, spider skitter/attack, swipe-hit, potion-drink, gear-break and low-lamp cues), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback for a busy horde.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Games floor (cave BGM + spider / swipe-hit / potion / gear-break / boss / defeat SFX, ≥6 types), scaling with horde intensity.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing; a distinct gear-break + boss cue).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the enemy-behaviour tuning tool + the seeded level generator), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
