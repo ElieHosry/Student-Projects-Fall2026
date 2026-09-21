@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Greenhouse</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="greenhouse.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="greenhouse.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Greenhouse</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="greenhouse-student-proposal">Greenhouse <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> 🔶 Fit with adjustments · <b>Category:</b> Creative Tools &amp; Media Production · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> A journaling app that makes self-reflection more engaging through visual progression and personalization. Each user starts with a unique seed that grows into a garden as they write entries, so they can look back and see their journey — encouraging a journaling habit. A scrapbook feature lets users freely arrange photos, stickers and text to personalize each entry. Named technical features: procedural generation &amp; progress (rule-based plants grown from a user&#39;s unique seed; interactions/stats affect base generation and growth; stored as a seed and rebuilt as a mesh on load); a real-time 3D garden renderer for mobile (instanced foliage, simple wind physics as a GPU shader, a cell shader for a 2D-drawn look); a custom scrapbook canvas (drag/pinch/rotate, runtime photo import); and on-device handwriting (velocity stroke smoothing, vector stroke storage for sharp graphics). Load-bearing C++: a fixed-timestep loop for realistic growth over real time, driving physics/animation and real-time gesture→screen interaction. Custom tool: an editor for app-layout editing, plant-generation editing and creating custom graphics/stickers/photos onto a note. Design features: living garden progression, scrapbook-style entries, personalized themes/backgrounds, and a customizable character profile.</p>
+<p><strong>Category note:</strong> filed under <strong>Creative Tools &amp; Media Production</strong> — the product is an authoring surface (scrapbook canvas + on-device handwriting + customization), and canvas content comes from users, which is the category&#39;s spine. The procedural 3D garden is the standout media/visual feature; runner-up categories would be <strong>Games</strong> or <strong>Immersive Experience</strong> (for the 3D garden), but the core loop is creative authoring + journaling, not a game.</p>
+<p><strong>Adjustments required for approval:</strong></p>
+<ul>
+<li><strong>Scope the 3D garden against the 2D gate.</strong> The module&#39;s <strong>2D output is the hard gate</strong> — here it&#39;s met by the custom scrapbook canvas + handwriting (custom-rendered in OpenGL ES), which is solid. <strong>3D is &quot;strong students only&quot; / optional</strong>, and a real-time 3D renderer on mobile with low-level libraries (OpenGL ES, no engine) is a large risk. Either render the garden as a <strong>2D/2.5D custom-rendered</strong> progression (de-risked, still satisfies the gate) or commit to real-time 3D as an <strong>explicit strong-student 3D goal with a 2.5D fallback</strong> — don&#39;t let the 3D renderer starve the core journaling/authoring product.</li>
+<li><strong>Keep the load-bearing work as the team&#39;s own C++.</strong> The procedural plant generation, growth simulation, gesture handling and handwriting stroke engine must be the team&#39;s own benchmarked C++ (not an off-the-shelf engine), so the project doesn&#39;t collapse into ordinary app development. The <strong>procedural plant generation + growth simulation is novel</strong> for this category&#39;s pool — propose it as an instructor-approved new pool goal (see below).</li>
+<li><strong>Privacy for personal content.</strong> Journal text and imported photos are sensitive — keep them local/encrypted with an explicit export, and if any sharing is added later, add moderation. (Minor, since the app is personal.)</li>
+</ul>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Forest_(app)">Forest — Wikipedia (gamification where a virtual tree/plant grows over a session and accumulates into a visual record of progress over time)</a></li>
+<li><a href="https://dayoneapp.com/">Day One (dayoneapp.com) — the award-winning journaling app: add photos, drawings and audio to entries and revisit past moments to build a journaling habit</a></li>
+<li><a href="https://www.goodnotes.com/">Goodnotes (goodnotes.com) — handwriting-first notebooks with stickers, images and freeform pages (the scrapbook canvas + on-device handwriting pillar)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Greenhouse</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile + Web browser on mobile — a mobile journaling app with a GPU-rendered garden and on-device handwriting is touch/stylus-first (device: Pixel 9a); the Native PC build is the development/tools &amp; benchmark vehicle. <b>Extended:</b> Firebase + Linux server set up by M2 (full use T2).</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> The scrapbook canvas (drag/pinch/rotate composition of photos/stickers/text), the on-device handwriting layer (vector strokes), the garden view (2D/2.5D or 3D per adjustment 1), themes/customization and the character profile (OpenGL ES / WebGL for the custom canvas + garden). <b>Languages:</b> Web — HTML/JS/CSS + C++→WASM (Emscripten, SDL2/3, OpenGL ES); Native — Kotlin Native Android UI + C++ via JNI (Android Studio); OpenGL ES in a GLSurfaceView where realtime 2D/2.5D is needed (no SDL on native).</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> Engine core (fixed-timestep loop, document/journal model, procedural plant generation + growth simulation, gesture processing, the handwriting stroke engine, and the garden renderer) + a cloud save / asset-library service. <b>Languages:</b> C++.<br><b>Backend scope:</b> Local now, server-ready (T2) — cloud save/library seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the load-bearing C++ is a fixed-timestep engine that advances plant growth against real elapsed time (seed → generated plant → growth), processes gestures (drag/pinch/rotate) into canvas transforms in real time, smooths handwriting strokes by velocity, and drives the garden animation.</li>
+<li><em>Data-driven:</em> the journal/document model, plant generation rules, the seed and growth stats, themes/backgrounds, sticker sets and the character are all hot-reloadable JSON — the editor tunes plant generation and layout without recompiling.</li>
+<li><em>2D:</em> the scrapbook canvas (custom composition/transform rendering) and the handwriting (vector stroke rendering) are custom-rendered in OpenGL ES — this satisfies the 2D gate. <em>3D:</em> the garden is optional/strong-student (see adjustment 1). <em>Networking:</em> cloud save/sync only; no real-time collaboration.</li>
+<li><em>Custom tool:</em> the <strong>editor</strong> — app-layout editing, plant-generation editing (tune rules and watch plants regenerate), and authoring custom graphics/stickers for notes, with live preview.</li>
+<li><em>External DB:</em> cloud save/backup of journals, the garden seed and the sticker/asset library. <em>Auth ⏭️:</em> accounts for cloud save + profile. <em>Analytics ⏭️:</em> optional — journaling-habit retention.</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Creative Tools &amp; Media Production pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window with a fixed-timestep loop advancing plant growth (vs real elapsed time), gestures and animation; C++17/20, CMake, Git; Emscripten→WASM. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D/2.5D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; growth simulation, the canvas and handwriting run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ document/journal model with entries, the garden seed + growth stats, plant-generation rules, themes, sticker sets and the character in JSON (nlohmann/json) with hot-reload; the document model IS the core data.</li><li><b>Prerequisites:</b> G1 (loop &amp; update hooks).</li><li><b>Feeds into:</b> M2G2 (the editor edits this), the growth sim and the canvas.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays for growth state and canvas transforms, Tracy profiling (garden render + stroke pipeline), Catch2 tests (deterministic plant generation for a seed), GitHub Actions Windows+Linux matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening) and the mobile frame budget M2G1 validates.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics — Canvas &amp; Viewport Rendering</strong> — the scrapbook canvas: layered composition of photos/stickers/text with pan/zoom (the 2D gate).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> OpenGL ES/GLSL compositing of a layered canvas (images, stickers, text), pan/zoom, FreeType text, stb_image for imported photos; multi-resolution caches. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (shell &amp; loop).</li><li><b>Feeds into:</b> The scrapbook editor; M2G4 (GPU filters/compositing).</li></ul></details>
+</li>
+<li><strong>G5 Brush &amp; Tool System</strong> — the on-device handwriting: stroke engine with velocity smoothing.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A tool/command abstraction and a stroke engine with velocity-based smoothing and pixel-perfect correction, strokes as data (custom C++).</li><li><b>Prerequisites:</b> G1 (input), G2 (stroke data), 2D rendering.</li><li><b>Feeds into:</b> M1G7 (vector stroke storage); the editor&#39;s command history.</li></ul></details>
+</li>
+<li><strong>G7 Vector Geometry &amp; Path Engine</strong> — vector stroke storage &amp; tessellation for sharp handwriting at any zoom.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> GLM math, bézier evaluation/tessellation for handwriting strokes, hit-testing and snapping for the canvas; vector storage keeps strokes crisp when scaled.</li><li><b>Prerequisites:</b> G1 (render loop), G2 (shape/stroke model).</li><li><b>Feeds into:</b> Crisp handwriting render; selection/transform on the canvas.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling of the garden render + stroke pipeline, ASan on MSVC, memory pools, and Emscripten→WASM validation on the mobile-web target plus Pixel 9a checks; Linux server set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D/2.5D is needed — no SDL on native, some screens are pure Native UI; validate the garden + canvas frame budget on-device.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The mobile deliverable; a stable garden/canvas frame budget.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core</strong> — the editor: app-layout editing, plant-generation editing (tune rules, watch plants regenerate) and authoring custom graphics/stickers onto notes.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ + Dear ImGui, JSON serialization, undo/redo command stack; live binding so a plant-rule or layout change updates the preview; sticker/graphic authoring. In this category the editor IS the product core.</li><li><b>Prerequisites:</b> M1G2 (data-driven architecture).</li><li><b>Feeds into:</b> M2G6 (advanced tool features); seeded plant/theme/sticker content.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, and packaging of the Emscripten web build + desktop dev build via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI) packaging the Android APK/AAB; OpenGL ES in a GLSurfaceView where realtime 2D/2.5D is needed — no SDL on native.</li><li><b>Prerequisites:</b> G3 (CI and test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every Greenhouse goal.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics — Advanced (GPU Filters &amp; Compositing)</strong> — the cell-shaded &quot;2D-drawn&quot; look, wind-shader foliage and canvas compositing/filters.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> GLSL shaders for the cell-shaded garden look and the wind effect, framebuffer post-FX and GPU compositing for the scrapbook canvas, texture atlases. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D/2.5D is needed — no SDL on native.</li><li><b>Prerequisites:</b> M1 canvas/viewport rendering; M2G1 (optimization).</li><li><b>Feeds into:</b> The garden&#39;s signature look; canvas filters/effects.</li></ul></details>
+</li>
+<li><strong>G6 Editor — Advanced Tool Features</strong> — drag-drop, multi-page journal management, workspaces and live preview for the scrapbook.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Drag-drop of stickers/photos, multi-page/entry management, layout workspaces, live preview binding and deep undo.</li><li><b>Prerequisites:</b> M2G2 (editor core).</li><li><b>Feeds into:</b> The scrapbook authoring showcase.</li></ul></details>
+</li>
+<li><strong>G8 Firebase — Accounts, Asset Library &amp; Analytics</strong> — cloud save of journals + garden seed, accounts, and the sticker/asset library.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth, Firestore/Realtime DB &amp; Storage for journals/seed/assets, Analytics — REST API from C++, JS/Kotlin SDK on the front-end; autosave.</li><li><b>Prerequisites:</b> M1G2 (data model to sync).</li><li><b>Feeds into:</b> Backup/recovery; the sticker/theme asset library.</li></ul></details>
+</li>
+</ul>
+<p><em>(Proposed new pool goals (require instructor approval):</em> <strong>Procedural Plant Generation &amp; Growth Simulation</strong> — rule-based plant generation from a stored seed (seed → mesh/sprite on load) with real-time growth driven by journaling activity; and, if the team commits to 3D, <strong>Real-time 3D Garden Renderer</strong> — instanced foliage, a GPU wind shader and a cell shader (with a 2.5D fallback). Neither exists in this category&#39;s pool (it&#39;s 2D-canvas-oriented); the three picks above stand regardless.<em>)</em></p>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 2 Design + 1 Art (9) — the authoring surface (scrapbook canvas, on-device handwriting, themes/customization) plus the garden-progression UX is a strong two-designer load, and there is a real authored-art surface (plant art direction/style, themes/backgrounds, the sticker set, the character/profile, the cell-shaded look) that earns one artist (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). If the 3D garden becomes a larger art job, consider trading a designer for a 2nd artist.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the write → grow → look-back journaling loop, the scrapbook authoring, and the garden-progression + customization systems)</li><li>M1D2 Core-Loop Interactive Prototype (Figma flow: write entry → scrapbook compose → watch the garden grow → look back)</li><li>M1D3 User Research, Personas &amp; Competitive Analysis (teardown of Forest / Day One / Goodnotes; journaling-habit personas)</li><li>M1D5 Interaction &amp; Input Design (drag/pinch/rotate canvas gestures, handwriting input, plant-tending interactions)</li><li>M1D8 Narrative, Theme &amp; World Concept (the garden metaphor, themes and the character-profile concept)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D2 Visual Branding &amp; Style Guide (Greenhouse identity; the theme/sticker system)</li><li>M2D5 Playtesting &amp; Iteration Program (journaling-habit retention, authoring friction, garden delight)</li><li>M2D8 Game Feel &amp; Feedback Pass — &quot;Juice&quot; (the tactile feel of the canvas, handwriting and growth)</li></ul></li><li><b>UI/UX M1</b> (graded by the UI/UX instructor):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — the entry, scrapbook, garden and profile screens.</li><li>M1U2 UX Flows &amp; Wireframes — write → compose → grow → customize journeys.</li><li>M1U3 Accessibility &amp; Readability Foundations — legible journal typography, contrast, thumb/stylus targets.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — the required screens navigable unaided on the mobile target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished scrapbook, garden and customization.</li><li>M2U3 Menu &amp; HUD Motion Design — growth animation, sticker/photo micro-interactions, theme transitions.</li><li>M2U5 Mobile UX Adaptation &amp; Ergonomics — one-handed + stylus authoring on the Pixel 9a.</li></ul></li><li><b>Art M1:</b> 1 artist (plant style + themes + stickers + character + UI art)<ul><li>M1A1 ⭐ Art Direction &amp; Key Mockups (a journal page + the garden)</li><li>M1A2 Characters &amp; Plant Style (the profile character + the plant art direction/style guiding the procedural generation)</li><li>M1A4 UI Art Concepts &amp; Typography (themes/backgrounds, the sticker set, HUD)</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ Polished Screen Art</li><li>M2A4 UI Art — States &amp; Feedback (growth stages, theme states, entry saved)</li><li>M2A5 Illustration &amp; Iconography — Full Set (the complete plant/sticker/theme/character art set)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — light UI/ambient SFX and calming BGM from the week-5 needs list, present &amp; working in the prototype (entry saved, plant grows, sticker placed), suitable and correctly triggered. Audio is not load-bearing here — a lecturer scope waiver may apply.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback for overlapping UI SFX.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — the standard floor tailored down for a calm creative app (ambient BGM + subtle UI/growth SFX in the showcase build).</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the layout/plant-generation editor), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
