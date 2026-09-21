@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Regularz</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="regularz.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="regularz.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Regularz</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="regularz-student-proposal">Regularz <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> 🔶 Fit with adjustments · <b>Category:</b> GovTech · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> A mobile pickup-ordering app giving small Singapore F&amp;B businesses a direct brand channel (vs commission-heavy marketplaces like Grab/Foodpanda or generic POS terminals). Customers browse meals/drinks with live stock, order made-to-order food, and get collection ETAs from a C++ queue-estimation service (moving-window / rolling-average of per-item prep time against the active-order backlog). Collection-only: a UUID order-bound QR code is generated after payment and scanned on the vendor device to confirm pickup. Inventory updates concurrently and safely (DB transactions reserve/restore stock, preventing overselling the last item). A data-driven CRM uses purchase histories to deliver personalized rewards (not flat points). Load-bearing C++: a cloud-hosted queue-management service on Linux that manages the live order queue, verifies payment/kitchen-status updates, computes ETAs, and stores order/ETA data in Firebase with transaction-safe atomic processing, pushing real-time updates to customer phones and the vendor tablet (mobile web). Custom tool: an F&amp;B Operations Editor (staff preview/modify stock, add/remove menu items, edit loyalty rewards, customize the interface). CI/deployment flow with staging→production and regression gates. Design features: branded mobile menu, end-to-end pickup ordering with live collection tracking + QR, vendor dashboard (orders/inventory), and personalized loyalty (a virtual wallet tracking purchases/rewards).</p>
+<p><strong>Category note:</strong> filed under <strong>GovTech</strong> — the load-bearing spine mirrors GovTech&#39;s &quot;queue management&quot; example (simulate/track a queue, real-time dashboard, service-flow/ops editor) as a <strong>two-role service platform</strong> (customer + vendor, order → prepare → ready → collected workflow with status tracking). Runner-ups: <strong>CMS</strong> (its &quot;restaurant menu &amp; ordering&quot; example — menu authoring + customer ordering) and <strong>Fintech</strong> (payment/wallet/transaction-safe), which fit narrower slices.</p>
+<p><strong>Adjustments required for approval:</strong></p>
+<ul>
+<li><strong>Clear the 2D gate with a custom-rendered data surface.</strong> The vendor dashboard (live order queue, inventory, ETA/collection tracking) should be a genuinely <strong>custom-rendered OpenGL ES data-display surface</strong> (like the GovTech dashboard-rendering goal), not only native widgets/tables — otherwise the app risks collapsing into ordinary CRUD.</li>
+<li><strong>Payments are mock/sandbox — no real money.</strong> Use a simulated/sandbox payment step (no live payment gateway, no real funds), and treat the &quot;virtual wallet&quot; as <strong>in-app loyalty points</strong>, not real currency. This keeps the project in scope for the module (and out of Fintech&#39;s regulated territory).</li>
+<li><strong>Keep the queue/ETA + concurrency-safe transactions as the team&#39;s own load-bearing C++</strong> (which the proposal commits to). The <strong>QR order-collection pipeline</strong> and the <strong>personalized CRM/loyalty engine</strong> are novel for this category&#39;s civic-flavoured pool — propose them as instructor-approved new pool goals (see below).</li>
+</ul>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Toast,_Inc.">Toast (toasttab.com) — Wikipedia: a cloud restaurant POS + mobile ordering + customer loyalty/promotions platform (a direct-brand alternative to marketplaces and dedicated terminals)</a></li>
+<li><a href="https://www.ritual.co/">Ritual (ritual.co) — an order-ahead / skip-the-line pickup app that positions against commission-heavy marketplaces and gives restaurants an affordable direct digital channel</a></li>
+<li><a href="https://www.olo.com/">Olo (olo.com) — a restaurant technology platform for direct branded digital ordering, payments and loyalty (not a marketplace)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Regularz</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>🔶</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Web browser on mobile — the customer app and the vendor tablet both run as a mobile web front end (HTML/JS/CSS + the C++ engine compiled to WASM via Emscripten), touch-first (device: Pixel 9a); the C++ queue service runs on a Linux cloud host. <b>Extended:</b> Firebase + the Linux server (already the home of the queue service) set up by M2 (full use T2).</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> The branded menu with live stock, item customization + order flow, live collection/ETA tracking and the QR screen (customer); and the vendor dashboard (order queue, inventory, ready/collected) — with a custom-rendered queue/ETA/inventory data surface (OpenGL ES / WebGL). <b>Languages:</b> Web — HTML/JS/CSS + C++→WASM (Emscripten, SDL2/3, OpenGL ES/WebGL). (Web-on-mobile target — no native app build this trimester; the C++ service is Linux-hosted.)</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The cloud-hosted C++ queue-management service — live order queue, payment/kitchen-status verification, rolling-average ETA computation, concurrency-safe stock reserve/restore, and the CRM/loyalty engine — with Firebase for orders/records/roles and real-time sync. <b>Languages:</b> C++.<br><b>Backend scope:</b> Server-indicated (T2) — the Linux-hosted queue service is set up &amp; basic-tested by M2, full use in T2; Firebase is the T1 store/sync bridge.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the load-bearing piece is a <strong>performant C++ service</strong> — it maintains the live order queue, computes each order&#39;s collection ETA from the active backlog and a rolling average of per-item prep/collection time, verifies payment/kitchen-status updates, and reserves/restores stock with <strong>transaction-safe atomic operations</strong> (no double-selling the last item, correct restock on cancel) even under duplicate/interrupted requests.</li>
+<li><em>Data-driven:</em> the menu/items, stock, prep-time parameters, order states, loyalty/reward rules and the ops-editor interface config are hot-reloadable JSON — the F&amp;B ops editor tunes them without recompiling.</li>
+<li><em>2D:</em> the vendor dashboard (order queue, inventory, ETA/collection tracking) and the customer live-tracking view are <strong>custom-rendered data-display UI</strong> in OpenGL ES (see adjustment 1). <em>3D:</em> not needed. <em>Networking:</em> real-time push of order/ETA/status updates to customer phones and the vendor tablet.</li>
+<li><em>Custom tool:</em> the <strong>F&amp;B Operations Editor</strong> — staff preview/modify stock, add/remove menu items, edit loyalty rewards, and customize the interface (a form/flow-builder-style editor).</li>
+<li><em>External DB:</em> Firebase stores orders/records/roles and syncs in real time. <em>Auth ⏭️:</em> customer + vendor accounts and roles. <em>Analytics ⏭️:</em> purchase histories drive the CRM/loyalty.</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the GovTech pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> C++17/20 with a fixed-timestep service loop driving the queue tick, ETA recompute and status updates; SDL2/3 dev harness, CMake, Git; Emscripten→WASM for the mobile-web front end; the service also runs headless on the Linux host.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the M1G4 queue engine and M1G6 order workflow run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ entity/registry with menu items, stock, prep-time parameters, orders + states, loyalty/reward rules and the ops-editor config in JSON (nlohmann/json) with hot-reload.</li><li><b>Prerequisites:</b> G1 (loop &amp; update hooks).</li><li><b>Feeds into:</b> M1G4 (queue reads the model), M1G6 (order states), M2G2 (the ops editor edits it), M2G10 (ETA features).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays for the queue/ETA and order states, Tracy profiling, Catch2 tests for the transaction-safe stock logic (concurrent-order race: no oversell) and ETA determinism, GitHub Actions Windows+Linux matrix + the staging→production regression gates the proposal describes.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening) and the ETA/transaction regression suite.</li></ul></details>
+</li>
+<li><strong>G4 Real-time Feed / Queue Engine</strong> — the live order queue: track paid orders + kitchen availability and derive collection ETAs from the backlog.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A C++ queue engine ticking active orders, a rolling average of per-item prep time, and backlog-based ETA updates emitted on order create/complete.</li><li><b>Prerequisites:</b> G1 (loop), G2 (order/item model).</li><li><b>Feeds into:</b> M2G10 (ETA prediction matured); the customer live-tracking view and vendor dashboard.</li></ul></details>
+</li>
+<li><strong>G6 Workflow / State Machine Engine</strong> — the order lifecycle (created → paid → preparing → ready → collected / cancelled) with concurrency-safe stock reserve/restore.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A C++ state machine over order statuses with transaction-safe transitions that reserve stock on order and restore it on eligible cancel, guarding against duplicate/interrupted requests (atomic operations).</li><li><b>Prerequisites:</b> G2 (order/stock model).</li><li><b>Feeds into:</b> The QR-collection step; M2G7 (audit trail of transitions).</li></ul></details>
+</li>
+<li><strong>G9 Staff / Officer Dashboard — Foundation</strong> — the vendor dashboard: order queue, inventory and ready/collected management.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A vendor-side dashboard (custom-rendered) showing the live order queue, per-item stock and order actions (mark ready, confirm collected); reads the queue engine + order states.</li><li><b>Prerequisites:</b> M1G4 (queue), M1G6 (order states), 2D rendering.</li><li><b>Feeds into:</b> M2G4 (advanced dashboard), the QR-scan collection flow.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling of the queue/ETA/transaction paths, ASan on MSVC, and Emscripten→WASM validation on the mobile-web target (customer phone + vendor tablet) on the Pixel 9a; the Linux queue service set up (account + software + basic connectivity test) by M2.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The mobile-web deliverable; the Linux-hosted service for T2.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core</strong> — the F&amp;B Operations Editor (form/flow builder): edit stock, add/remove menu items, edit loyalty rewards, and customize the interface.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ + Dear ImGui (or a web front-end), JSON serialization, undo/redo; live preview so a stock/menu/reward or layout change reflects immediately in the app.</li><li><b>Prerequisites:</b> M1G2 (data-driven architecture).</li><li><b>Feeds into:</b> M2G6 (advanced builder features); the vendor&#39;s day-to-day operations.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, packaging of the Emscripten web build + the Linux service, and the staging→production promotion flow with ETA/transaction regression gates via GitHub Actions.</li><li><b>Prerequisites:</b> G3 (CI and test foundation).</li><li><b>Feeds into:</b> Reliable deploys of the queue service + mobile web app.</li></ul></details>
+</li>
+<li><strong>G10 Prediction Engine</strong> — collection-time ETA matured (wait-time / ready-time estimates from the backlog).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A refined estimator over the rolling average of per-item prep + collection time and the active backlog (peak-period aware), with accuracy evaluation against recorded actuals.</li><li><b>Prerequisites:</b> M1G4 (queue engine + prep-time data).</li><li><b>Feeds into:</b> The customer ETA and the peak-period time-management the menu surfaces.</li></ul></details>
+</li>
+<li><strong>G8 Firebase — Auth Roles, Sync &amp; Analytics</strong> — customer + vendor accounts/roles, real-time order sync, and purchase-history analytics for the CRM.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth roles (customer/vendor), Firestore/Realtime DB for orders/records with real-time sync to phones + the vendor tablet, and Analytics feeding the loyalty/CRM.</li><li><b>Prerequisites:</b> M1G2 (data model to sync).</li><li><b>Feeds into:</b> The CRM/loyalty engine; role-gated vendor actions.</li></ul></details>
+</li>
+<li><strong>G7 RBAC &amp; Audit Logging</strong> — staff roles/permissions + a decision/transaction trail for orders and payments.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Role-based access control (owner/staff), and an append-only audit log of order transitions, stock changes and (mock) payment events — supporting the transaction-safe guarantees.</li><li><b>Prerequisites:</b> M1G6 (order transitions); Firebase identity.</li><li><b>Feeds into:</b> Trust/accountability; dispute resolution on collection.</li></ul></details>
+</li>
+</ul>
+<p><em>(Proposed new pool goals (require instructor approval):</em> <strong>QR Order-Collection Pipeline</strong> — a UUID order-bound code becomes a unique QR after (mock) payment, scanned/decoded on the vendor device to mark the order collected; and <strong>Personalized CRM &amp; Loyalty Engine</strong> — purchase-history-driven rewards and an in-app points wallet (not flat points). Neither exists in the GovTech pool; the three picks above stand regardless.<em>)</em></p>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 2 Design + 0 Art (8) — this is a two-role service platform (customer + vendor) with heavy service-flow and dashboard/ops UX and minimal illustrated art (menu photos are vendor-supplied; the rest is UI/branding), so two designers and no dedicated artist (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). With 0 artists, the designers take the <strong>D11 conditional</strong> as a real graded Design goal each milestone (M1 Art Proof of Concept / M2 Art Implementation Quality) — the last Design goal each milestone.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (customer + vendor blueprint; the browse → order → pay → track → collect loop + the loyalty model)</li><li>M1D2 Prototype (both roles clickable) · prototype in Figma</li><li>M1D6 Service Journey Design (order → paid → preparing → ready → collected, incl. cancel / no-show / out-of-stock paths)</li><li>M1D3 User Research, Personas &amp; Competitive Analysis (small F&amp;B owners + regulars; Grab/Foodpanda/EPOS/Ritual teardown)</li><li>M1D11 Art POC (conditional — no artist) — the design-owned art surface (style guide, iconography, UI, menu-card system)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D6 Service polished end to end (order → ETA → QR → collected, both roles)</li><li>M2D8 Status &amp; Notification pass (order-ready, ETA changes, collection confirm — reassurance at every state)</li><li>M2D11 Art Implementation Quality (conditional — no artist) — implemented art aligned with the POC, no placeholders</li></ul></li><li><b>UI/UX M1</b> (graded by the UI/UX instructor):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — customer + vendor screen-flow map and readability standards.</li><li>M1U2 UX Flows &amp; Wireframes — browse → order → track → collect; vendor order-management.</li><li>M1U3 Accessibility &amp; Readability Foundations — legible menu/queue typography, contrast, thumb-reach targets.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — customer AND vendor roles navigable unaided on the mobile-web target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated menu, tracking and vendor dashboard.</li><li>M2U3 Menu &amp; HUD Motion Design — order-state transitions, ETA updates, QR reveal.</li><li>M2U4 Onboarding &amp; Tutorial Design — vendor setup + first-order guidance.</li></ul></li><li><b>Art:</b> 0 artists — the art surface is covered by the M1D11/M2D11 conditionals, taken as Design goals (see Design M1/M2).</li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial UI/notification cues from the week-5 needs list present &amp; working in the prototype (order placed, paid, ready, collected, error), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — GovTech floor (no BGM; ≥5 restrained cues, each paired with a visual state change — placed / paid / ready / collected / error).</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel; each cue distinct on the vendor tablet vs the customer phone).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the F&amp;B Operations Editor), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
