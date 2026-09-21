@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>BEANS</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="beans.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="beans.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">BEANS</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="beans-student-proposal">BEANS <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Visualization &amp; Analytics · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval · <b>Runner-up category:</b> Education + Training</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>BEANS</em> is a learning-oriented coffee databank web-app that educates newcomers on beans and preparation methods by preference. It cross-references brew details (bean type, grind size, method) to <strong>estimate the final taste</strong>; users log a brew + feedback, and the app suggests improvements/alternatives from the <strong>collective community databank</strong>. A relevancy search recommends coffees by preference + search history; there&#39;s a shop for beans/gear, monthly subscription tiers, and an inventory tracker (with nearby store/cafe suggestions). Named technical features: a <strong>Parametric Taste &amp; Extraction Visualizer</strong> (brew variables → dynamic extraction-yield curves + a sensory taste-profile <strong>radar chart</strong>); a <strong>Brew Diagnostics &amp; Dial-In Tool</strong> (qualitative feedback like <em>sour/astringent/hollow</em> → inverse parameter corrections); a <strong>Taste-Profile Catalog Search &amp; Vector Ranking</strong> (multi-attribute search ranking beans by similarity to the user&#39;s taste + logs); and a <strong>high-throughput C++ vector search + neural re-ranking engine</strong>. Load-bearing C++: a compiled <strong>C++→WebAssembly</strong> module runs client-side computing particle-level solute diffusion / extraction dynamics in a <strong>fixed-timestep numerical loop</strong>, with slider inputs continuously re-injecting parameters to update the taste radar without frame drops or network hops; plus a <strong>dedicated C++ service</strong> for high-dimensional vector math (hardware SIMD distance across flavor profiles) and an <strong>embedded lightweight neural cross-encoder</strong> that re-ranks candidate beans before the API returns results. Tools: a <strong>Dial-In &amp; Recipe Calibration Utility</strong> (author/test/tune brew parameters per bean; roasters author bean-specific templates with grind/temperature/ratio bounds + sensory target envelopes; a closed-loop diagnostic that ingests taste feedback, runs inverse heuristics, and previews the corrected radar before committing a versioned profile). Design features: estimate brew taste from inputs; a guide-me/recipe feature; a community to share experiments; and monetization (B2C bean/machine subscriptions; B2B roaster onboarding).</p>
+<p><em>Note on category:</em> filed under <strong>Visualization &amp; Analytics</strong> — the load-bearing product is the <strong>interactive, data-moving visualization</strong> (extraction curves + taste radar recomputed live from slider inputs) plus <strong>vector-ranking analytics</strong> over a coffee databank; coffee brewing isn&#39;t claimed by another category, and the data moves (live recompute, ranking). Runner-up <strong>Education + Training</strong> (the &quot;learning-oriented / guide-me&quot; framing) — but there&#39;s no structured curriculum/competency, the mechanism is visualization + recommendation, so V&amp;A is the better home. (Not CMS: roaster authoring is one tool, not the product; not Simulator: the extraction sim feeds the visualization, it isn&#39;t the whole product.)</p>
+<p><strong>Scope &amp; risk notes (advisory, not blocking):</strong></p>
+<ol>
+<li><strong>Keep the load-bearing C++ on the team&#39;s side of the AI.</strong> The graded performant-C++ is the <strong>extraction WASM solver</strong>, the <strong>SIMD vector-search</strong> and the custom chart rendering — the &quot;lightweight neural cross-encoder&quot; should be a <strong>small, bounded component</strong> behind the C++ vector-search service (with the ranking working from the vector similarity even if the neural re-rank is swapped out), not the deliverable itself.</li>
+<li><strong>Don&#39;t let the e-commerce become the product.</strong> The shop / subscription / B2B-onboarding / inventory features are legitimate but should stay <strong>light backend</strong> (Firebase + the databank) — the visualizer, the dial-in tool and the taste-vector ranking are the module deliverables; otherwise the project risks collapsing into CRUD + a store.</li>
+</ol>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://www.baristahustle.com/coffee-compass/">Barista Hustle — &quot;The Coffee Compass&quot; (an interactive diagnostic that maps qualitative faults — sour, bitter, weak, strong — to concrete brew-parameter corrections: &quot;extract more/less&quot;, &quot;more/less coffee&quot;; the direct precedent for the Dial-In &amp; Diagnostics tool)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Coffee_extraction">Coffee extraction — Wikipedia (the extraction-yield vs strength / TDS model and the brewing-control chart that relate grind/ratio/time/temperature to taste — the domain model the parametric visualizer estimates)</a></li>
+<li><a href="https://sca.coffee/sca-news/how-to-use-the-flavor-wheel-in-eight-steps">SCA — &quot;How to Use the Coffee Taster&#39;s Flavor Wheel&quot; (the standardized multi-attribute sensory lexicon/vocabulary behind the taste-profile radar + the vector matching)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>BEANS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Web browser on mobile — the stated architecture is a C++→WASM client (the extraction solver runs client-side in the browser), so the app is web-first and mobile-web friendly (device: Pixel 9a); the Native PC build is the development/tools vehicle (the dial-in calibration utility). <b>Extended:</b> Firebase (accounts, community databank, shop/subscription data) + a Linux server the team sets up by M2 (full use T2) hosting the dedicated C++ vector-search + neural re-ranking service.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> Custom-rendered data views — the extraction-yield curves and the sensory **taste-profile radar**, recomputed live from slider inputs — plus the catalog/search results, the dial-in diagnostic view, community records and the shop UI. <b>Languages:</b> Web — HTML/JS/CSS + C++→WASM (Emscripten) for the solver + chart rendering (OpenGL ES / WebGL for the charts). </div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The client-side WASM extraction solver + the custom chart renderer, and a server-side **C++ vector-search service** (SIMD distance across flavor profiles + a bounded neural re-rank) over the coffee databank; plus Firebase for accounts, community logs and shop/subscription data. <b>Languages:</b> C++ (solver + vector service); Firebase-backed services + the Linux vector-service host on the Extended tier.<br><b>Backend scope:</b> Server-indicated (T2) — the vector-search service + databank + shop seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> two load-bearing pieces — the client-side <strong>fixed-timestep WASM extraction solver</strong> (particle-level solute diffusion → dissolved solids / extraction yield → taste coordinates, recomputed live as sliders change) <strong>and</strong> the server-side <strong>C++ vector-search service</strong> (SIMD multi-attribute distance + a bounded neural re-rank) ranking beans by taste similarity.</li>
+<li><em>Data-driven:</em> beans, grind/temperature/ratio parameters, sensory attribute vocabularies, dial-in templates + sensory envelopes, and community logs are all data — a new bean or dial-in template is a data change (authored via the calibration tool).</li>
+<li><em>2D:</em> the extraction-yield curves and the taste-profile radar are <strong>custom-rendered charts</strong> (no chart libraries) recomputed in real time — this is the 2D gate; plus the catalog/diagnostic/shop UI. <em>3D:</em> not needed. <em>Networking:</em> the vector service + shop are async client↔︎server (Application Communication ✅), so a bespoke streaming Networking System is optional (🔵).</li>
+<li><em>Custom tool:</em> the <strong>Dial-In &amp; Recipe Calibration Utility</strong> — roasters author bean templates (grind/temperature/ratio bounds + sensory envelopes) and the closed-loop diagnostic previews the corrected radar before committing a versioned profile.</li>
+<li><em>External DB:</em> the coffee databank, community logs, shop/subscription and inventory. <em>Auth ⏭️:</em> accounts (B2C users + B2B roasters). <em>Analytics ⏭️:</em> optional — the recommendation/search-history analytics (the team&#39;s own ranking is the deliverable via G10).</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Visualization &amp; Analytics pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — the fixed-timestep <strong>extraction solver</strong> (WASM).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> A C++17/20 fixed-timestep numerical loop computing solute diffusion / dissolved solids / extraction yield → taste coordinates, compiled to WASM (Emscripten) and driven live by slider inputs without network hops; CMake, Git.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> M1G5 (the charts it feeds), M1G9 (slider interaction), the dial-in tool.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A data model for beans, brew parameters, sensory attribute vocabularies, dial-in templates + sensory envelopes and community logs, in JSON, hot-reloadable — a new bean or template is a data change.</li><li><b>Prerequisites:</b> G1 (solver consumes it).</li><li><b>Feeds into:</b> M2G2 (the calibration tool edits it), M1G14 (search over it), M2G10 (ranking).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Debug overlays + Tracy profiling to prove the WASM solver + chart update hold interactive latency under continuous slider input, Catch2 tests for the solver&#39;s numerical determinism and the vector-distance math, on a GitHub Actions matrix (native + Emscripten).</li><li><b>Prerequisites:</b> G1 (solver to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the latency budget M2G1 validates on mobile web.</li></ul></details>
+</li>
+<li><strong>G5 2D Chart Rendering Core</strong> — the extraction-yield curves + the sensory <strong>taste radar</strong> (custom-rendered, no chart libraries).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> A custom chart renderer (axes, series, the multi-axis radar, batching) in OpenGL ES/WebGL via the WASM module, updated each frame from the solver output.</li><li><b>Prerequisites:</b> G1 (data to plot).</li><li><b>Feeds into:</b> M2G4 (advanced charting); the visualizer and the dial-in preview.</li></ul></details>
+</li>
+<li><strong>G9 Interaction Layer</strong> — the live <strong>sliders / brushing</strong> that continuously re-inject parameters and recompute the radar.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Pan/zoom/brush/slider interaction that streams parameter changes into the solver each frame and updates the charts without frame drops; crosshair/linked-view hooks.</li><li><b>Prerequisites:</b> G1 (solver), G5 (charts).</li><li><b>Feeds into:</b> The real-time visualizer feel; the dial-in tool&#39;s live preview.</li></ul></details>
+</li>
+<li><strong>G14 Query &amp; Filter Engine</strong> — the multi-attribute catalog search + the taste-<strong>vector ranking</strong> foundation.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Incremental filtering over an indexed coffee databank + a SIMD vector-distance ranking of beans by similarity to the user&#39;s taste profile and past logs (hardware parallel vector instructions).</li><li><b>Prerequisites:</b> G2 (databank), G1 (taste coordinates).</li><li><b>Feeds into:</b> M2G10 (insight/ranking + the bounded neural re-rank); the relevancy search feature.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Profiling + SIMD/threading optimization of the WASM solver and the vector service, sanitizers, and validation on the mobile-web target (Pixel 9a browser); the Linux server (the C++ vector-search + neural re-rank service) set up (account + software + basic connectivity test) by M2.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The web/mobile deliverable + a low-latency ranking service.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Dial-In &amp; Recipe Calibration Utility)</strong> — author/tune bean dial-in templates + sensory envelopes; the closed-loop diagnostic previews the corrected radar before committing a versioned profile.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A tool to author bean-specific templates (grind microns, water temp, ratio bounds, sensory target envelopes), ingest qualitative feedback (sour/astringent/hollow), run inverse heuristics to compute corrections, and preview the corrected radar; round-trip JSON with profile versioning to the databank.</li><li><b>Libraries/Software:</b> the project&#39;s WASM solver + chart renderer, nlohmann/json, Firebase/DB client.</li><li><b>Prerequisites:</b> G2 (template data), M1G1/M1G5 (solver + charts for preview).</li><li><b>Feeds into:</b> Roaster/contributor content; the dial-in feature; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, tests (solver determinism, vector math, data loading), and packaging of the Emscripten web build + the Linux vector service via GitHub Actions.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G4 Charting — Advanced</strong> — multi-pane views, overlays and synced cursors (compare brews / beans side by side).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Multi-pane charts, overlaying two brews&#39; extraction curves / radars, synced cursors and comparison views built on M1G5.</li><li><b>Prerequisites:</b> M1G5 (chart core), M2G1 (optimization).</li><li><b>Feeds into:</b> The compare/diagnose experience at showcase.</li></ul></details>
+</li>
+<li><strong>G10 Insight Engine — Trends &amp; Anomalies (Taste-Vector Ranking &amp; Dial-In)</strong> — the bean-ranking + the inverse-correction dial-in logic (no ML libraries; a bounded neural re-rank optional).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> The taste-similarity ranking (from the SIMD vectors + user logs), the inverse-heuristic dial-in corrections (feedback → parameter deltas), and an optional bounded neural cross-encoder re-rank behind the C++ vector service; correctness verified against held-out logs.</li><li><b>Prerequisites:</b> M1G14 (vector search), M2G1 (the service).</li><li><b>Feeds into:</b> The recommendation + dial-in features at showcase.</li></ul></details>
+</li>
+<li><strong>G8 Firebase — Accounts, Sharing &amp; Analytics</strong> — accounts (B2C + B2B), the community databank/logs, and the shop/subscription store.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth (users + roasters), Firestore for community brew logs, shared profiles and shop/subscription/inventory data, and optional Analytics, via the API layer.</li><li><b>Prerequisites:</b> G2 (log/profile data model).</li><li><b>Feeds into:</b> The community + the (light) e-commerce; sharing versioned dial-in profiles.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 2 Design + 1 Art (9) — a data product lives on <strong>UX and information design</strong>: the explore/diagnose/recommend flows, the view/drill-down architecture, the metric/threshold (taste-model) design, the data storytelling and the shop/community UX are a large surface for two designers; the art surface is comparatively small (perceptual palette, chart styling, iconography, dense-view UI) and suits one artist (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). If the databank/UX outgrows two designers, that is the place to add, not art. <em>Scope note (advisory):</em> a WASM extraction solver + a SIMD vector service + custom charts + a dial-in tool + a community databank + a shop is a large surface — the solver + the taste radar + the catalog vector-search + the dial-in tool is the M1/M2 floor; the neural re-rank, the full community and the shop/subscription/B2B are the stretch.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (who uses BEANS — coffee newcomers vs enthusiasts vs roasters — the explore/estimate/recommend loops, trust &amp; legibility of the taste estimates, feasibility)</li><li>M1D2 Prototype — the core explore loop (input brew params → see estimated taste → get a recommendation/alternative)</li><li>M1D3 User Research, Personas &amp; Competitive Analysis (data-consumer personas + a teardown of coffee apps / brew calculators; findings into the FDD)</li><li>M1D5 Interaction &amp; Data-Density Spec (the slider/dial/brush conventions and legibility rules for the extraction curves + radar)</li><li>M1D7 Metric &amp; Threshold Design (which taste attributes matter, the extraction/strength defaults, the dial-in target envelopes designed with users)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D5 Playtesting &amp; Iteration Program (test whether newcomers can dial in a better cup, triaged)</li><li>M2D6 Vertical Slice — one question answered end to end (a bean + params → estimated taste → recommended correction → saved/shared profile)</li><li>M2D8 Feedback Pass — clarity pass (density without chart junk; the dial-in correction moment unmistakable)</li></ul></li><li><b>UI/UX M1</b> (graded by the UI/UX instructor):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — the data-product screen-flow, control mapping and readability rules for dense chart views.</li><li>M1U2 UX Flows &amp; Wireframes — catalog → bean/brew view → visualizer/dial-in → recommendations → shop, wireframed per persona.</li><li>M1U3 Accessibility &amp; Readability Foundations — type sizes, contrast and a colorblind-safe perceptual palette (critical for the radar/curves).</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — catalog, visualizer, dial-in, recommendations, community and shop navigable unaided on the mobile-web target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished visualizer + dial-in UX tested with target users on the Pixel 9a browser.</li><li>M2U4 Onboarding &amp; Tutorial Design — a guided first exploration that gets a newcomer to a first recommendation without jargon.</li><li>M2U5 Mobile UX Adaptation &amp; Ergonomics — thumb-zone layout, safe areas and dense-view fit on the mobile-web target.</li></ul></li><li><b>Art M1:</b> 1 artist (data-product visual language — palette, chart styling, iconography, dense-view UI)<ul><li>M1A1 ⭐ Art Bible / Proof of Concept (the data-product visual language: perceptual palettes, chart styling, iconography; mockups = the visualizer view + a bean/catalog view)</li><li>M1A3 Environment, Props &amp; VFX Concepts (chart/backdrop styling + highlight-VFX concepts — the dial-in correction highlight)</li><li>M1A4 UI Art Concepts &amp; Typography (chart legends, control iconography, dense-view legibility)</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ Critical Asset Production &amp; In-Engine Visual Quality (the palette system, chart styling and iconography completed in-engine)</li><li>M2A4 UI Art — States &amp; Feedback (filter/brush/dial-in/alert feedback, legend and control polish)</li><li>M2A5 VFX — Critical Effects &amp; Transitions (highlight effects — a dial-in correction landing, a notable taste match)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — light, functional audio present &amp; working (subtle UI / confirmation / dial-in-success cues), suitable and correctly triggered (a lecturer waiver on BGM may apply for this data utility).</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — the V&amp;A floor adapted to a data utility (subtle interaction / recommendation / dial-in cues), correctly triggered and unobtrusive.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the playback functionality the build needs (multi-channel; a distinct dial-in-success cue).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the dial-in calibration utility), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
