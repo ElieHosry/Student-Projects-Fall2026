@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Framebreak</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="framebreak.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="framebreak.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Framebreak</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="framebreak-student-proposal">Framebreak <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> 🔶 Fit with adjustments · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> You are a prisoner escaping with a magical camera: <strong>snapping a real-world object materializes a functional 3D item inside your cell</strong> to overcome obstacles. Camera power is limited, so every snapshot demands observation and spatial strategy — scout your surroundings, pick the best item, capture it to solve each area&#39;s escape puzzle. Named technical features: (1) <strong>time-zone-synchronized procedural level generation</strong>; (2) an <strong>AI photo→3D pipeline</strong> — a photo is classified to identify the object and assign gameplay attributes, sent to the backend where the background is stripped and an image-to-3D model generates a textured mesh, which a <strong>C++ service reduces and fits with collision shapes</strong> before it streams back and spawns, with a progress/status indicator; (3) <strong>real-time 3D co-op multiplayer</strong>; (4) an <strong>attribute-matching puzzle system</strong> that checks a spawned object&#39;s properties against a room&#39;s exit requirements (any item with the right attributes solves it). Loop/service: a C++ backend service turns the raw generated mesh into something the phone can use — mesh reduction, texture bake, collision generation; since every photo is unique nothing is reusable, so the service&#39;s throughput decides how many concurrent players are supported. Tools: a <strong>desktop room editor</strong> on the same C++ renderer (place geometry, set each room&#39;s exit requirement as an attribute list, set the camera charge limit); a server hosting the image-to-3D app (device sends photo → server returns a 3D model → used in the loop). Design features: photo-to-object manifestation; a <strong>cooperative escape mode</strong> (solo or online co-op, combine snapshots to solve complex puzzles); <strong>dynamic time-of-day puzzles</strong> (layouts change for morning/afternoon/evening/midnight); and a <strong>hybrid monetization system</strong> (base 10 snaps/area, a &quot;large battery pack&quot; raises it to 20; paid hints).</p>
+<p><strong>Why &quot;with adjustments&quot; (conditions for week-5 approval):</strong></p>
+<ol>
+<li><strong>Keep the load-bearing C++ on the team&#39;s side of the AI.</strong> The module&#39;s performant-C++ requirement is met by <em>your</em> <strong>mesh-processing service</strong> (decimation, texture bake, collision-shape generation, streaming) + the game loop + the attribute-matching puzzle system + procedural generation — <strong>not</strong> by calling an external image-to-3D ML model. Treat the ML image-to-3D as one bounded component behind the service interface, and <strong>build a fallback</strong> (a curated library of pre-made meshes keyed by the classifier) so the game is fully demoable at the showcase even if the ML pipeline&#39;s latency or quality falls short. The classifier/image-to-3D itself is not a graded CS goal; the C++ service around it is.</li>
+<li><strong>Rework the monetization.</strong> Selling <strong>extra snaps</strong> (10 → 20 via the battery pack) and <strong>paid hints</strong> is pay-for-advantage, which breaks the module&#39;s clean-monetization rule (no pay-to-win, no manipulative loops). Make the snap budget a <strong>balance/earned</strong> decision and hints <strong>free or earned</strong>, and restrict any real-money purchases to <strong>cosmetics</strong>. (Design goal D8 in M2 owns this.)</li>
+<li><strong>This is a genuine 3D project</strong> (image-to-3D meshes, 3D items, 3D co-op) — the &quot;3D (strong students only)&quot; row applies, and it is the <strong>central technical risk</strong>. Scope the floor to single-player with a <strong>curated object set</strong> and a few rooms (the mesh service + attribute puzzle proven), with the ML photo→3D, real-time co-op and time-of-day generation as the stretch.</li>
+</ol>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://store.steampowered.com/app/1382070/Viewfinder/">Viewfinder on Steam (a first-person puzzle game whose core verb is <strong>turning photographs into real 3D geometry</strong> you place into the world to solve puzzles, with a limited-film camera — the closest precedent for photo→3D-object manifestation under a snap budget)</a></li>
+<li><a href="https://store.steampowered.com/app/1435790/Escape_Simulator/">Escape Simulator on Steam (first-person escape-room puzzles playable <strong>solo or in online co-op</strong>, with a <strong>room editor</strong> and community rooms — the co-op-escape + room-editor precedent)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Scribblenauts_(video_game)">Scribblenauts — Wikipedia (summon almost any object, whose <strong>attributes</strong> interact with the level to solve a puzzle — the &quot;any item with the right attributes solves it&quot; precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Framebreak</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — the phone&#39;s camera captures the photo and the 3D game runs on-device; device: Pixel 9a) — the Native PC build is the development/tools vehicle (the desktop room editor on the same C++ renderer). <b>Extended:</b> a Linux server the team sets up by M2 (full use T2) hosting the image-to-3D app + the **C++ mesh-processing service** and accounts/store; Firebase optional for accounts/analytics.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A 3D renderer of the cell/rooms and the spawned meshes, the photo-capture/framing layer, the snap-budget + generation-status HUD, and (co-op) the other player. <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine via JNI (Android Studio); OpenGL ES for the realtime 3D drawn in a GLSurfaceView; Web/desktop — SDL2/3 + OpenGL ES for the PC dev/room-editor build (same C++ renderer).</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The client C++ loop (spawned-object physics, the attribute-matching puzzle check, procedural time-of-day layout) **and** the load-bearing **C++ mesh-processing service** on the server (mesh reduction, texture bake, collision-shape generation, streaming) sitting behind the image-to-3D ML component. <b>Languages:</b> C++ (loop + service).<br><b>Backend scope:</b> Server-indicated (T2) — the image-to-3D + mesh service + accounts seam set up &amp; basic-tested on the Linux host by M2, full use in T2 (the service&#39;s throughput sets the concurrent-player ceiling).</div>
+
+<ul>
+<li><em>Loop and/or service:</em> two load-bearing pieces — the client fixed-timestep loop (spawned-object physics/collision, attribute-puzzle evaluation, time-of-day layout) <strong>and</strong> the C++ <strong>performant service</strong> that turns each unique generated mesh into a phone-ready asset (decimate → bake → collision → stream); its throughput decides concurrent players (measured in M1G3 / M2G1).</li>
+<li><em>Data-driven:</em> object gameplay attributes (assigned at classification), room exit-requirements (attribute lists), the camera charge limit, and level/time-of-day config are all data, authored via the room editor — a new room or attribute is a data change.</li>
+<li><em>2D:</em> the photo-capture/framing UI, the snap-budget counter and the generation-status indicator + HUD (custom-rendered) satisfy the 2D gate. <em>3D:</em> ✅ <strong>central</strong> — the spawned meshes, the cell/room geometry and the co-op scene are real 3D (strong-students; the key risk). <em>Networking:</em> real-time 3D co-op (authoritative state, sync spawned objects across players).</li>
+<li><em>Custom tool:</em> the <strong>desktop room editor</strong> on the same C++ renderer — place geometry, set each room&#39;s exit-requirement attribute list, set the camera charge limit.</li>
+<li><em>External DB:</em> accounts, progression and the (reworked, cosmetic-only) store. <em>Auth ⏭️:</em> accounts for co-op + store. <em>Analytics ⏭️:</em> optional — which objects players snap, where they get stuck.</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — includes the standing-up of the <strong>C++ mesh-processing service</strong> (the load-bearing performant service).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a fixed-timestep loop (C++17/20) for the escape gameplay, plus the first cut of the C++ service that decimates a mesh, bakes its texture and generates collision shapes; CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 3D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the spawned-object physics and the attribute puzzle run on its tick; the service feeds M1G5.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Entity/component model in C++ with object gameplay attributes, room exit-requirements (attribute lists), the camera charge limit and level/time-of-day config in JSON, hot-reloadable — a new room or attribute rule is a data change.</li><li><b>Prerequisites:</b> G1 (loop &amp; entity hooks).</li><li><b>Feeds into:</b> M2G2 (the room editor edits this data), M2G13 (attribute-matching puzzle), M2G14 (time-of-day procgen).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong> — includes profiling the mesh service&#39;s <strong>throughput</strong> (how many players it can support).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays (service queue, generation status, spawned-object state), Tracy profiling of the decimate→bake→collision pipeline for per-mesh latency + throughput, Catch2 tests for the attribute-puzzle check and data loading, on a GitHub Actions Windows+Android matrix.</li><li><b>Prerequisites:</b> G1 (loop + service to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the concurrent-player ceiling M2G1 validates.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> (adapted to a <strong>3D renderer</strong>) — the cell/room geometry and the spawned meshes are the whole read of the game.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> A 3D renderer (camera, lit meshes, texture/material for the streamed meshes, depth) plus the 2D HUD/photo-framing overlay; OpenGL ES, GLSL, stb_image, FreeType. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 3D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window).</li><li><b>Feeds into:</b> M2G4 (advanced 3D shading/lighting for time-of-day); every visible frame; the room editor shares this renderer.</li></ul></details>
+</li>
+<li><strong>G5 Physics &amp; Collision</strong> — spawned objects interact physically (via the service&#39;s generated collision shapes) with the room and the puzzle.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ + GLM math, rigid-body + collision resolution using the collision shapes the service fits to each mesh, so a spawned item can be placed, stacked, or used to reach/block/trigger a puzzle element.</li><li><b>Prerequisites:</b> G1 (tick + the service&#39;s collision shapes), G2 (object data).</li><li><b>Feeds into:</b> The physical problem-solving; M2G13 (physics-based attribute checks).</li></ul></details>
+</li>
+<li><strong>G11 Networking Foundation</strong> — the co-op multiplayer foundation (lobby, connection, state transport).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Sockets (Winsock2/BSD, or ENet/SDL_net) with a lobby/connection manager and a protocol that syncs room state and spawned objects between co-op players. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 3D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop the co-op shares), G2 (state to serialize).</li><li><b>Feeds into:</b> M2G7 (match sync &amp; prediction); the cooperative escape mode.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong> — including the mesh service&#39;s concurrent-player throughput and the Linux image-to-3D host.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling of the client 3D loop and the service pipeline (per-mesh latency + concurrent throughput), ASan on MSVC, memory pools, and on-device validation (Pixel 9a); the Linux server (image-to-3D + mesh service + accounts) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 3D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The Native-Android deliverable + a measured concurrent-player ceiling.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Desktop Room Editor)</strong> — place geometry, set each room&#39;s exit-requirement attribute list, set the camera charge limit, on the same C++ renderer as the game.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui + the shared C++ renderer: place/transform room geometry, author the exit-requirement attribute list, set the snap/charge limit, with round-trip JSON serialization, live preview and undo/redo.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s OpenGL ES renderer (shared with the game).</li><li><b>Prerequisites:</b> G2 (room/attribute data model), M1G4 (renderer).</li><li><b>Feeds into:</b> All room content; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android Debug builds, tests (attribute puzzle, service pipeline, data loading) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 3D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G7 Networking — Match Sync &amp; Prediction</strong> — the real-time 3D co-op: authoritative room state and synced spawned objects across players.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Authoritative state + snapshots, interpolation of the remote player, and consistent spawning/ownership of photo-generated objects across the co-op session.</li><li><b>Prerequisites:</b> M1G11 (networking foundation), M2G1 (optimization).</li><li><b>Feeds into:</b> The cooperative escape mode at showcase.</li></ul></details>
+</li>
+<li><strong>G13 Gameplay Systems II</strong> — the <strong>attribute-matching puzzle system</strong> and the (reworked, non-pay-to-win) snap/charge economy + hints.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ systems checking a spawned object&#39;s attributes against a room&#39;s exit-requirement list (any qualifying item solves it), plus the snap-budget/charge economy and an earned/free hint system.</li><li><b>Prerequisites:</b> M1G2 (attributes/requirements), M1G5 (physical interactions).</li><li><b>Feeds into:</b> The core puzzle loop at showcase; T2 room expansion.</li></ul></details>
+</li>
+<li><strong>G14 Procedural Generation II</strong> — the <strong>time-of-day-synchronized</strong> puzzle-layout variation (morning/afternoon/evening/midnight).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Rules that vary room layout / available solutions by the local time zone, with validation that each variant stays solvable given the room&#39;s exit requirements.</li><li><b>Prerequisites:</b> M1G2 (room data), M2G2 (rooms authored in the editor).</li><li><b>Feeds into:</b> The dynamic time-of-day replay variety at showcase.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 2 Design + 1 Art (9) — because the interactive objects are <strong>generated from photos rather than hand-authored</strong>, the art surface is smaller than a typical 3D game (the cells/rooms, the time-of-day lighting, the camera/HUD and effects), so one artist can carry it; the <strong>puzzle/attribute/room design is the larger surface</strong> (attribute vocabulary, per-room exit-requirements, co-op puzzle design, the reworked economy, time-of-day variants), so two designers own it (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). If the environment art per time-of-day outgrows one artist, trade the 2nd designer for a 2nd artist. <em>Scope note (advisory):</em> the mesh-processing service + AI photo→3D + attribute puzzle + 3D co-op + time-of-day procgen + room editor is a very large, high-risk surface — the mesh service + attribute puzzle + a curated object set + a few rooms is the M1/M2 floor; the ML photo→3D, co-op and time-of-day generation are the stretch. <strong>Prototype the mesh-service throughput and the curated-mesh fallback first.</strong></p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the snap→materialize→attribute-solve escape loop, the co-op mode and time-of-day puzzles; primary benchmark e.g. Viewfinder, with a Singapore benchmark for the local-awareness criterion)</li><li>M1D2 Core Gameplay Loop Prototype (a greybox proving snap → spawn → attribute-match → escape is fun with a limited snap budget) · prototype in Unity</li><li>M1D4 Game Feel &amp; Touch Interaction Specification (the photo-capture/framing feel and object placement, authored as tunable parameters)</li><li>M1D5 Level &amp; Progression Design (the escape rooms + the exit-requirement attribute design, authored to the room-editor data format)</li><li>M1D6 Systems &amp; Economy Design (the attribute vocabulary, the snap/charge budget and the — reworked, non-pay-to-win — economy)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D3 Systems Balance &amp; Tuning — Data-Driven (attribute/room/charge balance via the team&#39;s JSON, no code changes)</li><li>M2D5 Playtesting &amp; Iteration Program (test the puzzle clarity + the co-op flow, triage, re-test)</li><li>M2D8 Monetization &amp; Scope Integrity Design — the <b>required rework</b>: snaps/hints become balance/earned, real-money purchases restricted to cosmetics (clean-monetization, no pay-to-win) + a scope-integrity statement</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the photo-capture UI, the snap-budget counter and the generation-status indicator.</li><li>M1U2 UX Flows &amp; Wireframes — Menus → HUD — the scout → frame → snap → spawn → solve flow, solo and co-op.</li><li>M1U3 Accessibility &amp; Readability Foundations — legible status/generation feedback and reachable capture controls on a phone.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — capture, inventory, room and co-op UI navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished capture + status UX tested with players on the Pixel 9a.</li><li>M2U4 Onboarding &amp; Tutorial Design — teach the snap→materialize→attribute-solve loop in the first area without a wall of text.</li></ul></li><li><b>Art M1:</b> 1 artist (objects are photo-generated, so environment + UI are the art payload)<ul><li>M1A1 ⭐ Art Bible / Proof of Concept (the prison/escape visual direction — palette, time-of-day mood, how generated meshes sit in the scene)</li><li>M1A3 Environment, Props &amp; VFX Concepts (the cells/rooms, the snap/materialize VFX and the generation-in-progress effect)</li><li>M1A4 UI Art Concepts &amp; Typography (photo-capture UI, snap-budget counter, status indicator)</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ Critical Asset Production &amp; In-Engine Visual Quality (rooms, time-of-day lighting, HUD implemented and consistent)</li><li>M2A3 Environment Alive — Ambient Animation &amp; Layering (the four time-of-day looks of the rooms)</li><li>M2A4 UI Art — States &amp; Feedback (framing / generating / spawned / out-of-charge states)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial BGM/SFX from the week-5 needs list present &amp; working in the prototype (tense escape BGM, camera-shutter, materialize, puzzle-solve and error cues), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Games floor (escape BGM + shutter, materialize, place, solve, co-op and error SFX, ≥6 types), with time-of-day ambience.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing; a distinct materialize/solve cue).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the desktop room editor), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
