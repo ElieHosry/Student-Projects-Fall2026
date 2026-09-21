@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Trippy</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="trippy.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="trippy.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Trippy</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="trippy-student-proposal">Trippy <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> 🔶 Fit with adjustments · <b>Category:</b> Social Media · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> A social travel platform that turns authentic user journeys into actionable itineraries. Instead of static POI databases or scraped reviews, Trippy builds its spatial dataset from verified traveller activity: as users map destinations, upload photos and categorize locations, a proprietary C++ engine infers dwell time, pacing, seasonality and spot popularity. Named technical features: an <strong>intent-based itinerary search engine</strong> (ranks complete multi-day itineraries against constraints, prioritising trips completed by social connections); a <strong>self-evolving spatial metadata pipeline</strong> (infers place metadata from minimal inputs); <strong>crowd-validated entity resolution</strong> (human-in-the-loop consensus for duplicate/offset entries via proximity prompts); and <strong>on-device instant itinerary optimization</strong> (a C++ engine reorders stops/day-clusters to a new user&#39;s pace/schedule/seasonality without network latency, streaming improved itineraries live). Custom tool: a C++ desktop editor sharing the engine — add places, seed starter itineraries, retune recommender weights and watch rankings re-sort, plus audio config; data-driven so behaviour changes without recompiling. Design features: collaborative trip planning (create/discover/plan-with-friends/shared itinerary); friend-sourced discovery (recommendations, save/organise, activity voting); travel details &amp; tracking (document storage, day-by-day schedule, progress); and notifications/reminders (travel reminders, group updates, social-engagement alerts). Private post-trip collaborative hubs let groups compile photos and a shared scrapbook before itineraries are published to the community.</p>
+<p><strong>Adjustments required for approval:</strong></p>
+<ul>
+<li><strong>Clear the 2D gate with a custom-rendered data-display surface.</strong> A native app built purely from a maps SDK plus native lists would collapse into ordinary CRUD and miss the module&#39;s 2D requirement. Custom-render at least one real 2D surface in <strong>OpenGL ES (GLSurfaceView)</strong> — e.g. the map with your own POI/route/popularity-heat drawing and the day-by-day itinerary timeline, and/or the editor&#39;s live &quot;rankings re-sort&quot; view — rather than only a drop-in map widget and RecyclerViews.</li>
+<li><strong>Privacy &amp; moderation for the social/publish layer.</strong> Per-trip visibility (private hub vs friends vs published-to-community), report/block, and moderation of user photos/place data before public publish; don&#39;t expose precise personal/home locations. (Your private-hub model and per-trip control already point this way — make it an explicit, graded surface.)</li>
+</ul>
+<p><em>(Not required, affirmed:</em> the ranking/optimization/entity-resolution work is correctly scoped as the team&#39;s own load-bearing C++ engine — keep it that way. Map tiles/geocoding from a service are fine, but the scoring, re-ordering and dedupe stay in C++.)*</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://wanderlog.com/">Wanderlog (collaborative trip planner — create itineraries, discover, and plan trips together with friends)</a></li>
+<li><a href="https://www.polarsteps.com/">Polarsteps (plan, track &amp; relive trips — itinerary builder, route on a world map, photos, sharing, and full per-trip privacy control)</a></li>
+<li><a href="https://www.tripit.com/web">TripIt (all-in-one itinerary builder + trip planner with real-time flight alerts and travel reminders)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Trippy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>🔶</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile — a native Android app (Kotlin UI + the C++ engine via JNI); the itinerary optimizer runs on-device (no network dependency) and the same C++ builds on the desktop for the editor/benchmarks (device: Pixel 9a). <b>Extended:</b> Firebase + Linux server set up by M2 (full use T2). </div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> The map (custom-drawn POIs, routes, popularity), the day-by-day itinerary timeline and drag-to-reorder planner, discovery/search results, the collaborative group hub, the shared scrapbook and trip-progress views (OpenGL ES for the custom map/timeline surface). <b>Languages:</b> Web — HTML/JS/CSS + C++→WASM (Emscripten, SDL2/3, OpenGL ES) for the PC/desktop editor &amp; benchmark build; Native — Kotlin Native Android UI + C++ via JNI (Android Studio); OpenGL ES in a GLSurfaceView where realtime 2D is needed (no SDL on native).</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The C++ engine — itinerary scoring/ranking against constraints (friend-weighted), on-device stop/cluster re-ordering with per-step re-scoring, the spatial-metadata inference pipeline (dwell/seasonality/popularity), and proximity-based entity resolution — plus a Firebase store for spatial data, social graph, groups and media, and a notification service. <b>Languages:</b> C++.<br><b>Backend scope:</b> Local now, server-ready (T2) — the optimizer runs on-device; the Linux server seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the load-bearing piece is a <strong>performant C++ service</strong> — it scores hundreds of candidate itineraries against the traveller&#39;s taste, searches better orderings while re-scoring at each step, checks each new place against existing entries, and infers spatial metadata; it runs off the Kotlin UI thread over JNI and streams each improved itinerary to the screen. It has no Android/DB/UI dependency, so it also builds on the desktop for benchmarks and the regression suite.</li>
+<li><em>Data-driven:</em> places and inferred metadata, itineraries, recommender weights, seasonality vectors, entity-resolution radii and the notification rules are hot-reloadable JSON — the editor retunes engine behaviour without recompiling.</li>
+<li><em>2D:</em> the map (own POI/route/popularity rendering), the day-by-day itinerary timeline and the editor&#39;s live re-sort view are <strong>custom-rendered in OpenGL ES</strong> (see adjustment 1). <em>3D:</em> not needed. <em>Networking:</em> Firebase sync of the social graph/spatial data + push notifications (reminders, group updates, social-engagement alerts).</li>
+<li><em>Custom tool:</em> the <strong>C++ desktop editor</strong> sharing the engine — add places, seed starter itineraries, retune recommender weights and watch rankings re-sort live, plus audio configuration.</li>
+<li><em>External DB:</em> Firebase for spatial data, social graph, groups, media and logistics/documents. <em>Auth ⏭️:</em> accounts + friend graph. <em>Analytics ⏭️:</em> engagement events feed the spatial-metadata inference and stat views.</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Social Media pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> On the PC/desktop editor build, C++17/20 with a service loop that drives itinerary scoring and streams improved orderings; SDL2/3 dev harness, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the M1G9 ranker and the on-device optimizer run through it.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ entity/registry with places + inferred metadata, itineraries, recommender weights, seasonality vectors and entity-resolution radii in JSON (nlohmann/json) with hot-reload — the editor tunes engine behaviour against it.</li><li><b>Prerequisites:</b> G1 (loop &amp; update hooks).</li><li><b>Feeds into:</b> M1G9 (scoring reads it), M2G2 (the desktop editor edits it), M2G8 (search/optimizer features).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays for the ranker/optimizer, Tracy profiling (the search is CPU-bound), Catch2 regression + stress tests scoring/reordering large itinerary sets on the headless desktop build, GitHub Actions Windows+Linux matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening) and the on-device latency budget M2G1 validates; the headless engine build is a named deliverable.</li></ul></details>
+</li>
+<li><strong>G9 Matching / Ranking Engine — Foundation</strong> — the itinerary ranker/optimizer: score candidate itineraries against constraints and reorder stops.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Weighted scoring over itinerary features (pace, dates, preferences, friend-completion), local-search reordering of stops/day-clusters with per-step re-scoring, incremental re-rank (custom C++) — not a database query.</li><li><b>Prerequisites:</b> G2 (place/itinerary model), G1 (tick).</li><li><b>Feeds into:</b> M2G8 (intent search + on-device optimization II), the discovery feed.</li></ul></details>
+</li>
+<li><strong>G6 Custom 2D UI Rendering</strong> — the map (POIs/routes/popularity) and the day-by-day itinerary timeline rendered custom (satisfies the 2D gate).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 renderer or OpenGL ES, GLSL, FreeType, stb_image for custom map markers/routes/popularity heat and the itinerary timeline on the desktop build. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (shell &amp; loop).</li><li><b>Feeds into:</b> The planner/discovery views; the editor&#39;s live re-sort visualization.</li></ul></details>
+</li>
+<li><strong>G8 Firebase Integration — Identity &amp; Data</strong> — accounts, the social graph/groups, and the crowdsourced spatial dataset &amp; media.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth, Firestore/Realtime DB for places/itineraries/groups/media, REST API from C++ and the Kotlin SDK on the front-end.</li><li><b>Prerequisites:</b> G2 (data model to sync).</li><li><b>Feeds into:</b> M2G6 (entity-resolution/moderation), M2G12 (notifications), friend-weighted ranking.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling of the search/optimizer, ASan on MSVC, memory pools, and validation on the desktop editor/benchmark build; Linux server set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI; validate on-device optimizer latency and the GLSurfaceView map/timeline on the Pixel 9a.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The native Android deliverable and instant on-device re-planning.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core</strong> — the C++ desktop editor sharing the engine: add places, seed starter itineraries, retune recommender weights and watch rankings re-sort, with audio config.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ + Dear ImGui, JSON serialization, undo/redo command stack; live binding so a weight change re-sorts the visible rankings, plus map-based place authoring.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s SDL2/3/OpenGL ES renderer (live map + re-sort preview).</li><li><b>Prerequisites:</b> G2 (data model), M1G9 (engine to drive/inspect).</li><li><b>Feeds into:</b> Seeded starter content; weight tuning that M2G8 consumes.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, and packaging of the desktop editor/benchmark build via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI) packaging the Android APK/AAB; OpenGL ES in a GLSurfaceView where realtime 2D is needed — no SDL on native.</li><li><b>Prerequisites:</b> G3 (CI and test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every Trippy goal.</li></ul></details>
+</li>
+<li><strong>G8 Ranking / Matching Engine II</strong> — intent-based itinerary search + on-device optimization II: friend-weighted ranking and instant re-planning to a new user&#39;s pace/schedule/season.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Scoring models (weighted features, similarity), candidate generation, evaluation metrics, and a local-search optimizer that streams improving itineraries; social-connection completion as a ranking signal.</li><li><b>Prerequisites:</b> M1G9 (ranking foundation), M1G8 (social/data).</li><li><b>Feeds into:</b> The intent search, personalised recommendations and instant re-plan.</li></ul></details>
+</li>
+<li><strong>G12 Notification II</strong> — travel reminders, real-time group updates and social-engagement alerts.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Cloud Messaging, digest/schedule for reminders (flights, check-ins, activities), and push on group modifications and scrapbook/stat/trip-log posts.</li><li><b>Prerequisites:</b> M1G8 (Firebase identity/data).</li><li><b>Feeds into:</b> Retention; the group collaboration loop.</li></ul></details>
+</li>
+<li><strong>G6 Content Moderation Dashboard &amp; Pipeline</strong> — crowd-validated entity resolution + publish-time moderation.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Proximity-based duplicate detection and a human-in-the-loop consensus flow to a canonical place; a report/review queue and moderation dashboard for user photos/place data before public publish; Firebase security rules.</li><li><b>Prerequisites:</b> M1G2 (place model), M1G8 (Firebase identity/data).</li><li><b>Feeds into:</b> A precise, trusted spatial database; safe community publishing.</li></ul></details>
+</li>
+</ul>
+<p><em>(Proposed new pool goal (requires instructor approval):</em> <strong>Spatial Metadata Inference Pipeline</strong> — infer dwell time, pacing, seasonality vectors and spot popularity from recorded journeys (aggregation + custom charting); the Social Media pool&#39;s nearest is the Activity Analytics Engine, but the inference angle is novel. Fold into M1G2/M2G8 or append as a new pool goal; the three picks above stand regardless.<em>)</em></p>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 2 Design + 0 Art (8) — Trippy is a UX-heavy social utility: collaborative planning, friend-sourced discovery, day-by-day tracking, the group hub/scrapbook and notifications are a strong two-designer load, while the visual surface (map markers, badges, icons, scrapbook layouts) is UI-art the designers own and the photos are user-supplied — no character/illustration production, so 0 artists (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). With 0 artists, the designers take the <strong>D11 conditional</strong> as a real graded Design goal each milestone (M1 Art Proof of Concept / M2 Art Implementation Quality) — the last Design goal each milestone.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the plan → discover → collaborate → track → publish loop, the friend-sourced discovery model, and the private-hub → community-publish flow)</li><li>M1D2 Core-Loop Interactive Prototype (Figma flow: create trip → discover/rank → plan-with-friends → day-by-day → publish)</li><li>M1D3 User Research, Personas &amp; Competitive Analysis (teardown of Wanderlog / Polarsteps / TripIt; traveller personas)</li><li>M1D5 Interaction &amp; Input Design (map interactions, drag-to-reorder itinerary, group collaboration, proximity-prompt entity resolution)</li><li>M1D11 Art Proof of Concept (conditional — no artist: map-marker/badge/icon set, scrapbook visual language, UI style guide)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D2 Visual Branding &amp; Style Guide (Trippy identity; the trip-stat / badge system)</li><li>M2D5 Playtesting &amp; Iteration Program (planning friction, discovery relevance, collaboration clarity)</li><li>M2D11 Art Implementation Quality (conditional — no artist: UI art/icons implemented to standard)</li></ul></li><li><b>UI/UX M1</b> (graded by the UI/UX instructor):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — the map, planner, discovery, group hub and tracking screens.</li><li>M1U2 UX Flows &amp; Wireframes — create → discover → plan-with-friends → track → publish journeys.</li><li>M1U3 Accessibility &amp; Readability Foundations — legible timeline/map typography, contrast, thumb-reach targets.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — the required screens navigable unaided on the mobile target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished planner, map and group hub.</li><li>M2U3 Menu &amp; HUD Motion Design — itinerary re-sort animation, map transitions, notification affordances.</li><li>M2U5 Mobile UX Adaptation &amp; Ergonomics — one-handed planning and map use on the Pixel 9a, offline-friendly.</li></ul></li><li><b>Art:</b> 0 artists — the art surface is covered by the D11 conditionals, taken as Design goals (see Design M1/M2).</li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — light UI/notification SFX and optional ambience from the week-5 needs list, present &amp; working in the prototype (added stop, reminder, publish), suitable and correctly triggered. Audio is not load-bearing here — a lecturer scope waiver may apply (the editor&#39;s audio-config hook aside).</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback for overlapping UI SFX.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — the standard floor tailored down for a utility app (subtle UI/notification SFX + optional ambience in the showcase build).</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing for stacked notifications; the desktop editor&#39;s audio-config hook).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the C++ desktop editor), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
