@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Unwoven Harmony</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="unwoven-harmony.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="unwoven-harmony.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Unwoven Harmony</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="unwoven-harmony-student-proposal">Unwoven Harmony <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> An action game where <strong>gesture-based combat</strong> (tap, press-and-hold, swipe) meets <strong>dynamic music</strong> inspired by Chinese mythology. Players cast elemental magic to defeat enemies and bosses across short, music-driven stages. Unlike traditional rhythm games, hitting the beat is <strong>optional but rewarding</strong> — you can clear a stage by mashing, but hitting on beat grants special finishing moves and extra visual/audio flair. The soundtrack fuses traditional Chinese instruments with modern electronic beats; before a stage, players customise a moveset by equipping up to three of the <strong>Five Elements</strong>, and can <strong>import their own music</strong>. Named technical features: JSON data serialization for easy reading/manual editing; <strong>in-built BPM recognition</strong> for custom tracks; <strong>enemy AI that conforms to the track&#39;s BPM</strong>; and <strong>server-side data handling to prevent cheating</strong>. Loop: a C++ game loop handling a large queue of gestures for player + enemy attacks/movesets. Tool: a <strong>music importer</strong> that lets users add their own music, automatically matching attacks to the beat. Design features: fullscreen gesture combat (tap/hold/swipe anywhere, mapped to the Five Elements — Wood, Fire, Earth, Metal, Water, each with unique properties); a <strong>combo system</strong> where on-beat inputs chain moves and build Qi Energy to trigger finishing moves (missing beats has no penalty); <strong>5 linear PVE stages</strong> (~2 min each, 1–2 enemies at a time, some/all with a boss, clear before the timer, enemies spawn on fixed timers independent of the beat); and an <strong>ability-unlock system</strong> (progression + a post-stage shop where stage-earned currency buys moves, cosmetics and music tracks).</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://store.steampowered.com/app/1817230/HiFi_RUSH/">Hi-Fi RUSH on Steam (the defining precedent: an action-combat game where everything syncs to the music and hitting the beat <strong>enhances</strong> your combos but is never required — exactly the &quot;optional but rewarding&quot; hook)</a></li>
+<li><a href="https://store.steampowered.com/app/1061910/Metal_Hellsinger/">Metal: Hellsinger on Steam (on-beat attacks deal more damage and fill a Fury meter — the direct precedent for the on-beat-builds-Qi / finishing-move reward)</a></li>
+<li><a href="https://store.steampowered.com/app/12900/AudioSurf/">AudioSurf on Steam (a game built around <strong>importing your own music</strong> and auto-generating beat-timed gameplay from any track — the custom-music-import + BPM-analysis precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Unwoven Harmony</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (fullscreen touch gesture combat + on-device music import suit a phone; device: Pixel 9a) — the Native PC build is the development/tools vehicle (the music-importer tool). <b>Extended:</b> Firebase + a Linux server the team sets up by M2 (full use T2) for the **server-side anti-cheat** data handling, accounts and the currency/unlock/leaderboard store.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A 2D renderer of the elemental combat (player, 1–2 enemies, bosses, per-element spell VFX), the fullscreen gesture-input layer, the Qi/combo/timer HUD and the beat/on-beat flair, plus the shop and music-import screens. <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine via JNI (Android Studio); OpenGL ES drawn in a GLSurfaceView for the realtime 2D; Web/desktop — SDL2/3 + OpenGL ES for the PC dev/tools build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The C++ engine core (fixed-timestep loop over a large gesture queue for player + enemy movesets, the Five-Elements combat, the audio/BPM analysis feeding the combo/Qi and the BPM-conforming enemy AI) + a server-side data layer that validates progression/currency to prevent cheating. <b>Languages:</b> C++ (engine); Firebase-backed services on the Extended tier.<br><b>Backend scope:</b> Local now, server-ready (T2) — the anti-cheat / accounts / store seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ loop is load-bearing — a fixed-timestep loop resolves a <strong>large queue of gestures</strong> into player and enemy moves, runs the Five-Elements combat, and drives the audio/BPM analysis that feeds the on-beat combo/Qi rewards and the BPM-conforming enemy behaviour.</li>
+<li><em>Data-driven:</em> moves, the Five Elements and their properties, enemy types/patterns, stage layouts and shop/unlock data are all JSON (easy to read and hand-edit), so a new move or enemy is a data change.</li>
+<li><em>2D:</em> sprite/particle rendering of the elemental combat, spell VFX and the on-beat flair + HUD (custom-rendered). <em>3D:</em> not needed. <em>Networking:</em> no real-time multiplayer; the anti-cheat / accounts / store calls are async client↔︎server (Application Communication ✅), so a real-time Networking System is optional (🔵).</li>
+<li><em>Custom tool:</em> the <strong>music importer</strong> — import a track, run <strong>BPM recognition</strong>, and auto-generate the beat map so the player&#39;s attacks and the enemy AI align to the imported song.</li>
+<li><em>External DB:</em> accounts, currency/unlocks/cosmetics and (server-validated) progression. <em>Auth ⏭️:</em> accounts for the anti-cheat store. <em>Analytics ⏭️:</em> optional — on-beat engagement and stage drop-off for tuning.</li>
+</ul>
+<p><em>Audio note:</em> audio here is <strong>load-bearing</strong> (the combat, combos and enemy AI all key off BPM/beat), so the BPM-recognition + adaptive-music tech is real CS work (M1G6 / M2G9), and the TEAM/Audio goals carry a sync clause (below).</p>
+<p><em>Monetization note:</em> the shop uses <strong>stage-earned currency</strong> for moves, cosmetics and tracks — progression, not pay-to-win. If real-money purchases are ever added, keep them to the module&#39;s clean-monetization rule (cosmetics/tracks only, no pay-to-win).</p>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a fixed-timestep loop (C++17/20) reading fullscreen tap/hold/swipe gestures into a large gesture queue and resolving player + enemy moves; CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; M1G6 audio/BPM and M1G8 enemy AI run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Entity/component model in C++ with moves, the Five Elements and their properties, enemy types/patterns, stage layouts and shop/unlock data in hand-editable JSON, hot-reloadable — a new move or enemy is a data change.</li><li><b>Prerequisites:</b> G1 (loop &amp; entity update hooks).</li><li><b>Feeds into:</b> M2G2 (the importer tool + config), M1G8 (enemy data), M2G13 (unlock economy).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays (gesture queue, beat/BPM state, Qi), Tracy profiling to hold the frame budget with a large gesture queue + combat VFX, Catch2 tests for gesture parsing, BPM detection and data loading, gated by a GitHub Actions Windows+Android matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the on-device budget M2G1 validates.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the elemental-combat renderer (player, enemies, bosses, per-element spell VFX, HUD) is the whole read of the game.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Sprite/particle renderer with a camera, batching, per-element spell VFX and the Qi/combo/timer HUD + on-beat flair overlay; SDL2/3/OpenGL ES, GLSL, stb_image, FreeType. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window).</li><li><b>Feeds into:</b> M2G4 (advanced spell/on-beat VFX); every visible frame.</li></ul></details>
+</li>
+<li><strong>G6 Audio System</strong> — playback, mixing and event triggers <strong>plus the in-built BPM recognition / beat analysis</strong> that the whole game keys off.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> FMOD or OpenAL playback + mixing, beat/BPM detection (onset/tempo analysis) exposing a beat clock to the gameplay, and event-triggered SFX for casts, hits and on-beat flair.</li><li><b>Prerequisites:</b> G1 (loop &amp; audio callback), G2 (move/audio data).</li><li><b>Feeds into:</b> The combo/Qi on-beat reward, M1G8 (BPM-conforming enemy AI), M2G2 (the music importer), M2G9 (adaptive music).</li></ul></details>
+</li>
+<li><strong>G8 Enemy AI &amp; Pathfinding</strong> — the enemy roster whose behaviour <strong>conforms to the track&#39;s BPM</strong>, with fixed-timer spawns for fair non-rhythm play.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Finite-state machines for enemy types keyed to the beat clock (telegraphs/attacks on-beat), with spawns on fixed timers independent of the beat, tuned per type from data (custom C++).</li><li><b>Prerequisites:</b> G1 (tick), G2 (enemy data), G6 (beat clock).</li><li><b>Feeds into:</b> M2G10-class boss behaviour; the beat-flavoured combat.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling to hold the frame + audio-latency budget under a full gesture queue and combat VFX, ASan on MSVC, memory pools, and validation on-device (Pixel 9a, Native Android); the Firebase/Linux-server anti-cheat seam set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The Native-Android deliverable and a tight audio-to-input latency budget.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Music Importer)</strong> — import a track, detect its BPM and auto-generate the beat map that aligns the player&#39;s attacks and the enemy AI to the song.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A tool that ingests a user track, runs the M1G6 BPM/onset analysis, previews and lets the user confirm/adjust the tempo grid, and serializes the beat map to JSON for the game to consume.</li><li><b>Libraries/Software:</b> Dear ImGui, the project&#39;s audio/BPM module (FMOD/OpenAL + onset detection), nlohmann/json.</li><li><b>Prerequisites:</b> M1G6 (BPM analysis), G2 (data model).</li><li><b>Feeds into:</b> Player-imported music replayability; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android Debug builds, tests (gesture parsing, BPM detection, data loading) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G9 Audio — Advanced</strong> — the <strong>dynamic music</strong> (traditional Chinese + electronic fusion), adaptive layers and the on-beat finishing-move audio flair.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> FMOD/OpenAL adaptive layers keyed to combat state, DSP effects and mixing buses, and beat-synced stingers for finishing moves and on-beat flair.</li><li><b>Prerequisites:</b> M1G6 (audio system + beat clock).</li><li><b>Feeds into:</b> The showcase audio identity; the on-beat reward feedback.</li></ul></details>
+</li>
+<li><strong>G8 Firebase — Accounts, Leaderboards &amp; Analytics</strong> — accounts, the <strong>server-side anti-cheat</strong> validation, and the currency/unlock/cosmetic store + leaderboards.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth accounts, Firestore for currency/unlock/cosmetic data + leaderboards with server-side validation so clients cannot forge progression, optional Analytics, via the REST API from C++.</li><li><b>Prerequisites:</b> G2 (progression/economy data model).</li><li><b>Feeds into:</b> The anti-cheat guarantee; the shop and leaderboards.</li></ul></details>
+</li>
+<li><strong>G13 Gameplay Systems II</strong> — the <strong>ability-unlock / shop / currency</strong> economy and the combo/Qi progression.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ systems over the entity/data model for move unlocks, the post-stage shop (moves, cosmetics, tracks bought with stage-earned currency) and the combo→Qi→finishing-move loop, all balancing-data-driven.</li><li><b>Prerequisites:</b> M1G2 (move/economy data), M2G2 (config authoring).</li><li><b>Feeds into:</b> The progression + replayability at showcase; T2 move expansion.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + 2 Art (9) — the Chinese-mythology setting, per-element spell VFX, the enemy/boss roster and the cosmetics are a large, VFX-forward art surface, so two artists carry it; a single designer owns the gesture-combat moveset design (Five Elements), the optional-rhythm combo/Qi system, the stage/enemy design and the shop economy (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). If the moveset/rhythm/economy design outgrows one designer, trade the 2nd artist for a 2nd designer. <em>Scope note (advisory):</em> gesture combat + BPM analysis + adaptive music + a music-import tool + Five-Elements movesets + 5 stages + bosses + a server anti-cheat store is a large surface — treat the gesture combat with ~2 elements, the beat clock + on-beat Qi reward, 2 stages and one boss as the M1/M2 floor, with all five elements, the music importer and the server store as the stretch. <strong>BPM detection quality is the key audio-facing risk — prototype it early.</strong></p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the gesture-combat + optional-rhythm hook, the Five Elements, the combo/Qi loop and the mythology framing; primary benchmark e.g. Hi-Fi Rush, with a Singapore benchmark for the local-awareness criterion)</li><li>M1D2 Core Gameplay Loop Prototype (a greybox proving the **optional-but-rewarding beat hook** feels good — mashing works, on-beat feels better) · prototype in Unity</li><li>M1D6 Systems &amp; Economy Design (the Five-Elements moveset properties, the combo→Qi→finishing-move loop and the stage-currency shop — every system with a purpose)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D3 Systems Balance &amp; Tuning — Data-Driven (element/move balance, combo/Qi pacing and enemy tuning via the team&#39;s JSON, no code changes)</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the Qi/combo/timer HUD, the on-beat cue and the element-select/shop screens.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — combat HUD, element loadout, shop and music-import screens navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished HUD + on-beat feedback tested with casual and rhythm-focused players on the Pixel 9a.</li></ul></li><li><b>Art M1:</b> 2 artists justified (mythology setting + per-element VFX + enemy/boss roster)<ul><li>M1A1 ⭐ Art Bible / Proof of Concept (the Chinese-mythology visual direction — palette, the Five-Elements visual language, readability in combat)</li><li>M1A2 Character Concepts &amp; Model Sheets (the player, the enemy types and the bosses)</li><li>M1A3 Environment, Props &amp; VFX Concepts (the stage settings + the per-element spell-effect language)</li><li>M1A4 UI Art Concepts &amp; Typography (Qi/combo/timer HUD, element-select, shop)</li><li>M1A5 Animation Foundations (player casts per element, enemy/boss attacks, finishing-move flourishes)</li><li>M1A6 Early Asset Production — Prototype Support</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ Critical Asset Production &amp; In-Engine Visual Quality</li><li>M2A2 Character Animation — Extensive (elemental movesets, finishing moves, bosses)</li><li>M2A3 Environment Alive — Ambient Animation &amp; Layering (the mythology stages)</li><li>M2A4 UI Art — States &amp; Feedback (on-beat vs off-beat, Qi-full, finishing-move states)</li><li>M2A5 VFX — Critical Effects &amp; Transitions (per-element spell VFX + the on-beat finishing-move flair — the core reward)</li><li>M2A6 Cutscenes &amp; Storyboards (the mythology story beats)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — <b>load-bearing audio</b>: the traditional-Chinese + electronic dynamic tracks present &amp; working in the prototype, with a tight, correctly-synced beat clock driving on-beat cues (a sync clause applies — the beat IS the mechanic).</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace/import files without recompiling) + reliable multi-channel playback and the BPM/beat-clock feed the gameplay consumes.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — the full dynamic soundtrack (traditional Chinese + electronic) across the 5 stages, beat-synced to combat, with on-beat finishing-move flair (≥6 cue types); a sync clause applies since audio is load-bearing.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised, adaptive layers, and the BPM-recognition support for imported tracks the build needs.</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the music importer), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
