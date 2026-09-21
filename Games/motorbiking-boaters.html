@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Motorbiking boaters</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="motorbiking-boaters.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="motorbiking-boaters.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Motorbiking boaters</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="motorbiking-boaters-student-proposal">Motorbiking boaters <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> An endless side-scrolling freestyle jet-ski game: the player is an aspiring rider training for the BlueBull Jet-Ski Freeride Competition, chaining stunts and combos while staying on the jet ski as long as possible without wiping out. Tricks are performed with <strong>phone interactions — swipes, taps, holds and tilts</strong> — combined in sequences to trigger different stunts; simple tricks give small <strong>time bonuses</strong>, complex tricks/combos give more time and score multipliers, and failed tricks <strong>subtract time</strong> (a risk-and-reward loop). The course escalates with more obstacles and trick terrain the longer the player survives; the goal is high scores. <strong>USP:</strong> tricks are integral to survival — chain increasingly difficult stunts to extend game time in a high-risk / high-reward environment. Genre: casual arcade sports / endless runner. Platform: <strong>Mobile, native Android</strong>. Named technical features: gyroscope/accelerometer motion controls + gesture recognition; a <strong>server-side gacha + user-accounts</strong> solution; a <strong>real-time physics engine</strong> simulating the jet-ski + water interaction (arcade inertia, jumping above water); and <strong>procedural endless level generation</strong>. Named core-requirement notes: a C++ loop stable under heavy particle effects (splashes/sparks after a combo landing); tilt-to-move via gyro/accelerometer; a <strong>custom level-testing tool</strong> for designers to tweak procedural-level and player parameters without touching code. Design features: gesture-based freestyle trick system; a combo &amp; scoring system; the risk-or-reward system; progressive difficulty &amp; survival.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://altosodyssey.com/press/">Alto&#39;s Odyssey Press Kit — Team Alto (an endless side-scroller built on a one-touch trick system: chain combos, physics-based movement, procedurally generated terrain, escalating biomes — the endless-trick-survival + procgen precedent)</a></li>
+<li><a href="https://store.steampowered.com/app/1190170/OlliOlli_World/">OlliOlli World on Steam (a 2D side-scrolling trick game where you string tricks, grinds and spins into combos for score multipliers, landing cleanly or wiping out — the gesture-input trick-combo-scoring precedent)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Jetpack_Joyride">Jetpack Joyride — Wikipedia (the benchmark one-touch endless mobile arcade runner: procedurally varied hazards, coins, an in-run slot machine + a &quot;Stash&quot; of gadgets/cosmetics — the endless-mobile + gacha/economy precedent, incl. a &quot;Wave Rider&quot; jet-ski vehicle)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Motorbiking boaters</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — the stated platform; device: Pixel 9a) — tilt-to-move and swipe/tap/hold trick input are native-touch/sensor-first; the Native PC build is the development/tools vehicle (the level-testing tool). <b>Extended:</b> a Linux server the team sets up by M2 (full use T2) hosting the gacha service + user accounts, plus an external database (Firebase or a server store) for accounts, cosmetics and high scores.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A side-scrolling 2D renderer (the rider + jet-ski, water surface, obstacles, trick terrain and escalating background) with the trick/combo/timer HUD and heavy splash/spark particle VFX, plus the gacha and score screens. <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine via JNI (Android Studio); OpenGL ES drawn in a GLSurfaceView for the realtime 2D; Web/desktop — SDL2/3 + OpenGL ES for the PC dev/tools build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The C++ engine core (fixed-timestep loop, arcade jet-ski + water-interaction physics with above-water inertia, gesture/gyro trick recognition, the combo/scoring/time economy, procedural endless generation and the particle systems) + a server-side gacha &amp; user-accounts service. <b>Languages:</b> C++ (engine); the gacha/accounts service on the Linux server.<br><b>Backend scope:</b> Local now, server-ready (T2) — the gacha + accounts + high-score seam set up &amp; basic-tested on the Linux host by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ loop is load-bearing — it runs the arcade jet-ski/water physics (buoyancy, above-water inertia, landing), the gesture/gyro trick recognition and combo resolution, the risk/reward time economy, the endless procedural scroll and the heavy splash/spark particle effects, holding a stable frame rate under a combo&#39;s particle burst.</li>
+<li><em>Data-driven:</em> trick definitions and their gesture sequences, scoring/time-bonus values, obstacle/terrain pieces and their difficulty weights, player/physics parameters and the gacha cosmetic tables are all hot-reloadable data authored via the level-testing tool — designers tune without touching code.</li>
+<li><em>2D:</em> side-scrolling sprite rendering + splash/spark particle VFX (custom-rendered). <em>3D:</em> not needed. <em>Networking:</em> no real-time multiplayer — the gacha/accounts/high-score calls are async client↔︎server (Application Communication ✅); a real-time Networking System is optional (🔵).</li>
+<li><em>Custom tool:</em> the <strong>level-testing tool</strong> — tweak procedural-generation weights, obstacle/terrain sets and player/physics parameters with live preview, without recompiling.</li>
+<li><em>External DB:</em> accounts, cosmetics/gacha inventory and high scores. <em>Auth ⏭️:</em> user accounts. <em>Analytics ⏭️:</em> optional — trick-attempt/failure and drop-off telemetry for difficulty tuning.</li>
+</ul>
+<p><em>Monetization note (design condition):</em> the <strong>gacha</strong> must be designed to the module&#39;s clean-monetization rule — <strong>cosmetic-only, no pay-to-win, transparent odds, no manipulative loops</strong> (addressed in the M2 Design goal D8 below). A gacha that gated gameplay power or hid odds would fail that rule; keep it purely cosmetic.</p>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a fixed-timestep loop (C++17/20) running the endless scroll, reading swipe/tap/hold + gyro/accelerometer input, and resolving tricks/combos and the time economy; CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; M1G5 physics and M1G7 procgen run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Entity/component registry in C++ with tricks + gesture sequences, scoring/time-bonus values, obstacle/terrain pieces, player/physics parameters and gacha cosmetic tables defined in JSON, hot-reloadable.</li><li><b>Prerequisites:</b> G1 (loop &amp; entity update hooks).</li><li><b>Feeds into:</b> M2G2 (the level-testing tool edits this data), M1G7 (terrain pieces), M2G13 (trick/combo systems).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui debug overlays (physics, trick state, combo timer), Tracy profiling to hold the frame budget under a **combo&#39;s particle burst** (splashes/sparks), Catch2 tests for trick recognition, scoring and data loading, gated by a GitHub Actions Windows+Android matrix with clang-format/clang-tidy.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the frame budget M2G1 validates on-device.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the side-scrolling renderer (rider, jet-ski, water, obstacles, trick terrain) is the whole read of the game.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Sprite/tile renderer with a scrolling camera, parallax background, a water surface and batching; SDL2/3/OpenGL ES, GLSL, stb_image, FreeType HUD. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window).</li><li><b>Feeds into:</b> M2G4 (advanced water/particle VFX); every visible frame of the demo.</li></ul></details>
+</li>
+<li><strong>G5 Physics &amp; Collision</strong> — the arcade jet-ski + water-interaction physics (above-water inertia, jumping, landing) is the mechanical core.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ + GLM math, a custom arcade water/buoyancy + jet-ski model (thrust, jump arcs, landing angle affecting a clean-vs-wipeout outcome), and collision against obstacles/trick terrain.</li><li><b>Prerequisites:</b> G1 (loop &amp; tick), G2 (physics params).</li><li><b>Feeds into:</b> The trick/landing feel; the risk/reward wipeout condition; M2G13 (combo scoring on landings).</li></ul></details>
+</li>
+<li><strong>G7 Procedural Level Generation</strong> — the endless, escalating course (obstacles + trick terrain that ramp with survival time).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Seeded RNG assembling terrain/obstacle pieces from a weighted set, with a difficulty ramp driven by survival time and validation that a run stays completable.</li><li><b>Prerequisites:</b> G2 (piece data model).</li><li><b>Feeds into:</b> M2G14-class variety; the level-testing tool tunes the weights.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling to hold the frame budget under peak splash/spark particle load, ASan on MSVC, memory/particle pools, and validation on-device (Pixel 9a, Native Android); the Linux server (gacha + accounts + high scores) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The Native-Android deliverable and a stable frame budget under combo bursts.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Level-Testing Tool)</strong> — the designer tool: tweak procedural-generation weights, obstacle/terrain sets and player/physics parameters with live preview, no code changes.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui editor exposing procgen weights, terrain/obstacle sets, trick/scoring values and physics parameters as JSON, with round-trip serialization, live preview in the renderer and undo/redo.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s SDL2/3/OpenGL ES renderer (live preview).</li><li><b>Prerequisites:</b> G2 (parameter data model), M1G4 (rendering for preview).</li><li><b>Feeds into:</b> Fast design iteration; the custom-tools showcase; procgen/difficulty tuning.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android Debug builds, tests (trick recognition, scoring, data loading) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics — Advanced</strong> — the water and the <strong>splash/spark particle VFX</strong> (the game&#39;s core juice) matured, plus post-FX.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> OpenGL/GLSL shaders for the water surface and spray, a pooled particle system for splashes/sparks/combo bursts, framebuffers and post-FX. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> M1G4 (base renderer), M2G1 (optimization).</li><li><b>Feeds into:</b> Showcase visuals; the tactile feedback of landing a combo.</li></ul></details>
+</li>
+<li><strong>G8 Firebase — Accounts, Leaderboards &amp; Analytics</strong> — user accounts, high-score leaderboards and the gacha&#39;s server-side cosmetic inventory.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth user accounts, Firestore for cosmetic/gacha inventory + high-score leaderboards, optional Analytics events, via the REST API from C++.</li><li><b>Prerequisites:</b> G2 (profile/inventory/score data model).</li><li><b>Feeds into:</b> Accounts + competitive high scores; the (clean) gacha cosmetics.</li></ul></details>
+</li>
+<li><strong>G13 Gameplay Systems II</strong> — the <strong>trick / combo / risk-reward scoring</strong> system matured: gesture sequences → tricks, combo chaining, and the time-bonus / time-penalty economy.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ systems over the entity/data model: a gesture-sequence → trick resolver, combo chaining with multipliers, and the time economy (bonus on success, penalty on a failed/mistimed trick), all balancing-data-driven.</li><li><b>Prerequisites:</b> M1G2 (trick/scoring data), M1G5 (landing outcome feeds success/fail).</li><li><b>Feeds into:</b> The USP — chain-tricks-to-survive — at showcase; T2 trick expansion.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + 2 Art (9) — the game reads by its <strong>trick animation and water/particle VFX</strong>, so two artists carry the rider + jet-ski, the many trick animations, the water/spray effects, the escalating environments and the gacha cosmetics; a single designer owns the gesture-trick vocabulary, the combo/scoring/risk-reward economy, the procedural-difficulty curve and the (clean) gacha economy (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). If the trick/economy/gacha <strong>systems</strong> outgrow one designer, trade the 2nd artist for a 2nd designer. <em>Scope note (advisory):</em> arcade water physics + gesture tricks + combo/risk-reward + procedural endless + a server gacha + the editor is a large surface — treat single-run survival with the water physics, a handful of tricks + combos, the risk/reward timer and the level-testing tool as the M1/M2 floor, with the full trick set, escalating procgen and the server gacha as the stretch.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the chain-tricks-to-survive risk/reward loop, the trick vocabulary and the escalating course; primary benchmark e.g. Alto&#39;s Odyssey or OlliOlli World, with a Singapore benchmark for the local-awareness criterion)</li><li>M1D4 Game Feel &amp; Touch Interaction Specification (the swipe/tap/hold/tilt trick gestures + gyro tilt-to-move, authored as tunable parameters — the differentiating input)</li><li>M1D6 Systems &amp; Economy Design (the trick→score→time economy, the combo multipliers, the risk/reward penalty and the cosmetic/gacha economy — every system with a purpose)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D8 Monetization &amp; Scope Integrity Design (the **gacha reworked to the module&#39;s clean-monetization rule** — cosmetic-only, transparent odds, no pay-to-win — plus a scope-integrity statement)</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the timer/combo/score HUD and the gesture affordances, legible at speed on a phone.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — HUD, results, gacha and account screens navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished HUD + trick feedback tested with casual players on the Pixel 9a.</li></ul></li><li><b>Art M1:</b> 2 artists justified (trick-animation-heavy + water/particle VFX)<ul><li>M1A1 ⭐ Art Bible / Proof of Concept (the arcade-sports visual direction — palette, water look, readability at speed)</li><li>M1A2 Character Concepts &amp; Model Sheets (the rider + the jet-ski, with cosmetic-variant sheets)</li><li>M1A3 Environment, Props &amp; VFX Concepts (the water, obstacles, trick terrain and the escalating biomes + splash/spark effect concepts)</li><li>M1A4 UI Art Concepts &amp; Typography (timer/combo/score HUD, gacha screens)</li><li>M1A5 Animation Foundations (the trick animations — the core art payload — plus ride/land/wipeout)</li><li>M1A6 Early Asset Production — Prototype Support</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ Critical Asset Production &amp; In-Engine Visual Quality</li><li>M2A2 Character Animation — Extensive (the full trick set + combo/land/wipeout reactions)</li><li>M2A3 Environment Alive — Ambient Animation &amp; Layering (living water + escalating background)</li><li>M2A4 UI Art — States &amp; Feedback (trick-landed / failed / combo-multiplier states)</li><li>M2A5 VFX — Critical Effects &amp; Transitions (splashes, spray, sparks, combo bursts — the game&#39;s core read)</li><li>M2A6 Cutscenes &amp; Storyboards (the BlueBull competition intro / victory beats)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial BGM/SFX from the week-5 needs list present &amp; working in the prototype (upbeat arcade BGM, engine/splash, trick-success/fail, combo and wipeout cues), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback for overlapping trick/splash SFX.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Games floor (arcade BGM + engine, splash, trick-success/fail, combo, obstacle and wipeout SFX, ≥6 types), rising with the escalating difficulty.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing; a distinct combo-tier cue).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the level-testing tool), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
