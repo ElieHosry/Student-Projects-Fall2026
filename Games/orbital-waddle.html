@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Orbital Waddle</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="orbital-waddle.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="orbital-waddle.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Orbital Waddle</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="orbital-waddle-student-proposal">Orbital Waddle <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> You play an astronaut penguin whose partner is kidnapped by the Astrorca and taken to Planet 67. Journeying across a chain of alien planets — <strong>each a rotating isometric cube world</strong> — you clear timed enemy waves to earn the key and locate a hidden <strong>Thingamajig</strong> to power the rocket onward. Combat is hack-and-slash roguelite (in the vein of Hades / Megabonk): start with a snowball launcher, grow an arsenal of weapons, upgrades, abilities and stat boosts. Each planet has its own terrain, enemy mix and theme, and <strong>walking off an edge smoothly rotates the whole world so a new cube face becomes the ground</strong>. Named technical features: (1) a <strong>planet-rotation traversal engine</strong> that reorients terrain + the gravity vector as the player crosses an edge while keeping every active enemy/projectile/object stable in the local frame; (2) an <strong>ECS sustaining 100 concurrent enemies per wave</strong> without frame drops on Android; (3) a Thingamajig relocation system that updates a HUD compass; (4) a <strong>data-driven weapon/ability/stat economy</strong> backed by a <strong>Firebase</strong> layer for cloud-save sync, server-side achievement unlocks and a server-validated global leaderboard. Loop: the game loop, ECS, planet rotation and enemy AI run in one fixed-timestep C++ loop (Android Studio + C++ via JNI) targeting 100 live enemies; adding an enemy/wave is a data change. Tools: a <strong>planet &amp; wave editor</strong> (terrain, spawn zones, Thingamajig points), a <strong>data-driven config tool</strong> (weapon stats, upgrade trees, enemy params, post-rescue difficulty tiers), and a <strong>CI pipeline</strong>. Design: the rotating planet world; a 5-enemy roster (Astrorca, RoboLi Seals, Space Petrels, F.O.X, Polaroids) with distinct movement/attack patterns; a wave→key + Thingamajig loop across 4 planets (3 themed + Planet 67 finale); and a <strong>New Game+ completionist loop</strong> with remixed waves and <strong>cosmetic-only</strong> rewards (no pay-to-win). Platform: <strong>Mobile, native Android</strong>.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://store.steampowered.com/app/1145360/Hades/">Hades on Steam (the hack-and-slash roguelite the proposal names: escape-run structure, a growing arsenal of weapons and stackable Boons/upgrades, thousands of build combinations, isometric combat — the roguelite arsenal + New Game+ precedent)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Fez_(video_game)">Fez — Wikipedia (a world you traverse by <strong>rotating between faces</strong>, so a different plane becomes navigable ground — the closest published precedent for the cube-face rotation-traversal mechanic)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Super_Mario_Galaxy">Super Mario Galaxy — Wikipedia (small self-contained planetoids with all-around gravity that let you walk around a body as its gravity reorients — the planet-gravity-reorientation precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Orbital Waddle</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — the stated platform, Android Studio + C++ via JNI; device: Pixel 9a) — a touch roguelite with an on-screen HUD compass; the Native PC build is the development/tools vehicle (the planet/wave editor + config tool). <b>Extended:</b> Firebase + a Linux server the team sets up by M2 (full use T2) for cloud-save sync, server-side achievement unlocks and the server-validated global leaderboard.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> An isometric renderer of the cube-world planet (terrain, the penguin, up to ~100 enemies, projectiles and VFX) with the **smooth edge-crossing world rotation**, the wave/health/arsenal HUD and the Thingamajig compass. <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine via JNI (Android Studio); OpenGL ES drawn in a GLSurfaceView for the realtime isometric world (the rotation is a 3D transform of the camera/world); Web/desktop — SDL2/3 + OpenGL ES for the PC dev/tools build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> One fixed-timestep C++ loop running the ECS (≥100 enemies/wave), the planet-rotation traversal (terrain + gravity-vector reorientation, keeping entities stable in the local frame), enemy AI, the wave→key→Thingamajig progression and the weapon/ability/stat economy + a Firebase application-communication layer. <b>Languages:</b> C++ (engine via JNI); Firebase-backed services on the Extended tier.<br><b>Backend scope:</b> Local now, server-ready (T2) — Firebase cloud-save / achievements / leaderboard seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ loop is heavily load-bearing — one fixed-timestep loop drives the ECS at a target of <strong>100 concurrent enemies/wave on Android</strong>, the planet-rotation reorientation (terrain + gravity vector, entities stable in the local frame), enemy AI, waves and the arsenal economy.</li>
+<li><em>Data-driven:</em> the ECS separates data from behaviour — enemy types, wave patterns, weapon/upgrade/stat trees, per-planet terrain/theme and the post-rescue difficulty tiers are all data, so a new enemy or wave is a data change, authored via the editor/config tools.</li>
+<li><em>2D:</em> isometric sprite/tile rendering of the cube-face world, enemies, projectiles, VFX and the HUD compass (custom-rendered). <em>3D:</em> 🔵 the edge-crossing rotation and gravity reorientation are a 3D camera/world transform layer over the isometric art — a strong-students concern, not a full 3D pipeline. <em>Networking:</em> no real-time multiplayer; the Firebase cloud-save / achievement / leaderboard calls are async client↔︎service (Application Communication ✅), so a real-time Networking System is optional (🔵).</li>
+<li><em>Custom tool:</em> a <strong>planet &amp; wave editor</strong> (terrain, enemy spawn zones, Thingamajig relocation points per planet) <strong>and</strong> a <strong>data-driven config tool</strong> (weapon stats, upgrade trees, enemy params, difficulty tiers) — rebalance without recompiling.</li>
+<li><em>External DB:</em> Firebase cloud saves, achievements and the global leaderboard. <em>Auth ⏭️:</em> accounts for cloud save. <em>Analytics ⏭️:</em> optional — wave/death/build telemetry for balancing.</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + one fixed-timestep loop (C++17/20) driving the ECS, planet rotation, enemy AI and input; CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; M1G5 rotation/physics and M1G8 enemy AI run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / ECS</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A cache-friendly ECS in C++ (data separated from behaviour) built to sustain ~100 enemies/wave, with enemy types, wave patterns, weapon/upgrade/stat trees, per-planet terrain and difficulty tiers all defined in JSON and hot-reloadable — a new enemy/wave is a data change.</li><li><b>Prerequisites:</b> G1 (loop &amp; system update order).</li><li><b>Feeds into:</b> M2G2 (the editor/config tools edit this data), M1G8 (enemy data), M2G13 (economy).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui debug overlays (ECS counts, rotation state, gravity vector), Tracy profiling to sustain **100 enemies/wave on Android without frame drops**, Catch2 tests for the loop/rotation/data loading, and a CI pipeline (GitHub Actions Windows+Android matrix) building and testing every commit.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the 100-enemy budget M2G1 validates on-device.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the isometric cube-world renderer (terrain, penguin, enemies, projectiles, HUD compass) is the whole read of the game.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Isometric sprite/tile renderer with a camera, batching for ~100 enemies + projectiles, depth sorting on the cube face, and the HUD/compass; SDL2/3/OpenGL ES, GLSL, stb_image, FreeType. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window).</li><li><b>Feeds into:</b> M2G4 (advanced combat/rotation VFX); every visible frame.</li></ul></details>
+</li>
+<li><strong>G5 Physics &amp; Collision</strong> — the <strong>planet-rotation traversal</strong>: reorient terrain + the gravity vector as the player crosses an edge, keeping every enemy/projectile stable in the local frame, plus combat/knockback collision.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> C++ + GLM math for the gravity-vector reorientation and the smooth face-to-face rotation transform, local-frame stability for active entities during the turn, and collision/knockback for combat; broadphase (grid) for ~100 enemies. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (tick), G2 (terrain/entity data).</li><li><b>Feeds into:</b> The signature traversal; M2G11-class polish; combat feel.</li></ul></details>
+</li>
+<li><strong>G8 Enemy AI &amp; Pathfinding</strong> — the 5-enemy roster (Astrorca, RoboLi Seals, Space Petrels, F.O.X, Polaroids), each with a distinct movement/attack pattern.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Finite-state machines + steering/pathfinding on the cube face for the 5 enemy types, tuned per type from data, scaling to ~100 concurrent agents (custom C++).</li><li><b>Prerequisites:</b> G1 (tick), G2 (enemy data), G5 (movement on the rotating terrain).</li><li><b>Feeds into:</b> M2G10 (advanced AI + the Astrorca boss + difficulty tiers); the timed-wave loop.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling to sustain 100 enemies/wave through a rotation, ASan on MSVC, ECS memory pools, and validation on-device (Pixel 9a, Native Android); the Firebase/Linux-server seam (cloud save + achievements + leaderboard) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The Native-Android deliverable and a stable 100-enemy budget across a rotation.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Planet &amp; Wave Editor)</strong> — place terrain, enemy spawn zones and Thingamajig relocation points per planet; the config tool for weapon/upgrade/enemy/difficulty-tier tuning.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui editor authoring per-planet terrain, spawn zones, Thingamajig points and wave patterns as JSON, plus a config panel for weapon/upgrade/enemy/difficulty-tier values, with round-trip serialization, live preview and undo/redo.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s SDL2/3/OpenGL ES renderer (live preview of the cube face).</li><li><b>Prerequisites:</b> G2 (data model), M1G4 (rendering for preview).</li><li><b>Feeds into:</b> Fast content/balance iteration; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android Debug builds, automated tests (simulation loop, rotation, data loading) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G8 Firebase — Accounts, Leaderboards &amp; Analytics</strong> — cloud-save sync, server-side achievement unlocks and the server-validated global leaderboard.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth accounts, Firestore for cloud saves + achievements + the leaderboard (server-validated to prevent forged scores), optional Analytics, via the REST API from C++.</li><li><b>Prerequisites:</b> G2 (save/economy data model).</li><li><b>Feeds into:</b> Cross-device saves, the completionist achievements, and competitive leaderboards.</li></ul></details>
+</li>
+<li><strong>G10 AI — Advanced</strong> — the Astrorca boss (Planet 67 finale) and the New Game+ remixed/harder enemy tiers.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Behaviour trees for the Astrorca boss (phases/patterns), difficulty-tier scaling of the 5-enemy roster and remixed NG+ waves, all data-driven (custom C++).</li><li><b>Prerequisites:</b> M1G8 (enemy AI foundation).</li><li><b>Feeds into:</b> The finale + the New Game+ completionist loop.</li></ul></details>
+</li>
+<li><strong>G13 Gameplay Systems II</strong> — the <strong>weapon / ability / upgrade / stat economy</strong> and the New Game+ completionist loop (cosmetic-only rewards).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Composable C++ systems over the ECS for weapons, abilities, upgrade trees and stat boosts (start: snowball launcher), plus the New Game+ remix + cosmetic unlocks (skins, launcher recolours — no pay-to-win), all balancing-data-driven.</li><li><b>Prerequisites:</b> M1G2 (ECS/economy data), M2G2 (config tool authors it).</li><li><b>Feeds into:</b> The roguelite depth and the replay loop at showcase; T2 arsenal expansion.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + 2 Art (9) — four distinct planet themes, a 5-enemy roster + the Astrorca boss, the penguin, the growing arsenal and its VFX, and the cosmetic skins are a large art surface, so two artists carry it; a single designer owns the roguelite economy (weapons/upgrades/stats), the wave/planet/progression design and the New Game+ tiers (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). If the economy + wave/tier design outgrows one designer, trade the 2nd artist for a 2nd designer. <em>Scope note (advisory):</em> a novel planet-rotation engine + a 100-enemy ECS + 5 enemies + a boss + 4 planets + an arsenal economy + Firebase + two editors is a very large surface — treat the rotation traversal on one planet, the ECS + ~2–3 enemies, the wave→key→Thingamajig loop and the planet/wave editor as the M1/M2 floor, with the full roster, 4 planets, the arsenal economy and New Game+ as the stretch. The <strong>rotation-traversal engine is the highest technical risk</strong> — prototype it first.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the rescue premise, the rotating-planet traversal, the wave→key→Thingamajig loop and the roguelite arsenal; primary benchmark e.g. Hades, with a Singapore benchmark for the local-awareness criterion)</li><li>M1D2 Core Gameplay Loop Prototype (a greybox proving the **edge-crossing rotation + hack-and-slash combat** is fun and readable — the highest-risk mechanic) · prototype in Unity</li><li>M1D6 Systems &amp; Economy Design (the weapon/ability/upgrade/stat economy, the wave/key pacing and the cosmetic-only NG+ rewards — every system with a purpose)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D3 Systems Balance &amp; Tuning — Data-Driven (combat, arsenal, wave and difficulty-tier balance via the config tool, no code changes)</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the wave/health/arsenal HUD and the **Thingamajig compass**, legible over a busy 100-enemy screen and stable through a rotation.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — HUD, arsenal/upgrade menus, compass and results navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished HUD + upgrade-choice UX tested with players on the Pixel 9a.</li></ul></li><li><b>Art M1:</b> 2 artists justified (4 planet themes + 5 enemies + boss + arsenal VFX)<ul><li>M1A1 ⭐ Art Bible / Proof of Concept (the isometric cube-world direction — palette per planet, readability at 100-enemy density)</li><li>M1A2 Character Concepts &amp; Model Sheets (the penguin, the 5 enemies and the Astrorca boss)</li><li>M1A3 Environment, Props &amp; VFX Concepts (the 4 planet themes/terrain + the arsenal/ability effect language)</li><li>M1A4 UI Art Concepts &amp; Typography (HUD, Thingamajig compass, arsenal/upgrade screens)</li><li>M1A5 Animation Foundations (penguin, enemy and attack cycles; the rotation transition)</li><li>M1A6 Early Asset Production — Prototype Support</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ Critical Asset Production &amp; In-Engine Visual Quality</li><li>M2A2 Character Animation — Extensive (the roster, the boss, ability reactions)</li><li>M2A3 Environment Alive — Ambient Animation &amp; Layering (the 4 living planet worlds + the rotation)</li><li>M2A4 UI Art — States &amp; Feedback (upgrade-choice, wave-clear, compass states)</li><li>M2A5 VFX — Critical Effects &amp; Transitions (weapons, abilities, the world-rotation transition — the signature moment)</li><li>M2A6 Cutscenes &amp; Storyboards (the kidnapping intro / Planet 67 confrontation / rescue)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial BGM/SFX from the week-5 needs list present &amp; working in the prototype (per-planet BGM, weapon/hit/ability, enemy and the rotation &quot;whoosh&quot; cues), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback for a 100-enemy combat mix.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Games floor (per-planet BGM + weapon, ability, enemy, boss, wave-clear and world-rotation SFX, ≥6 types) that stays legible under heavy combat.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing; a distinct rotation-transition cue).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the planet &amp; wave editor), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
