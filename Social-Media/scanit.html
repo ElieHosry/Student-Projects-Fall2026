@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>ScanIT</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="scanit.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="scanit.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">ScanIT</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="scanit-student-proposal">ScanIT <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> 🔶 Fit with adjustments · <b>Category:</b> Social Media · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> A native Android shopping assistant that identifies products, compares current prices across retailers, and suggests alternatives from vague requirements. Users scan a barcode/label or search conversationally (e.g. &quot;small black headphones with strong bass under $150&quot;), refine by budget/colour/size/features/brand, and contribute updated prices, availability and product info — a community-driven price database with review/verification before data becomes trusted. Kotlin provides the native Android shell/UI; the performance-critical search &amp; recommendation core is C++ via JNI. Named features: camera-assisted product identification (barcode + OCR); conversational hybrid search (intent extraction, remembered preferences, follow-up questions); a real-time C++ recommendation engine (filter → compare → rank); and a CRUD/crowdsourced backend with multi-store price comparison. Custom tool: an ImGui interface to monitor/test components, change search parameters, trigger searches, view API responses and debug the backend. Focus is current prices (not historical tracking), with explanations of why each result matches.</p>
+<p><strong>Category note:</strong> filed under <strong>Social Media</strong> — the load-bearing C++ piece is a ranking/recommendation service over community-contributed content with moderation, which is the Social Media pool&#39;s spine (matching/ranking, search &amp; discovery, moderation, Firebase). Runner-up category: <strong>CMS</strong> (the crowdsourced contribute → verify → trusted-data workflow), which lacks a ranking/recommendation goal and so fits less well.</p>
+<p><strong>Adjustments required for approval:</strong></p>
+<ul>
+<li><strong>Clear the 2D gate with a genuinely custom-rendered data-display surface.</strong> A native Kotlin app built purely from Android widgets/RecyclerViews would collapse into ordinary CRUD and fail the module&#39;s 2D requirement. Render at least the price-comparison / savings-breakdown view (retailer cards, savings pills, a simple price bar/plot) in <strong>OpenGL ES inside a <code>GLSurfaceView</code></strong>, drawn by the C++/render layer — not stock widgets.</li>
+<li><strong>The recommendation engine must be the team&#39;s own load-bearing C++ service.</strong> The filter → compare → rank → &quot;explain the match&quot; pipeline (and the ranking behind conversational refinement) must be benchmarked C++ the team wrote. A library/model may extract intents from the conversational query, but an external &quot;AI&quot;/LLM API must <strong>not</strong> be the engine that does the matching/ranking (category guard-rail: the backend cannot be someone else&#39;s service).</li>
+<li><strong>Be realistic about live retailer prices.</strong> Real multi-retailer price APIs are mostly unavailable or paid, and scraping often violates terms of service. Base the project on the <strong>crowdsourced database + a seeded/mock (or legitimately available) retailer dataset</strong>; treat any live feed as a bonus, not a dependency.</li>
+</ul>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/ShopSavvy">ShopSavvy — Wikipedia (barcode-scanning shopping app: finds online &amp; local stores, compares prices, shows reviews/deals)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/PriceRunner">PriceRunner — Wikipedia (price-comparison service matching retailer prices against a backend DB via fuzzy auto-matching + manual admin verification)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Google_Lens">Google Lens — Wikipedia (camera-assisted product identification: reads barcodes/QR/labels and returns product &amp; shopping results)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>ScanIT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>🔶</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile — the project is a native Android app (Kotlin UI + the C++ core via JNI), camera-first and touch-first (device: Pixel 9a); the Native PC build is the development/debug and custom-tools vehicle (no web target this trimester). <b>Extended:</b> Firebase + Linux server set up by M2 (full use T2).</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> Scanner screen (camera), conversational/multimodal search bar, refine chips, and the multi-store price-comparison sheet (retailer cards, stock badges, savings pills) with a custom-rendered price/savings view; plus the crowdsourced contribute/verify screens (OpenGL ES for the custom data-display surface). <b>Languages:</b> Web — HTML/JS/CSS + C++→WASM (Emscripten, SDL2/3, OpenGL ES) for the PC dev/debug build; Native — Kotlin Native Android UI + C++ via JNI (Android Studio); OpenGL ES in a GLSurfaceView where realtime 2D is needed (no SDL on native). </div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The C++ recommendation service (filter → compare → rank + match-explanation), the conversational-query intent/preference model, a search/index over the product catalog, external-price API adapters and the timed refresh loop, plus the crowdsourced CRUD store with a moderation/verification pipeline. <b>Languages:</b> C++.<br><b>Backend scope:</b> Local now, server-ready (T2) — Firebase for the crowdsourced DB; the Linux server seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the load-bearing piece is a <strong>performant C++ service</strong> — it parses the query (budget, product type, attributes), filters the catalog, compares candidates, ranks the best matches and decides when to ask a follow-up, plus a timed query loop that refreshes results/prices when data changes. This is genuine C++ information-retrieval work, not a database <code>where</code> clause or an external API call.</li>
+<li><em>Data-driven:</em> products, variants, attributes, retailers, stock/price entries, matching weights and the conversational intent schema are all hot-reloadable JSON — no hard-coded catalog or ranking constants.</li>
+<li><em>2D:</em> the price-comparison / savings view is <strong>custom-rendered in OpenGL ES</strong> (retailer cards, stock badges, savings pills, a price bar) — the domain-adapted 2D surface (see adjustment 1). <em>3D:</em> not needed. <em>Networking:</em> external retailer/price API calls + the crowdsourced-DB sync and (optional) push when a watched price changes.</li>
+<li><em>Custom tool:</em> the <strong>ImGui monitoring/testing console</strong> — change search parameters, trigger searches, view API responses, watch system performance and debug the backend (PC-side); it doubles as the moderation/verification review surface.</li>
+<li><em>External DB:</em> Firebase for the crowdsourced product/store/price database. <em>Auth ⏭️:</em> accounts for contributions and trust/attribution (safety-relevant for moderation). <em>Analytics ⏭️:</em> optional — which queries/products convert, to tune the ranker.</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Social Media pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> On the PC dev/debug build, C++17/20 with a fixed-timestep service loop driving the timed query/refresh pass and the recommendation pipeline; SDL2/3 for the dev harness, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the M1G9 recommendation engine and the timed refresh loop run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ entity/registry with products, variants, attributes, retailers, price/stock entries, matching weights and the intent schema in JSON (nlohmann/json) with hot-reload.</li><li><b>Prerequisites:</b> G1 (loop &amp; update hooks).</li><li><b>Feeds into:</b> M1G9 (scoring reads this model), M1G8 (Firebase syncs it), M2G11 (search index), M2G2 (the console edits it).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays for the ranker and query pipeline, Tracy profiling, Catch2 stress tests ranking a large synthetic catalog, GitHub Actions Windows+Linux matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening) and the latency budget M2G1 validates on-device.</li></ul></details>
+</li>
+<li><strong>G9 Matching / Ranking Engine — Foundation</strong> — the load-bearing C++ recommender: filter → compare → rank products against the parsed requirements.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Priority queues and weighted scoring over product attributes (price, type, features), hard-constraint filtering (budget/compatibility), incremental re-ranking as preferences change (custom C++) — not a database query.</li><li><b>Prerequisites:</b> G2 (product/attribute model), G1 (tick).</li><li><b>Feeds into:</b> M2G8 (recommendations II + match-explanation), M2G11 (search), the comparison sheet.</li></ul></details>
+</li>
+<li><strong>G6 Custom 2D UI Rendering</strong> — the multi-store price-comparison / savings view rendered custom (satisfies the 2D gate).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 renderer or OpenGL ES, GLSL, FreeType (text), stb_image for the retailer cards, stock badges, savings pills and a price bar on the PC dev build. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (shell &amp; loop).</li><li><b>Feeds into:</b> The price-comparison sheet; M2G6 moderation views reuse the widget layer.</li></ul></details>
+</li>
+<li><strong>G8 Firebase Integration — Identity &amp; Data</strong> — the crowdsourced product/store/price database (CRUD) and accounts.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth, Firestore/Realtime DB for products/stores/prices/contributions, REST API from C++ and the JS/Kotlin SDK on the front-end.</li><li><b>Prerequisites:</b> G2 (data model to sync).</li><li><b>Feeds into:</b> M2G6 (moderation pipeline), M2G8 (reputation/trust as a ranking signal).</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling of ranking/search, ASan on MSVC, memory pools for the catalog/index, and validation on the PC dev build; Linux server set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI; validate ranking/search latency and the GLSurfaceView comparison view on the Pixel 9a.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The native Android deliverable and headroom for large catalogs on-device.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core</strong> — the ImGui monitoring/testing console + the moderation/verification review surface: change search params, trigger searches, view API responses, edit catalog data, action contributions.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ + Dear ImGui, JSON serialization, undo/redo command stack; panels to tune matching weights, inspect API responses and review/verify/correct crowdsourced entries.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s SDL2/3/OpenGL ES renderer (live result preview).</li><li><b>Prerequisites:</b> G2 (data model), M1G9 (engine to drive/inspect).</li><li><b>Feeds into:</b> M2G8 (weights it tunes), M2G6 (moderation actions applied through it).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, packaging of the PC dev build artifact via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI) packaging of the Android APK/AAB; OpenGL ES in a GLSurfaceView where realtime 2D is needed — no SDL on native.</li><li><b>Prerequisites:</b> G3 (CI and test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every ScanIT goal.</li></ul></details>
+</li>
+<li><strong>G8 Ranking / Matching Engine II</strong> — recommendations + &quot;why it matches&quot;: conversational refinement, alternatives and explanations.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Scoring models (weighted features, cosine similarity over attribute/feature vectors), candidate generation, evaluation metrics, and a match-explanation trace; reputation/trust of a price entry as a ranking signal.</li><li><b>Prerequisites:</b> M1G9 (ranking foundation), M1G8 (data).</li><li><b>Feeds into:</b> The recommendation feed, alternatives, and the &quot;why this matches&quot; explanation.</li></ul></details>
+</li>
+<li><strong>G11 Search &amp; Discovery Engine</strong> — the conversational/hybrid search: parse the query, index the catalog, retrieve candidates.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Incremental inverted index, TF-IDF ranking and a custom query parser (C++) that extracts budget/type/attributes from natural language and feeds the ranker; barcode/OCR results enter the same pipeline.</li><li><b>Prerequisites:</b> M1G2 (content model), M1G9 (ranker).</li><li><b>Feeds into:</b> The search bar, refine flow and follow-up questions.</li></ul></details>
+</li>
+<li><strong>G6 Content Moderation Dashboard &amp; Pipeline</strong> — the crowdsourced review/verify/correct/report workflow that turns contributions into trusted data.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Validation filters (C++), a contribution/report queue in Firestore, and a dashboard (ImGui or front-end) for community/admin review, verify, correct and reject.</li><li><b>Prerequisites:</b> M1G2 (content model), M1G8 (Firebase identity/data).</li><li><b>Feeds into:</b> Trusted price/product data; M2G8 (trust as a ranking signal).</li></ul></details>
+</li>
+</ul>
+<p><em>(Proposed new pool goal (requires instructor approval):</em> <strong>Camera Capture &amp; OCR/Barcode Pipeline</strong> — camera frame capture, barcode decode and label/model-number OCR feeding the shared search pipeline; the Social Media pool has no vision goal, so the camera-assisted identification feature would either be a new appended pool goal or folded into M1G2/M2G11. The three picks above stand regardless.<em>)</em></p>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 2 Design + 0 Art (8) — ScanIT is a UX-heavy utility app: the scanner, conversational search + refine, the multi-store comparison sheet, and the crowdsourced contribute/verify flows are a strong two-designer load, while the visual surface (icons, store-logo placeholders, stock badges, savings pills) is UI-art the designers own — there is no character/illustration production, so 0 artists (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). With 0 artists, the designers take the <strong>D11 conditional</strong> as a real graded Design goal each milestone (M1 Art Proof of Concept / M2 Art Implementation Quality) — the last Design goal each milestone.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the scan → search → refine → compare → contribute product spec, the conversational + crowdsourced USP, scope sign-off)</li><li>M1D2 Core-Loop Interactive Prototype (Figma flow: scan/search → refine chips → price-comparison sheet → contribute)</li><li>M1D3 User Research, Personas &amp; Competitive Analysis (teardown of ShopSavvy / PriceRunner / Google Lens; shopper personas; research)</li><li>M1D5 Interaction &amp; Input Design (touch-first scanner, conversational search bar, refine chips, comparison-sheet gestures)</li><li>M1D11 Art Proof of Concept (conditional — no artist: icon set, store-logo/badge visual language, UI style guide)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D2 Visual Branding &amp; Style Guide (ScanIT identity; the stock-badge / savings-pill system)</li><li>M2D5 Playtesting &amp; Iteration Program (search success, comparison clarity, contribution friction)</li><li>M2D11 Art Implementation Quality (conditional — no artist: UI art/icons implemented to standard in the build)</li></ul></li><li><b>UI/UX M1</b> (graded by the UI/UX instructor):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — the scanner, search, comparison and contribute screens.</li><li>M1U2 UX Flows &amp; Wireframes — scan/search → refine → compare → contribute/verify journeys.</li><li>M1U3 Accessibility &amp; Readability Foundations — legible price/badge typography, contrast, thumb-reach targets.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — the required screens navigable unaided on the mobile target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished comparison sheet and search/refine flow.</li><li>M2U3 Menu &amp; HUD Motion Design — result transitions, savings-pill and stock-badge micro-interactions.</li><li>M2U5 Mobile UX Adaptation &amp; Ergonomics — camera-first, one-handed scan/search on the Pixel 9a.</li></ul></li><li><b>Art:</b> 0 artists — the art surface is covered by the D11 conditionals, taken as Design goals (see Design M1/M2).</li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — light UI/scan feedback SFX and optional subtle ambience from the week-5 needs list, present &amp; working in the prototype (scan confirm, result ready, error), suitable and correctly triggered. Audio is not load-bearing here — a lecturer waiver on scope may apply.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback for overlapping UI SFX.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — the standard floor tailored down for a utility app (scan/confirm/error SFX + optional ambience in the showcase build).</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing for stacked UI cues).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the ImGui console), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
