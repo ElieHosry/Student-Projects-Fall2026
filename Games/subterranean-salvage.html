@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Subterranean Salvage</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="subterranean-salvage.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="subterranean-salvage.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Subterranean Salvage</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="subterranean-salvage-student-proposal">Subterranean Salvage <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> A collection-based extraction game in a 2D pixel-art style for the web. The player is a treasure hunter sending drones into the Red Zone, evading enemies with heightened hearing by making minimal sound and sneaking, looting homes and chests for items lost to time, and returning to the safe zones before the drone&#39;s limited battery runs out. Collected items grant points (rarer = more), and players compete on a leaderboard. Named technical features: a <strong>sound-based raycasting system</strong> (object interactions produce noise; enemy AI detects and pathfinds to the audio source); a <strong>real-time surface lighting system</strong> (a cone light dynamically illuminates surroundings when a light source is equipped); a <strong>dynamic per-level difficulty framework</strong> (positions enemies around high-value loot and key objectives); and an <strong>online leaderboard API + cloud database</strong>. The load-bearing C++ does real-time acoustic raycasting — radial sound waves on drone noise (fast propulsion, cracking chests) with falloff, obstacle dampening and reflections to alert sound-sensitive enemies. Custom tool: a Red Zone Extraction Level Editor (paint tile layouts, place safe extraction zones, position homes/ruins/loot chests). Design features: environment-driven gameplay; evasion-based extraction (no combat — only outrun/hide/sneak); ≥3 sets of 3 collectable items depicting the past from a post-apocalyptic view; ≥3 enemy zombie types (Normal, Avoidant, Aggressive) with different interactions/stats.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Mark_of_the_Ninja">Mark of the Ninja — Wikipedia (2D stealth where sounds are shown as expanding circles that alert enemies, with light/dark visibility and a scoring system)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Darkwood_(video_game)">Darkwood — Wikipedia (top-down survival where you scavenge/loot and evade enemies drawn by sound and light)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Escape_from_Tarkov">Escape from Tarkov — Wikipedia (the extraction genre: scavenge loot in a raid and reach an extraction zone within the time limit or lose it)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Subterranean Salvage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Web browser on mobile — the proposal targets web applications (HTML/JS/CSS + the C++ engine compiled to WASM via Emscripten), touch-first on the phone (device: Pixel 9a); the Native PC build is the development/tools &amp; benchmark vehicle. <b>Extended:</b> Firebase + Linux server set up by M2 (full use T2).</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> The pixel-art Red Zone renderer (drone, 3 enemy types, homes/ruins/chests, items), the real-time cone-light/surface lighting, sound-visualisation and detection cues, the battery/loot HUD, safe-zone/extraction UI and the leaderboard (OpenGL ES / WebGL). <b>Languages:</b> Web — HTML/JS/CSS + C++→WASM (Emscripten, SDL2/3, OpenGL ES/WebGL). (Web-on-mobile target — no native Android build this trimester; the Native PC build is the dev/tools vehicle.)</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> Engine core (fixed-timestep loop, entity system, drone movement &amp; collision, the acoustic raycasting/propagation service, enemy AI &amp; sound-source pathfinding, loot/battery/extraction systems, per-level difficulty placement) + a leaderboard service. <b>Languages:</b> C++.<br><b>Backend scope:</b> Local now, server-ready (T2) — leaderboard/cloud DB seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the load-bearing C++ is the <strong>acoustic raycasting service</strong> — on drone noise it casts radial sound waves and computes falloff, obstacle dampening and reflections in real time, feeding sound-sensitive enemy AI that pathfinds to the source; the fixed-timestep loop also advances drone movement, the battery timer, loot and the 3 enemy behaviours.</li>
+<li><em>Data-driven:</em> tile layouts, the Red Zone/homes/ruins/chests, the 3 enemy types and stats, the item sets, difficulty rules and acoustic/lighting parameters are all hot-reloadable JSON — no hard-coded levels, enemies or items.</li>
+<li><em>2D:</em> pixel-art sprite/tile rendering of the Red Zone, drone, enemies, items and chests, plus the real-time cone-light/surface lighting and sound-wave visualisation (custom-rendered). <em>3D:</em> not needed. <em>Networking:</em> async online leaderboard; no real-time netcode.</li>
+<li><em>Custom tool:</em> the <strong>Red Zone Extraction Level Editor</strong> — paint tile layouts, place safe extraction zones and position homes, ruins and loot chests, with live preview.</li>
+<li><em>External DB:</em> the cloud leaderboard/high-score database. <em>Auth ⏭️:</em> accounts for leaderboard identity. <em>Analytics ⏭️:</em> optional — where runs fail (detected / battery-out / by which enemy), for difficulty tuning.</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window with touch input and a fixed-timestep loop advancing the drone, the battery timer, the acoustic pass and enemy updates; C++17/20, CMake, Git; Emscripten→WASM for the web target.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; M1G6 acoustic raycasting and M1G8 enemy AI run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Entity/component registry in C++ with tiles, the Red Zone/chests/items, the 3 enemy types &amp; stats, difficulty rules and acoustic/lighting parameters in JSON (nlohmann/json) with hot-reload.</li><li><b>Prerequisites:</b> G1 (loop &amp; entity update hooks).</li><li><b>Feeds into:</b> M2G2 (the level editor edits this data), M1G6/M1G8 (acoustic + enemy data), M2G10 (difficulty placement).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays for sound-wave propagation, enemy alert state and detection, Tracy profiling, Catch2 stress tests (many simultaneous sound sources + enemies), GitHub Actions Windows+Linux matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening) and the WASM frame budget M2G1 validates.</li></ul></details>
+</li>
+<li><strong>G6 Audio System</strong> — the acoustic raycasting/propagation service: radial sound waves, falloff, obstacle dampening and reflections that alert enemies.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A C++ acoustic model casting radial rays on noise events (propulsion, chest-cracking), computing falloff, obstacle dampening and reflections, and emitting alert events to enemy AI; FMOD/OpenAL for the actual SFX playback tied to the same events.</li><li><b>Prerequisites:</b> G1 (loop/tick), G2 (acoustic parameters as data).</li><li><b>Feeds into:</b> M1G8 (enemies pathfind to the loudest source); the core stealth mechanic.</li></ul></details>
+</li>
+<li><strong>G8 Enemy AI &amp; Pathfinding</strong> — hearing-based detection + pathfind-to-sound for the 3 enemy types (Normal, Avoidant, Aggressive).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A*/flow-field pathfinding to the alerting sound source, steering, and finite-state machines for the 3 enemy types&#39; distinct behaviours/stats (custom C++), tuned from data.</li><li><b>Prerequisites:</b> G1 (tick), G2 (enemy data), G6 (sound alerts).</li><li><b>Feeds into:</b> M2G10 (advanced behaviour + difficulty placement); the evasion loop.</li></ul></details>
+</li>
+<li><strong>G5 Physics &amp; Collision</strong> — drone movement, collision with the environment/chests, and the raycast geometry the acoustic system uses.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ + GLM math, a custom integrator for drone movement, broadphase (uniform grid / quadtree), collision resolution, and ray/segment intersection against walls/obstacles (shared by acoustics and line-of-sight).</li><li><b>Prerequisites:</b> G1 (loop &amp; tick).</li><li><b>Feeds into:</b> M1G6 (obstacle dampening/reflection geometry); movement feel.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling of the acoustic/AI passes, ASan on MSVC, memory pools for enemies/sound events, and Emscripten→WASM validation on the mobile-web target plus Pixel 9a browser checks; Linux server set up (account + software + basic connectivity test) by M2.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The web/mobile deliverable and headroom for dense acoustic/enemy scenes.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core</strong> — the Red Zone Extraction Level Editor: paint tiles, place safe/extraction zones, and position homes, ruins and loot chests.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui editor authoring tile layouts, extraction/safe zones, structure and chest placement, enemy spawns and item tables as JSON, with round-trip serialization and an undo/redo command stack.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s SDL2/3/OpenGL ES renderer (live Red Zone preview).</li><li><b>Prerequisites:</b> G2 (tile/entity data), M1 rendering.</li><li><b>Feeds into:</b> The playable Red Zone maps; M2G10 (difficulty tuning applied through it).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, and packaging of the Emscripten web build artifact (and the desktop dev build) via GitHub Actions.</li><li><b>Prerequisites:</b> G3 (CI and test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every Subterranean Salvage goal.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics — Advanced</strong> — the real-time cone-light and surface lighting system.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> OpenGL ES / WebGL shaders and framebuffers for a real-time cone light and dynamic surface illumination, with shadow/occlusion from walls; texture atlases for the pixel-art set.</li><li><b>Prerequisites:</b> M1 2D rendering; M2G1 (optimization).</li><li><b>Feeds into:</b> The atmosphere and readability of the darkened Red Zone.</li></ul></details>
+</li>
+<li><strong>G10 AI — Advanced</strong> — behavior trees for the 3 enemy types + the dynamic per-level difficulty framework.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Behavior trees / difficulty tiers over the M1 AI foundation, plus a placement system that positions enemies around high-value loot and key objectives per level (custom C++).</li><li><b>Prerequisites:</b> M1G8 (AI &amp; pathfinding foundation), M1G6 (sound alerts).</li><li><b>Feeds into:</b> Showcase difficulty; the risk/reward around rare loot.</li></ul></details>
+</li>
+<li><strong>G8 Firebase — Accounts, Leaderboards &amp; Analytics</strong> — the online leaderboard + cloud high-score database.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth accounts, Firestore leaderboards (points by run), optional Analytics for run-failure funnels, via the REST API from C++ / JS SDK on the web front-end; server-validated score submission.</li><li><b>Prerequisites:</b> G2 (run/score data model).</li><li><b>Feeds into:</b> Competitive leaderboards; M2G10 difficulty telemetry.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + 2 Art (9) — a 2D pixel-art world (the Red Zone tileset, homes/ruins/chests, the drone, 3 enemy zombie types, ≥9 collectable items and the lighting/VFX) is a big art slot, so 2 artists; a solo designer owns the acoustic-stealth/extraction loop, the level and difficulty design and the item/point economy (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). If level/content volume grows, trade the 2nd artist for a 2nd designer. <em>Scope note (advisory):</em> acoustic sim + real-time lighting + difficulty framework + editor + 3 enemies + 9 items is a large surface — treat the acoustic-stealth extraction core with 1–2 hand-built Red Zones + the editor as the M1/M2 floor, with the difficulty framework and full item sets as the stretch.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the sneak → loot → evade → extract-before-battery loop and the point economy; benchmark e.g. Mark of the Ninja for sound/stealth readability)</li><li>M1D2 Core Gameplay Loop Prototype (greybox proving sound-based evasion + loot + extract is tense and fun) · prototype in Unity</li><li>M1D6 Level &amp; Progression Design (Red Zone layouts, the acoustic/loot risk-reward, and the teach-test-twist curve for the hearing mechanic)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D3 Systems Balance &amp; Tuning — Data-Driven (enemy hearing, battery budget, loot value and difficulty placement via the team&#39;s JSON, no code changes)</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the battery/loot HUD, the sound-visualisation cue and the extraction prompt.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — standard screens + the loot/extract/leaderboard flow navigable unaided on the mobile-web target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished HUD and touch controls in the browser on the Pixel 9a.</li></ul></li><li><b>Art M1:</b> 2 artists justified (pixel-art environment + enemies + items + lighting)<ul><li>M1A1 ⭐ (mockups: main menu + a Red Zone in play, lit by the cone light)</li><li>M1A2 Characters (the drone + the 3 enemy zombie types — Normal, Avoidant, Aggressive, silhouette-first)</li><li>M1A3 Environment (Red Zone tileset — homes, ruins, chests, safe/extraction zones)</li><li>M1A4 UI Art Concepts &amp; Typography (battery/loot HUD, sound cue, extraction prompt)</li><li>M1A5 Animation Foundations (drone move/propulsion, enemy idle/alert/chase, chest-open)</li><li>M1A6 Early Asset Production (incl. the first item sets)</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐</li><li>M2A2 Extensive Animation (enemy behaviours per type, drone states, loot interactions)</li><li>M2A3 Environment Alive (ambient motion, the ≥9 collectable-item art depicting the past)</li><li>M2A4 UI Art — States &amp; Feedback (heard/alerted, low battery, item rarity, extraction success)</li><li>M2A5 VFX — Effects &amp; Transitions (sound-wave visuals, cone-light glow, extraction)</li><li>M2A6 Cutscenes &amp; Storyboards (intro to the Red Zone premise)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — <b>audio is load-bearing here</b> (sound IS the mechanic): the SFX the acoustic system emits (propulsion, chest-crack, footstep, enemy alert) must be present, suitable, and <b>correctly synced</b> to the sound-raycasting events in the prototype, plus atmospheric BGM.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback (many overlapping sound sources) tied to the acoustic model.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Games floor with a <b>load-bearing sync clause</b>: BGM + a full SFX set (propulsion, loot, footsteps, enemy alerts, extraction, ≥6 types) that accurately reflects the acoustic simulation (louder actions = larger, more audible sound).</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback the build needs (multi-channel mixing; spatialisation matching the sound-raycasting so the player can judge how loud they are).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the Red Zone level editor), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
