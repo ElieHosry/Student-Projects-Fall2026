@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Stridelings</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="stridelings.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="stridelings.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Stridelings</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="stridelings-student-proposal">Stridelings <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games <i>(gamified-app lens)</i> · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>Stridelings</em> is a <strong>gamified fitness-tracking app</strong> that turns walks and runs into a <strong>creature-collecting game without interrupting the workout</strong>. A tracked session records distance, pace, route and time, with a chosen <strong>Strideling</strong> as companion. The Singapore map is gamified into a <strong>biome grid</strong> (4 biome types), each biome with its own resources and Stridelings of various rarities; resources auto-gather as the user moves and Stridelings follow with interest. At session end, the user keeps the Stridelings that followed to the end and levels their companion by the session; gathered resources decorate a <strong>home base</strong> where creatures hang out. Biomes <strong>rotate weekly</strong>, pushing new routes; daily/weekly missions tailored to the user&#39;s goals reward consistency. Named load-bearing C++: a <strong>real-time GPS signal-conditioning pipeline</strong> (Kalman-style filtering/smoothing of noisy GPS + spoofing/abnormality detection); a <strong>real-time 2D map render via OpenGL ES</strong> from <strong>GeoJSON</strong> queried from a <strong>PostgreSQL + PostGIS</strong> server; <strong>offline session recording</strong> (local SQLite) synced to the server at session end for <strong>validation + reward issue</strong> (so recording survives tunnels/deadzones); and a <strong>data-driven content pipeline</strong> (all Stridelings, biomes, resources and drop tables defined externally, edited in the team&#39;s editors, exported as <strong>versioned content packs</strong>, shipping content without code changes). The sim loop reads GPS to update distance/pace, determine the current biome, decide resource collection and creature joins. Tools: a <strong>creature-creation tool</strong> (spritesheets, stats, spawn, rarity); a <strong>session simulator</strong> (synthetic GPS traces treated as real sessions with real rewards, for dev testing); a <strong>biome editor</strong> (biome art + collectible resources); and a <strong>debugger/logger</strong> (location/updates, biome changes, creature encounters, rewards, missions, system errors). Design features: an <strong>interaction-free session</strong> (stats screen + map screen with creatures visibly joining, easy switch); the <strong>grid-based rotating biomes</strong>; <strong>creature collecting</strong> (unique companion passives — e.g. more resources / rarer encounters — level-ups unlock passives, duplicates fuse to enhance); and the <strong>home base</strong> (tap-to-interact creatures + furniture bought with gathered resources). Team: <strong>6 CS + 1 Design + 0 Art</strong>.</p>
+<p><em>Note (category):</em> like other <strong>gamified apps</strong>, Stridelings is filed under <strong>Games</strong> (there is no separate fitness/health category) — assessed through the gamified-app lens (session/economy/retention systems), the same way the module treats step-and-pet and habit-loop projects.</p>
+<p><em>Note (module completeness):</em> the proposal&#39;s server is <strong>PostgreSQL + PostGIS</strong> on the team&#39;s <strong>Linux server</strong> — exactly the module&#39;s Extended tier (a Linux server set up by M2, full use T2). Firebase is the module&#39;s default external DB; the team may use it for auth/accounts or keep PostGIS as the primary store (either is fine — just set the seam up + basic-test it by M2). <em>Monetization:</em> none is specified and the economy is <strong>earn-by-exercise</strong> (resources → furniture), which is clean; if real-money purchases are ever added, keep them <strong>cosmetic / non-pay-to-win</strong> (no buying rarity or power) per the module&#39;s clean-monetization rule — worth stating explicitly given the rarity/fusion systems.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Pikmin_Bloom">Pikmin Bloom — Wikipedia (Niantic&#39;s step-tracking companion app: creatures grow from and <strong>follow you as you walk</strong>, collected over real-world movement without interrupting the walk — the fitness-walk + creatures-follow-you precedent)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Pok%C3%A9mon_Go">Pokémon Go — Wikipedia (the location-based creature-collecting benchmark: a gamified real-world map with creatures to encounter and collect as the player moves through GPS space — the map-as-game-board + collect-by-moving precedent)</a></li>
+<li><a href="https://play.google.com/store/apps/details?id=com.sixtostart.zombiesrunclient">Zombies, Run! — Google Play (the benchmark gamified running app that layers a game over the run <strong>without interrupting the workout</strong>, rewarding consistency through missions — the non-interruptive-fitness-game precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Stridelings</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — C++ engine via JNI, OpenGL ES map rendered in a GLSurfaceView, Kotlin app shell; device: Pixel 9a) — GPS, background-safe offline recording and on-device SQLite are native concerns. The Native PC build is the development/tools vehicle (the creature-creation tool, biome editor, session simulator and logger). <b>Extended:</b> the team&#39;s <b>Linux server + PostgreSQL/PostGIS</b> (set up by M2, full use T2) serving GeoJSON + validating sessions and issuing rewards; Firebase optionally for auth/accounts.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A 2D app — the interaction-free session (stats screen + the OpenGL ES map with the biome grid and Stridelings visibly joining), the collection, the companion/level UI and the decoratable home base. <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine/services via JNI (Android Studio); OpenGL ES for the realtime map in a GLSurfaceView; some screens (collection, home, missions) can be pure Native UI. Web/desktop — SDL2/3 + OpenGL ES for the PC dev/tools build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> Two layers. On-device C++: the GPS signal-conditioning pipeline (Kalman filtering + spoof/abnormality checks), the real-time session sim loop (distance/pace, biome resolution, resource collection, creature joins), the map renderer, and the offline SQLite recorder. Server: the Linux + PostgreSQL/PostGIS service that serves GeoJSON, validates uploaded sessions and issues rewards, and hosts the versioned content packs. <b>Languages:</b> C++ (device engine/services); server (Postgres/PostGIS + the team&#39;s service layer); Firebase optional.<br><b>Backend scope:</b> Local + offline now, server-validated (T2) — the upload/validate/reward seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ sim loop reads conditioned GPS each tick to update distance/pace, resolve the current biome cell, decide resource collection and creature joins, and drive the two session screens; the <strong>GPS signal-conditioning pipeline</strong> (Kalman filter + spoof detection) is a distinct C++ performant service feeding it.</li>
+<li><em>Data-driven:</em> Stridelings (stats/rarity/spawn/passives), the 4 biomes + their resource/drop tables, missions and home furniture are all <strong>external content packs</strong> — new content ships without a rebuild (this is a named, load-bearing requirement, not an afterthought).</li>
+<li><em>2D:</em> the OpenGL-ES map render from server GeoJSON, the biome grid, the joining creatures, the collection and the home base (custom-rendered). <em>3D:</em> not needed.</li>
+<li><em>Front-end + Back-end:</em> a genuine client/server split — device app + Linux/PostGIS server that validates sessions and issues rewards; the offline-record-then-upload flow is <strong>Application Communication</strong> ✅.</li>
+<li><em>Custom tools:</em> four — the <strong>creature-creation tool</strong>, the <strong>biome editor</strong>, the <strong>session simulator</strong> (synthetic GPS traces), and the <strong>debugger/logger</strong>.</li>
+<li><em>Networking:</em> no real-time multiplayer — sessions upload asynchronously after they end, so a Networking System is optional (🔵). <em>External DB:</em> central (PostGIS + content packs + per-user collections). <em>Auth ⏭️ / Analytics ⏭️:</em> accounts and consistency analytics are natural but module-deferred to T2 (🔵).</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — the session loop + the <strong>GPS signal-conditioning</strong> service.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> A fixed-timestep C++ loop reading conditioned GPS to update distance/pace, resolve the biome cell, and decide resource collection + creature joins; a GPS signal-conditioning pipeline (Kalman filter, smoothing, spoof/abnormality checks) feeding it; C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); GPS + OpenGL ES map in a GLSurfaceView; some screens pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the map render (M1G4), creature behaviour (M1G8) and the offline recorder (M1G12) run off its state.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong> — the <strong>content-pack</strong> backbone.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> An entity/data model with Stridelings (stats/rarity/spawn/passives), the 4 biomes + resource/drop tables, missions and furniture in hot-reloadable, **versioned** JSON content packs — a new creature or biome is a data change, no rebuild.</li><li><b>Prerequisites:</b> G1 (loop &amp; entity hooks).</li><li><b>Feeds into:</b> M2G2 (creature-creation tool), M2G6 (biome editor + content-pack export), M1G8 (creature data).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong> — the <strong>debugger/logger</strong> + the <strong>session simulator</strong>.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A session logger (location, updates, biome changes, creature encounters, rewards, missions, errors), ImGui overlays, a session simulator that feeds synthetic GPS traces through the real loop, Tracy profiling of a long session, and Catch2 tests (GPS conditioning, biome resolution, reward validation), on a GitHub Actions matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the session-simulator tool at showcase.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the real-time <strong>OpenGL ES map render</strong> from server GeoJSON + the joining creatures.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> An OpenGL ES renderer drawing the map from GeoJSON (polygons/paths), the biome-grid overlay, the user&#39;s route, and the Stridelings visibly joining, plus the stats HUD; SDL2/3/OpenGL ES, GLSL, FreeType. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES map in a GLSurfaceView; some screens pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window); server GeoJSON.</li><li><b>Feeds into:</b> The session map screen; the biome editor shares this renderer.</li></ul></details>
+</li>
+<li><strong>G8 Enemy AI &amp; Pathfinding</strong> — the <strong>creature spawn + follow behaviour</strong> (Stridelings follow with interest, join/leave).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Biome-weighted spawning by rarity, steering so creatures follow the moving user with interest, and the join/keep/leave logic (kept if they follow to session end), tuned from creature data (custom C++).</li><li><b>Prerequisites:</b> G1 (session state), G2 (creature/biome data).</li><li><b>Feeds into:</b> M2G13 (collection/level/fuse/passive systems); the collect-by-moving pillar.</li></ul></details>
+</li>
+<li><strong>G12 Save / Persistence &amp; Server Integration</strong> — <strong>offline SQLite recording</strong> + end-of-session upload/validation.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Local SQLite recording that survives tunnels/deadzones, then an end-of-session upload to the Linux/PostGIS server which validates the trace and issues rewards; REST from C++ (JS SDK / Firebase optional for auth). <b>Web build</b> uses the same service API.</li><li><b>Prerequisites:</b> G1 (session data to record), G2 (reward/content data).</li><li><b>Feeds into:</b> M2G8 (server accounts/validation/analytics); reliable rewards.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong> — on-device battery/perf + the Linux/PostGIS server seam.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Profiling + optimization of a long session (battery-aware GPS/render cadence), sanitizers, and on-device validation (Pixel 9a); the Linux + PostgreSQL/PostGIS server (GeoJSON + session validation + content packs) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES map in a GLSurfaceView; some screens pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The mobile deliverable + a battery-viable long session.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Creature-Creation Tool)</strong> — spritesheets, stats, spawn locations, rarity.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui (or a small external editor): upload a spritesheet, set stats/passives, spawn biomes and rarity, round-trip JSON into a content pack, with live preview and undo/redo.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s renderer (preview).</li><li><b>Prerequisites:</b> G2 (creature data model).</li><li><b>Feeds into:</b> All creature content; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android builds, tests (GPS conditioning + spoof detection, biome resolution, session validation, content-pack loading — driven by the session simulator&#39;s synthetic traces) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES map in a GLSurfaceView; some screens pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G6 Content Editor — Advanced (Biome Editor + Versioned Content Packs)</strong> — biome art/resources + content-pack export.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui advanced widgets: edit each biome&#39;s art assets and collectible resources/drop tables, assemble creatures + biomes + missions into a **versioned content pack**, and export it so new content ships without rebuilding; live preview binding, undo/redo depth.</li><li><b>Prerequisites:</b> M2G2 (editor core), G2 (data model).</li><li><b>Feeds into:</b> Fast content authoring; T2 live content updates.</li></ul></details>
+</li>
+<li><strong>G8 Server — Accounts, Session Validation, Missions &amp; Analytics</strong> — the PostGIS/Firebase back-end.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> The Linux + PostgreSQL/PostGIS service (or Firebase for auth): per-user accounts + collections, server-side session validation + reward issue, the daily/weekly mission system, the weekly biome-rotation job, and consistency analytics; security so a client can&#39;t forge a session or rewards.</li><li><b>Prerequisites:</b> M1G12 (offline record + upload), M2G1 (server set up).</li><li><b>Feeds into:</b> Trustworthy rewards + missions; T2 live-ops.</li></ul></details>
+</li>
+<li><strong>G13 Gameplay Systems II</strong> — the <strong>collection / level / fuse / passives</strong> + the <strong>home base</strong>.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ systems over the entity/data model: the collection, companion level-ups unlocking passives, duplicate **fusion** enhancing passives, the resource economy + furniture purchases, and the tap-to-interact home base; balancing-data-driven via the content packs.</li><li><b>Prerequisites:</b> M1G8 (creatures), G2 (creature/resource data).</li><li><b>Feeds into:</b> The meta-loop depth at showcase; T2 content expansion.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + <strong>1 Art</strong> (8) — a creature-collector is an <strong>art-heavy</strong> genre (many Stridelings across rarities, 4 distinct biomes, home-base furniture, UI), so the proposed <strong>6 CS + 1 Design + 0 Art is the module&#39;s tight case</strong>: with no artist, the single designer must also carry the <strong>D11 conditional</strong> (Art POC / Art Implementation Quality) each milestone, and a <strong>solo designer + 0 artists</strong> is exactly the situation the design pool flags — such a team &quot;must ask the instructor which conditional bends&quot; (see <code>design-goals-pool.pdf</code>). <strong>Strongly recommended: add 1 Artist</strong> (best for a monster-collector&#39;s asset volume), or at least a <strong>2nd designer</strong> so one owns the session/economy/retention design and the other absorbs the D11 art surface. If the team stays 0-artist, scope the art hard: a <strong>small, reusable, stylised creature/biome set</strong> (a few base silhouettes recoloured by rarity/biome; tile-based biome art) authored/sourced under D11, and expect the instructor sign-off on the bent conditional. <em>Scope note (advisory):</em> a Kalman GPS pipeline + a GeoJSON OpenGL-ES map + offline-record-and-validate + a data-driven content pipeline + four tools + a client/server split is a <strong>large, server-heavy CS scope</strong> — one biome type, basic GPS→distance/creature-join, offline record + a stub validate, and one editor is the M1/M2 floor; the 4 rotating biomes, spoof detection, fusion/passives, the home base and all four tools are the stretch. The <strong>content-pack pipeline is the smartest lever</strong> here — it lets the (small) team ship creatures/biomes as data without engineering time per item.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / TEAM picks for this project (no Art track as proposed — 0 artists, so the Art surface is carried by the Design-owned D11 conditional; adding an artist is recommended, see above); deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the gamified-fitness USP, the biome grid + weekly rotation, the creature-collect/level/fuse economy, the home base and the non-interruptive session; primary benchmark e.g. Pikmin Bloom / Pokémon GO, plus a Singapore benchmark — Healthy 365 fits the local-awareness criterion)</li><li>M1D9 Engagement &amp; Retention Loop Design (the daily/weekly missions tied to the user&#39;s goals, the biome-rotation variety loop and the collection meta — with the ethics line: engagement serves the user&#39;s fitness goal, never dark-pattern or pay-to-win)</li><li>M1D11 Art Proof of Concept *(conditional — mandatory for 0-artist teams; Design-owned)* — the stylised creature/biome visual direction: a small reusable creature set recoloured by rarity/biome, the 4 biome looks, home-base style; 2 mockups.</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D11 Art Implementation Quality *(conditional — mandatory for 0-artist teams; Design-owned)* — the creature/biome/home art implemented in-engine, no placeholders.</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the two session screens (glanceable stats + the map with joining creatures), the collection and the home base, plus a wireframe baseline; special attention to <b>glanceability while moving</b> (the non-interruptive session).</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — the session screens, collection, companion/level, missions and home base navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished non-interruptive-session + collection UX tested with real walkers/runners on the Pixel 9a.</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial BGM/SFX from the week-5 needs list present &amp; working in the prototype (ambient session BGM, resource-collect, creature-join, level-up, mission-complete cues), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard floor (ambient BGM + collect / creature-join / level / fuse / mission / home SFX, ≥6 types), suited to a non-interruptive, often screen-off session.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing; distinct creature-join + reward cues).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the creature-creation tool + the biome editor + the session simulator), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
