@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>OctoNav</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="octonav.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="octonav.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">OctoNav</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="octonav-student-proposal">OctoNav <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Immersive Experience · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval · <b>Runner-up category:</b> Visualization &amp; Analytics</div>
+
+<p><strong>Proposal (as submitted):</strong> An Android app (Android Studio) providing <strong>indoor navigation for SIT Block E2</strong> with a <strong>real-time 3D / isometric campus view</strong>. Users pick a destination and a mobility preference; the system computes an <strong>optimal multi-floor route</strong> weighted by distance, turn count and accessibility. Campus geometry is captured via <strong>dedicated LiDAR walk-throughs</strong>; users can report temporary obstructions in real time, feeding <strong>live rerouting</strong>. The app has login (Google / school email), bottom-tab navigation, a user profile and a local database for search history and saved data. Named technical features: custom <strong>2.5D and 3D visualization</strong> of Block E2; a <strong>cloud database</strong> to share data between devices in real time; a <strong>nodes-to-model</strong> step that turns LiDAR readings into working models; and a <strong>pathfinding engine</strong> searching across three axes (X, Y, Z). Core-requirement notes: a <strong>frame-bounded C++ loop</strong> that each tick pulls in new/buffered LiDAR data, updates the internal structure, and renders the current state to a 2.5D and a 3D viewport. Tools: a <strong>raw-sensor → point-cloud conversion tool</strong> and an <strong>engine inspector</strong> (query point attributes; visual debug overlays for octree bounds). Design features: real-time crowdsourced updates on closures/obstacles; dynamic routing on live crowd densities; in-depth 1:1 LiDAR mapping; and accessibility (wheelchair / physically-handicapped) <strong>conditional routing</strong>.</p>
+<p><em>Note on category:</em> filed under <strong>Immersive Experience</strong> — the deliverable is an explorable, real-time 3D/2.5D reconstruction of a real building navigated with the team&#39;s own engine, matching the category&#39;s <em>&quot;virtual campus tour&quot;</em> exemplar. Runner-up <strong>Visualization &amp; Analytics</strong> (the live crowd-density / route data as moving data) — but OctoNav is a navigable spatial world, not a dashboard, so Immersive Experience is the better home. (Not GovTech: there is no staff/operations side or roles/audit trail.)</p>
+<p><strong>Scope &amp; risk note (advisory, not a blocking condition):</strong> LiDAR capture → point-cloud → nodes-to-model → octree → 3-axis pathfinding → real-time 3D render → live crowdsourced rerouting is a <strong>large, ambitious surface</strong>, and this is a genuine <strong>3D</strong> project (the &quot;strong students only&quot; row) — the LiDAR/point-cloud → model pipeline is the key risk. Scope the floor to <strong>one or two floors of Block E2</strong> from a curated capture, with the C++ loop, the octree + 3-axis pathfinding and the 2.5D/3D view proven; treat the full-building capture, live crowd-density rerouting and cloud real-time sync as the stretch.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://www.google.com/maps/about/partners/indoormaps/">Google Maps Indoor Maps — Google (official indoor-mapping + multi-floor &quot;Live View&quot; indoor navigation that understands altitude/floors — the multi-floor indoor-wayfinding precedent)</a></li>
+<li><a href="https://matterport.com/blog/lidar-room-mapping">Matterport — &quot;A Tactical Guide to LiDAR Room Mapping&quot; (LiDAR walk-throughs turned into an accurate, <strong>navigable 3D digital twin</strong> of a building — the LiDAR-capture → navigable-3D-model precedent)</a></li>
+<li><a href="https://www.mappedin.com/resources/blog/accessible-indoor-navigation-software/">Mappedin — &quot;Accessible indoor navigation software&quot; (indoor wayfinding with <strong>barrier-free / wheelchair routing</strong> that prioritizes elevators and avoids stairs — the accessibility conditional-routing precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>OctoNav</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — the stated build; device: Pixel 9a) — a touch app with a real-time 2.5D/3D campus view and a bottom-tab shell; the Native PC build is the development/tools vehicle (the conversion tool + engine inspector). <b>Extended:</b> Firebase (cloud DB for real-time cross-device sharing of obstruction reports + crowd density; Google/school-email auth) + a Linux server the team sets up by M2 (full use T2) for the LiDAR point-cloud processing pipeline.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A real-time renderer of Block E2 in both a **2.5D** and a **3D** viewport (multi-floor geometry, the computed route highlighted, obstruction markers, the mobility-preference and destination UI, bottom-tab nav, profile). <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine via JNI (Android Studio); OpenGL ES for the realtime 2.5D/3D drawn in a GLSurfaceView; Web/desktop — SDL2/3 + OpenGL ES for the PC dev/tools build (conversion tool + inspector).</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The frame-bounded C++ loop (ingest LiDAR/point-cloud data → update the octree spatial structure → render both viewports) + the **3-axis (X,Y,Z) multi-floor pathfinding** weighted by distance/turns/accessibility + live rerouting from crowd/obstruction data; plus the cloud DB for real-time sharing and the LiDAR point-cloud processing on the server. <b>Languages:</b> C++ (loop + pathfinding); Firebase-backed services + the server pipeline on the Extended tier.<br><b>Backend scope:</b> Server-indicated (T2) — the cloud real-time-sync + LiDAR-processing seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ loop is load-bearing — each tick it pulls in new/buffered LiDAR/point-cloud data, updates the octree spatial structure, runs any pending 3-axis pathfinding/rerouting, and renders the current state to the 2.5D and 3D viewports.</li>
+<li><em>Data-driven:</em> the campus geometry (from the nodes-to-model step), node/edge graph with accessibility attributes, room/destination metadata and routing weights are all data, authored/converted via the tools — a new floor or obstruction is a data change.</li>
+<li><em>2D:</em> the 2.5D viewport, the route/turn overlays, the obstruction markers and the app UI (bottom-tabs, profile, search) are custom 2D rendering — satisfying the 2D gate. <em>3D:</em> ✅ <strong>central</strong> — the real-time 3D campus view + the octree/3-axis spatial work (strong-students; the key risk). <em>Networking:</em> the real-time cross-device sharing of reports/crowd density is via the cloud DB (Application Communication ✅), so a bespoke real-time Networking System is optional (🔵).</li>
+<li><em>Custom tool:</em> the <strong>conversion tool</strong> (raw LiDAR/sensor input → the engine&#39;s internal point-cloud format) <strong>and</strong> the <strong>engine inspector</strong> (query point attributes, octree-bounds debug overlays).</li>
+<li><em>External DB:</em> the cloud DB (real-time reports/crowd density, cross-device) + the local DB (search history, saved data). <em>Auth ⏭️:</em> Google / school-email login. <em>Analytics ⏭️:</em> optional — common routes / bottleneck reporting.</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Immersive Experience pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + the frame-bounded C++ loop (ingest LiDAR/point-cloud → update the octree → render both viewports), plus the bottom-tab app shell and destination/mobility input; C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2.5D/3D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the octree (M1G8) and pathfinding (M1G12) run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Data model in C++ for the campus geometry, the node/edge navigation graph with accessibility attributes, room/destination metadata and routing weights, in JSON/serialized form, hot-reloadable — a new floor or obstruction is a data change.</li><li><b>Prerequisites:</b> G1 (loop &amp; update hooks).</li><li><b>Feeds into:</b> M2G2 (the conversion/editor tools), M1G12 (pathfinding graph), M2G12 (cloud sync of reports).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui debug overlays (octree bounds, point attributes — the basis of the inspector tool), Tracy profiling of the ingest→update→render→pathfind budget on a full-floor point cloud, Catch2 tests for the pathfinding and data loading, on a GitHub Actions Windows+Android matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the on-device budget M2G1 validates; the engine inspector.</li></ul></details>
+</li>
+<li><strong>G4 2D Scene Rendering &amp; Animation System</strong> (extended to <strong>2.5D + 3D</strong>) — the dual-viewport campus renderer is the whole read of the app.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> A renderer with a 2.5D (isometric) and a 3D viewport of the multi-floor campus (camera, lit geometry, the highlighted route, obstruction markers), batching, depth; OpenGL ES, GLSL, FreeType HUD. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2.5D/3D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window), G8 (geometry to draw).</li><li><b>Feeds into:</b> M2G4 (Rendering II — 3D shading/lighting per floor); every visible frame.</li></ul></details>
+</li>
+<li><strong>G8 Scene Graph &amp; Content System</strong> — the <strong>octree spatial structure</strong> built from the LiDAR nodes-to-model step that holds the campus geometry.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> An octree/scene structure in C++ holding the point-cloud-derived geometry and the walkable node graph, with the nodes-to-model conversion that turns LiDAR readings into the working model; spatial queries for rendering + pathfinding.</li><li><b>Prerequisites:</b> G1 (loop), G2 (data model).</li><li><b>Feeds into:</b> M1G4 (what it renders), M1G12 (what it paths over), the inspector/conversion tools.</li></ul></details>
+</li>
+<li><strong>G12 Map / Navigation System</strong> — the <strong>3-axis (X,Y,Z) multi-floor pathfinding</strong> weighted by distance, turns and accessibility, with rerouting.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A* / weighted graph search across X/Y/Z (multi-floor, via stairs/lifts), cost weights for distance, turn count and accessibility (conditional routing for wheelchair users), and a rerouting path that responds to obstruction/crowd updates.</li><li><b>Prerequisites:</b> G1 (tick), G8 (the node graph).</li><li><b>Feeds into:</b> The route the renderer draws; M2G12 (live crowd/obstruction data drives rerouting).</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling of the ingest→update→render→pathfind loop on a full floor, ASan on MSVC, memory pools for the point cloud/octree, and on-device validation (Pixel 9a); the Firebase/Linux-server seam (cloud sync + LiDAR processing) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2.5D/3D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The Native-Android deliverable + a stable budget on a real Block E2 capture.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Conversion Tool + Scene/Node Editor + Inspector)</strong> — the raw-sensor → point-cloud conversion tool, a scene/node editor, and the engine inspector (point attributes + octree-bounds overlays).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui + the shared C++ renderer: convert raw LiDAR/sensor input into the internal point-cloud format, place/adjust nav nodes and accessibility attributes, and inspect point attributes / octree bounds, with round-trip serialization and live preview.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s OpenGL ES renderer (shared with the app).</li><li><b>Prerequisites:</b> G2 (data model), M1G8 (octree), M1G4 (renderer).</li><li><b>Feeds into:</b> All campus content; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android Debug builds, tests (pathfinding, conversion, data loading) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2.5D/3D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G4 Rendering II</strong> — 3D shading, lighting and post-FX for the multi-floor campus view.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> OpenGL ES / GLSL lighting and materials for the 3D floors, framebuffers/post-FX, and clear floor-transition visuals so multi-floor routes read.</li><li><b>Prerequisites:</b> M1G4 (base renderer), M2G1 (optimization).</li><li><b>Feeds into:</b> A legible, polished 2.5D/3D campus at showcase.</li></ul></details>
+</li>
+<li><strong>G12 Firebase — Analytics &amp; Content Delivery</strong> — the cloud DB for real-time cross-device sharing of obstruction reports + crowd density (feeding live rerouting), accounts and analytics.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth (Google/school email), Firestore/Realtime DB for crowdsourced obstruction reports + crowd density synced across devices in real time, and optional Analytics, via the REST API from C++.</li><li><b>Prerequisites:</b> G2 (report/route data model), M1G12 (rerouting consumes it).</li><li><b>Feeds into:</b> Live rerouting; the crowdsourced updates feature.</li></ul></details>
+</li>
+<li><strong>G16 Accessibility &amp; Comfort Options</strong> — the wheelchair / physically-handicapped <strong>conditional routing</strong> + accessibility UI/comfort options.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Accessibility routing profiles (avoid stairs, prefer lifts/ramps) driving the M1G12 weights, plus UI accessibility (contrast, type scale, reduced motion) and clear mobility-preference selection.</li><li><b>Prerequisites:</b> M1G12 (weighted pathfinding), M2U1/U2 (UI).</li><li><b>Feeds into:</b> The accessibility design feature; inclusive wayfinding at showcase.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 2 Design + 1 Art (9) — because the campus <strong>geometry is LiDAR-captured rather than hand-modelled</strong>, the art surface is smaller than a typical Immersive Experience (visual style, materials/lighting, wayfinding iconography and UI), so one artist can carry it; the <strong>wayfinding UX is the larger surface</strong> (destination/mobility selection, multi-floor route legibility, the crowdsourced-report flow, accessibility conditional routing, onboarding), so two designers own the design + UI/UX (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). If the visual/material polish per floor outgrows one artist, trade the 2nd designer for a 2nd artist. Note: for Immersive Experience the audio floor is lighter (ambient + UI cues) — a lecturer waiver on heavy BGM may apply for a utility wayfinding app.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the indoor-wayfinding concept, target users incl. wheelchair/accessibility, the destination → mobility → multi-floor route experience, feasibility against the LiDAR/engine plan)</li><li>M1D2 Prototype — one interactive scene/moment working end to end (select destination → see the 2.5D/3D route across floors)</li><li>M1D3 User Research, Personas &amp; Competitive Analysis (SIT students + accessibility-needs personas; teardown of Google Indoor Maps / Mappedin / Matterport; findings folded into the FDD)</li><li>M1D6 Experience Flow &amp; Pacing (the scan → search → route → walk-view flow, floor-transition legibility, dwell/decision points)</li><li>M1D7 Reactivity Model (mapping live crowd density / obstruction reports to routing responses — reroute thresholds, warning states — as tunable parameters)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D5 Playtesting &amp; Iteration Program (route-following + accessibility-mode tests with real students, triaged)</li><li>M2D6 Vertical Slice — one complete floor/route polished end to end (destination → accessible route → arrival)</li><li>M2D7 Reactivity Tuning (the crowd-density / obstruction thresholds that trigger rerouting, tuned from observation)</li></ul></li><li><b>UI/UX M1</b> (graded by the UI/UX instructor):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — the bottom-tab shell, destination search, mobility-preference and route-view standards; readable over a busy 3D scene.</li><li>M1U2 UX Flows &amp; Wireframes — entry → search → route → walk-view → report-obstruction, wireframed end to end.</li><li>M1U3 Accessibility &amp; Readability Foundations — contrast, type scale, touch targets and input alternatives (critical given the accessibility mandate).</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — search, route, profile, report and settings navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished route + accessibility UX tested with students on the Pixel 9a.</li><li>M2U4 Onboarding &amp; Tutorial Design — teach destination → mobility → route (and reporting) in the first run without a wall of text.</li><li>M2U5 Mobile UX Adaptation &amp; Ergonomics — thumb-zone layout, one-handed use and interruption handling for on-the-move wayfinding, device-tested on the Pixel 9a.</li></ul></li><li><b>Art M1:</b> 1 artist (geometry is LiDAR-captured, so style + iconography + UI are the art payload)<ul><li>M1A1 ⭐ Art Bible / Proof of Concept (the campus visual direction — palette, material/lighting look for the 2.5D/3D view, wayfinding iconography)</li><li>M1A3 Environment, Props &amp; VFX Concepts (the campus material/lighting styling, route/marker and obstruction VFX)</li><li>M1A4 UI Art Concepts &amp; Typography (bottom-tab shell, destination/mobility UI, route + accessibility iconography)</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ Critical Asset Production &amp; In-Engine Visual Quality (the campus look, wayfinding icons and UI implemented and consistent)</li><li>M2A3 Environment Alive — Ambient Animation &amp; Layering (lighting/ambient pass so the 3D campus reads clearly per floor)</li><li>M2A4 UI Art — States &amp; Feedback (routing / rerouting / obstruction-reported / accessibility-mode states)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial audio from the week-5 needs list present &amp; working (subtle ambient + UI/navigation cues: destination set, reroute, arrival), suitable and correctly triggered (a lecturer waiver on BGM may apply for this utility).</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — the Immersive-Experience floor adapted to a wayfinding utility (ambient + navigation/arrival/reroute/report cues, ≥ the agreed set), correctly triggered.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the playback functionality the build needs (multi-channel; a distinct reroute/arrival cue).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the conversion tool + engine inspector), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
