@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>oKAI</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="okai.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="okai.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">oKAI</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="okai-student-proposal">oKAI <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> A top-down endless survival bullet-hell for casual mobile players, built around <strong>drawing symbols on the touchscreen to cast spells</strong> and surviving endless enemy waves. Defeating enemies grants new spells, so the player adapts their strategy as the run progresses; 1–4 players can team up. Named technical features: a custom C++ <strong>gesture-recognition engine</strong> (geometric template matching — $1 Unistroke / $Q — with a multi-stage preprocessing pipeline: resampling to a fixed point count, rotational normalization, scale-invariant bounding-box scaling, centroid translation; Euclidean scoring against templates; target &gt;90% recognition within a 100 ms latency window); <strong>server-authoritative C++ multiplayer</strong> for 1–4 players over LAN or cloud (clients send inputs/cast requests, the server owns players, enemies, spells, damage, drops and progression, sends periodic world snapshots; clients interpolate remote entities and use client-side prediction + server reconciliation for the local player; RTT/loss/bandwidth diagnostics; tested under simulated latency/jitter/loss); a <strong>data-driven ECS</strong> (spell/enemy/player attributes from external files, runtime add/remove/replace of components, systems parallelizable); and a <strong>robust modular spell system</strong> (spells do more than one-shot damage; fast authoring of unique effects). Core requirements name an external data source, a stable-30fps C++ loop (20+ enemies, 5+ spell objects), an event/snapshot application protocol, CI, JSON+XML data-driven architecture, a dedicated C++ authoritative back-end, and tools: an ECS diagnostics logger, an in-engine gameplay-telemetry API, an in-system game editor with developer diagnostics, and a <strong>custom gesture-template editor</strong> (draw a symbol, export as XML) to add/refine spell recognition. Development environment: <strong>Native Android</strong>. Design features: gesture-based spellcasting (the primary mechanic), ≥5 spell types, ≥3 enemy types (Basic / Ranged / Tank), and ≥1 boss.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://store.steampowered.com/app/1794680/Vampire_Survivors/">Vampire Survivors on Steam (the endless-survival &quot;be the bullet hell&quot; loop — defeat waves, collect new weapons/abilities each run, snowball your build; now with up to-4-player co-op — the survival-and-adapt loop precedent)</a></li>
+<li><a href="https://store.steampowered.com/app/42910/Magicka/">Magicka on Steam (a dynamic spell-casting action game where the spell <strong>input itself</strong> is the mechanic, with up-to-four-player co-op and a wave-survival challenge mode — the input-driven-magic + co-op precedent)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Arx_Fatalis">Arx Fatalis — Wikipedia (spells cast by <strong>drawing runes with mouse gestures</strong> that must be drawn correctly to fire — the direct gesture-recognition-to-cast precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>oKAI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — the stated dev environment; device: Pixel 9a) — the touchscreen gesture-drawing mechanic is native-touch-first; the Native PC &quot;desktop diagnostic&quot; build is the development/tools vehicle (ECS diagnostics, telemetry, editors). <b>Extended:</b> a Linux server the team sets up by M2 (full use T2) hosting the dedicated C++ authoritative game server for cloud lobbies + an external database (Firebase or a server-side store) for player/enemy/spell data.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A top-down 2D bullet-hell renderer (20+ enemies + 5+ spell objects on screen at a stable 30 fps), the live **gesture-drawing surface** (stroke capture + trail feedback + recognized-spell cue), the spell/HUD overlays and the lobby screens. <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine via JNI (Android Studio); OpenGL ES drawn in a GLSurfaceView for the realtime 2D; Web/desktop — SDL2/3 + OpenGL ES for the PC diagnostic build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The dedicated **C++ authoritative server** (LAN or cloud) running the gameplay simulation for 1–4 players — validating inputs and cast requests, simulating players/enemies/spells, resolving damage and server-random loot drops, owning progression, and distributing snapshots + reliable gameplay events — plus the external data store for spell/enemy/player data. <b>Languages:</b> C++ (engine + server).<br><b>Backend scope:</b> Local now, server-ready (T2) — the authoritative server + external DB seam set up &amp; basic-tested on the Linux host by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ loop is load-bearing on two fronts — the fixed-timestep gameplay simulation (20+ enemies + 5+ spell objects at a stable 30 fps, server-authoritative) <strong>and</strong> the real-time <strong>gesture-recognition service</strong> (resample → normalize rotation → scale → translate → Euclidean-score against templates, targeting &gt;90% accuracy within 100 ms). This is the defining performant-C++ requirement.</li>
+<li><em>Data-driven:</em> spell, enemy and player attributes load from JSON; gesture templates are XML point-sets authored by the gesture-template editor; the ECS adds/removes/replaces components at runtime (e.g. a <code>FlyingComponent</code> mid-run) so new spells and effects are authored as data, not code.</li>
+<li><em>2D:</em> top-down sprite/particle rendering of the bullet-hell (enemies, spells, drops, the boss) plus the gesture stroke/feedback layer — custom-rendered. <em>3D:</em> not needed. <em>Networking:</em> server-authoritative snapshots + reliable events for 1–4 players, client prediction/reconciliation, RTT/loss/bandwidth diagnostics, tested under simulated latency/jitter/loss.</li>
+<li><em>Custom tool:</em> the <strong>gesture-template editor</strong> (draw → export XML → registered as a castable spell), plus the in-system game editor and the ECS diagnostics logger + gameplay-telemetry API (the &quot;desktop diagnostic core&quot; build).</li>
+<li><em>External DB:</em> player/enemy/spell/progression data. <em>Auth ⏭️:</em> player accounts. <em>Analytics ⏭️:</em> the gameplay-telemetry API (quit-points, retry counts, ability usage, tutorial time) — optional/T2 but explicitly designed for.</li>
+</ul>
+<p><em>Proposed new pool goal (requires instructor approval):</em> <strong>Gesture Recognition Engine</strong> — the $1/$Q template-matching pipeline as its own graded CS goal (currently folded into M1G1 ⭐ core logic + tested in M1G3 ⭐). If approved it would append to the Games pool (e.g. G17) and become the natural home for this signature system; the three picks below remain from the existing pool.</p>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a fixed-timestep loop (C++17/20) running the survival simulation and hosting the **gesture-recognition core** (stroke capture → resample → normalize → score); CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the gesture engine and M1G8 enemy AI run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A runtime ECS in C++ with spell/enemy/player attributes in JSON and gesture templates in XML, hot-reloadable; components add/remove/replace at runtime (the `FlyingComponent` example); systems operate on component sets and are parallelizable.</li><li><b>Prerequisites:</b> G1 (loop &amp; entity update hooks).</li><li><b>Feeds into:</b> M2G2 (the editors edit this data), M2G13 (the modular spell system), M1G8 (enemy data).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui debug overlays + the ECS diagnostics logger, Tracy profiling to hold 30 fps with 20+ enemies and 5+ spell objects, Catch2 tests for **gesture recognition** (accuracy/latency), spell casting and data loading, gated by a GitHub Actions Windows+Android matrix with clang-format/clang-tidy.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening incl. networking tests); the 30 fps / 100 ms budgets M2G1 validates on-device.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the top-down bullet-hell renderer and the gesture stroke/feedback layer are the whole read of the game.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Sprite/particle renderer (enemies, spells, drops, boss), camera, batching for 20+ enemies + 5+ spells at 30 fps, and a stroke/trail overlay for the gesture; SDL2/3/OpenGL ES, GLSL, stb_image, FreeType HUD. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window).</li><li><b>Feeds into:</b> M2G4 (advanced spell VFX); every visible frame of the demo.</li></ul></details>
+</li>
+<li><strong>G8 Enemy AI &amp; Pathfinding</strong> — the ≥3 enemy types (Basic / Ranged / Tank) and the groundwork for the boss.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Finite-state machines + A*/steering for the enemy types, ranged-vs-melee-vs-tank behaviours and swarm movement toward the player, tuned per type from data (custom C++).</li><li><b>Prerequisites:</b> G1 (tick), G2 (enemy data).</li><li><b>Feeds into:</b> M2G10 (advanced AI + the boss); the endless-wave survival loop.</li></ul></details>
+</li>
+<li><strong>G11 Networking Foundation</strong> — the server-authoritative 1–4-player multiplayer and its protocol.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Sockets (Winsock2/BSD, or ENet/SDL_net) between the C++ authoritative server and clients, a lobby/connection manager for up to 4 clients, a protocol separating periodic snapshots from reliable gameplay events, sequence numbers/timestamps to reject stale packets. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop the server simulates), G2 (state to serialize).</li><li><b>Feeds into:</b> M2G7 (match sync, prediction &amp; reconciliation); the co-op feature.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling to hold 30 fps + the 100 ms gesture budget, ASan on MSVC, memory pools for enemies/spells/particles, and validation on-device (Pixel 9a); the Linux server (authoritative game server + external DB) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The Native-Android deliverable and a stable frame/latency budget under full load.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core</strong> — the <strong>gesture-template editor</strong> (draw → export XML → register a castable spell) plus the in-system game editor with developer diagnostics.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui editor: draw/capture a gesture, resample/preview it, save the template as XML, and edit spell/enemy attributes as JSON, with round-trip serialization, live preview and undo/redo; developer-diagnostics readouts (import time, validation failures, hot-reload duration).</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json + a lightweight XML writer (e.g. pugixml), the project&#39;s SDL2/3/OpenGL ES renderer (live preview).</li><li><b>Prerequisites:</b> G2 (attribute/template data model), M1G4 (rendering for preview).</li><li><b>Feeds into:</b> M2G6-class advanced tooling; new/refined spell recognition; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android Debug builds, unit/integration tests (gesture recognition, spell casting, data loading) + networking validation (serialization, server-side input validation, connect/disconnect, multi-client tests under simulated latency/jitter/loss), asset/scene validators, and artifact upload. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every oKAI goal.</li></ul></details>
+</li>
+<li><strong>G7 Networking — Match Sync &amp; Prediction</strong> — authoritative match state with client prediction and server reconciliation.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Server-authoritative snapshots + delta over the wire, interpolation of remote players/enemies, client-side prediction + reconciliation for the local player, and RTT/packet-loss/bandwidth/update-rate diagnostics.</li><li><b>Prerequisites:</b> M1G11 (networking foundation), M2G1 (optimization).</li><li><b>Feeds into:</b> Smooth 1–4-player co-op at showcase, validated under simulated latency/jitter/loss.</li></ul></details>
+</li>
+<li><strong>G10 AI — Advanced</strong> — the boss encounter and richer enemy behaviour tiers.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Behaviour trees for the boss (phases/patterns), difficulty tiers and coordination across the Basic/Ranged/Tank mix, tuned from data (custom C++).</li><li><b>Prerequisites:</b> M1G8 (enemy AI foundation).</li><li><b>Feeds into:</b> The ≥1 boss encounter and the escalating-wave challenge at showcase.</li></ul></details>
+</li>
+<li><strong>G13 Gameplay Systems II</strong> — the <strong>robust, modular spell system</strong>: spells do more than a single instance of damage, and new effects are fast to author.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A composable spell/effect system over the ECS (status effects, projectiles, areas, modifiers) so unique spells compose from reusable effect components; balancing data driving the ≥5 spell types.</li><li><b>Prerequisites:</b> M1G2 (ECS), M2G2 (editor authors spell data).</li><li><b>Feeds into:</b> The spell-arsenal showcase; T2 spell expansion.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + 2 Art (9) — bullet-hell reads by its <strong>VFX and enemy variety</strong>, so two artists carry the spell effects, the ≥3 enemy types + boss, the player and the gesture/HUD art; a single designer owns the gesture-spellcasting feel, the ≥5-spell arsenal, the enemy/boss behaviours and the wave/run progression (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). If the spell/enemy <strong>systems and multiplayer balance</strong> outgrow one designer, trade the 2nd artist for a 2nd designer. <em>Scope note (advisory):</em> a custom gesture-recognition engine + server-authoritative netcode + ECS + modular spells + ≥5 spells + ≥3 enemies + a boss + the editor suite is a very large surface — treat single-player survival with the gesture engine, ~3 spells, the 3 enemy types and the gesture-template editor as the M1/M2 floor, with co-op multiplayer, the boss and the full arsenal as the stretch.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the gesture-spellcasting survival loop, the ≥5 spells, ≥3 enemies + boss, and the adapt-your-build progression; primary benchmark e.g. Vampire Survivors, with a Singapore benchmark for the local-awareness criterion)</li><li>M1D4 Game Feel &amp; Touch Interaction Specification (the draw-to-cast feel — stroke forgiveness, recognition thresholds, cast feedback timing — authored as tunable parameters for the CS team, THE differentiator)</li><li>M1D6 Systems &amp; Economy Design (the ≥5 spells, the 3 enemy types, drops/loot and the run economy — every system with a source, a sink and a purpose)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D3 Systems Balance &amp; Tuning — Data-Driven (spell/enemy/drop balance and boss difficulty via the team&#39;s JSON, no code changes)</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the bullet-hell HUD, the spell/gesture cues and the lobby, so the screen stays legible under 20+ enemies.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — HUD, spell feedback, lobby and results navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished HUD + gesture feedback tested with casual players on the Pixel 9a.</li></ul></li><li><b>Art M1:</b> 2 artists justified (VFX-heavy bullet-hell + enemy/boss roster)<ul><li>M1A1 ⭐ Art Bible / Proof of Concept (the top-down visual direction — palette, readability under bullet-hell density, spell-language)</li><li>M1A2 Character Concepts &amp; Model Sheets (the player, the 3 enemy types and the boss)</li><li>M1A3 Environment, Props &amp; VFX Concepts (arenas, drops, and the spell-effect visual language)</li><li>M1A4 UI Art Concepts &amp; Typography (gesture HUD, spell icons, the drawn-symbol vocabulary)</li><li>M1A5 Animation Foundations (enemy/boss/cast key poses and cycles)</li><li>M1A6 Early Asset Production — Prototype Support</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ Critical Asset Production &amp; In-Engine Visual Quality</li><li>M2A2 Character Animation — Extensive (enemies, the boss, cast reactions)</li><li>M2A3 Environment Alive — Ambient Animation &amp; Layering</li><li>M2A4 UI Art — States &amp; Feedback (recognized / mis-drawn / on-cooldown spell states)</li><li>M2A5 VFX — Critical Effects &amp; Transitions (the spell effects — the game&#39;s core read — plus hit/death/boss VFX)</li><li>M2A6 Cutscenes &amp; Storyboards (intro / boss / victory beats)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial BGM/SFX from the week-5 needs list present &amp; working in the prototype (tense survival BGM, spell-cast, spell-hit, enemy and UI cues), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback for many overlapping spell/enemy SFX.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Games floor (survival BGM + per-spell cast/impact, enemy, boss, pickup and UI SFX, ≥6 types), scaling cleanly with bullet-hell density.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing; a distinct cue per recognized spell).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the gesture-template editor), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
