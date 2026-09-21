@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Guard the Dumplings</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="guard-the-dumplings.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="guard-the-dumplings.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Guard the Dumplings</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="guard-the-dumplings-student-proposal">Guard the Dumplings <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-22 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>Guard the Dumplings</em> is a <strong>tower-defense strategy game</strong> in a European fantasy world where players defend a kingdom guarding an exclusive dumpling recipe from an enemy kingdom. Enemies invade in <strong>waves led by elite commanders and a final boss</strong>; players place <strong>tower units of different classes</strong> (Soldier, Archer, Mage) and spend an in-game currency, <strong>&quot;dumpling mana&quot;</strong> (earned from defeating enemies), to build and upgrade defenses. A <strong>day/night cycle</strong> structures play: <strong>battles occur only during the day</strong> (no building/upgrading), while <strong>night is the strategic phase</strong> for enhancing units and building towers. Named load-bearing C++: a game loop managing each wave — spawning many soldiers, updating towers, controlling projectiles at a stable step; a <strong>real-time AI pathfinding system</strong> continuously updating enemy and player soldiers&#39; navigation toward goals; and a <strong>health system</strong> processing attacks/damage and updating HP + health bars in real time. Named technical features: a <strong>real-time enemy wave-spawning system</strong>; <strong>tower AI &amp; targeting</strong> (auto-detect enemies in range, select targets by tower-specific behaviour); a <strong>grid-based placement + path-management system</strong> (validates placement, controls enemy movement along predefined paths); and <strong>adaptive AI pathfinding</strong> for enemy and player soldiers (navigate to the nearest target, adapting to the changing landscape). Tools: a <strong>custom map editor</strong> (which cells allow tower placement, which paths soldiers walk, and live editing of soldier/tower HP + game data); and a <strong>dev game-speed control</strong> (1×/2× to accelerate waves for testing wave progression, spawning and tower behaviour). Design features: the day/night cycle; tower upgrades across the three classes; progressive waves (regular troops → captain → King + elite boss stage); and the dumpling-mana economy (spend to upgrade or buy new tower types). Team: <strong>6 CS + 1 Design + 1 Artist</strong>.</p>
+<p><em>Note (module completeness):</em> the proposal doesn&#39;t name a <strong>platform</strong> — a grid-placement TD is touch-friendly, so it&#39;s planned as a mobile build (Native Android, Pixel 9a). It also doesn&#39;t mention an <strong>External Database</strong> or accounts, but the module mandates Firebase — plan to persist progress / unlocked towers / level records there (a standard, small addition; see the External Database row + M1G12-style integration). <em>Monetization:</em> &quot;dumpling mana&quot; is an <strong>in-game, earn-by-play</strong> currency (clean); if real-money purchases are added, keep them cosmetic / non-pay-to-win per the module rule.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://store.steampowered.com/app/246420/Kingdom_Rush___Tower_Defense/">Kingdom Rush — Tower Defense on Steam (the benchmark TD with <strong>Barracks (soldiers), Archer and Mage</strong> tower classes, waves led by bosses, and per-tower upgrades — an almost class-for-class match to the Soldier/Archer/Mage design)</a></li>
+<li><a href="https://store.steampowered.com/app/960090/Bloons_TD_6/">Bloons TD 6 on Steam (place towers along predefined paths, <strong>earn currency from defeating enemies</strong> to buy and <strong>upgrade</strong> towers across branches, and survive escalating waves + boss bloons — the path-based + currency-to-upgrade + wave precedent)</a></li>
+<li><a href="https://store.steampowered.com/app/65800/Dungeon_Defenders/">Dungeon Defenders on Steam (a TD with an explicit <strong>build phase then combat phase</strong> — prep and place defenses, then fight the wave — the direct precedent for the night-build / day-battle cycle)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Guard the Dumplings</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — C++ engine via JNI rendering through OpenGL ES in a GLSurfaceView, Kotlin app shell; device: Pixel 9a) — grid placement + tapping is touch-first; a Web-on-mobile (Emscripten→WASM) build is a viable alternative. The Native PC build is the dev/tools vehicle (the map editor + the game-speed control). <b>Extended:</b> Firebase + a Linux server the team sets up by M2 (full use T2) for progress / unlock / level-record persistence.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A 2D top-down TD renderer — the grid map + paths, the three tower classes and their upgrades, the enemy troops/commanders/boss, projectiles, real-time health bars, and the day/night + dumpling-mana HUD. <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine via JNI (Android Studio); OpenGL ES for the realtime 2D in a GLSurfaceView; some screens (menus, upgrade shop) can be pure Native UI. Web/desktop — SDL2/3 + OpenGL ES for the PC dev/tools build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The real-time C++ engine — the wave-spawning system, tower update + AI targeting, projectile control, the adaptive A* pathfinding for enemy + player soldiers, the health/damage system, the dumpling-mana economy and the day/night phase machine — holding a stable step with many soldiers on the mobile target; plus Firebase for progress persistence. <b>Languages:</b> C++ (engine); Firebase-backed services on the Extended tier.<br><b>Backend scope:</b> Local now, server-ready (T2) — the progress-persistence seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ loop is load-bearing — per wave it spawns many soldiers, updates every tower&#39;s targeting + firing, advances projectiles, runs the adaptive pathfinding, and processes attacks/damage + health bars at a stable step, driving the day (battle) / night (build) phase machine.</li>
+<li><em>Data-driven:</em> the tower classes + upgrade tiers, enemy troops/commanders/boss, wave compositions, dumpling-mana costs and the map layouts are all data — a new tower, enemy or wave is a data change (authored in the map/data editor).</li>
+<li><em>2D:</em> the grid map + paths, towers/troops/projectiles, real-time health bars and the mana/day-night HUD (custom-rendered). <em>3D:</em> not needed.</li>
+<li><em>Custom tools:</em> two — the <strong>map editor</strong> (placement cells, soldier paths, live soldier/tower HP + game-data editing) and the <strong>dev game-speed control</strong> (1×/2× to accelerate waves for testing).</li>
+<li><em>Networking:</em> single-player; progress persistence is async client↔︎cloud (Application Communication ✅), so a Networking System is optional (🔵). <em>External DB:</em> progress/unlocks/level records (Firebase — add per the module). <em>Auth ⏭️ / Analytics ⏭️:</em> module-deferred to T2 (🔵).</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — the wave loop + spawning + health/damage + the day/night phase machine.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a fixed-timestep C++ loop managing wave spawning of many soldiers, tower updates, projectile control and the health/damage system, plus the day/night phase machine, at a stable step; C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the AI/pathfinding (M1G8) and grid/paths (M1G14) run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> An entity/component model with tower classes + upgrade tiers, enemy troops/commanders/boss, wave compositions, mana costs and map layouts in hot-reloadable JSON — a new tower, enemy or wave is a data change.</li><li><b>Prerequisites:</b> G1 (loop &amp; entity hooks).</li><li><b>Feeds into:</b> M2G2 (map/data editor), M2G13 (upgrade/economy systems), M1G8 (AI data).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong> — incl. the <strong>game-speed dev control</strong>.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A dev game-speed control (1×/2×) to accelerate waves, ImGui overlays (tower ranges/targets, pathfinding, spawn counts, HP), Tracy profiling of a peak wave with many soldiers + projectiles, Catch2 tests (targeting, pathfinding, damage math, data loading), on a GitHub Actions matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); fast wave/balance testing.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the grid map, towers/troops/projectiles and real-time health bars.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> A sprite/tile renderer for the grid map + paths, the three tower classes + upgrades, enemy troops/commanders/boss, projectiles, health bars, and the mana/day-night HUD, with a camera; SDL2/3/OpenGL ES, GLSL, stb_image, FreeType. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window).</li><li><b>Feeds into:</b> Every visible frame; the map editor shares this renderer.</li></ul></details>
+</li>
+<li><strong>G8 Enemy AI &amp; Pathfinding</strong> — tower targeting + the <strong>adaptive</strong> soldier pathfinding.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Per-tower targeting (detect enemies in range, select by tower-specific rules: first/nearest/strongest) + A*/flow-field pathfinding for enemy and player soldiers toward the nearest target, re-pathing as the landscape (towers/soldiers) changes; custom C++, deterministic.</li><li><b>Prerequisites:</b> G1 (tick), G2 (unit data), G14 (grid/paths).</li><li><b>Feeds into:</b> M2G10 (advanced AI — commanders/boss, smarter targeting); the core combat.</li></ul></details>
+</li>
+<li><strong>G14 Level / Tile Map System</strong> — the <strong>grid placement + path-management</strong> system.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A grid/tile map (JSON) marking placeable cells vs walkable paths, placement validation, and the predefined enemy paths + spatial indexing that the pathfinding queries; the format the map editor authors.</li><li><b>Prerequisites:</b> M1G2 (map data model), G4 (rendering).</li><li><b>Feeds into:</b> M2G2 (the map editor writes this format); the placement + pathing rules.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong> — hold the step under peak waves + the persistence seam.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Memory pools for soldiers/projectiles, Tracy profiling of a peak wave, ASan on MSVC, and on-device validation (Pixel 9a) holding the step with many units; the Firebase/Linux-server seam (progress persistence) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The Native-Android deliverable + stable peak-wave performance.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Map &amp; Data Editor)</strong> — placement cells, soldier paths, live soldier/tower HP + game data.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui + the shared renderer: paint placeable cells vs paths, define spawn/goal points, and live-edit soldier/tower HP + game data, with round-trip JSON to the map format, live preview and undo/redo.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s renderer (preview).</li><li><b>Prerequisites:</b> G2 (map/unit data), M1G14 (grid/path format).</li><li><b>Feeds into:</b> All level content; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android builds, tests (targeting, pathfinding, damage math, wave/data loading — sped up via the game-speed control) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G6 Content Editor — Advanced Tool Features (Live Data Editing + Speed Control)</strong> — the map editor matured.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui advanced widgets: drag-drop map building, live in-play editing of soldier/tower stats + wave composition with immediate feedback, and the game-speed control surfaced as a gameplay/dev tool; deep undo/redo.</li><li><b>Prerequisites:</b> M2G2 (editor core).</li><li><b>Feeds into:</b> Fast wave/balance authoring; the content showcase.</li></ul></details>
+</li>
+<li><strong>G10 AI — Advanced (Commanders, Boss &amp; Targeting)</strong> — the elite commanders + King boss + smarter targeting.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Behaviour trees / FSMs for elite-commander and the King-boss behaviours (abilities, formations), matured tower-targeting priorities, and adaptive soldier tactics, all tuned from data.</li><li><b>Prerequisites:</b> M1G8 (AI &amp; pathfinding foundation).</li><li><b>Feeds into:</b> The captain/boss wave stages; the difficulty curve.</li></ul></details>
+</li>
+<li><strong>G13 Gameplay Systems II</strong> — tower <strong>upgrade trees</strong>, the <strong>dumpling-mana economy</strong> and the <strong>day/night</strong> progression.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ systems over the entity/data model: the per-class upgrade trees, the dumpling-mana earn/spend economy, the day(battle)/night(build) phase rules and wave progression (regular → captain → King), balancing-data-driven.</li><li><b>Prerequisites:</b> M1G2 (tower/enemy data), M1G1 (loop/economy hooks).</li><li><b>Feeds into:</b> The strategic depth at showcase; T2 content expansion.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + 1 Art (8) — <strong>as proposed</strong>, and well-matched: a tower-defense has a <strong>contained but real art surface</strong> (three tower classes + upgrade tiers, the enemy roster of troops/commanders/King, the European-fantasy map, projectiles/VFX, UI) that one artist can carry, while a single designer owns the FDD, the level/wave design, the dumpling-mana economy + upgrade balance and the day/night structure (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). If the level/wave/balance content outgrows one designer, consider a 2nd designer. <em>Scope note (advisory):</em> a stable many-unit loop + adaptive pathfinding + tower targeting + a grid/path system + a map editor is a solid, well-understood TD scope — one map, the three tower classes, a few wave types with one commander, and the map editor is the M1/M2 floor; the full upgrade trees, the King-boss + elite commanders, multiple maps and the polished day/night economy are the stretch. Adaptive re-pathing (soldiers navigating a changing landscape) is the trickiest CS bit — validate it early on one map.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the TD + day/night USP, the Soldier/Archer/Mage classes, the dumpling-mana economy, the wave/commander/boss progression; primary benchmark e.g. Kingdom Rush / Dungeon Defenders, plus a Singapore benchmark)</li><li>M1D5 Level &amp; Progression Design (the map(s), the predefined paths, the wave composition + difficulty curve and the day/night pacing — the heart of a TD)</li><li>M1D6 Systems &amp; Economy Design (the dumpling-mana source/sink, the per-class upgrade trees and tower/enemy balance — every system with a purpose)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D3 Systems Balance &amp; Tuning — Data-Driven (tower/upgrade/mana/wave balance via the editor&#39;s JSON, no code changes — critical for a TD)</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the placement/build UI, the mana/HP HUD, the upgrade shop and the day/night phase indicator, plus a wireframe baseline.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — the build/battle screens, upgrade shop, wave/day-night UI and results navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished place-and-defend + upgrade UX tested with players on the Pixel 9a.</li></ul></li><li><b>Art M1:</b> 1 artist (towers + enemy roster + map + VFX + UI)<ul><li>M1A1 ⭐ Art Bible / Proof of Concept (the European-fantasy visual direction — palette, tone, tower/enemy identity language)</li><li>M1A2 Character Concepts &amp; Model Sheets (the three tower classes + upgrades, and the enemy troops / commanders / King)</li><li>M1A3 Environment, Props &amp; VFX Concepts (the kingdom map + paths, projectiles and the day/night look)</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ Critical Asset Production &amp; In-Engine Visual Quality</li><li>M2A2 Character Animation — Extensive (tower attacks + upgrades, troop walk/attack/death, commander/boss animations)</li><li>M2A5 VFX — Critical Effects &amp; Transitions (projectiles, tower-fire, hits, the day↔night transition)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial BGM/SFX from the week-5 needs list present &amp; working in the prototype (battle BGM, tower-fire, hit, mana-earn, build/upgrade and wave-start cues), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback for a busy wave.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Games floor (battle BGM + tower-fire / hit / mana / upgrade / commander / boss SFX, ≥6 types), scaling with wave intensity + the day/night shift.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing; distinct per-tower-class + boss cues).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the map/data editor + the game-speed control), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-22.</em></p>
+</body>
+</html>
