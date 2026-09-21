@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Pawgress</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="pawgress.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="pawgress.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Pawgress</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="pawgress-student-proposal">Pawgress <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> 🔶 Fit with adjustments · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>Pawgress</em> is a wellness app that turns everyday walking into play: your steps help a <strong>virtual pet</strong> grow and stay happy, while your walks gradually reveal areas of Singapore on an <strong>interactive map</strong>. Set daily walking goals, build a streak, explore new places, and earn rewards to care for and customise your pet. Named technical features: <strong>device step-counter synchronisation</strong>; <strong>GPS-based map exploration</strong> (detect explored areas, update map progress); a <strong>virtual-pet progression system</strong> (walking + milestones → pet EXP, growth, rewards); and <strong>offline save &amp; sync</strong> (store progress locally offline, sync to backend when reconnected). Loop: a local C++ engine handling rendering logic and loops, the glue between app and backend, data transfer to/from the backend, and update loops for local UI + rendered graphics (the pet avatar). Tools: three <strong>debugging tools</strong> — a GPS spoofer, a simulated-tracking-data injector (steps, distance), and a network-break inspector (client-sent vs server-accepted). Design features: GPS map exploration; real step tracking; virtual-pet progression &amp; customisation; and daily goals &amp; streaks.</p>
+<p><em>Note on category:</em> filed under <strong>Games</strong> — Pawgress is a <strong>gamified-wellness app</strong> (virtual-pet progression, rewards, streaks, exploration), the exact shape the module&#39;s Games design pool covers under its gamified-apps lens (Duolingo / Forest / Habitica / Healthy 365 are its benchmarks). Not Visualization &amp; Analytics (it&#39;s a pet/exploration game, not a data dashboard) and not Social Media (no social core as written).</p>
+<p><strong>Why &quot;with adjustments&quot; (conditions for week-5 approval):</strong></p>
+<ol>
+<li><strong>Add a content-authoring tool</strong> as the graded Custom Tool. The three listed tools (GPS spoofer, tracking-data injector, network-break inspector) are excellent <strong>debugging infrastructure</strong> — keep them (they live under G3 ⭐) — but the module&#39;s Tools requirement expects a <strong>content-authoring</strong> tool. Add one, e.g. an editor to author the <strong>map exploration regions / Singapore landmarks</strong>, the <strong>pet growth stages + customisation items</strong>, and the <strong>reward / milestone / streak rules</strong> as data (this becomes M2G2 ⭐, and it directly serves the &quot;later support other workstations / more content&quot; goal).</li>
+<li><strong>Keep the C++ loop and 2D rendering load-bearing</strong> (avoid CRUD collapse). As written, the risk is that the app becomes a Firebase-backed step counter with a picture of a pet. To be a real module project, the C++ must do real work: an <strong>animated, simulated pet</strong> (growth/mood/reaction states + reward VFX), a <strong>custom-rendered pan/zoom map of Singapore with on-device fog-of-war exploration</strong> computed from GPS, and <strong>real offline-sync merge/conflict logic</strong> — with pet/region/reward definitions data-driven. The step/GPS/Firebase sync is the plumbing, not the deliverable.</li>
+</ol>
+<p>With those two in place this is a solid Games (gamified-wellness) project; the pieces (data-driven pet sim, custom 2D map + fog-of-war, offline-sync, a content editor) are all genuine module work.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Pok%C3%A9mon_Go">Pokémon GO — Wikipedia (the benchmark <strong>GPS walk-to-explore</strong> mobile game: walking the real world reveals and unlocks map content — the GPS-map-exploration precedent)</a></li>
+<li><a href="https://apps.apple.com/us/app/walkr-gamified-fitness-app/id834805518">Walkr — Gamified Fitness Walk (App Store) (a gamified step-tracker where your <strong>steps drive progression and exploration</strong> through a playful world — the steps-to-progression + explore precedent)</a></li>
+<li><a href="https://www.wokamon.com/">Wokamon — Monster Walk Quest (official) (a <strong>virtual pet fed and grown by your steps</strong>, unlocking more characters and worlds to explore — the steps-grow-your-pet precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Pawgress</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>🔶</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — device step-counter + GPS sensors; device: Pixel 9a) — the Native PC build is the development/tools vehicle (the content editor + the debug tools). <b>Extended:</b> Firebase + a Linux server the team sets up by M2 (full use T2) for accounts, the cloud store, and the offline-sync backend.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> The animated pet avatar (growth/mood/customisation), the custom-rendered pan/zoom **map of Singapore with fog-of-war exploration**, and the daily-goal/streak/reward UI. <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine via JNI (Android Studio); OpenGL ES for the realtime 2D (pet + map) in a GLSurfaceView; Web/desktop — SDL2/3 + OpenGL ES for the PC dev/tools build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The local C++ loop (pet simulation + animation, the fog-of-war exploration update from GPS, step ingestion, the local UI/graphics update) + the offline save/sync layer with merge/conflict resolution; plus accounts and the cloud store. <b>Languages:</b> C++ (loop + sync merge); Firebase-backed services on the Extended tier.<br><b>Backend scope:</b> Local now, server-ready (T2) — the accounts / cloud-store / offline-sync seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ loop is load-bearing <strong>once adjustment 2 holds</strong> — it simulates and animates the pet (growth/mood/reaction), updates the fog-of-war exploration state from GPS, ingests step data, and drives the local UI/graphics; the offline→online sync merge is real C++ logic.</li>
+<li><em>Data-driven:</em> pet growth stages + customisation items, map regions/landmarks + exploration rules, and reward/milestone/streak rules are all data — a new pet, region or reward is a data change (authored via the new content editor).</li>
+<li><em>2D:</em> the animated pet and the <strong>custom pan/zoom map with fog-of-war</strong> + the goal/streak/reward UI are real 2D rendering (custom-rendered) — this is the 2D gate. <em>3D:</em> not needed. <em>Networking:</em> offline save + backend sync is async client↔︎cloud (Application Communication ✅), so a bespoke Networking System is optional (🔵).</li>
+<li><em>Custom tool:</em> 🔶 the debug tools (GPS spoofer, data injector, network inspector) are supporting infrastructure; <strong>add a content-authoring editor</strong> (regions/landmarks, pet stages/items, reward rules) as the graded tool (see adjustment 1).</li>
+<li><em>External DB:</em> accounts, pet/customisation ownership, exploration + streak progress; local DB for offline. <em>Auth ⏭️:</em> accounts. <em>Analytics ⏭️:</em> optional — activity/retention trends.</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a C++ loop that simulates the pet, updates local state and (on desktop) ingests injected step/GPS data for tooling/tests; C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI, device step-counter + GPS); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the pet sim, the map fog-of-war and the sync run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Entity/component model with pet growth stages + customisation items, map regions/landmarks + exploration rules, and reward/milestone/streak rules in hot-reloadable JSON — a new pet, region or reward is a data change.</li><li><b>Prerequisites:</b> G1 (loop &amp; entity hooks).</li><li><b>Feeds into:</b> M2G2 (the content editor edits this data), M2G13 (progression), M1G14 (region data).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong> — home of the three named debug tools.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui debug overlays + the <b>GPS spoofer</b>, the <b>tracking-data injector</b> (steps/distance) and the <b>network-break inspector</b> (client-sent vs server-accepted); Tracy profiling of the pet/map update budget; Catch2 tests for the sync-merge and data loading; GitHub Actions Windows+Android matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); testing every location/step/network feature deterministically.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the animated pet avatar + the custom map render (with fog-of-war) are the whole read of the app.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Sprite renderer for the pet (growth/mood/customisation states, sprite animation) and a pan/zoom map of Singapore with a fog-of-war overlay revealed by exploration; SDL2/3/OpenGL ES, GLSL, stb_image, FreeType. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window), G14 (map data).</li><li><b>Feeds into:</b> M2G4 (advanced pet/map/reward VFX); every visible frame.</li></ul></details>
+</li>
+<li><strong>G12 Save / Persistence &amp; Firebase Integration</strong> — the <strong>offline save &amp; sync</strong> (local store + backend sync with merge).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Local serialization of pet/exploration/streak state, a sync layer that queues changes offline and merges/resolves conflicts on reconnect, and Firebase (Firestore) for the cloud store; step/GPS data persisted locally first.</li><li><b>Prerequisites:</b> G2 (state to persist).</li><li><b>Feeds into:</b> M2G8 (accounts + cloud sync matured); the offline-first guarantee.</li></ul></details>
+</li>
+<li><strong>G14 Level / Tile Map System</strong> — the explorable <strong>map of Singapore</strong>: chunked/streamed tiles, pan/zoom, and the explored-region data driven by GPS.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A tile/region map (chunking, pan/zoom camera, spatial indexing) with an exploration mask updated from GPS position, and region/landmark metadata from data.</li><li><b>Prerequisites:</b> G2 (region data), G1 (GPS ingest).</li><li><b>Feeds into:</b> M1G4 (what it renders); the exploration-progress feature; the content editor authors regions.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling of the pet/map/sync loop, ASan on MSVC, memory pools, and on-device validation (Pixel 9a) incl. real device step-counter + GPS + offline→online sync; the Firebase/Linux-server seam set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The Native-Android deliverable + a robust offline-first sync.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Content Authoring Tool)</strong> — the <strong>required content editor</strong>: author map regions/landmarks, pet growth stages + customisation items, and reward/milestone/streak rules as data.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui + the shared C++ renderer: place map regions/landmarks, define pet stages + customisation items, and author reward/milestone/streak rules, with round-trip JSON serialization, live preview and undo/redo.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s SDL2/3/OpenGL ES renderer (preview).</li><li><b>Prerequisites:</b> G2 (data model), M1G4/M1G14 (renderer + map).</li><li><b>Feeds into:</b> All content; the &quot;extend to more content later&quot; goal; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android Debug builds, tests (sync-merge, progression, data loading) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G13 Gameplay Systems II</strong> — the <strong>virtual-pet progression</strong>: EXP, growth, milestones, rewards, customisation, and the daily-goals/streaks loop.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ systems converting walking + milestones into pet EXP/growth, an unlock/customisation economy, and a daily-goal + streak loop — designed to serve the user&#39;s wellness, not dark-pattern (data-driven).</li><li><b>Prerequisites:</b> M1G2 (pet/reward data), M1G4 (pet visuals).</li><li><b>Feeds into:</b> The pet-progression + streak features at showcase; T2 content expansion.</li></ul></details>
+</li>
+<li><strong>G8 Firebase — Accounts, Leaderboards &amp; Analytics</strong> — accounts, the cloud store and optional analytics for the offline-first sync.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth accounts, Firestore for pet/customisation/exploration/streak data synced across devices, and optional Analytics, via the REST API from C++.</li><li><b>Prerequisites:</b> M1G12 (offline-sync layer).</li><li><b>Feeds into:</b> Cross-device continuity; the sync backend.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics — Advanced</strong> — polish: pet reward/level-up VFX, map exploration-reveal effects and UI motion.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> OpenGL/GLSL effects and a pooled particle system for reward/level-up/exploration-reveal moments, plus map polish (region highlights, landmark reveals).</li><li><b>Prerequisites:</b> M1G4 (base renderer), M2G1 (optimization).</li><li><b>Feeds into:</b> The delight/reward moments at showcase.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + 2 Art (9) — Pawgress lives on <strong>charm</strong>: the pet (growth stages, moods, expression, a customisation-item catalogue) plus the Singapore map/landmarks and the reward art are a large art surface, so two artists carry it; a single designer owns the progression/reward economy, the exploration design and the daily-goal/streak <strong>retention loop</strong> (with the wellness ethics line) (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). If the retention/economy design outgrows one designer, trade the 2nd artist for a 2nd designer. <em>Scope note (advisory):</em> pet sim + fog-of-war map + offline sync + progression economy + a content editor is a healthy but full scope — the pet + one explorable map area + the step→EXP→reward loop + offline-sync + the content editor is the M1/M2 floor; broad customisation, many regions and analytics are the stretch.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the walk → pet-grows → explore loop, the reward/streak economy and the wellness framing; primary benchmark e.g. Walkr or Wokamon, with a Singapore benchmark — Healthy 365 — for the local-awareness criterion)</li><li>M1D2 Core Gameplay Loop Prototype (a greybox proving walk → EXP → pet grows / map reveals feels rewarding) · prototype in Unity</li><li>M1D9 Engagement &amp; Retention Loop Design (the daily-goal / streak / reward loop, with the ethics line explicit — engagement must serve the user&#39;s health, never dark-pattern or guilt-trip)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D3 Systems Balance &amp; Tuning — Data-Driven (the step→EXP→reward curve, streak pacing and customisation economy via the team&#39;s JSON)</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the pet-care home, the map/exploration view and the goal/streak HUD.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — home, map, pet-care/customisation and goals screens navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished pet/map/reward UX tested with walkers on the Pixel 9a.</li></ul></li><li><b>Art M1:</b> 2 artists justified (pet growth stages + customisation catalogue + map/landmarks)<ul><li>M1A1 ⭐ Art Bible / Proof of Concept (the cosy visual direction — palette, the pet&#39;s charm, the Singapore-map style)</li><li>M1A2 Character Concepts &amp; Model Sheets (the pet across growth stages + mood/expression sheets)</li><li>M1A3 Environment, Props &amp; VFX Concepts (the Singapore map areas/landmarks + reward/exploration VFX concepts)</li><li>M1A4 UI Art Concepts &amp; Typography (pet-care home, map view, goal/streak HUD, reward screens)</li><li>M1A5 Animation Foundations (pet idle/grow/react + customisation swaps)</li><li>M1A6 Early Asset Production — Prototype Support</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ Critical Asset Production &amp; In-Engine Visual Quality</li><li>M2A2 Character Animation — Extensive (the pet&#39;s moods, reactions and growth transitions)</li><li>M2A3 Environment Alive — Ambient Animation &amp; Layering (living Singapore-map areas/landmarks)</li><li>M2A4 UI Art — States &amp; Feedback (goal-met / streak / reward-unlocked / region-revealed states)</li><li>M2A5 VFX — Critical Effects &amp; Transitions (level-up, reward and exploration-reveal effects)</li><li>M2A6 Cutscenes &amp; Storyboards (the pet&#39;s intro / milestone moments)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial BGM/SFX from the week-5 needs list present &amp; working in the prototype (cosy BGM, step/goal-met, pet-happy, reward and region-reveal cues), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Games floor (cosy ambient BGM + step / goal / streak / pet / reward / region-reveal SFX, ≥6 types), calm and non-nagging in keeping with the wellness tone.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing; a distinct reward/level-up cue).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the content editor), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
