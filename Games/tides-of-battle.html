@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Tides of Battle</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="tides-of-battle.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="tides-of-battle.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Tides of Battle</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="tides-of-battle-student-proposal">Tides of Battle <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>Tides of Battle</em> is a real-time, lane-based <strong>1v1 strategy game</strong> built around <strong>faction deckbuilding</strong>. Players pick a primary faction (defining playstyle + unique cards) and build a deck from that faction alone or <strong>cross-faction</strong> for new synergies, then bring it into a real-time arena to deploy units, manage resources and react to the opponent. Three core pillars: resource management, strategic deckbuilding, reactive decision-making. Team: 6 CS + 1 Design + 1 Art. Named technical features: <strong>real-time multiplayer via deterministic lockstep</strong> (both clients simulate an identical world locally, exchanging only tiny command packets); <strong>fixed-timestep simulation decoupled from rendering</strong>; <strong>GPU-instanced sprite batching</strong>; and a <strong>data-driven content pipeline</strong> (units/cards share attributes — health, speed, range, faction). Load-bearing C++: two simulation loops in parallel — a client-side loop and a server-side service — both running the exact same simulation with only player inputs transmitted; an <strong>input-delay / frame-buffering</strong> system ties inputs to a simulation frame, and both clients only advance a frame once both inputs are available (guaranteeing a synchronized state); the server manages connections, receives inputs and distributes them. Tool: a <strong>network debugging tool</strong> (player connection status, ping, current frame, input + buffer; plus controls to simulate packet loss / lag to test the input-delay system). Design features: ≥3 factions (distinct playstyle/strengths/identity); ≥8 units per faction; a mana-based resource system; and cross-faction deckbuilding. <em>(Monetization &quot;can be integrated&quot; via a gacha to unlock faction units.)</em></p>
+<p><em>Note (monetization — design condition):</em> unlocking <strong>gameplay units via gacha in a competitive 1v1</strong> is pay-to-win, which breaks the module&#39;s clean-monetization rule. <strong>If</strong> monetization is added, keep all gameplay units earnable/free and restrict real-money purchases to <strong>cosmetics</strong> (no pay-for-power in ranked play). Owned by the M2 Design goal D8 if pursued.</p>
+<p><em>Note (team/scope):</em> 1 artist for <strong>3 factions × 8 units = 24+ unit sprites</strong> (plus animations, UI and VFX) is a heavy load — scope the roster for the milestones (e.g. fewer units per faction at M1/M2, expand in T2), or consider adding a 2nd artist (the team has room to reach 9: 6 CS + 1 Design + 2 Art).</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Clash_Royale">Clash Royale — Wikipedia (the benchmark <strong>real-time 1v1 lane</strong> card battler: deploy units from an 8-card deck, a steadily-regenerating <strong>elixir/mana</strong> resource, arenas + trophy ranking — the real-time-lane + mana + deck + PvP precedent)</a></li>
+<li><a href="https://warcraftrumble.blizzard.com/en-us/">Warcraft Rumble — Blizzard (a real-time <strong>multi-lane</strong> collectible-unit battler with <strong>faction leaders/families</strong>, gold-based deployment and a rock-paper-scissors unit system — the real-time faction-army lane precedent)</a></li>
+<li><a href="https://store.steampowered.com/app/790600/Stormbound/">Stormbound on Steam (a lane-based <strong>faction deckbuilding</strong> card battler — four kingdoms with distinct synergies, mana, and competitive PvP ladder — the faction-deckbuilding + cross-synergy precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Tides of Battle</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (device: Pixel 9a) and/or Web browser on mobile — a real-time 1v1 card-strategy game suits either; the Native PC build is the development/tools vehicle (the network debug tool + the content editor). <b>Extended:</b> Firebase (accounts, collection, matchmaking/rating) + a Linux server the team sets up by M2 (full use T2) as the **lockstep relay** (manages connections, receives + distributes input packets).</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A 2D renderer with **GPU-instanced sprite batching** for the many units/projectiles across the lanes, the deck/hand + mana HUD, the deckbuilder and collection screens — decoupled from the fixed-timestep sim. <b>Languages:</b> Native — Kotlin Native Android UI + C++ via JNI (Android Studio); Web — HTML/JS/CSS + C++→WASM (Emscripten); OpenGL ES sprite instancing in a GLSurfaceView where realtime 2D is needed (no SDL on native).</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The **deterministic fixed-timestep C++ simulation** (units, lanes, mana, combat) running identically on both clients, driven by lockstep input packets with frame-buffering; a **server-side loop/service** managing connections and relaying inputs; plus accounts/collection/rating. <b>Languages:</b> C++ (client sim + server relay); Firebase-backed services on the Extended tier.<br><b>Backend scope:</b> Server-indicated (T2) — the lockstep relay + accounts/collection seam set up &amp; basic-tested on the Linux host by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ loop is heavily load-bearing — a <strong>deterministic fixed-timestep</strong> simulation of units/lanes/mana/combat, decoupled from rendering, that advances a frame only once both players&#39; inputs for that frame are buffered; the server-side service relays inputs. Determinism is the make-or-break property.</li>
+<li><em>Data-driven:</em> units/cards (health, speed, range, faction, abilities), the ≥3 factions and cross-faction rules, and mana costs are all data via the content pipeline — a new unit/faction is a data change.</li>
+<li><em>2D:</em> GPU-instanced sprite rendering of the lane battlefield, units, projectiles and the deck/mana HUD (custom-rendered). <em>3D:</em> not needed. <em>Networking:</em> ✅ <strong>the signature</strong> — real-time deterministic lockstep with input-delay/frame-buffering and a server relay (one of the few projects where a full real-time Networking System is central).</li>
+<li><em>Custom tool:</em> the <strong>network debugging tool</strong> (connection/ping/frame/input-buffer inspection + simulated packet-loss/lag) is excellent dev infrastructure; the team should also build a <strong>content-authoring editor</strong> (unit/card/faction editor on the data pipeline) as the graded content tool (see M2G2 ⭐).</li>
+<li><em>External DB:</em> accounts, the card collection, deck configs and matchmaking/rating. <em>Auth ⏭️:</em> accounts for ranked PvP. <em>Analytics ⏭️:</em> optional — faction/card win-rates for balancing.</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — the <strong>deterministic fixed-timestep</strong> sim decoupled from rendering.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a deterministic fixed-timestep C++ simulation of units/lanes/mana/combat, decoupled from the render loop, with an input-frame model ready for lockstep; C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> M1G11 (lockstep consumes the deterministic sim); every other goal.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong> — the data-driven content pipeline (units/cards/factions).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Entity/component model with units/cards sharing attributes (health, speed, range, faction, abilities), the ≥3 factions + cross-faction rules and mana costs in hot-reloadable JSON — a new unit/faction is a data change.</li><li><b>Prerequisites:</b> G1 (loop &amp; sim).</li><li><b>Feeds into:</b> M2G2 (the content editor), M2G13 (mana/deck systems).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong> — includes the <strong>network debugging tool</strong> + a desync detector.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays + the network debug tool (connection/ping/frame/input-buffer, simulate packet-loss/lag), a per-frame state-hash desync detector, Tracy profiling of a full-lane fight, Catch2 tests proving deterministic replay (same inputs → identical state), on a GitHub Actions matrix.</li><li><b>Prerequisites:</b> G1 (sim to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the network debug tool is a named deliverable; determinism is verified here.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the lane renderer with <strong>GPU-instanced sprite batching</strong>.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> A 2D renderer using GPU-instanced sprite batching for the many lane units/projectiles, a camera, and the deck/hand/mana HUD, decoupled from the sim; SDL2/3/OpenGL ES, GLSL, stb_image, FreeType. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (sim to visualise).</li><li><b>Feeds into:</b> M2G4 (advanced VFX); every visible frame.</li></ul></details>
+</li>
+<li><strong>G8 Enemy AI &amp; Pathfinding</strong> — the <strong>lane unit behaviour</strong> (units auto-advance, target and attack down their lane).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Deterministic per-unit behaviour (advance lane, acquire target, attack, ability triggers) + lane pathing, all driven by the unit&#39;s data (range/speed/faction), computed inside the fixed-timestep sim (custom C++).</li><li><b>Prerequisites:</b> G1 (tick), G2 (unit data).</li><li><b>Feeds into:</b> The lane combat; M2G13 (unit/faction systems). (This is unit behaviour, not a PvE opponent — the opponent is the human via lockstep.)</li></ul></details>
+</li>
+<li><strong>G11 Networking Foundation</strong> — the <strong>deterministic lockstep</strong> transport + input-delay/frame-buffering + server relay.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Sockets (Winsock2/BSD, or ENet) exchanging tiny per-frame input command packets, an input-delay/frame-buffer that advances the sim only when both inputs are present, and a server relay (connections, receive, distribute); sequence/lockstep confirmation. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (deterministic sim), G3 (desync detection).</li><li><b>Feeds into:</b> M2G7 (lockstep hardening under latency); the whole real-time-multiplayer pillar.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Tracy profiling of a full-lane fight, ASan on MSVC, pools for units/projectiles, GPU-instancing tuning, and on-device validation (Pixel 9a and/or mobile web); the Linux lockstep-relay server + Firebase (accounts/collection) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The mobile deliverable + a stable lockstep match on-device.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Unit / Card / Faction Editor)</strong> — author units/cards (health/speed/range/abilities), factions and cross-faction rules on the data pipeline.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui editor to define units/cards, assign them to factions, set mana costs and abilities, and preview them on the lane, with round-trip JSON and undo/redo. (The network debug tool from G3 ⭐ is the second, dev-facing tool.)</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s SDL2/3/OpenGL ES renderer (preview).</li><li><b>Prerequisites:</b> G2 (the data model), M1G4 (rendering for preview).</li><li><b>Feeds into:</b> All unit/faction content; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible mobile builds, tests (deterministic replay, lockstep sync under simulated latency/loss, data loading) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G7 Networking — Match Sync &amp; Prediction</strong> — the lockstep hardened: input-delay tuning, stall/recovery, desync handling under real latency/loss.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Lockstep input-delay tuning, handling of dropped/late packets (stall + catch-up), per-frame state-hash desync detection + recovery, tested under the network debug tool&#39;s simulated packet-loss/jitter/lag.</li><li><b>Prerequisites:</b> M1G11 (lockstep foundation), M2G1 (optimization).</li><li><b>Feeds into:</b> A robust real-time 1v1 match at showcase.</li></ul></details>
+</li>
+<li><strong>G13 Gameplay Systems II</strong> — the <strong>mana economy + faction / cross-faction deckbuilding + unit deployment</strong> systems.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ systems over the ECS for the mana resource, unit deployment, faction identities (strengths/weaknesses/mechanics) and cross-faction synergy rules; balancing-data-driven.</li><li><b>Prerequisites:</b> M1G2 (unit/faction data), M1G8 (unit behaviour).</li><li><b>Feeds into:</b> The deckbuilding + reactive-combat depth at showcase; T2 faction/unit expansion.</li></ul></details>
+</li>
+<li><strong>G8 Firebase — Accounts, Leaderboards &amp; Analytics</strong> — accounts, the card collection, deck configs and the ranked matchmaking/leaderboard.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firebase Auth accounts, Firestore for the collection + deck configs + matchmaking/rating leaderboard, and optional Analytics, via the REST API from C++; server-validated results.</li><li><b>Prerequisites:</b> G2 (collection/deck data model).</li><li><b>Feeds into:</b> Ranked 1v1 + persistent collection; balancing telemetry.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> the team&#39;s stated <strong>6 CS + 1 Design + 1 Art</strong> (8) is workable, but flag the <strong>art load</strong>: 3 factions × 8 units = 24+ unit sprites plus animations, UI and VFX is a lot for one artist. One designer owns the faction identities, the mana economy, the cross-faction deckbuilding and the competitive balance; the artist carries the faction unit rosters, the lane battlefield and the deck/collection UI. <strong>Recommendation:</strong> either scope the unit roster down for M1/M2 (fewer units per faction, expand in T2) or add a <strong>2nd artist</strong> to reach 6 CS + 1 Design + 2 Art (9) (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). <em>Scope note (advisory):</em> deterministic lockstep + a deterministic sim + GPU-instancing + factions/deckbuilding + a content editor + matchmaking is a large surface — a deterministic 1-lane 1v1 with ~2 factions and a handful of units, the lockstep netcode and the content editor is the M1/M2 floor; all 3+ factions × 8 units, ranked matchmaking and the gacha (if any) are the stretch. <strong>Determinism across both clients is the single highest technical risk — prove it early (state-hash desync detection in M1).</strong></p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the real-time lane 1v1, the faction identities, the mana economy and cross-faction deckbuilding; primary benchmark e.g. Clash Royale / Stormbound, with a Singapore benchmark for the local-awareness criterion)</li><li>M1D2 Core Gameplay Loop Prototype (a greybox proving deploy → lane combat → react with mana is fun in real time) · prototype in Unity</li><li>M1D6 Systems &amp; Economy Design (the ≥3 faction identities + ≥8 units each, the mana economy, and the cross-faction synergy rules — every system with a purpose; balance-first given 1v1 PvP)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D3 Systems Balance &amp; Tuning — Data-Driven (faction/unit/mana balance and matchmaking tuning via the team&#39;s JSON, no code changes) <i>— (if monetization is pursued, pair with D8 Monetization &amp; Scope Integrity to keep it non-pay-to-win)</i></li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the lane battlefield, the hand/mana HUD and the deckbuilder/collection screens.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — the arena, deckbuilder, collection and matchmaking screens navigable unaided on the mobile target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished deploy/combat + deckbuilding UX tested with players on the Pixel 9a.</li></ul></li><li><b>Art M1:</b> 1 artist (scope the roster — or add a 2nd artist; see composition)<ul><li>M1A1 ⭐ Art Bible / Proof of Concept (the visual direction + the per-faction identity language — silhouettes, palettes, card frames)</li><li>M1A2 Character Concepts &amp; Model Sheets (the faction unit rosters — prioritise a readable, reusable per-faction kit)</li><li>M1A4 UI Art Concepts &amp; Typography (lane battlefield, hand/mana HUD, deckbuilder/collection screens)</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ Critical Asset Production &amp; In-Engine Visual Quality (units, battlefield and UI implemented and consistent)</li><li>M2A2 Character Animation — Extensive (unit move/attack/ability/death across the factions)</li><li>M2A5 VFX — Critical Effects &amp; Transitions (deploy, ability, impact and destroy effects)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial BGM/SFX from the week-5 needs list present &amp; working in the prototype (faction/battle BGM, deploy, attack, ability and mana cues), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback for a busy lane.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Games floor (faction BGM + deploy / attack / ability / mana / victory SFX, ≥6 types), scaling cleanly with lane activity.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing; distinct per-faction/ability cues).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the content editor + the network debug tool), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-21.</em></p>
+</body>
+</html>
