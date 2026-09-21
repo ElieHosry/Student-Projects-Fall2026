@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Kungfu Crashout</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="kungfu-crashout.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="kungfu-crashout.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Kungfu Crashout</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="kungfu-crashout-student-proposal">Kungfu Crashout <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-22 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>Kungfu Crashout</em> is a <strong>mobile multiplayer fighting game where the environment is the weapon</strong> — players pick up items from the background and use them against opponents. Control is <strong>screen-based gesture input with no on-screen buttons</strong>, a simple scheme that&#39;s easy to pick up. Gameplay is quick 1-on-1 battles in a wide side-view stage with detailed, interactable backgrounds; matches last a few minutes. A roster of characters each have unique fighting styles, players combining the environment with their martial-arts skills to win. Named load-bearing C++: a <strong>native Android</strong> build; a <strong>C++ game loop holding a stable 60 fps with 2 characters + multiple physics objects + particles</strong>, running <strong>deterministically</strong>; <strong>peer-to-peer PvP</strong>; <strong>AI opponents</strong>; and <strong>interactable stage objects</strong>. Named technical features: <strong>gestures as player actions</strong> (movement, attacks, interactions); <strong>environmental interactions</strong> (pick up + throw objects); <strong>different enemy AIs</strong> (difficulty / character-based); and <strong>multiplayer PvP</strong>. Tools: a <strong>custom editor</strong> to view/debug the game — <strong>hurtbox/hitbox debugging + frame checking</strong> of movement and animation, a <strong>debug/admin menu</strong> to adjust values, an <strong>(extra) keyframe editor</strong> if time allows, and a <strong>JSON serializer</strong>. Design features: the <strong>stage/arena determines available environmental items</strong>; a <strong>roster of ≥6 unique characters</strong>; the <strong>gesture input system</strong> simplifying combos/specials; and a <strong>wide variety of interactable items</strong>. Team: <strong>6 CS + 1 Design + 2 Artists</strong>.</p>
+<p><em>Note (module completeness):</em> the proposal doesn&#39;t mention an <strong>External Database</strong> or accounts, but the module mandates Firebase — plan to persist unlocked characters / cosmetics / match records there (a standard, small addition; see the External Database row + M1G12-style integration). <em>Monetization:</em> none is specified — if added, keep it <strong>cosmetic / non-pay-to-win</strong> (no selling characters/power that affect the fight) per the module&#39;s clean-monetization rule.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._Ultimate">Super Smash Bros. Ultimate — Wikipedia (the benchmark fighter built around <strong>items and stage hazards as weapons</strong> — fighters grab, throw and weaponise the environment on a wide side-view stage — the environment-is-the-weapon precedent)</a></li>
+<li><a href="https://store.steampowered.com/app/291550/Brawlhalla/">Brawlhalla on Steam (a free-to-play platform fighter with a large roster of unique &quot;Legends&quot; and <strong>weapon pickups</strong>, running cross-platform including mobile — the roster-of-distinct-fighters + pick-up-a-weapon + clean F2P precedent)</a></li>
+<li><a href="https://play.google.com/store/apps/details?id=com.nekki.shadowfight3">Shadow Fight 3 — Google Play (a popular <strong>mobile</strong> martial-arts fighting game with a <strong>simplified touch-control scheme</strong> and distinct fighting styles/factions — the mobile + simple-touch-combat precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Kungfu Crashout</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — C++ engine via JNI rendering through OpenGL ES in a GLSurfaceView, Kotlin app shell; device: Pixel 9a) — the game is explicitly a native Android build with gesture (no-button) touch controls. The Native PC build is the development/tools vehicle (the hurtbox/frame-debug editor). <b>Extended:</b> Firebase + a Linux server the team sets up by M2 (full use T2) for accounts, unlocked-character/cosmetic persistence and match records; peer-to-peer is the in-match transport.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A 2D side-view fighter renderer — the two characters (animated with frame data), the detailed interactable stage, the pick-up/throwable items, hit-spark VFX and particles, and the minimal gesture-driven HUD. <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine via JNI (Android Studio); OpenGL ES for the realtime 2D in a GLSurfaceView; Web/desktop — SDL2/3 + OpenGL ES for the PC dev/tools build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The deterministic real-time C++ fight engine — the fixed-timestep loop holding 60 fps with 2 characters + physics objects + particles, hitbox/hurtbox collision + frame data, the grab/throw/environmental-object physics, the gesture-to-action recognizer, and the enemy AIs — plus a peer-to-peer netcode layer for PvP; Firebase for accounts/persistence on the Extended tier. <b>Languages:</b> C++ (engine + netcode); Firebase-backed services on the Extended tier.<br><b>Backend scope:</b> Local + P2P now, server-ready (T2) — the accounts/persistence seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the deterministic C++ loop is the heart — it advances both characters, resolves hitbox/hurtbox collisions on frame data, simulates the throwable physics objects + particles, and holds 60 fps on the Native-Android target.</li>
+<li><em>Networking:</em> <strong>core feature</strong> — peer-to-peer PvP. Note this is the hardest part of a fighting game: a deterministic lockstep/<strong>rollback</strong> netcode over P2P is a serious undertaking, so the local 2-player + AI fight is the reliable floor and networked PvP is the primary scope-cut candidate (see scope note). Application Communication ✅ covers accounts/persistence.</li>
+<li><em>Data-driven:</em> characters + movesets/frame data, the ≥6 roster, the item catalogue and per-stage item availability are all data — a new character, move or item is a data change (authored/tuned via the editor).</li>
+<li><em>2D:</em> the side-view fighter renderer, the detailed interactable stage, throwable items, hit-spark VFX and particles (custom-rendered). <em>3D:</em> not needed.</li>
+<li><em>Custom tool:</em> the <strong>fighting-game debug editor</strong> — hurtbox/hitbox visualization, frame checking of movement + animation, a value-tuning admin menu, a JSON serializer, and (time permitting) a keyframe editor.</li>
+<li><em>External DB:</em> accounts, unlocked characters/cosmetics, match records (Firebase — add this per the module). <em>Auth ⏭️ / Analytics ⏭️:</em> module-deferred to T2 (🔵).</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — the deterministic 60 fps fight loop + the <strong>gesture</strong> recognizer.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a deterministic fixed-timestep C++ loop advancing 2 characters + physics objects + particles at 60 fps, with a gesture-input recognizer mapping strokes to movement/attacks/interactions (no on-screen buttons); C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; physics (M1G5) and animation (M1G9) run on its tick; netcode (M2G7) needs its determinism.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> An entity/component model with characters + movesets/frame data, the ≥6 roster, the item catalogue and per-stage item availability in hot-reloadable JSON — a new character, move or item is a data change (the serializer round-trips it).</li><li><b>Prerequisites:</b> G1 (loop &amp; entity hooks).</li><li><b>Feeds into:</b> M2G2 (the debug editor), M2G10 (AI data), M2G11 (item/throw physics data).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong> — the base of the hurtbox/frame debug tooling.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays drawing hitboxes/hurtboxes + frame data, a frame-step/pause debugger, Tracy profiling to prove 60 fps with 2 characters + physics + particles, Catch2 tests (determinism, collision, data loading), on a GitHub Actions Windows+Android matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G2 (the full debug editor); M2G3 (CI hardening).</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the side-view fighter renderer + detailed interactable stage + particles.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> A sprite renderer for the 2 characters, the wide detailed stage with interactable elements, throwable items, hit-spark VFX and particles, with a camera and the minimal HUD; SDL2/3/OpenGL ES, GLSL, stb_image, FreeType. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window).</li><li><b>Feeds into:</b> M2G4-style polish; every visible frame; the debug editor shares this renderer.</li></ul></details>
+</li>
+<li><strong>G5 Physics &amp; Collision</strong> — hitbox/hurtbox collision + the throwable physics objects.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A C++ collision system (broadphase + resolution) for character hit/hurt boxes on frame data and for the grabbable/throwable physics objects that interact with characters and stage; GLM math, deterministic on both clients.</li><li><b>Prerequisites:</b> G1 (loop &amp; tick), G2 (move/item data).</li><li><b>Feeds into:</b> M2G11 (advanced throw/grab + continuous collision); the environment-is-the-weapon pillar.</li></ul></details>
+</li>
+<li><strong>G9 Animation System</strong> — character animation + frame data (the combat backbone).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A sprite-animation system with a state graph and per-frame data (startup/active/recovery, hit/hurt boxes bound to frames), blending and cancels, driven by move data — the substrate the frame-checking tool inspects.</li><li><b>Prerequisites:</b> G1 (loop), G4 (rendering).</li><li><b>Feeds into:</b> The debug editor&#39;s frame checking; the game feel of every move.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong> — hold 60 fps on-device + the persistence seam.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Memory pools for physics/particles, Tracy profiling of a busy fight, ASan on MSVC, and on-device validation (Pixel 9a) holding 60 fps with 2 characters + physics + particles; the Firebase/Linux-server seam (accounts/persistence) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The Native-Android deliverable + a stable 60 fps fight.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Fighting-Game Debug Editor)</strong> — hurtbox/hitbox + frame checking + admin menu + serializer.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui + the shared renderer: visualize + edit hit/hurt boxes per frame, step frames to check movement/animation, a value-tuning admin menu, and JSON serialize/deserialize of characters/moves/items; (stretch) a keyframe editor.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s SDL2/3/OpenGL ES renderer (preview).</li><li><b>Prerequisites:</b> M1G3 (debug overlays), M1G9 (animation/frame data), G2 (data model).</li><li><b>Feeds into:</b> Fast move/character authoring + balancing; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android builds, tests (determinism, collision/frame data, netcode sync under simulated latency, data loading) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G7 Networking — Match Sync &amp; Prediction (P2P PvP + Rollback)</strong> — the peer-to-peer fighting netcode.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A P2P transport + a deterministic lockstep/rollback model (input exchange, prediction, rollback + re-simulate on misprediction), state-hash desync detection, tested under simulated latency/jitter/loss; leans on the M1 deterministic loop. <i>Highest-risk goal — see scope note.</i></li><li><b>Prerequisites:</b> M1G1 (deterministic loop), M1G3 (desync detection).</li><li><b>Feeds into:</b> Online PvP at showcase (stretch); the local 2-player fight is the floor.</li></ul></details>
+</li>
+<li><strong>G10 AI — Advanced (Difficulty &amp; Character-Based Enemy AIs)</strong> — the different enemy AIs.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Behaviour trees / FSMs giving distinct per-character AI (spacing, punishes, item usage), difficulty tiers (reaction time, decision quality), and use of the environment/items, tuned from data (custom C++).</li><li><b>Prerequisites:</b> M1G1 (fight state), G2 (move/character data).</li><li><b>Feeds into:</b> The single-player + practice modes; the &quot;different enemy AIs&quot; feature.</li></ul></details>
+</li>
+<li><strong>G11 Physics — Advanced (Grab / Throw / Environmental Interaction)</strong> — the environment-as-weapon systems.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Constraint/joint solvers + continuous collision for grabbing, carrying and throwing stage objects at the opponent (impact damage/knockback), interaction rules per item type, and per-stage item availability; deterministic on both clients.</li><li><b>Prerequisites:</b> M1G5 (physics &amp; collision).</li><li><b>Feeds into:</b> The environment-is-the-weapon USP; the stage-determines-items design pillar.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + 2 Art (9) — <strong>as proposed</strong>, and well-justified: a fighting game is <strong>art- and animation-heavy</strong> (a ≥6-character roster each with a distinct style and a full move-set of animations, detailed interactable stages, throwable items, hit VFX), so <strong>2 artists</strong> are the right call, one able to specialise in character animation (fighting games live on frame-by-frame animation). A single designer owns the FDD, the <strong>gesture control scheme + game feel</strong>, the roster/item/stage systems and the AI/difficulty design (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). <em>Scope note (advisory):</em> a deterministic 60 fps fight engine + frame-data animation + hitbox/hurtbox combat + grab/throw physics + a debug editor is already a full CS scope for M1/M2 — and <strong>peer-to-peer rollback netcode is, on its own, one of the hardest problems in games</strong>. Strong recommendation: make the <strong>local 2-player + AI fight the floor</strong> (fully playable, great feel, ≥3 characters, one or two stages), and treat <strong>networked P2P PvP as the stretch</strong> (M2G7) — do a networking spike early to de-risk it, and keep the sim deterministic from day one so rollback stays possible. The ≥6 roster, the full item variety and online PvP are the M2 stretch, not the floor.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the environment-is-the-weapon fighter, the gesture control scheme, the ≥6 roster + distinct styles, the stage-determines-items design; primary benchmark e.g. Super Smash Bros. / Brawlhalla, plus a Singapore benchmark)</li><li>M1D2 Core Gameplay Loop Prototype (a greybox proving the gesture combat + grab-and-throw-the-environment fight is fun) · prototype in Unity</li><li>M1D4 Game Feel &amp; Touch Interaction Specification (the no-button gesture scheme — how movement/attacks/grabs/specials map to strokes, buffering, cancels, hit-stop — as tunable data)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D3 Systems Balance &amp; Tuning — Data-Driven (character/move/item balance and AI difficulty via the editor&#39;s JSON, no code changes — critical for a fighter)</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the health/round HUD, the gesture affordances/feedback and the character-select, plus a wireframe baseline.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — character-select, match HUD, results and the (local/online) match-setup navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished gesture-combat UX tested with players on the Pixel 9a (does the no-button scheme actually read?).</li></ul></li><li><b>Art M1:</b> 2 artists justified (≥6 fighters + animations + stages + items + VFX)<ul><li>M1A1 ⭐ Art Bible / Proof of Concept (the martial-arts visual direction — tone, palette, character-identity language)</li><li>M1A2 Character Concepts &amp; Model Sheets (the ≥6 fighters with distinct styles + silhouettes)</li><li>M1A3 Environment, Props &amp; VFX Concepts (the detailed interactable stages, the throwable items, hit-spark VFX)</li><li>M1A4 UI Art Concepts &amp; Typography (health/round HUD, character-select, gesture feedback)</li><li>M1A5 Animation Foundations (fighting key poses, attack/hurt/throw cycles — the fighter&#39;s lifeblood)</li><li>M1A6 Early Asset Production — Prototype Support</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ Critical Asset Production &amp; In-Engine Visual Quality</li><li>M2A2 Character Animation — Extensive (full move-sets, throws, environmental grabs, KOs across the roster)</li><li>M2A3 Environment Alive — Ambient Animation &amp; Layering (living, interactable stages)</li><li>M2A4 UI Art — States &amp; Feedback (hit/combo/round feedback states)</li><li>M2A5 VFX — Critical Effects &amp; Transitions (impacts, item-throw effects, specials)</li><li>M2A6 Cutscenes &amp; Storyboards (character intros / victory poses)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial BGM/SFX from the week-5 needs list present &amp; working in the prototype (stage BGM, hit/impact, whiff, item-pickup/throw, KO cues), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback for overlapping fight SFX.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Games floor (stage BGM + hit / block / throw / special / KO / announcer SFX, ≥6 types), scaling with fight intensity.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing; distinct hit/throw/special cues).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the hurtbox/frame debug editor), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-22.</em></p>
+</body>
+</html>
