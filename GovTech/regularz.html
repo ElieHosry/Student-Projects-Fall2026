@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Regularz</title>
+  <title>Regularz - Team16</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,10 +30,10 @@ li { margin: 3px 0; }
 <body>
 <div style="text-align:right;margin:0 0 14px"><a href="regularz.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="regularz.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
 <header id="title-block-header">
-<h1 class="title">Regularz</h1>
+<h1 class="title">Regularz - Team16</h1>
 </header>
 <p><a href="../index.html">← Back to index</a></p>
-<h2 id="regularz-student-proposal">Regularz <em>(student proposal)</em></h2>
+<h2 id="regularz---team16-student-proposal">Regularz - Team16 <em>(student proposal)</em></h2>
 <div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> 🔶 Fit with adjustments · <b>Category:</b> GovTech · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
 
 <p><strong>Proposal (as submitted):</strong> A mobile pickup-ordering app giving small Singapore F&amp;B businesses a direct brand channel (vs commission-heavy marketplaces like Grab/Foodpanda or generic POS terminals). Customers browse meals/drinks with live stock, order made-to-order food, and get collection ETAs from a C++ queue-estimation service (moving-window / rolling-average of per-item prep time against the active-order backlog). Collection-only: a UUID order-bound QR code is generated after payment and scanned on the vendor device to confirm pickup. Inventory updates concurrently and safely (DB transactions reserve/restore stock, preventing overselling the last item). A data-driven CRM uses purchase histories to deliver personalized rewards (not flat points). Load-bearing C++: a cloud-hosted queue-management service on Linux that manages the live order queue, verifies payment/kitchen-status updates, computes ETAs, and stores order/ETA data in Firebase with transaction-safe atomic processing, pushing real-time updates to customer phones and the vendor tablet (mobile web). Custom tool: an F&amp;B Operations Editor (staff preview/modify stock, add/remove menu items, edit loyalty rewards, customize the interface). CI/deployment flow with staging→production and regression gates. Design features: branded mobile menu, end-to-end pickup ordering with live collection tracking + QR, vendor dashboard (orders/inventory), and personalized loyalty (a virtual wallet tracking purchases/rewards).</p>

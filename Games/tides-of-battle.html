@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Tides of Battle</title>
+  <title>Tides of Battle - Team32</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,10 +30,10 @@ li { margin: 3px 0; }
 <body>
 <div style="text-align:right;margin:0 0 14px"><a href="tides-of-battle.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="tides-of-battle.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
 <header id="title-block-header">
-<h1 class="title">Tides of Battle</h1>
+<h1 class="title">Tides of Battle - Team32</h1>
 </header>
 <p><a href="../index.html">← Back to index</a></p>
-<h2 id="tides-of-battle-student-proposal">Tides of Battle <em>(student proposal)</em></h2>
+<h2 id="tides-of-battle---team32-student-proposal">Tides of Battle - Team32 <em>(student proposal)</em></h2>
 <div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
 
 <p><strong>Proposal (as submitted):</strong> <em>Tides of Battle</em> is a real-time, lane-based <strong>1v1 strategy game</strong> built around <strong>faction deckbuilding</strong>. Players pick a primary faction (defining playstyle + unique cards) and build a deck from that faction alone or <strong>cross-faction</strong> for new synergies, then bring it into a real-time arena to deploy units, manage resources and react to the opponent. Three core pillars: resource management, strategic deckbuilding, reactive decision-making. Team: 6 CS + 1 Design + 1 Art. Named technical features: <strong>real-time multiplayer via deterministic lockstep</strong> (both clients simulate an identical world locally, exchanging only tiny command packets); <strong>fixed-timestep simulation decoupled from rendering</strong>; <strong>GPU-instanced sprite batching</strong>; and a <strong>data-driven content pipeline</strong> (units/cards share attributes — health, speed, range, faction). Load-bearing C++: two simulation loops in parallel — a client-side loop and a server-side service — both running the exact same simulation with only player inputs transmitted; an <strong>input-delay / frame-buffering</strong> system ties inputs to a simulation frame, and both clients only advance a frame once both inputs are available (guaranteeing a synchronized state); the server manages connections, receives inputs and distributes them. Tool: a <strong>network debugging tool</strong> (player connection status, ping, current frame, input + buffer; plus controls to simulate packet loss / lag to test the input-delay system). Design features: ≥3 factions (distinct playstyle/strengths/identity); ≥8 units per faction; a mana-based resource system; and cross-faction deckbuilding. <em>(Monetization &quot;can be integrated&quot; via a gacha to unlock faction units.)</em></p>

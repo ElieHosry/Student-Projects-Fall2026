@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Graveyard Shift</title>
+  <title>Graveyard Shift - Team06</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,10 +30,10 @@ li { margin: 3px 0; }
 <body>
 <div style="text-align:right;margin:0 0 14px"><a href="graveyard-shift.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="graveyard-shift.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
 <header id="title-block-header">
-<h1 class="title">Graveyard Shift</h1>
+<h1 class="title">Graveyard Shift - Team06</h1>
 </header>
 <p><a href="../index.html">← Back to index</a></p>
-<h2 id="graveyard-shift-student-proposal">Graveyard Shift <em>(student proposal)</em></h2>
+<h2 id="graveyard-shift---team06-student-proposal">Graveyard Shift - Team06 <em>(student proposal)</em></h2>
 <div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> 🔶 Fit with adjustments · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
 
 <p><strong>Proposal (as submitted):</strong> <em>Graveyard Shift</em> is a darkly-humorous, fast-paced strategy game: you run a supernatural restaurant in a graveyard serving ghosts, zombies and ghouls. The challenge is <strong>seating customers by kind</strong> (ghosts with ghosts, etc.) — mix them and tensions rise into <strong>chaotic riots</strong>, which leave <strong>remains</strong> you must collect as <strong>ingredients</strong> for the next day&#39;s menu. The loop is service → chaos → resource-gathering: mis-seated customers agitate faster (earlier riots); fail to gather enough ingredients and the restaurant risks financial collapse. Named technical features: an <strong>event-based sprite animation system</strong> (animation events call functions at specific frames — e.g. a throw frame spawns a projectile + plays a SFX, keeping animation/gameplay/audio in sync without hard-coded timings); a reusable <strong>FSM template</strong> (start/update/exit) for scenes, player and customers; an <strong>entity-component system</strong> to avoid inheritance hierarchies; and <strong>object pooling</strong> for the many projectiles (fixed pool, reused on out-of-bounds/hit). Loop: a real-time C++ fixed-timestep loop using delta-time — each update advances time-of-day, updates each customer&#39;s mood, spreads agitation to nearby customers, moves projectiles, checks collisions and updates ingredients; a mixed table drops moods faster, and once mood passes a limit the customer enters the riot state and throws projectiles. Built for Android, C++ rendering via OpenGL ES connected to a Kotlin app through JNI. Tools: an <strong>animation tool</strong> (load sprite sheets + animation data — triggers, frame rate, start/end frame — via JSON so the team adjusts animations without code) and an <strong>entity data editor</strong> (create customer types, dishes and entities by choosing components and setting values like mood/patience/speed, so UXGD teammates make e.g. an impatient ghoul without recompiling). Design features: time-of-day mood/riot risk; ingredient collection as the player&#39;s &quot;health&quot;; seating arrangement (same-kind vs mixed); and a mood + personality system (personality affects how fast mood drops). <strong>Monetization:</strong> a list of in-app purchases — items to collect ingredients (vacuum), <strong>extra patience / riot-delay</strong> (TV comedy, calming dish), <strong>larger ingredient-collection area</strong>, <strong>temporary invincibility</strong>, and <strong>continue/revive</strong> at the current level.</p>

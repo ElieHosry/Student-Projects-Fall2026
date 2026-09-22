@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Squall</title>
+  <title>Squall - Team07</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,10 +30,10 @@ li { margin: 3px 0; }
 <body>
 <div style="text-align:right;margin:0 0 14px"><a href="squall.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="squall.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
 <header id="title-block-header">
-<h1 class="title">Squall</h1>
+<h1 class="title">Squall - Team07</h1>
 </header>
 <p><a href="../index.html">← Back to index</a></p>
-<h2 id="squall-student-proposal">Squall <em>(student proposal)</em></h2>
+<h2 id="squall---team07-student-proposal">Squall - Team07 <em>(student proposal)</em></h2>
 <div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
 
 <p><strong>Proposal (as submitted):</strong> <em>Squall</em> is a <strong>physics-based puzzle game</strong> where the instrument of manipulation is the player&#39;s fingers: players <strong>draw push, pull and time-freeze spells directly onto the screen</strong> as shapes to manipulate the world — jamming a mechanism with a box, yanking a key from across an inaccessible area, freezing objects to accelerate them toward a locked gate. Every puzzle has a goal but the solution is in the player&#39;s hands; three simple base spells let level architecture, systems and introduced mechanics carry the challenge. Named load-bearing C++: a stable <strong>rigid-body physics loop</strong> running many puzzle objects simultaneously; an <strong>ECS</strong> (contiguous memory for cache-efficient updates, decoupled rendering / physics / state-evaluation systems, transient event components + buffers for interaction handling); and a <strong>raycasted audio service</strong> casting dynamic sound rays for realistic acoustic occlusion + distance. Named technical features: <strong>vector/direction gesture recognition</strong> for drawn spells (real-time geometry + direction analysis distinguishing a circle from another shape); the dynamic physics system; the raycasted audio; and a <strong>level-streaming database</strong> for instant load (stream assets instead of loading all upfront). Tools: a <strong>level editor</strong> (free room layout — collision walls, spell/object-gated paths, room environment effects; entry/exit transition points) and a <strong>scriptable object system</strong> (transform/rotation/scale/ID-tag properties; typed objects like light sources, switches, buttons, pressure plates; custom script data for object-to-object interaction; reusable data assets placed many times). Design features: <strong>location-sensitive screen-drawing</strong> of spells; physics-based environmental interactions; the <strong>three spells</strong> — a <strong>circle</strong> that pulls surrounding objects, a <strong>triangle</strong> that freezes objects in time (accumulated forces/status effects all resolve on elapse), and a <strong>push</strong> that forces objects along/in front of it; and <strong>non-combative boss fights</strong> solved as puzzles using in-world objects. Team: <strong>6 CS + 1 Design + 1 Art</strong>.</p>

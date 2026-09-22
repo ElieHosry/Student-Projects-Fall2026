@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Stridelings</title>
+  <title>Stridelings - Team24</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,10 +30,10 @@ li { margin: 3px 0; }
 <body>
 <div style="text-align:right;margin:0 0 14px"><a href="stridelings.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="stridelings.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
 <header id="title-block-header">
-<h1 class="title">Stridelings</h1>
+<h1 class="title">Stridelings - Team24</h1>
 </header>
 <p><a href="../index.html">← Back to index</a></p>
-<h2 id="stridelings-student-proposal">Stridelings <em>(student proposal)</em></h2>
+<h2 id="stridelings---team24-student-proposal">Stridelings - Team24 <em>(student proposal)</em></h2>
 <div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games <i>(gamified-app lens)</i> · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
 
 <p><strong>Proposal (as submitted):</strong> <em>Stridelings</em> is a <strong>gamified fitness-tracking app</strong> that turns walks and runs into a <strong>creature-collecting game without interrupting the workout</strong>. A tracked session records distance, pace, route and time, with a chosen <strong>Strideling</strong> as companion. The Singapore map is gamified into a <strong>biome grid</strong> (4 biome types), each biome with its own resources and Stridelings of various rarities; resources auto-gather as the user moves and Stridelings follow with interest. At session end, the user keeps the Stridelings that followed to the end and levels their companion by the session; gathered resources decorate a <strong>home base</strong> where creatures hang out. Biomes <strong>rotate weekly</strong>, pushing new routes; daily/weekly missions tailored to the user&#39;s goals reward consistency. Named load-bearing C++: a <strong>real-time GPS signal-conditioning pipeline</strong> (Kalman-style filtering/smoothing of noisy GPS + spoofing/abnormality detection); a <strong>real-time 2D map render via OpenGL ES</strong> from <strong>GeoJSON</strong> queried from a <strong>PostgreSQL + PostGIS</strong> server; <strong>offline session recording</strong> (local SQLite) synced to the server at session end for <strong>validation + reward issue</strong> (so recording survives tunnels/deadzones); and a <strong>data-driven content pipeline</strong> (all Stridelings, biomes, resources and drop tables defined externally, edited in the team&#39;s editors, exported as <strong>versioned content packs</strong>, shipping content without code changes). The sim loop reads GPS to update distance/pace, determine the current biome, decide resource collection and creature joins. Tools: a <strong>creature-creation tool</strong> (spritesheets, stats, spawn, rarity); a <strong>session simulator</strong> (synthetic GPS traces treated as real sessions with real rewards, for dev testing); a <strong>biome editor</strong> (biome art + collectible resources); and a <strong>debugger/logger</strong> (location/updates, biome changes, creature encounters, rewards, missions, system errors). Design features: an <strong>interaction-free session</strong> (stats screen + map screen with creatures visibly joining, easy switch); the <strong>grid-based rotating biomes</strong>; <strong>creature collecting</strong> (unique companion passives — e.g. more resources / rarer encounters — level-ups unlock passives, duplicates fuse to enhance); and the <strong>home base</strong> (tap-to-interact creatures + furniture bought with gathered resources). Team: <strong>6 CS + 1 Design + 0 Art</strong>.</p>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>BEANS</title>
+  <title>BEANS - Team37</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,10 +30,10 @@ li { margin: 3px 0; }
 <body>
 <div style="text-align:right;margin:0 0 14px"><a href="beans.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="beans.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
 <header id="title-block-header">
-<h1 class="title">BEANS</h1>
+<h1 class="title">BEANS - Team37</h1>
 </header>
 <p><a href="../index.html">← Back to index</a></p>
-<h2 id="beans-student-proposal">BEANS <em>(student proposal)</em></h2>
+<h2 id="beans---team37-student-proposal">BEANS - Team37 <em>(student proposal)</em></h2>
 <div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Visualization &amp; Analytics · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval · <b>Runner-up category:</b> Education + Training</div>
 
 <p><strong>Proposal (as submitted):</strong> <em>BEANS</em> is a learning-oriented coffee databank web-app that educates newcomers on beans and preparation methods by preference. It cross-references brew details (bean type, grind size, method) to <strong>estimate the final taste</strong>; users log a brew + feedback, and the app suggests improvements/alternatives from the <strong>collective community databank</strong>. A relevancy search recommends coffees by preference + search history; there&#39;s a shop for beans/gear, monthly subscription tiers, and an inventory tracker (with nearby store/cafe suggestions). Named technical features: a <strong>Parametric Taste &amp; Extraction Visualizer</strong> (brew variables → dynamic extraction-yield curves + a sensory taste-profile <strong>radar chart</strong>); a <strong>Brew Diagnostics &amp; Dial-In Tool</strong> (qualitative feedback like <em>sour/astringent/hollow</em> → inverse parameter corrections); a <strong>Taste-Profile Catalog Search &amp; Vector Ranking</strong> (multi-attribute search ranking beans by similarity to the user&#39;s taste + logs); and a <strong>high-throughput C++ vector search + neural re-ranking engine</strong>. Load-bearing C++: a compiled <strong>C++→WebAssembly</strong> module runs client-side computing particle-level solute diffusion / extraction dynamics in a <strong>fixed-timestep numerical loop</strong>, with slider inputs continuously re-injecting parameters to update the taste radar without frame drops or network hops; plus a <strong>dedicated C++ service</strong> for high-dimensional vector math (hardware SIMD distance across flavor profiles) and an <strong>embedded lightweight neural cross-encoder</strong> that re-ranks candidate beans before the API returns results. Tools: a <strong>Dial-In &amp; Recipe Calibration Utility</strong> (author/test/tune brew parameters per bean; roasters author bean-specific templates with grind/temperature/ratio bounds + sensory target envelopes; a closed-loop diagnostic that ingests taste feedback, runs inverse heuristics, and previews the corrected radar before committing a versioned profile). Design features: estimate brew taste from inputs; a guide-me/recipe feature; a community to share experiments; and monetization (B2C bean/machine subscriptions; B2B roaster onboarding).</p>

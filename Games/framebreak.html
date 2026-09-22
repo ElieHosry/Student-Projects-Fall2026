@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Framebreak</title>
+  <title>Framebreak - Team20</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,10 +30,10 @@ li { margin: 3px 0; }
 <body>
 <div style="text-align:right;margin:0 0 14px"><a href="framebreak.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="framebreak.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
 <header id="title-block-header">
-<h1 class="title">Framebreak</h1>
+<h1 class="title">Framebreak - Team20</h1>
 </header>
 <p><a href="../index.html">← Back to index</a></p>
-<h2 id="framebreak-student-proposal">Framebreak <em>(student proposal)</em></h2>
+<h2 id="framebreak---team20-student-proposal">Framebreak - Team20 <em>(student proposal)</em></h2>
 <div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> 🔶 Fit with adjustments · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
 
 <p><strong>Proposal (as submitted):</strong> You are a prisoner escaping with a magical camera: <strong>snapping a real-world object materializes a functional 3D item inside your cell</strong> to overcome obstacles. Camera power is limited, so every snapshot demands observation and spatial strategy — scout your surroundings, pick the best item, capture it to solve each area&#39;s escape puzzle. Named technical features: (1) <strong>time-zone-synchronized procedural level generation</strong>; (2) an <strong>AI photo→3D pipeline</strong> — a photo is classified to identify the object and assign gameplay attributes, sent to the backend where the background is stripped and an image-to-3D model generates a textured mesh, which a <strong>C++ service reduces and fits with collision shapes</strong> before it streams back and spawns, with a progress/status indicator; (3) <strong>real-time 3D co-op multiplayer</strong>; (4) an <strong>attribute-matching puzzle system</strong> that checks a spawned object&#39;s properties against a room&#39;s exit requirements (any item with the right attributes solves it). Loop/service: a C++ backend service turns the raw generated mesh into something the phone can use — mesh reduction, texture bake, collision generation; since every photo is unique nothing is reusable, so the service&#39;s throughput decides how many concurrent players are supported. Tools: a <strong>desktop room editor</strong> on the same C++ renderer (place geometry, set each room&#39;s exit requirement as an attribute list, set the camera charge limit); a server hosting the image-to-3D app (device sends photo → server returns a 3D model → used in the loop). Design features: photo-to-object manifestation; a <strong>cooperative escape mode</strong> (solo or online co-op, combine snapshots to solve complex puzzles); <strong>dynamic time-of-day puzzles</strong> (layouts change for morning/afternoon/evening/midnight); and a <strong>hybrid monetization system</strong> (base 10 snaps/area, a &quot;large battery pack&quot; raises it to 20; paid hints).</p>

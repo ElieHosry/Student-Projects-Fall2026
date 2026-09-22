@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>KOPI-TWIN</title>
+  <title>KOPI-TWIN - Team15</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,10 +30,10 @@ li { margin: 3px 0; }
 <body>
 <div style="text-align:right;margin:0 0 14px"><a href="kopi-twin.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="kopi-twin.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
 <header id="title-block-header">
-<h1 class="title">KOPI-TWIN</h1>
+<h1 class="title">KOPI-TWIN - Team15</h1>
 </header>
 <p><a href="../index.html">← Back to index</a></p>
-<h2 id="kopi-twin-student-proposal">KOPI-TWIN <em>(student proposal)</em></h2>
+<h2 id="kopi-twin---team15-student-proposal">KOPI-TWIN - Team15 <em>(student proposal)</em></h2>
 <div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Education + Training · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval · <b>Runner-up category:</b> Immersive Experience</div>
 
 <p><strong>Proposal (as submitted):</strong> <em>Kopi Twin</em> is a mobile <strong>augmented-reality training app</strong> that turns an ordinary table into a simulated kopitiam drink workstation for <strong>new food-service employees</strong> — trainees practise preparing and serving orders without occupying a stall or using real ingredients. Unlike video tutorials or fixed step-by-step guides, it uses a <strong>real-time simulation</strong> to generate customer orders, manage virtual ingredients, track recipe states and introduce changing workplace conditions. Trainees do guided lessons, then timed <strong>peak-hour scenarios</strong> balancing speed, accuracy and waste; performance is scored on procedural accuracy, completion time, incorrect actions and simulated ingredient usage. The POC focuses on traditional kopi, but the data-driven training system can extend to other workstations. Named technical features: a <strong>native C++ digital-twin core on ARCore&#39;s NDK (C API)</strong> converting a live camera scan into a persistent, bounded spatial-anchor map that survives across sessions; a <strong>data-driven object system</strong> (real-world anchors carry swappable behaviour definitions in data files, so the same engine runs different scenarios without code changes — swap JSON/txt instead of hard-coding); <strong>user interaction with the object system</strong> (handle objects via a button press); and a <strong>bounded-space digital-twin</strong> (a defined playable area with persistent anchor placement). Loop: a local native C++ update loop drives the AR session every frame — pull ARCore pose/plane data, update anchored virtual-object states, run the interaction/grading logic — performant enough for a live camera feed on-device. Tool: a <strong>content/scenario editor</strong> letting a non-programmer (a recipe designer or safety trainer) define anchor points, object behaviours and pass/fail interaction rules as data. Design features: guided AR training (instructions beside the relevant virtual equipment); peak-hour simulation (simultaneous orders, limited ingredients, time pressure); immediate error feedback (wrong ingredients/quantities/sequences/skipped steps); and a performance &amp; competency dashboard (accuracy, completion time, compliance, simulated waste).</p>

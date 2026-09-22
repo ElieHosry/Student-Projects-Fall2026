@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>SGGotWhat?</title>
+  <title>SGGotWhat? - Team02</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,10 +30,10 @@ li { margin: 3px 0; }
 <body>
 <div style="text-align:right;margin:0 0 14px"><a href="sggotwhat.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="sggotwhat.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
 <header id="title-block-header">
-<h1 class="title">SGGotWhat?</h1>
+<h1 class="title">SGGotWhat? - Team02</h1>
 </header>
 <p><a href="../index.html">← Back to index</a></p>
-<h2 id="sggotwhat-student-proposal">SGGotWhat? <em>(student proposal)</em></h2>
+<h2 id="sggotwhat---team02-student-proposal">SGGotWhat? - Team02 <em>(student proposal)</em></h2>
 <div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> 🔶 Fit with adjustments · <b>Category:</b> Social Media · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
 
 <p><strong>Proposal (as submitted):</strong> A crowdsourced discovery app helping Singaporeans find real hidden gems (quiet cafes, unexpected viewpoints), countering the &quot;SG got what&quot; stereotype. Users log spots and one-off events, validated by the community; a personalized recommendation engine and route planner surface what&#39;s worth seeing and plan a full day out. An Events page pairs Eventfinda-API listings with community-submitted niche pop-ups. Backend C++ services handle spatiotemporal search, trending and multi-stop transit route optimization in real time. Named technical features: a <strong>Trust &amp; Validation pipeline</strong> (hard checks — GPS radius + accuracy, rate limiting, account age; soft checks — perceptual photo hashing, n-gram/Jaccard text similarity); a <strong>personalised recommendation engine</strong> (per-user affinity vectors + collaborative persona matching, a reserved share from adjacent clusters to avoid taste bubbles, clusters recomputed in a background loop); a <strong>spatiotemporal discovery index</strong> (custom C++ spatial index over spots/events with valid-time windows, distance blended with trending/personalisation, auto-expanding radius, zoom-based pin clustering); and a <strong>multimodal router + itinerary optimiser</strong> (C++ earliest-arrival over bus/MRT from LTA DataMall, plus a time-window orienteering metaheuristic that selects/orders stops to maximise value). Custom tool: a web-based moderation &amp; content editor (review soft-check-flagged submissions side-by-side with the detected duplicate, create/edit spots &amp; categories, tune ranking weights with a live preview of a test user&#39;s feed). Perf targets: nearby query &lt;50 ms p95 at 10k spots; itinerary &lt;2 s for 20 candidates; submission validation &lt;500 ms; deterministic-for-seed recommendations.</p>

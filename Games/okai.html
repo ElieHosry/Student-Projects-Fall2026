@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>oKAI</title>
+  <title>oKAI - Team25</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,10 +30,10 @@ li { margin: 3px 0; }
 <body>
 <div style="text-align:right;margin:0 0 14px"><a href="okai.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="okai.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
 <header id="title-block-header">
-<h1 class="title">oKAI</h1>
+<h1 class="title">oKAI - Team25</h1>
 </header>
 <p><a href="../index.html">← Back to index</a></p>
-<h2 id="okai-student-proposal">oKAI <em>(student proposal)</em></h2>
+<h2 id="okai---team25-student-proposal">oKAI - Team25 <em>(student proposal)</em></h2>
 <div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
 
 <p><strong>Proposal (as submitted):</strong> A top-down endless survival bullet-hell for casual mobile players, built around <strong>drawing symbols on the touchscreen to cast spells</strong> and surviving endless enemy waves. Defeating enemies grants new spells, so the player adapts their strategy as the run progresses; 1–4 players can team up. Named technical features: a custom C++ <strong>gesture-recognition engine</strong> (geometric template matching — $1 Unistroke / $Q — with a multi-stage preprocessing pipeline: resampling to a fixed point count, rotational normalization, scale-invariant bounding-box scaling, centroid translation; Euclidean scoring against templates; target &gt;90% recognition within a 100 ms latency window); <strong>server-authoritative C++ multiplayer</strong> for 1–4 players over LAN or cloud (clients send inputs/cast requests, the server owns players, enemies, spells, damage, drops and progression, sends periodic world snapshots; clients interpolate remote entities and use client-side prediction + server reconciliation for the local player; RTT/loss/bandwidth diagnostics; tested under simulated latency/jitter/loss); a <strong>data-driven ECS</strong> (spell/enemy/player attributes from external files, runtime add/remove/replace of components, systems parallelizable); and a <strong>robust modular spell system</strong> (spells do more than one-shot damage; fast authoring of unique effects). Core requirements name an external data source, a stable-30fps C++ loop (20+ enemies, 5+ spell objects), an event/snapshot application protocol, CI, JSON+XML data-driven architecture, a dedicated C++ authoritative back-end, and tools: an ECS diagnostics logger, an in-engine gameplay-telemetry API, an in-system game editor with developer diagnostics, and a <strong>custom gesture-template editor</strong> (draw a symbol, export as XML) to add/refine spell recognition. Development environment: <strong>Native Android</strong>. Design features: gesture-based spellcasting (the primary mechanic), ≥5 spell types, ≥3 enemy types (Basic / Ranged / Tank), and ≥1 boss.</p>

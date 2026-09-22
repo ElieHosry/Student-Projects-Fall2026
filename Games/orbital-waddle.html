@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Orbital Waddle</title>
+  <title>Orbital Waddle - Team12</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,10 +30,10 @@ li { margin: 3px 0; }
 <body>
 <div style="text-align:right;margin:0 0 14px"><a href="orbital-waddle.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="orbital-waddle.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
 <header id="title-block-header">
-<h1 class="title">Orbital Waddle</h1>
+<h1 class="title">Orbital Waddle - Team12</h1>
 </header>
 <p><a href="../index.html">← Back to index</a></p>
-<h2 id="orbital-waddle-student-proposal">Orbital Waddle <em>(student proposal)</em></h2>
+<h2 id="orbital-waddle---team12-student-proposal">Orbital Waddle - Team12 <em>(student proposal)</em></h2>
 <div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
 
 <p><strong>Proposal (as submitted):</strong> You play an astronaut penguin whose partner is kidnapped by the Astrorca and taken to Planet 67. Journeying across a chain of alien planets — <strong>each a rotating isometric cube world</strong> — you clear timed enemy waves to earn the key and locate a hidden <strong>Thingamajig</strong> to power the rocket onward. Combat is hack-and-slash roguelite (in the vein of Hades / Megabonk): start with a snowball launcher, grow an arsenal of weapons, upgrades, abilities and stat boosts. Each planet has its own terrain, enemy mix and theme, and <strong>walking off an edge smoothly rotates the whole world so a new cube face becomes the ground</strong>. Named technical features: (1) a <strong>planet-rotation traversal engine</strong> that reorients terrain + the gravity vector as the player crosses an edge while keeping every active enemy/projectile/object stable in the local frame; (2) an <strong>ECS sustaining 100 concurrent enemies per wave</strong> without frame drops on Android; (3) a Thingamajig relocation system that updates a HUD compass; (4) a <strong>data-driven weapon/ability/stat economy</strong> backed by a <strong>Firebase</strong> layer for cloud-save sync, server-side achievement unlocks and a server-validated global leaderboard. Loop: the game loop, ECS, planet rotation and enemy AI run in one fixed-timestep C++ loop (Android Studio + C++ via JNI) targeting 100 live enemies; adding an enemy/wave is a data change. Tools: a <strong>planet &amp; wave editor</strong> (terrain, spawn zones, Thingamajig points), a <strong>data-driven config tool</strong> (weapon stats, upgrade trees, enemy params, post-rescue difficulty tiers), and a <strong>CI pipeline</strong>. Design: the rotating planet world; a 5-enemy roster (Astrorca, RoboLi Seals, Space Petrels, F.O.X, Polaroids) with distinct movement/attack patterns; a wave→key + Thingamajig loop across 4 planets (3 themed + Planet 67 finale); and a <strong>New Game+ completionist loop</strong> with remixed waves and <strong>cosmetic-only</strong> rewards (no pay-to-win). Platform: <strong>Mobile, native Android</strong>.</p>

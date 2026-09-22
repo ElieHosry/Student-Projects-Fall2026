@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Subterranean Salvage</title>
+  <title>Subterranean Salvage - Team28</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,10 +30,10 @@ li { margin: 3px 0; }
 <body>
 <div style="text-align:right;margin:0 0 14px"><a href="subterranean-salvage.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="subterranean-salvage.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
 <header id="title-block-header">
-<h1 class="title">Subterranean Salvage</h1>
+<h1 class="title">Subterranean Salvage - Team28</h1>
 </header>
 <p><a href="../index.html">← Back to index</a></p>
-<h2 id="subterranean-salvage-student-proposal">Subterranean Salvage <em>(student proposal)</em></h2>
+<h2 id="subterranean-salvage---team28-student-proposal">Subterranean Salvage - Team28 <em>(student proposal)</em></h2>
 <div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-21 · <b>Status:</b> awaiting instructor approval</div>
 
 <p><strong>Proposal (as submitted):</strong> A collection-based extraction game in a 2D pixel-art style for the web. The player is a treasure hunter sending drones into the Red Zone, evading enemies with heightened hearing by making minimal sound and sneaking, looting homes and chests for items lost to time, and returning to the safe zones before the drone&#39;s limited battery runs out. Collected items grant points (rarer = more), and players compete on a leaderboard. Named technical features: a <strong>sound-based raycasting system</strong> (object interactions produce noise; enemy AI detects and pathfinds to the audio source); a <strong>real-time surface lighting system</strong> (a cone light dynamically illuminates surroundings when a light source is equipped); a <strong>dynamic per-level difficulty framework</strong> (positions enemies around high-value loot and key objectives); and an <strong>online leaderboard API + cloud database</strong>. The load-bearing C++ does real-time acoustic raycasting — radial sound waves on drone noise (fast propulsion, cracking chests) with falloff, obstacle dampening and reflections to alert sound-sensitive enemies. Custom tool: a Red Zone Extraction Level Editor (paint tile layouts, place safe extraction zones, position homes/ruins/loot chests). Design features: environment-driven gameplay; evasion-based extraction (no combat — only outrun/hide/sneak); ≥3 sets of 3 collectable items depicting the past from a post-apocalyptic view; ≥3 enemy zombie types (Normal, Avoidant, Aggressive) with different interactions/stats.</p>
