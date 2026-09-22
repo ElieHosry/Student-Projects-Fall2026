@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Planet Pawsitive</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="planet-pawsitive.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="planet-pawsitive.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Planet Pawsitive</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="planet-pawsitive-student-proposal">Planet Pawsitive <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games <i>(gamified-app lens)</i> · <b>Assessed:</b> 2026-09-22 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>Planet Pawsitive</em> encourages Singaporeans to build a lasting habit of using the <strong>ReturnRight</strong> reverse-vending machines. It has a <strong>location-based tracker</strong> (nearest machine) and a <strong>Tamagotchi mini-game</strong>: each bottle deposited grants a <strong>token</strong> (used for feeding / drawing new tamagotchi), with the token amount determined by an <strong>uploaded image of the machine&#39;s return summary</strong>. The <strong>pet&#39;s state doubles as the reminder system</strong> (prompting returns without scheduled notifications); decorations + interactable objects for the pet&#39;s space are a <strong>stretch goal</strong>. The main interface reflects ongoing activity and surfaces context on <strong>Singapore&#39;s waste situation</strong>, and a <strong>lifetime tracker</strong> records total containers returned + deposits recovered. Named load-bearing C++ (local engine): the <strong>real-time interactive pet simulator</strong> + pet progression, the <strong>real-time pet growing</strong> synced to a <strong>world clock</strong> driving a <strong>day/evening/night room</strong> cycle, the <strong>custom Pet AI</strong> (random actions — sleeping/walking/sitting), and <strong>custom 2D technical art</strong> (light source, shaders) — all in C++. Named technical features: <strong>OCR image recognition</strong> (in Python) on the machine&#39;s confirmation screen, with a <strong>timer to prevent fraudulent use</strong>; the real-time pet growing + day/night world-clock sync; the custom Pet AI; and the custom 2D technical art (lighting/shaders). Tools: the <strong>OCR scan</strong> of return-summary images; and an <strong>accessories/decorations editor</strong>. Design features: the <strong>Tamagotchi pet system</strong> (emotional-responsibility lifestyle framing); the <strong>scan-to-track mechanic</strong> (photo → OCR reads container count → tokens); a <strong>habit-forming loop</strong> (streaks, cumulative bottles, pet-status nudges instead of notifications); and a <strong>&quot;Semakau&quot; clock</strong> (a Singapore-landfill countdown — &quot;Your 5 bottles have stayed out of Semakau island!&quot; / a countdown to 2035 — inspired by the Climate Clock). Team: <strong>6 CS + 1 Design + 0 Art</strong>.</p>
+<p><em>Note (category):</em> like other <strong>gamified apps</strong> (there is no sustainability/health category), Planet Pawsitive is filed under <strong>Games</strong> and assessed through the gamified-app lens (pet/progression/habit-loop systems) — the same way the module treats step-and-pet and habit-loop projects. The recycling/awareness is the theme; the pet-habit loop is the product.</p>
+<p><em>Note (module completeness):</em> the app needs a <strong>backend + external DB</strong> (pet state, tokens, lifetime tracker, OCR results) — use Firebase and/or the team&#39;s Linux server (set the seam up + basic-test it by M2). <em>Platform:</em> location tracker + image upload → a <strong>mobile</strong> build (Native Android, Pixel 9a). <em>On the Python OCR:</em> the module&#39;s graded core is <strong>C++</strong> — the pet sim / AI / day-night / technical art are correctly in C++; the <strong>Python OCR is fine as a backend/tool</strong> (like a backend script), but keep the load-bearing real-time logic in C++ and treat OCR as a service the app calls (with the anti-fraud timer server-checked). <em>Monetization:</em> none specified and the economy is <strong>earn-by-recycling</strong> (tokens), which is clean.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://recyclensave.sg/">Recycle N Save — Smart Reverse Vending Machines (Singapore) (the real Singapore scheme this app is built on: deposit drink containers at reverse-vending machines and earn rewards — the exact scan-a-deposit-earn-a-reward + Singapore-recycling context)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Tamagotchi">Tamagotchi — Wikipedia (the archetypal <strong>virtual pet</strong> you raise through life stages, where the <strong>pet&#39;s needs periodically remind</strong> you to care for it — the pet-as-reminder + care/growth precedent)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Climate_Clock">Climate Clock — Wikipedia (the countdown clock showing the time left to limit warming to 1.5°C — the team&#39;s stated inspiration for the &quot;Semakau&quot; landfill-countdown clock)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Planet Pawsitive</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — C++ pet engine via JNI rendering through OpenGL ES in a GLSurfaceView, Kotlin app shell; device: Pixel 9a) — location, camera/image upload and on-device state are native concerns. The Native PC build is the dev/tools vehicle (the decorations editor + the OCR pipeline). <b>Extended:</b> Firebase + a Linux server the team sets up by M2 (full use T2) for pet/token/tracker persistence and the OCR/anti-fraud service (Python OCR can run here).</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A 2D app — the pet + its room with day/night lighting (custom technical art), the token/feeding/drawing UI, the machine-locator map, the scan-upload flow, the lifetime tracker and the Semakau clock. <b>Languages:</b> Native — Kotlin Native Android UI + the C++ pet engine via JNI (Android Studio); OpenGL ES for the realtime pet/room + shaders in a GLSurfaceView; tracker/map/menus can be pure Native UI. Web/desktop — SDL2/3 + OpenGL ES for the PC dev/tools build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The local C++ engine — the real-time pet simulator + progression, the real-time growing synced to a world clock, the day/evening/night room cycle, the custom Pet AI (random actions) and the custom 2D technical art (lighting/shaders) — plus a backend (Firebase/Linux server) for persistence and the Python OCR + anti-fraud-timer service that converts a return-summary image into tokens. <b>Languages:</b> C++ (pet engine — load-bearing); Python OCR on the backend/tool tier; Firebase on the Extended tier.<br><b>Backend scope:</b> Local now, server-backed (T2) — the persistence + OCR/anti-fraud seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ engine is the heart — it runs the real-time pet simulator, grows the pet against a world clock, drives the day/evening/night room cycle, runs the custom Pet AI (sleeping/walking/sitting), and generates the custom 2D technical art (lighting/shaders).</li>
+<li><em>Data-driven:</em> pet states + growth stages, token costs/actions, decorations, the Semakau-clock facts and the lifetime tracker are all data — a new pet action, decoration or token cost is a data change (authored in the decorations editor).</li>
+<li><em>2D:</em> the pet + room, the custom lighting/shaders, the map, the scan flow, the tracker and the Semakau clock (custom-rendered) satisfy the 2D gate. <em>3D:</em> not needed.</li>
+<li><em>Front-end + Back-end:</em> a client/server split — device app + backend for persistence + the OCR/anti-fraud service; the scan-upload → token flow is <strong>Application Communication</strong> ✅.</li>
+<li><em>Custom tools:</em> two — the <strong>OCR scan</strong> pipeline (Python, with the anti-fraud timer) and the <strong>accessories/decorations editor</strong>.</li>
+<li><em>Networking:</em> single-player with async backend, so a real-time Networking System is optional (🔵). <em>External DB:</em> pet/tokens/tracker/OCR results (Firebase — add per the module). <em>Auth ⏭️ / Analytics ⏭️:</em> module-deferred to T2 (🔵).</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — the pet sim + real-time growing + world-clock/day-night cycle.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a real-time C++ loop running the pet simulator, growing the pet against a world clock, and driving the day/evening/night room cycle; C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the Pet AI (M1G8) and technical art (M1G4) run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A data model with pet states + growth stages, token costs/actions, decorations, Semakau-clock facts and the lifetime tracker in hot-reloadable JSON — a new pet action, decoration or token cost is a data change.</li><li><b>Prerequisites:</b> G1 (loop &amp; entity hooks).</li><li><b>Feeds into:</b> M2G2 (the decorations editor), M2G13 (token/habit systems), M1G8 (Pet AI data).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong> — incl. OCR-pipeline testing.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays (pet AI state, growth/world-clock, token grants), Tracy profiling of the pet sim + shader/lighting, Catch2 tests (growth/day-night logic, token conversion, anti-fraud timer, data loading), and OCR-pipeline test fixtures, on a GitHub Actions matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the scan-to-token verification.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the <strong>custom 2D technical art</strong> (light source, shaders) + the pet/room + day/night.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> A renderer with custom lighting (a light source) and shaders for the pet + room, day/evening/night tinting, and the token/feeding UI; SDL2/3/OpenGL ES, GLSL, stb_image, FreeType. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window).</li><li><b>Feeds into:</b> M2G4 (advanced lighting/shaders); the pet&#39;s visual charm.</li></ul></details>
+</li>
+<li><strong>G8 Enemy AI &amp; Pathfinding</strong> — the <strong>custom Pet AI</strong> (random actions: sleeping/walking/sitting).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A behaviour/decision system (weighted-random or utility) choosing pet actions (sleep/walk/sit/idle) with simple in-room pathing, influenced by pet state (hunger/happiness) and the time of day; custom C++.</li><li><b>Prerequisites:</b> G1 (tick), G2 (pet data).</li><li><b>Feeds into:</b> M2G13 (pet progression); the pet&#39;s believable liveliness.</li></ul></details>
+</li>
+<li><strong>G12 Save / Persistence &amp; Firebase Integration</strong> — the lifetime tracker + tokens + state + the OCR scan-to-token backend.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Local persistence of pet state, tokens and the lifetime tracker, synced to Firebase; and the scan flow — the return-summary image goes to the OCR service (Python), which reads the container count and (with the anti-fraud timer, server-checked) grants tokens.</li><li><b>Prerequisites:</b> G2 (data model).</li><li><b>Feeds into:</b> The scan-to-track mechanic; M2 habit systems.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong> — on-device perf + the backend seam.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Memory pools, Tracy profiling of the pet sim + shaders, ASan on MSVC, and on-device validation (Pixel 9a) — including the pet running efficiently in the background for the real-time growth; the Firebase/Linux-server seam (persistence + OCR/anti-fraud) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The mobile deliverable + a battery-viable real-time pet.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Accessories/Decorations Editor)</strong> — author decorations + interactable objects.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui + the shared renderer: place/author decorations and interactable objects in the pet&#39;s space, set token costs, and round-trip JSON, with live preview and undo/redo.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s renderer (preview).</li><li><b>Prerequisites:</b> G2 (decoration data model).</li><li><b>Feeds into:</b> The decorations stretch goal; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android builds, tests (growth/day-night, token conversion, anti-fraud, OCR-pipeline fixtures, data loading) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics — Advanced (Lighting &amp; Shaders)</strong> — the custom technical art matured.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> OpenGL/GLSL shaders, a proper light source + soft shadows, day/evening/night post-FX and atmosphere in the pet&#39;s room, texture atlases. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> M1G4 (2D graphics), M2G1 (optimization).</li><li><b>Feeds into:</b> The signature &quot;custom 2D technical art&quot;; the day/night mood at showcase.</li></ul></details>
+</li>
+<li><strong>G6 Content Editor — Advanced Tool Features (Interactable Objects)</strong> — the decorations editor matured.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui advanced widgets: author interactable objects (tap responses, pet interactions) and richer room layouts with live preview binding, drag-drop and deeper undo/redo.</li><li><b>Prerequisites:</b> M2G2 (editor core).</li><li><b>Feeds into:</b> The interactable-objects stretch; the content showcase.</li></ul></details>
+</li>
+<li><strong>G13 Gameplay Systems II</strong> — the <strong>token economy + habit loop + Semakau clock + lifetime tracker</strong>.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ systems over the data model: the token earn/spend economy (feed/draw), the pet-progression + pet-state-as-reminder nudge system, the habit loop (streaks, cumulative bottles, optional money-saved), the Semakau clock (facts + countdown) and the lifetime tracker; balancing-data-driven.</li><li><b>Prerequisites:</b> M1G2 (data), M1G12 (tokens/tracker).</li><li><b>Feeds into:</b> The habit/awareness showcase; T2 content.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + <strong>1 Art</strong> (8) — the proposed <strong>6 CS + 1 Design + 0 Art</strong> is the module&#39;s tight case for an <strong>art-forward</strong> concept: a Tamagotchi pet with <strong>growth stages, day/night rooms, decorations and drawable/collectable tamagotchi</strong> is a real art surface, so with no artist the single designer must also carry the <strong>D11 conditional</strong> each milestone, and a <strong>solo designer + 0 artists</strong> is exactly what the design pool flags (&quot;must ask the instructor which conditional bends&quot;, see <code>design-goals-pool.pdf</code>). <em>Mitigating factor:</em> the proposal&#39;s <strong>custom 2D technical art (lighting/shaders) is CS-generated</strong>, which offloads some of the visual polish onto the engine — but the pet, room and decoration <strong>assets</strong> still need an artist&#39;s hand. <strong>Recommended: add 1 Artist</strong> (best for the pet/room/decoration charm), or at least a <strong>2nd designer</strong> so one owns the habit/economy design and the other absorbs the D11 art surface. If the team stays 0-artist, scope hard: <strong>one pet with a few growth stages + a small reusable decoration set</strong> authored under D11, and expect the instructor sign-off on the bent conditional. <em>Scope note (advisory):</em> a real-time pet engine + custom Pet AI + shader/lighting tech art + an OCR scan pipeline + a decorations editor is a solid scope — the pet sim + world-clock growth + day/night + the OCR-to-token scan + one decoration is the M1/M2 floor; the advanced lighting/shaders, the interactable-objects editor and the full Semakau-clock + habit-loop polish are the stretch. <strong>OCR reliability + anti-fraud</strong> is the trickiest bit — validate the scan pipeline early with real machine-summary photos, and check the anti-fraud timer server-side.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / TEAM picks for this project (no Art track as proposed — 0 artists, so the pet/room/decoration Art surface is carried by the Design-owned D11 conditional; adding an artist is recommended, see above); deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the recycling-habit + Tamagotchi USP, the scan-to-track mechanic, the pet-state-as-reminder loop and the Semakau clock; the problem — sustaining recycling habits; a primary benchmark e.g. Recycle N Save / a virtual-pet app, and the Singapore/Semakau local-awareness angle)</li><li>M1D9 Engagement &amp; Retention Loop Design (the habit-forming loop — streaks, cumulative bottles, pet-status nudges instead of notifications — with the ethics line: engagement serves the recycling habit, never dark-pattern)</li><li>M1D11 Art Proof of Concept *(conditional — mandatory for 0-artist teams; Design-owned)* — the pet visual direction (growth stages), the day/night room look, the decoration set and UI style; 2 mockups.</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D11 Art Implementation Quality *(conditional — mandatory for 0-artist teams; Design-owned)* — the pet, day/night room, decorations and UI implemented in-engine, no placeholders.</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the pet/room, the scan-upload flow, the machine-locator map, the token/feeding UI and the Semakau clock, plus a wireframe baseline.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — the pet space, scan flow, tracker, map and Semakau clock navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished scan-to-pet + habit UX tested with real users on the Pixel 9a (does the pet-as-reminder actually drive returns?).</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial audio from the week-5 needs list present &amp; working in the prototype (calm ambient BGM by time-of-day, pet actions, feed/draw, token-earned and scan-success cues), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable playback (day/evening/night ambience).</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — the app&#39;s audio set (time-of-day ambience + pet / feed / token / scan / milestone cues, ≥6 types), suited to a calm lifestyle app.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the playback the build needs (multi-channel mixing; distinct scan-success + token cues; day/night ambience crossfade).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the OCR scan pipeline + the decorations editor), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-22.</em></p>
+</body>
+</html>
