@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Ihstya</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="ihstya.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="ihstya.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Ihstya</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="ihstya-student-proposal">Ihstya <em>(student proposal)</em></h2>
+<div style="background:#FFF8E1;border-left:4px solid #F59E0B;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> 🔶 Fit with adjustments · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-22 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>Ihstya</em> is a <strong>mobile lane-based deckbuilder defense strategy RPG</strong> (in the style of <strong>Arknights, Clash Royale and Counter:Side</strong>) where you enter battle with a fixed deck of <strong>Units and Artifice</strong> to fight off waves of enemies — using resource management to strategically summon heroes/soldiers and use artificery to defend your territory. Named load-bearing C++: a <strong>C++ Entity Component System</strong> decoupling data from execution to minimise memory fragmentation + pointer chasing; and a <strong>C# scripting layer</strong> for fast iteration + hot-reloadable data on top of the C++ native core (which handles the heavy logic). Named technical features: an <strong>entity logic state machine</strong> (moving/conflict); <strong>special rendering with entity culling</strong>; the <strong>ECS with C# scripting + hot-reloadable data</strong>; and an <strong>entity cone-detection system</strong> (field-of-view). Tools: a <strong>custom GUI editor</strong> (like Unity/Godot/Unreal) for debugging, editing + viewing data/scenes and live test-running UI + gameplay; and <strong>data serialization</strong> (JSON read optimally into the sim loop). Design features: <strong>Units</strong> (Named + Soldiers) with distinct attack patterns + skills/ultimates that interact dynamically (e.g. auto-counterattack when hit, or a teleport-behind-vision skill); <strong>lore-linked team synergies</strong> (units related by lore gain effects together — linked ultimates, stacking buffs by count on field); <strong>two decks with different functionality</strong> (an <strong>Artifice/Magic</strong> deck on cooldown where every card is always accessible, and a <strong>Summon/Unit</strong> deck on a shuffle where used units cycle back into the shuffle); and a <strong>dynamic map</strong> that magic + units interact with (spells summon walls that block pathing forcing detours, or build a temporary portal/bridge to bypass terrain). Team: <strong>6 CS + 2 Designers + 1 Artist</strong>.</p>
+<div style="background:#FDECEA;border-left:4px solid #E74C3C;padding:6px 12px;margin:6px 0 8px;border-radius:4px"><b>Adjustments required (why 🔶):</b><ol style="margin:4px 0 0"><li><b>Monetization — the &quot;gacha&quot; model must be non-pay-to-win.</b> The module&#39;s clean-monetization rule forbids pay-to-win: real-money purchases must be <b>cosmetic-only</b>. A gacha that sells gameplay-affecting <b>Units</b> for real money is pay-to-win and is not permitted. Keep unit acquisition <b>earned by play</b> (in-game currency only), or restrict any real-money purchases to cosmetics — and design this explicitly (see the M2 Monetization &amp; Scope-Integrity design goal). This is a design-model change, not a tech blocker.</li><li><b>The C# scripting layer is an ambitious, non-required extra — keep the C++ core load-bearing.</b> The module is built around a <b>C++ core + data-driven JSON hot-reload</b> (which already gives you fast iteration without recompiling). Embedding a C# scripting runtime (Mono/.NET) on top adds real toolchain + interop complexity and is <b>not required</b>. Treat C# scripting as a <b>stretch</b>: deliver the required computational logic in C++ with JSON hot-reload first; add a scripting layer only if time allows, and ensure the graded C++ engine carries the load-bearing logic regardless.</li></ol>The core game (lane deckbuilder defense, ECS, two-deck systems, dynamic map) is a strong, well-scoped Games fit once these two are settled.</div>
+
+<p><em>Note (module completeness):</em> the app needs an <strong>External Database</strong> (unit rosters / collection / accounts) — use Firebase and/or the team&#39;s Linux server (set the seam up + basic-test it by M2). <em>Platform:</em> Arknights/Clash-Royale-style → a <strong>mobile</strong> build (Native Android, Pixel 9a).</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://arknights.fandom.com/wiki/Arknights">Arknights — Arknights Wiki (the named benchmark: a <strong>gacha tower-defense</strong> where you deploy collectible Operator units onto a grid to stop waves along fixed lanes, with unit skills that zone/pull/push enemies — the deploy-units-defend-lanes + collection precedent)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Clash_Royale">Clash Royale — Wikipedia (the named benchmark: a real-time <strong>lane card/deck</strong> game — collect cards, build a deck, and deploy troops on a cooldown/elixir economy to defend and attack lanes — the deck + resource-economy + lane precedent)</a></li>
+<li><a href="https://gachagames.fandom.com/wiki/Counter:Side">Counter:Side — Gacha Games Wiki (the named benchmark: a side-scroll &quot;Line Battle&quot; deckbuilder gacha where you deploy up to eight units in real time on a <strong>deployment-point cost</strong> economy — the deckbuilder + deployment-cost + auto-battle-line precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Ihstya</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — C++ engine via JNI rendering through OpenGL ES in a GLSurfaceView, Kotlin app shell; device: Pixel 9a) — a touch-first lane deckbuilder. The Native PC build is the dev/tools vehicle (the custom GUI editor). <b>Extended:</b> Firebase + a Linux server the team sets up by M2 (full use T2) for accounts + unit-collection persistence.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A 2D lane-battle renderer — the many units (heroes/soldiers) with culling, the two decks (cooldown Artifice + shuffle Summon), skill/ultimate VFX, the dynamic map (walls/portals/bridges), and the resource/HUD. <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine via JNI (Android Studio); OpenGL ES for the realtime 2D in a GLSurfaceView; some screens (collection, deck-build, menus) can be pure Native UI. Web/desktop — SDL2/3 + OpenGL ES for the PC dev/tools build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The real-time C++ engine — the ECS (contiguous storage, low fragmentation), the entity state machine (moving/conflict), unit skills/ultimates + lore synergies, the two-deck economy (cooldown + shuffle), the entity cone-detection, the dynamic-map pathing, and special rendering with culling — driven by JSON hot-reload (and, as a stretch, a C# scripting layer); plus Firebase for accounts/collection. <b>Languages:</b> C++ (native core — load-bearing); optional C# scripting layer; Firebase on the Extended tier.<br><b>Backend scope:</b> Local now, server-ready (T2) — the accounts/collection seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the C++ ECS loop is the heart — it runs the entity state machine, unit skills/ultimates + synergy resolution, the two-deck economy, cone-detection and the dynamic-map pathing at a stable step, with data hot-reloaded from JSON (the C++ core carries the heavy logic; C# scripting is an optional layer, not the graded core).</li>
+<li><em>Data-driven:</em> units (heroes/soldiers) + skills/ultimates, lore-synergy rules, the two decks, artifice/magic effects and the dynamic-map spells are all data — a new unit, skill or spell is a data change (authored in the editor, JSON-serialized).</li>
+<li><em>2D:</em> the lane-battle renderer with entity culling, skill/ultimate VFX and the dynamic map (custom-rendered). <em>3D:</em> not needed.</li>
+<li><em>Custom tool:</em> the <strong>custom GUI editor</strong> (Unity/Godot/Unreal-like) — debug, edit + view data/scenes, and live test-run UI + gameplay — plus the JSON serialization pipeline.</li>
+<li><em>Networking:</em> single-player PvE lane defense as described (no real-time PvP), so a Networking System is optional (🔵). <em>External DB:</em> accounts + unit collection (Firebase — add per the module). <em>Auth ⏭️ / Analytics ⏭️:</em> module-deferred to T2 (🔵).</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — the ECS loop + the entity state machine + serialization.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a fixed-timestep C++ loop over an ECS (contiguous storage, low fragmentation) running the entity state machine (moving/conflict), with JSON data serialization read efficiently into the loop; C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; rendering (M1G4), AI/cone-detection (M1G8) and the dynamic map (M1G14) run on its tick.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong> — the ECS + JSON hot-reload (C# scripting optional, see adjustments).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> The ECS data model with units + skills/ultimates, lore-synergy rules, the two decks and dynamic-map spells in hot-reloadable JSON — a new unit/skill/spell is a data change. (A C# scripting layer is a stretch that sits on top; the C++ core remains the load-bearing, graded engine.)</li><li><b>Prerequisites:</b> G1 (loop &amp; entity hooks).</li><li><b>Feeds into:</b> M2G2 (the GUI editor), M2G13 (deck/skill systems), M1G8 (AI data).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays (entity states, cone-detection, deck/resource state), Tracy profiling of a wave with many units + culling, Catch2 tests (state machine, synergy resolution, deck cycling, data loading), on a GitHub Actions matrix — the base of the GUI editor&#39;s debug views.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G2 (the editor); M2G3 (CI hardening).</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the lane-battle renderer + <strong>special rendering with entity culling</strong>.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> A sprite renderer with entity culling (only draw on-screen/relevant entities) for the many units, skill/ultimate VFX, the two decks and the dynamic map, plus the resource HUD; SDL2/3/OpenGL ES, GLSL, stb_image, FreeType. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window).</li><li><b>Feeds into:</b> M2 skill/ultimate VFX polish; the editor&#39;s scene view shares this renderer.</li></ul></details>
+</li>
+<li><strong>G8 Enemy AI &amp; Pathfinding</strong> — the entity state machine behaviours + <strong>cone detection</strong> + dynamic-map pathing.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A* / flow-field pathfinding along the lanes that re-paths around summoned walls (detours) or through portals/bridges, an entity cone-detection (field-of-view) system feeding unit decisions, and the moving/conflict state machine; custom C++, deterministic.</li><li><b>Prerequisites:</b> G1 (tick), G2 (unit data), G14 (dynamic map).</li><li><b>Feeds into:</b> M2G10 (advanced AI — skill/ultimate behaviours); the teleport/counter/vision mechanics.</li></ul></details>
+</li>
+<li><strong>G14 Level / Tile Map System</strong> — the <strong>dynamic map</strong> (lanes + walls/portals/bridges affecting pathing).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A lane/tile map (JSON) with collision + pathing data that spells mutate at runtime — summon walls that block (forcing detours) or portals/bridges that bypass terrain — with the pathfinding querying the live graph; spatial indexing.</li><li><b>Prerequisites:</b> M1G2 (map/spell data), G4 (rendering).</li><li><b>Feeds into:</b> M2G2 (the editor authors maps); the dynamic-map design pillar.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong> — the ECS/culling perf + the persistence seam.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Cache-friendly ECS iteration, entity-culling tuning, memory pools, Tracy profiling of a heavy wave, ASan on MSVC, and on-device validation (Pixel 9a); the Firebase/Linux-server seam (accounts/collection) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The Native-Android deliverable + a stable heavy-wave battle.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Custom GUI Editor)</strong> — the Unity/Godot/Unreal-like editor.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui + the shared renderer: debug + view + edit data/scenes (units, skills, decks, maps), with round-trip JSON serialization, live preview and undo/redo — the base of the &quot;live test-run&quot; editor.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s SDL2/3/OpenGL ES renderer (preview).</li><li><b>Prerequisites:</b> G2 (data model), M1G3 (debug overlays).</li><li><b>Feeds into:</b> M2G6 (live test-running UI + gameplay); all content.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android builds, tests (state machine, synergy, deck cycling, dynamic-map pathing, data loading) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G6 Content Editor — Advanced Tool Features (Live Test-Run UI + Gameplay)</strong> — the GUI editor matured.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui advanced widgets: drag-drop scene/unit/map building, live binding of edits into a running session, and a play/test mode running the engine&#39;s UI + gameplay in-editor; deep undo/redo. (If a C# scripting layer is pursued, this is where hot-reload of scripts would surface — stretch.)</li><li><b>Prerequisites:</b> M2G2 (editor core).</li><li><b>Feeds into:</b> Fast content authoring; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G10 AI — Advanced (Unit Skills/Ultimates &amp; Cone-Detection Behaviours)</strong> — the dynamic unit interactions.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Behaviour trees / FSMs for the skill/ultimate behaviours (auto-counterattack on being hit, teleport-behind-vision + slip control, linked ultimates), matured cone-detection decisions, and enemy-wave AI, tuned from data.</li><li><b>Prerequisites:</b> M1G8 (state machine + cone detection).</li><li><b>Feeds into:</b> The dynamic unit-interaction design pillar; the showcase depth.</li></ul></details>
+</li>
+<li><strong>G13 Gameplay Systems II</strong> — the <strong>two-deck economy + lore synergies + resource management</strong>.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ systems over the ECS: the Artifice deck (cooldown, all cards accessible) + the Summon deck (shuffle, used units cycle back), the resource-management economy, and the lore-synergy system (stacking buffs by count on field, linked/enhanced ultimates); balancing-data-driven.</li><li><b>Prerequisites:</b> M1G2 (unit/deck data), M1G1 (loop/economy hooks).</li><li><b>Feeds into:</b> The core strategy depth at showcase; T2 unit/deck expansion.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 2 Design + 1 Art (9) — <strong>as proposed</strong>, and sensible for a <strong>systems-deep</strong> game: two designers can split the heavy design load (the two-deck economy + synergies, the unit/skill/ultimate design, the dynamic-map + wave design, the balance, and — importantly — the <strong>monetization/scope-integrity</strong> design the 🔶 adjustment requires), while one artist carries the visual surface. Note this is at the <strong>D + A ≤ 3 cap</strong> (2 Design + 1 Art), so a 2nd artist can&#39;t be added without dropping a designer. <em>Art-scope caution:</em> a <strong>collection/gacha-style RPG is art-heavy</strong> (many Named units, skills/ultimates VFX) but has only <strong>one artist</strong> — scope the <strong>Named-unit roster small</strong> (a handful of distinct heroes + reusable soldier/enemy art), lean on a strong reusable style, and let the ambitious roster be a T2 stretch. <em>Scope note (advisory):</em> a C++ ECS + entity state machine + cone-detection + dynamic-map pathing + the two-deck systems + a Unity-like editor is a <strong>large, ambitious CS scope</strong> even before the C# scripting layer — the ECS lane battle with the two decks, a few units with skills, the dynamic-map walls, and the editor&#39;s core is the M1/M2 floor; the C# scripting layer, the full synergy/linked-ultimate web, cone-detection-driven AI and the live test-run editor are the stretch. Settle the <strong>monetization model early</strong> (it changes the collection/economy design) and keep the <strong>C++ core load-bearing</strong> (C# is optional).</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents. Full load = 4 goals per designer per milestone across Design + UI/UX (8 combined for 2 designers).<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the lane-deckbuilder-defense USP, the two-deck system, lore synergies, the dynamic map and the collection model — with the monetization model stated as non-pay-to-win; primary benchmark e.g. Arknights / Clash Royale / Counter:Side, plus a Singapore benchmark)</li><li>M1D2 Core Gameplay Loop Prototype (a greybox proving deploy → resource-manage → skill/ultimate → defend with the two decks is fun) · prototype in Unity</li><li>M1D6 Systems &amp; Economy Design (the two-deck economy — cooldown Artifice + shuffle Summon — the resource management and the lore-synergy interlocks)</li><li>M1D8 Puzzle &amp; Mechanic Design (the unit skill/ultimate interactions — auto-counter, teleport-behind-vision, linked ultimates — and the dynamic-map spell mechanics)</li><li>M1D5 Level &amp; Progression Design (the dynamic maps, the enemy waves + difficulty curve, and how walls/portals reshape encounters)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D2 Working Prototype — Full-Content Build (the polished lane battle with the two decks + a few synergised units, in the team&#39;s engine + editor)</li><li>M2D3 Systems Balance &amp; Tuning — Data-Driven (unit/deck/synergy/wave balance via the editor&#39;s JSON, no code changes — critical for a deckbuilder)</li><li>M2D8 <b>Monetization &amp; Scope-Integrity Design</b> (the 🔶 adjustment: design a clean, non-pay-to-win model — cosmetics and/or earn-by-play collection, NO real-money gameplay power — plus a scope-integrity statement)</li><li>M2D5 Playtesting &amp; Iteration Program (deckbuilders live or die on balance — structured playtests with before/after changes)</li><li>M2D7 Narrative Presentation &amp; Delivery (the lore that drives the team-synergy system — unit/faction identities and why lore-linked units combine — delivered in-game)</li></ul></li><li><b>UI/UX M1:</b><ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — standards for the deck/hand/resource HUD, the collection/deck-build screens and the battlefield, plus a wireframe baseline.</li><li>M1U2 UX Flows &amp; Wireframes — Menus → HUD (the collection → deck-build → battle → results flow mapped before pixels get expensive).</li><li>M1U3 Accessibility &amp; Readability Foundations (legible unit/skill iconography and touch targets on a busy lane).</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — the collection, deck-build, battle HUD and results navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished deploy/skill/deck UX tested with players on the Pixel 9a.</li></ul></li><li><b>Art M1:</b> 1 artist (Named units + soldiers/enemies + skill VFX + dynamic map + UI — scope the roster small)<ul><li>M1A1 ⭐ Art Bible / Proof of Concept (the world&#39;s visual direction — tone, palette, unit-identity language)</li><li>M1A2 Character Concepts &amp; Model Sheets (a scoped set of Named units + reusable soldier/enemy designs)</li><li>M1A3 Environment, Props &amp; VFX Concepts (the dynamic map — walls/portals/bridges — and the skill/ultimate VFX concepts)</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ Critical Asset Production &amp; In-Engine Visual Quality</li><li>M2A2 Character Animation — Extensive (unit attack patterns, skills, ultimates + the linked-ultimate moments)</li><li>M2A5 VFX — Critical Effects &amp; Transitions (the skills/ultimates, linked-ultimate flourishes, and the dynamic-map spell effects)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial BGM/SFX from the week-5 needs list present &amp; working in the prototype (battle BGM, summon, magic-cast, skill/ultimate, hit and wave cues), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback for a busy lane.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Games floor (battle BGM + summon / magic / skill / ultimate / hit / victory SFX, ≥6 types), scaling with lane intensity + linked-ultimate moments.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing; distinct ultimate/linked-ultimate cues).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the custom GUI editor), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-22.</em></p>
+</body>
+</html>
