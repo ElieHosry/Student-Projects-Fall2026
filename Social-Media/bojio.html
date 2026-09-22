@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>BoJio</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="bojio.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="bojio.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">BoJio</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="bojio-student-proposal">BoJio <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Social Media · <b>Assessed:</b> 2026-09-22 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>BoJio</em> is a <strong>mobile social discovery + group-planning app</strong> that turns interesting activities into fair, practical outings. Users discover activities via a <strong>photo-first feed</strong> or real-world venue data, save them, and hit <strong>&quot;Plan This&quot;</strong> to create a group outing; the group provides locations, availability, budget, interests and travel preferences. An <strong>AI-assisted recommendation</strong> component interprets preferences and retrieves activities, real-world place/travel data supply venue + journey info, and a <strong>performant C++ planning engine</strong> evaluates constraints (time, budget, travel distance, group fairness) to generate multiple feasible itineraries; users compare plans, see trade-offs, pick one, and view it as a <strong>map + timeline</strong> with reminders. The architecture separates recommendation, external-data integration and deterministic C++ planning so each subsystem is testable independently. Named load-bearing C++: a <strong>Multi-Objective C++ Itinerary Planner</strong> — receives a structured <code>PlanningProblem</code>, removes activities violating <strong>hard constraints</strong> (availability, opening hours, budget, travel feasibility; constraint-satisfaction with <strong>forward-checking / AC-3</strong> pruning), then evaluates meeting points + activity sequences against <strong>weighted soft objectives</strong> (group travel fairness, preference match, total travel time, cost, activity diversity) via <strong>heuristic search</strong>, and returns the ranked <strong>Top-K</strong> itineraries. Named technical features: the planner; <strong>offline-aware local caching + sync</strong> (Android Room cache for feeds/saved/recent plans, shown immediately while refreshing); <strong>vector-based semantic retrieval</strong> (preferences + activity descriptions → embeddings in <strong>PostgreSQL + pgvector</strong>, similarity search matching intent — &quot;something chill and creative&quot; → pottery / art jamming / board-game cafés); and <strong>real-world geospatial + travel integration</strong> (Google Places + Routes + geospatial queries normalised into a common internal format). Tool: a <strong>planning Simulator + Config Tool</strong> (synthetic groups/locations/budgets/preferences, edit activity data, configure planner weights/constraints, run the engine, inspect Top-K + score breakdowns; edge-cases like conflicting schedules / impossible budgets / unfair travel; planner params + activity data as external config). Design features: photo-first social discovery; the &quot;Plan This&quot; group flow (must-do vs optional); alternative-plan comparison (Balanced / Fairest Travel / Lowest Cost / Best Preference Match, vote + select); and a visual itinerary + explanation (timeline + map + warnings + group-fit indicators). Team: <strong>6 CS + 1 Design + 0 Art</strong>.</p>
+<p><em>Note (category):</em> BoJio&#39;s front is <strong>social</strong> — a photo-first community feed, friends, the &quot;Plan This&quot; group flow and collaborative voting — so it is assessed as <strong>Social Media</strong>; the C++ multi-objective planner, semantic retrieval and external-data integration are the engine behind the social planning. (A Visualization &amp; Analytics reading was considered for the planner + comparison/trade-off views.)</p>
+<p><em>Note (module completeness):</em> the design already leans on a backend + <strong>PostgreSQL/pgvector</strong> + Google Places/Routes — this is exactly the module&#39;s model (external DB mandatory; a Linux server set up by M2, full use T2; Firebase optional for auth). <em>Platform:</em> it&#39;s an explicit <strong>Android</strong> app (Room cache) — Native Android, Pixel 9a. <em>Scope caution:</em> the ambitions are broad (a real constraint-satisfaction planner + a vector-retrieval pipeline + external-API integration + offline sync); make the <strong>deterministic C++ planner the load-bearing star</strong> and let the AI-retrieval + full offline-sync flex (see scope note).</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://www.meetup.com/">Meetup (the benchmark for discovering and organising <strong>group activities/events</strong> — browse activities by interest/location on a map, save them and coordinate a group — the social-discovery + group-outing precedent)</a></li>
+<li><a href="https://wanderlog.com/">Wanderlog — collaborative trip planner (a <strong>shared itinerary</strong> app where a group co-plans, plots stops on an interactive <strong>map</strong>, and views the plan on a timeline — the collaborative-itinerary + map/timeline precedent)</a></li>
+<li><a href="https://www.pinterest.com/">Pinterest (the <strong>photo-first visual discovery</strong> platform — explore and <strong>save</strong> ideas through images rather than text-first search — the photo-first-feed + save precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>BoJio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — the C++ planning service via JNI, OpenGL ES for the map/timeline/comparison visuals in a GLSurfaceView, Kotlin app shell + Room cache; device: Pixel 9a) — a photo-first, on-the-go social app; feed/plan/profile screens can be pure Native UI. The Native PC build is the dev/tools vehicle (the planning Simulator + Config Tool). <b>Extended:</b> the team&#39;s <b>Linux server + PostgreSQL/pgvector</b> (set up by M2, full use T2) hosting the vector retrieval, the normalised place/route data and the planning service; Firebase optionally for auth/accounts.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A 2D app — the photo-first discovery feed, the &quot;Plan This&quot; group-input flow, the alternative-plan comparison cards, and the visual itinerary (synchronised timeline + map with travel legs, timings, costs, warnings + group-fit indicators). <b>Languages:</b> Native — Kotlin Native Android UI + the C++ planner via JNI (Android Studio); OpenGL ES for the custom map/timeline/comparison visuals in a GLSurfaceView; feed/profile screens can be pure Native UI. Web/desktop — SDL2/3 + OpenGL ES for the PC dev/tools build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> C++ + services — the deterministic multi-objective planner (hard-constraint pruning via forward-checking/AC-3, weighted soft-objective scoring, heuristic search, Top-K ranking) — plus a Linux server with PostgreSQL/pgvector (semantic vector retrieval), the Google Places/Routes integration normalised into a common format, and the Android Room offline cache + sync. <b>Languages:</b> C++ (the planning service — load-bearing); backend + pgvector on the Linux server; Firebase optional.<br><b>Backend scope:</b> Client + services now, server-hosted (T2) — the planner + retrieval + external-data seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the <strong>C++ planning service</strong> is the star — it ingests a <code>PlanningProblem</code>, prunes hard-constraint-violating candidates (forward-checking / AC-3), scores meeting points + sequences against weighted soft objectives (fairness, preference, travel, cost, diversity) via heuristic search, and returns ranked Top-K itineraries; it is deterministic and the app&#39;s main performance-sensitive component.</li>
+<li><em>Data-driven:</em> planner weights + constraints, activity definitions, and the group/preference schema are all external config/data — a new weight or activity is a data change (authored in the simulator/config tool).</li>
+<li><em>2D:</em> the feed, the comparison cards, and the synchronised <strong>map + timeline</strong> with travel legs/timings/costs (custom-rendered) satisfy the 2D gate. <em>3D:</em> not needed.</li>
+<li><em>Front-end + Back-end:</em> a genuine split — Android client (+ Room cache) over a C++ planner + Linux/pgvector backend + external APIs; the fetch/sync + external-data flows are <strong>Application Communication</strong> ✅.</li>
+<li><em>Custom tool:</em> the <strong>planning Simulator + Config Tool</strong> — synthetic groups/activities, tunable planner weights/constraints, run + inspect Top-K with score breakdowns, and edge-case testing.</li>
+<li><em>Networking:</em> asynchronous social (share/vote/sync), no real-time multiplayer, so a Networking System is optional (🔵). <em>External DB:</em> central (pgvector + normalised place data + plans/social). <em>Auth ⏭️ / Analytics ⏭️:</em> accounts + engagement analytics are natural but module-deferred to T2 (🔵).</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Social Media pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — the <strong>C++ planning service</strong> + core logic.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> A C++ performant service ingesting a PlanningProblem, pruning hard-constraint violations (forward-checking / AC-3) and scaffolding the heuristic search; SDL2/3 host for the dev build; C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ planner via JNI); OpenGL ES map/timeline in a GLSurfaceView; some screens pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the ranking (M1G9) and external data (M1G8) feed it.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong> — the PlanningProblem schema + planner config + offline-cache model.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A data model with the PlanningProblem (members, availability, budget, preferences, travel tolerance, candidates, opening hours, travel times), planner weights/constraints and activity definitions as external JSON config — a new weight or activity is a data change; the shared model the Room cache mirrors.</li><li><b>Prerequisites:</b> G1 (planner &amp; entity hooks).</li><li><b>Feeds into:</b> M2G2 (the simulator/config tool), M1G8 (external-data normalisation), M1G9 (scoring inputs).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui/overlay inspectors (constraint pruning, score breakdowns, Top-K), Tracy profiling of the planner over many candidates/combinations, Catch2 tests (hard-constraint correctness, deterministic ranking, edge cases — conflicting schedules / impossible budgets), on a GitHub Actions Windows+Linux matrix.</li><li><b>Prerequisites:</b> G1 (planner to instrument).</li><li><b>Feeds into:</b> M2G2 (the simulator surfaces these); M2G3 (CI hardening).</li></ul></details>
+</li>
+<li><strong>G8 Firebase Integration — Identity &amp; Data (+ Geospatial/Travel Integration &amp; Offline Cache)</strong> — external data + the Room cache/sync.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Accounts + saved activities/plans in the store (Firebase and/or Linux/Postgres); the Google Places + Routes integration normalised into a common internal format; and the Android Room offline cache showing feeds/saved/recent plans immediately while refreshing from the backend.</li><li><b>Prerequisites:</b> G2 (data model).</li><li><b>Feeds into:</b> M1G9 (activity candidates), the planner (M1G1); M2G8 (retrieval matured).</li></ul></details>
+</li>
+<li><strong>G9 Matching / Ranking Engine — Foundation (Semantic Retrieval + Multi-Objective Scoring)</strong> — the AI-retrieval + Top-K ranking.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Embeddings for preferences + activity descriptions in PostgreSQL/pgvector with semantic similarity search (intent match), plus the multi-objective weighted-scoring layer (fairness, preference, travel, cost, diversity) that ranks the planner&#39;s feasible candidates into Top-K.</li><li><b>Prerequisites:</b> G2 (activity/preference model).</li><li><b>Feeds into:</b> M2G8 (Ranking II — candidate generation + evaluation metrics); the comparison cards.</li></ul></details>
+</li>
+<li><strong>G14 Profile &amp; Social Graph System</strong> — friends + groups for &quot;Plan This&quot;.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Firestore/Postgres social-graph modelling (friends, groups), the &quot;select friends&quot; group creation, and shared plans/votes, with privacy in mind.</li><li><b>Prerequisites:</b> Identity &amp; data (M1G8).</li><li><b>Feeds into:</b> The group planning flow; M2G13 (group-fit analytics).</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong> — the planner perf + the Linux/pgvector server seam.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Profiling + optimization of the planner (pruning efficiency, threading over candidate batches, memory pools), sanitizers, and on-device validation (Pixel 9a); the Linux + PostgreSQL/pgvector server (retrieval + normalised data + planning) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ planner via JNI); OpenGL ES map/timeline in a GLSurfaceView; some screens pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The mobile deliverable + a responsive planner.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Planning Simulator + Config Tool)</strong> — the named dev/design tool.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui (or a small desktop UI): create synthetic groups/locations/budgets/preferences, add/edit activity data, configure planner weights + constraints, run the C++ engine, and inspect the Top-K itineraries with score breakdowns; round-trip external config.</li><li><b>Prerequisites:</b> G2 (config/data model), M1G1 (the planner).</li><li><b>Feeds into:</b> Rapid tuning + edge-case testing; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android builds, tests (constraint correctness, deterministic ranking, retrieval, edge cases via the simulator) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ planner via JNI); OpenGL ES map/timeline in a GLSurfaceView; some screens pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G8 Ranking / Matching Engine II — Planner &amp; Semantic Retrieval Matured</strong> — candidate generation + evaluation.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Matured candidate generation (meeting points + sequences), refined multi-objective scoring (weighted features, cosine similarity for retrieval), and evaluation metrics + the presets (Balanced / Fairest Travel / Lowest Cost / Best Preference Match) that drive the comparison cards.</li><li><b>Prerequisites:</b> M1G9 (retrieval + scoring foundation).</li><li><b>Feeds into:</b> The alternative-plan comparison; the quality of the Top-K.</li></ul></details>
+</li>
+<li><strong>G11 Search &amp; Discovery Engine</strong> — the photo-first activity discovery.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Discovery/search over activities (semantic + filters over the normalised place data), an incremental index and a query layer, feeding the photo-first feed and the &quot;save / Plan This&quot; flow (custom C++/services).</li><li><b>Prerequisites:</b> M1 content/data model; the retrieval (M1G9).</li><li><b>Feeds into:</b> The discovery feed; the planner&#39;s candidate pool.</li></ul></details>
+</li>
+<li><strong>G13 Engagement Analytics Dashboards — Plan Comparison, Trade-offs &amp; Explanations</strong> — the visual itinerary + group-fit viz.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Custom rendering (no chart libs) for the comparison cards (trade-off metrics per plan), the synchronised map + timeline (travel legs, timings, costs), and the explanations / warnings / group-fit indicators that justify each itinerary.</li><li><b>Prerequisites:</b> M2G8 (scored plans), M1G14 (group data).</li><li><b>Feeds into:</b> The &quot;understand why&quot; showcase; informed group voting.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + 0 Art (8) — <strong>as proposed</strong>, and workable: a planning/social <strong>utility</strong> app has a <strong>light-to-moderate</strong> art surface (the photo-first feed uses user/venue photos, so the design work is UI, the comparison cards, the map/timeline styling and iconography), which the <strong>D11 conditional</strong> can carry. That said, a <strong>solo designer + 0 artists</strong> is the case the design pool flags (&quot;must ask the instructor which conditional bends&quot;, see <code>design-goals-pool.pdf</code>), and the <strong>design/UX load here is heavy</strong> — the &quot;Plan This&quot; input flow, the alternative-plan comparison UX (making trade-offs legible), and the explanation/warnings design are the make-or-break of the product — so a <strong>2nd designer is recommended</strong> (one owning the discovery/social + planning-input UX, the other the comparison/explanation UX + the D11 visual surface). <em>Scope note (advisory):</em> a real multi-objective constraint-satisfaction planner + a vector-retrieval pipeline + external-API integration + offline sync + a simulator tool is a <strong>large, ambitious CS scope</strong> — the <strong>deterministic C++ planner (hard constraints + weighted scoring + Top-K) + the simulator tool</strong> is the load-bearing star and the M1/M2 floor; make the <strong>AI/semantic retrieval and full offline-sync the stretch</strong> (a keyword/filter retrieval is an acceptable fallback if pgvector embeddings slip). Getting the <code>PlanningProblem</code> schema + planner architecture right early (as the team&#39;s own &quot;separate subsystems&quot; plan intends) is the single biggest de-risker.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / TEAM picks for this project (no Art track as proposed — 0 artists, so the light Art surface is carried by the Design-owned D11 conditional); deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the social-discovery + fair-group-planning USP, the &quot;Plan This&quot; flow, the alternative-plan comparison and the visual-itinerary explanation; the problem — friend groups struggle to plan fair outings; primary benchmark e.g. Meetup / Wanderlog, and a Singapore benchmark)</li><li>M1D2 Core-Loop Interactive Prototype (a clickable prototype of discover → Plan This → compare plans → select → view itinerary, proving the UX before the planner is deep) · Figma</li><li>M1D11 Art Proof of Concept *(conditional — mandatory for 0-artist teams; Design-owned)* — the visual identity: UI system, the comparison-card + map/timeline visual language, iconography; 2 mockups.</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D11 Art Implementation Quality *(conditional — mandatory for 0-artist teams; Design-owned)* — the UI, comparison cards, map/timeline and explanations implemented in-engine, no placeholders.</li></ul></li><li><b>UI/UX M1:</b><ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — standards for the photo-first feed, the &quot;Plan This&quot; multi-input flow, the comparison cards and the itinerary timeline/map, plus a wireframe baseline; making <b>trade-offs legible</b> is the priority.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — the feed, &quot;Plan This&quot; flow, comparison + voting and the visual itinerary navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated with real friend groups (does the comparison actually help them agree on a fair plan?), polished on the Pixel 9a.</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial audio from the week-5 needs list present &amp; working (UI feedback, plan-ready, vote and reminder/&quot;hit the road&quot; notification cues), suitable and correctly triggered — modest for a utility app.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable playback.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — the app&#39;s audio set (UI + plan-ready + vote + reminder/notification cues), suited to a mobile social/utility app.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the playback the build needs (multi-channel; a distinct plan-ready + reminder cue).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the planning Simulator + Config Tool), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-22.</em></p>
+</body>
+</html>
