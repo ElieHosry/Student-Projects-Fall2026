@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Market Mayhem</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style type="text/css">body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+max-width: 900px; margin: 0 auto; padding: 24px 32px; color: #1f2328; line-height: 1.55; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 6px; }
+h2 { margin-top: 28px; } h3 { margin-top: 24px; color: #1f2328; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 6px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+a { color: #0969da; text-decoration: none; } a:hover { text-decoration: underline; }
+img { max-width: 100%; border: 1px solid #d1d9e0; border-radius: 6px; }
+li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div style="text-align:right;margin:0 0 14px"><a href="market-mayhem.docx" download style="display:inline-block;background:#2E7D32;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as Word (.docx)</a><a href="market-mayhem.pdf" download style="display:inline-block;background:#C62828;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;margin-left:8px">&#11015; Download as PDF (.pdf)</a></div>
+<header id="title-block-header">
+<h1 class="title">Market Mayhem</h1>
+</header>
+<p><a href="../index.html">← Back to index</a></p>
+<h2 id="market-mayhem-student-proposal">Market Mayhem <em>(student proposal)</em></h2>
+<div style="background:#F6F8FA;border-left:4px solid #57606A;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Assessment:</b> ✅ Fit · <b>Category:</b> Games · <b>Assessed:</b> 2026-09-22 · <b>Status:</b> awaiting instructor approval</div>
+
+<p><strong>Proposal (as submitted):</strong> <em>Market Mayhem</em> is a <strong>2D top-down single-player combat racing game</strong>. The player is in a supermarket with a <strong>grocery list</strong> and a <strong>trolley</strong>, travelling around to collect the listed items; whoever completes their list and reaches the cashier first wins. The player and <strong>3 NPCs</strong> can crash into one another to knock items to the floor, steal them, and immobilise each other temporarily; each item (including grocery-list items) has different effects to <strong>boost the player or sabotage others</strong>. Named load-bearing C++: a game loop holding a stable step with multiple shoppers each with their <strong>own AI, inventories, physics and values</strong> (speed, acceleration, heat gauges, etc.), running <strong>deterministically</strong>. Named technical features: <strong>Enemy AI &amp; Pathfinding</strong> (other shoppers collect items they need or crash into the player while avoiding walls); a <strong>real-time physics engine</strong> handling multiple shoppers moving + crashing; <strong>movement physics</strong> mimicking vehicle controls (joystick, gear shifting, drifting); and <strong>item effects</strong> affecting runtime logic (many items, each with its own effect). Tool: a <strong>modular effect system</strong> — a reusable framework (e.g. a custom effects editor) to handle the real-time logic for item effects. Design features: trolleys with acceleration/braking/crashing; items with special effects; the supermarket + item aisles to collect from; and grocery lists that track collected items. Team: <strong>6 CS + 1 Design + 1 Artist</strong>.</p>
+<p><em>Note (module completeness):</em> the proposal doesn&#39;t name a <strong>platform</strong> — the joystick/vehicle controls are touch-friendly, so it&#39;s planned as a mobile build (Native Android, Pixel 9a; a Web-on-mobile build is a viable alternative). It also doesn&#39;t mention an <strong>External Database</strong> or accounts, but the module mandates Firebase — plan to persist progress / high scores / unlocks there (a standard, small addition; see the External Database row + M1G12-style integration). Neither is a category concern.</p>
+<p><em>References:</em></p>
+<ul>
+<li><a href="https://www.nintendolife.com/guides/mario-kart-8-deluxe-drifting-guide-how-to-drift-slipstream-and-boost">Mario Kart 8 Deluxe — drifting &amp; items guide (Nintendo Life) (the benchmark combat kart-racer: pick up <strong>items to boost yourself or sabotage rivals</strong>, <strong>drift for boosts</strong>, and knock opponents aside — the item-effects + drift + combat-racing precedent)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Micro_Machines_(video_game)">Micro Machines — Wikipedia (a <strong>top-down</strong> racer where you drive small vehicles around cluttered environments, weaving past obstacles and knocking rivals off course — the top-down combat-racing precedent)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Supermarket_Sweep">Supermarket Sweep — Wikipedia (the frantic <strong>timed race to grab grocery items from supermarket aisles</strong> — the grocery-list-race + supermarket-setting precedent)</a></li>
+</ul>
+<h3 id="core-tech-requirements">Core Tech Requirements</h3>
+<p>Legend: ✅ Applies directly | 🔶 Applies with domain adaptation | 🔵 Optional | ❌ Not needed | ⏭️ Second trimester</p>
+<table>
+<thead>
+<tr class="header">
+<th>Core Tech Requirement</th>
+<th>Market Mayhem</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>External Database</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Authentication ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="odd">
+<td>Analytics ⏭️</td>
+<td>🔵</td>
+</tr>
+<tr class="even">
+<td>Real-time C++ Simulation Loop and/or C++ Performant Service</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Application Communication</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Continuous Integration</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Data-Driven Architecture</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Front-end + Back-end</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Custom Tools Development</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>2D Graphical Output</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>3D (strong students only)</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Networking System</td>
+<td>🔵</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How each requirement applies:</strong></p>
+<div style="background:#EAF3FF;border-left:4px solid #0969DA;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><i>Platform fit:</i> <b>Main:</b> Native mobile (Native Android — C++ engine via JNI rendering through OpenGL ES in a GLSurfaceView, Kotlin app shell; device: Pixel 9a) — joystick + gear/drift controls are touch-first; a Web-on-mobile (Emscripten→WASM) build is a viable alternative. The Native PC build is the dev/tools vehicle (the custom effects editor). <b>Extended:</b> Firebase + a Linux server the team sets up by M2 (full use T2) for progress / high-score / unlock persistence.</div>
+
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:6px 12px;margin:4px 0 4px;border-radius:4px"><b>Front end:</b> A 2D top-down renderer — the supermarket + aisles, the player + 3 NPC trolleys, the items, crash/effect VFX, and the grocery-list + heat-gauge/effect HUD. <b>Languages:</b> Native — Kotlin Native Android UI + the C++ engine via JNI (Android Studio); OpenGL ES for the realtime 2D in a GLSurfaceView; some screens (menus) can be pure Native UI. Web/desktop — SDL2/3 + OpenGL ES for the PC dev/tools build.</div>
+
+<div style="background:#FFF3E0;border-left:4px solid #E65100;padding:6px 12px;margin:4px 0 8px;border-radius:4px"><b>Back end:</b> The deterministic real-time C++ engine — the fixed-timestep loop over the player + 3 NPC shoppers (each with AI, inventory, physics + values like speed/acceleration/heat), the vehicle movement + crash physics, the enemy AI + wall-avoiding pathfinding, and the modular item-effect system driving runtime logic — plus Firebase for progress/scores. <b>Languages:</b> C++ (engine); Firebase-backed services on the Extended tier.<br><b>Backend scope:</b> Local now, server-ready (T2) — the progress/score seam set up &amp; basic-tested by M2, full use in T2.</div>
+
+<ul>
+<li><em>Loop and/or service:</em> the deterministic C++ loop is the heart — it advances four shoppers (each with AI, inventory, physics + heat/speed values), resolves trolley movement + crashes, and applies item effects to the runtime logic at a stable step.</li>
+<li><em>Data-driven:</em> the item catalogue + their effects, the grocery lists, the supermarket layout/aisles and shopper stats (speed/accel/heat) are all data — a new item, effect or list is a data change (authored in the effects editor).</li>
+<li><em>2D:</em> the top-down supermarket renderer, trolleys, items, crash/effect VFX and the grocery/heat HUD (custom-rendered). <em>3D:</em> not needed.</li>
+<li><em>Custom tool:</em> the <strong>modular effect system / custom effects editor</strong> — author and wire item effects (boost/sabotage/steal/immobilise) as reusable, data-driven modules without hard-coding each in the engine.</li>
+<li><em>Networking:</em> single-player (player vs 3 AI), so a Networking System is optional (🔵). <em>External DB:</em> progress/high-scores/unlocks (Firebase — add per the module). <em>Auth ⏭️ / Analytics ⏭️:</em> module-deferred to T2 (🔵).</li>
+</ul>
+<h3 id="suggested-tech-goals">Suggested Tech Goals</h3>
+<p>G1–G3 ⭐ are the common goals (fixed for all categories); the other 3 are picked from the Games pool in <code>milestone-goals-pool-per-category.pdf</code> (G1–G3 ⭐ common, G4+ picks).</p>
+<p><em>M1:</em></p>
+<ul>
+<li><strong>G1 ⭐ Application Shell, Real-time C++ Simulation Loop, Input &amp; Core Logic</strong> — the deterministic loop over 4 shoppers + the joystick/gear/drift input.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> SDL2/3 window + a deterministic fixed-timestep C++ loop advancing the player + 3 NPC shoppers (each with AI, inventory, physics + values), with joystick + gear-shift/drift input; C++17/20, CMake, Git. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> None — foundation of this project.</li><li><b>Feeds into:</b> Every other goal; the physics (M1G5) and AI (M1G8) run on its tick; the effect system (M2G2) hooks its runtime logic.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Data-Driven Architecture of Core Objects / Entity System</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> An entity/component model with items + their effects, grocery lists, the supermarket layout/aisles and shopper stats (speed/accel/heat) in hot-reloadable JSON — a new item, effect or list is a data change.</li><li><b>Prerequisites:</b> G1 (loop &amp; entity hooks).</li><li><b>Feeds into:</b> M2G2 (the effects editor), M2G13 (the item-effect + inventory systems), M1G8 (AI data).</li></ul></details>
+</li>
+<li><strong>G3 ⭐ Debugging, Profiling, Stress Test &amp; CI</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> ImGui overlays (shopper AI state, inventories, physics/heat, collisions), Tracy profiling of a 4-shopper crash-heavy scene to hold the step, Catch2 tests (determinism, collision, effect application, data loading), on a GitHub Actions matrix.</li><li><b>Prerequisites:</b> G1 (loop to instrument).</li><li><b>Feeds into:</b> M2G3 (CI hardening); the effect-system verification.</li></ul></details>
+</li>
+<li><strong>G4 2D Graphics</strong> — the top-down supermarket, trolleys, items and crash/effect VFX.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> A sprite/tile renderer for the supermarket + aisles, the 4 trolleys, items, crash/effect VFX, and the grocery/heat HUD, with a camera; SDL2/3/OpenGL ES, GLSL, stb_image, FreeType. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G1 (loop &amp; window).</li><li><b>Feeds into:</b> M2 juice/VFX; every visible frame.</li></ul></details>
+</li>
+<li><strong>G5 Physics &amp; Collision</strong> — the <strong>vehicle movement + crashing</strong> physics.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A C++ physics system — trolley acceleration/braking/drifting (vehicle-like handling), collision + impulse for crashes that knock items loose and immobilise, broadphase for the 4 shoppers + aisles; GLM math, deterministic.</li><li><b>Prerequisites:</b> G1 (loop &amp; tick), G2 (shopper stats).</li><li><b>Feeds into:</b> M2G11 (advanced crash/drift physics); the crash/steal/immobilise mechanics.</li></ul></details>
+</li>
+<li><strong>G8 Enemy AI &amp; Pathfinding</strong> — the <strong>NPC shoppers</strong> (collect items, crash the player, avoid walls).
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> A* / flow-field pathfinding around the aisles (wall-avoiding) with a decision layer choosing to fetch a needed item or ram the player, tuned from data; deterministic per shopper (custom C++).</li><li><b>Prerequisites:</b> G1 (tick), G2 (shopper/item data), G5 (movement).</li><li><b>Feeds into:</b> M2G10 (advanced AI — smarter tactics + difficulty); the &quot;3 NPCs&quot; opponents.</li></ul></details>
+</li>
+</ul>
+<p><em>M2:</em></p>
+<ul>
+<li><strong>G1 ⭐ Architecture — Optimization &amp; Platform Validation</strong> — hold the step under crash-heavy play + the persistence seam.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> Memory pools for items/effects/particles, Tracy profiling of a 4-shopper crash-heavy scene, ASan on MSVC, and on-device validation (Pixel 9a); the Firebase/Linux-server seam (progress/scores) set up (account + software + basic connectivity test) by M2. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> All M1 goals (hardens the M1 codebase).</li><li><b>Feeds into:</b> The Native-Android deliverable + a stable crash-heavy race.</li></ul></details>
+</li>
+<li><strong>G2 ⭐ Content Editor — Core (Modular Effects Editor)</strong> — author item effects as reusable data-driven modules.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Dear ImGui + the shared runtime: define item effects (boost/sabotage/steal/immobilise) as composable modules with parameters, wire them to items, and round-trip JSON, with live preview and undo/redo — no hard-coding each effect in the engine.</li><li><b>Libraries/Software:</b> Dear ImGui, nlohmann/json, the project&#39;s renderer (preview).</li><li><b>Prerequisites:</b> G2 (item/effect data model), M1G1 (runtime hooks).</li><li><b>Feeds into:</b> Fast effect/item authoring; the custom-tools showcase.</li></ul></details>
+</li>
+<li><strong>G3 ⭐ CI — CMake, Code Quality, Build Standards &amp; Packaging</strong>
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> <b>Web build:</b> CMake presets, clang-format + clang-tidy gates, reproducible Windows + Android builds, tests (determinism, collision, effect application, data loading) and packaging via GitHub Actions. <b>Native build:</b> Android Studio (Kotlin Native Android UI + the C++ engine via JNI); OpenGL ES drawn in a GLSurfaceView where realtime 2D is needed — no SDL on native, some screens are pure Native UI.</li><li><b>Prerequisites:</b> G3 (CI &amp; test foundation).</li><li><b>Feeds into:</b> Release/showcase builds of every goal.</li></ul></details>
+</li>
+<li><strong>G10 AI — Advanced (Smarter Shopper Tactics &amp; Difficulty)</strong> — the 3 NPCs matured.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Behaviour trees / utility AI weighing fetch-item vs sabotage vs flee, item/effect usage, target selection, and difficulty tiers (aggression, reaction, routing), tuned from data.</li><li><b>Prerequisites:</b> M1G8 (AI &amp; pathfinding foundation).</li><li><b>Feeds into:</b> A satisfying single-player challenge; the &quot;different behaviours&quot; per shopper.</li></ul></details>
+</li>
+<li><strong>G11 Physics — Advanced (Crash &amp; Drift Maturity)</strong> — the crashing/drifting deepened.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> Constraint/materials + continuous collision for high-speed crashes (no tunnelling), refined drift/handling curves, and item-scatter/knockback physics on collision; deterministic.</li><li><b>Prerequisites:</b> M1G5 (physics &amp; collision).</li><li><b>Feeds into:</b> The satisfying crash/steal feel; the vehicle game-feel.</li></ul></details>
+</li>
+<li><strong>G13 Gameplay Systems II</strong> — the <strong>item-effect system + inventories + grocery list + win condition</strong>.
+  <details><summary>Tech &amp; dependencies</summary><ul><li><b>Tech:</b> C++ systems over the entity/data model: the modular item effects applied to runtime logic (boost/sabotage/steal/immobilise), per-shopper inventories, the grocery-list tracking + cashier win condition, and the heat-gauge economy; balancing-data-driven via the effects editor.</li><li><b>Prerequisites:</b> M1G2 (item/effect data), M1G1 (loop/runtime hooks).</li><li><b>Feeds into:</b> The core game depth at showcase; T2 item/mode expansion.</li></ul></details>
+</li>
+</ul>
+<h3 id="track-goals--team-composition">Track Goals &amp; Team Composition</h3>
+<p><strong>Recommended composition:</strong> 6 CS + 1 Design + 1 Art (8) — <strong>as proposed</strong>, and well-matched: a top-down combat racer has a contained but real art surface (the supermarket + aisles, the 4 trolleys/shoppers, the item icons, crash/effect VFX, UI) that one artist can carry, while a single designer owns the FDD, the vehicle game-feel, the item-effect catalogue + boost/sabotage balance and the AI difficulty (rules: min 1 Design mandated, max 9 total, D+A ≤ 3; see <code>team-formation.pdf</code>). If the item/effect content outgrows one designer, consider a 2nd designer. <em>Scope note (advisory):</em> a deterministic 4-shopper loop + vehicle/crash physics + wall-avoiding AI + a modular effect system is a solid, well-contained single-player scope — the trolley handling + crashing, 2-3 items with effects, one supermarket and basic NPC AI is the M1/M2 floor; the full item roster, the smart per-shopper AI tactics and the polished effects editor are the stretch. The <strong>modular effect system is the smartest lever</strong> — it lets the team add items as data rather than engineering each; get its architecture right early.</p>
+<div style="background:#F5F0FA;border-left:4px solid #7E57C2;padding:6px 12px;margin:10px 0 4px;border-radius:4px"><b>Track goals</b> — suggested Design / UI-UX / Art / TEAM picks for this project; deliverables &amp; quality ladders live in the track pool documents.<ul style="margin:4px 0 0"><li><b>Design M1:</b><ul><li>M1D1 ⭐ Features Design Document (the combat-grocery-racing USP, the trolley controls, the item-effect boost/sabotage system, the grocery-list-to-cashier win; primary benchmark e.g. Mario Kart / Micro Machines, plus a Singapore benchmark)</li><li>M1D4 Game Feel &amp; Touch Interaction Specification (the joystick + gear-shift + drift trolley controls, crash feel, hit-stop and feedback — as tunable data)</li><li>M1D6 Systems &amp; Economy Design (the item-effect catalogue — boost/sabotage/steal/immobilise — the heat-gauge economy and the balance across items — every system with a purpose)</li></ul></li><li><b>Design M2:</b><ul><li>M2D1 ⭐ Features Design Iteration &amp; Showcase Readiness</li><li>M2D3 Systems Balance &amp; Tuning — Data-Driven (item/effect + AI-difficulty + handling balance via the effects editor&#39;s JSON, no code changes)</li></ul></li><li><b>UI/UX M1</b> (graded by the Design instructor for the Games category):<ul><li>M1U1 ⭐ UI Standards &amp; Wireframe Baseline — readability standards for the grocery-list tracker, the heat-gauge/effect HUD, the minimap/aisles and the controls, plus a wireframe baseline.</li></ul></li><li><b>UI/UX M2:</b><ul><li>M2U1 ⭐ Functional UI &amp; Usability — the race HUD, grocery list, results and menus navigable unaided on the Native-Android target.</li><li>M2U2 ⭐ UX Validation &amp; Final Polished UI — validated, polished trolley-control + crash/effect UX tested with players on the Pixel 9a.</li></ul></li><li><b>Art M1:</b> 1 artist (supermarket + trolleys/shoppers + items + VFX + UI)<ul><li>M1A1 ⭐ Art Bible / Proof of Concept (the chaotic-supermarket visual direction — tone, palette, trolley/shopper identity language)</li><li>M1A2 Character Concepts &amp; Model Sheets (the player + 3 NPC shoppers/trolleys)</li><li>M1A3 Environment, Props &amp; VFX Concepts (the supermarket + aisles, the item set, and the crash/effect VFX)</li></ul></li><li><b>Art M2:</b><ul><li>M2A1 ⭐ Critical Asset Production &amp; In-Engine Visual Quality</li><li>M2A2 Character Animation — Extensive (trolley drift/crash, shopper reactions, immobilise/steal moments)</li><li>M2A5 VFX — Critical Effects &amp; Transitions (crashes, item-effect activations, boosts, item-scatter)</li></ul></li><li><b>TEAM M1:</b><ul><li>M1TA1 ⭐ Overall Audio Experience — initial BGM/SFX from the week-5 needs list present &amp; working in the prototype (supermarket BGM, trolley engine/drift, crash, item-pickup, effect-activate and list-complete cues), suitable and correctly triggered.</li><li>M1TA2 ⭐ Audio Engine Functionality — data-driven audio pipeline (add/replace files without recompiling) + reliable multi-channel playback for a busy 4-shopper scene.</li></ul></li><li><b>TEAM M2:</b><ul><li>M2TA1 ⭐ Overall Audio Experience — standard Games floor (supermarket BGM + trolley / crash / pickup / effect / sabotage / win SFX, ≥6 types), scaling with the mayhem.</li><li>M2TA2 ⭐ Audio Engine Functionality — audio properties de/serialised and the full playback functionality the build needs (multi-channel mixing; distinct crash + effect cues).</li><li>M2TP1 ⭐ Final Presentation — 7 min in front of class + instructors: live custom-tools showcase (the modular effects editor), prototype demo, team post-mortem (wk14)</li></ul></li></ul></div>
+
+<hr />
+<p><em>Generated by the Project Proposal Assessor skill · grounding: live folder (<code>Project 2 Technical adjustments/</code>) · references verified 2026-09-22.</em></p>
+</body>
+</html>
